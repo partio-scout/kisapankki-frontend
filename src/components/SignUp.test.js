@@ -21,9 +21,9 @@ describe('<SignUp />', () => {
     )
   })
   
-  test('renders inputs for username and password', () => {
+  test('renders inputs for name, username, password and key', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(2)
+    expect(inputs.length).toBe(4)
   })
   
   test('renders submit button', () => {
