@@ -3,9 +3,8 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 
 const App = () => {
-
-  const [ showLogin, setShowLogin ] = useState(false)
-  const [ showSignUp, setShowSignUp ] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(false)
 
   const setLogin = () => {
     setShowLogin(!showLogin)
@@ -20,7 +19,7 @@ const App = () => {
   return (
     <div>
       <div className="header">
-        <div className="logo"></div>
+        <div className="logo" />
         <button className="login-button-header" onClick={() => setLogin()}>Kirjaudu</button>
         <button className="signup-button-header" onClick={() => setSignUp()}>Rekisteröidy</button>
       </div>
@@ -33,4 +32,4 @@ const App = () => {
   )
 }
 
-export default App 
+export default App

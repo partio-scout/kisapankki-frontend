@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import Notification from './Notification' 
-import signupService from '../services/signup' 
+import Notification from './Notification'
+import signupService from '../services/signup'
 
 const SignUp = () => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
@@ -15,7 +14,7 @@ const SignUp = () => {
     event.preventDefault()
     try {
       const user = await signupService.signup({
-        name, username, password, key
+        name, username, password, key,
       })
 
       setUser(user)
@@ -36,8 +35,8 @@ const SignUp = () => {
       <h2>Rekisteröidy</h2>
       <Notification message={errorMessage} />
       <form onSubmit={handleSignUp}>
-      <div>
-        <input
+        <div>
+          <input
             className="name"
             type="text"
             value={name}

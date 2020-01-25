@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import Notification from './Notification' 
-import loginService from '../services/login' 
+import Notification from './Notification'
+import loginService from '../services/login'
 
 const Login = () => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('') 
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   const handleLogin = async (event) => {

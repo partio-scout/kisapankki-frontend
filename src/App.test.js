@@ -6,26 +6,25 @@ import App from './App'
 afterEach(cleanup)
 
 describe('<App />', () => {
-
   let component
 
   beforeEach(() => {
     component = render(
-      <App />
+      <App />,
     )
   })
 
   test('renders login button in header', () => {
     const button = component.container.querySelector('.login-button-header')
     expect(button).toHaveTextContent(
-      'Kirjaudu'
+      'Kirjaudu',
     )
   })
 
   test('renders signup button in header', () => {
     const button = component.container.querySelector('.signup-button-header')
     expect(button).toHaveTextContent(
-      'Rekisteröidy'
+      'Rekisteröidy',
     )
   })
 
@@ -52,5 +51,4 @@ describe('<App />', () => {
     const form = component.container.querySelector('.signup-form')
     expect(component.container).toContainElement(form)
   })
-
 })
