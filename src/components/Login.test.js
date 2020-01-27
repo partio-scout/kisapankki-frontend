@@ -6,31 +6,29 @@ import Login from './Login'
 afterEach(cleanup)
 
 describe('<Login />', () => {
-
   let component
 
   beforeEach(() => {
     component = render(
-      <Login />
+      <Login />,
     )
   })
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Kirjaudu sisään'
+      'Kirjaudu sisään',
     )
   })
-  
+
   test('renders inputs for username and password', () => {
     const inputs = component.container.querySelectorAll('input')
     expect(inputs.length).toBe(2)
   })
-  
+
   test('renders submit button', () => {
     const button = component.container.querySelector('.login-button')
     expect(button).toHaveTextContent(
-      'Kirjaudu'
+      'Kirjaudu',
     )
   })
-
 })
