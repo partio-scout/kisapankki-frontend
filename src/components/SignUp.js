@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import Notification from './Notification' 
 import signupService from '../services/signup' 
 
-const SignUp = () => {
+const SignUp = ({ setUser, setShowSignUp }) => {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [key, setKey] = useState('')
-  const [user, setUser] = useState(null)
 
   const handleSignUp = async (event) => {
     event.preventDefault()
@@ -17,12 +16,15 @@ const SignUp = () => {
       const user = await signupService.signup({
         name, username, password, key
       })
-
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
       setUser(user)
       setName('')
       setUsername('')
       setPassword('')
       setKey('')
+      setShowSignUp(false)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
