@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Notification from './Notification'
 import loginService from '../services/login'
 
-const Login = ({ setUser, setShowLogin }) => {
+const Login = ({ setUser, setPage }) => {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
@@ -20,7 +20,7 @@ const Login = ({ setUser, setShowLogin }) => {
       setUser(user)
       setUsername('')
       setPassword('')
-      setShowLogin(false)
+      setPage('tasks')
     } catch (exception) {
       setErrorMessage('Väärä käyttäjätunnus/salasana')
       setTimeout(() => {

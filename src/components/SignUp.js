@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Notification from './Notification'
 import signupService from '../services/signup'
 
-const SignUp = ({ setUser, setShowSignUp }) => {
+const SignUp = ({ setUser, setPage }) => {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const [name, setName] = useState('')
@@ -24,7 +24,7 @@ const SignUp = ({ setUser, setShowSignUp }) => {
       setUsername('')
       setPassword('')
       setKey('')
-      setShowSignUp(false)
+      setPage('tasks')
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
