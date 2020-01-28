@@ -37,6 +37,7 @@ const App = () => {
         <div className="logo"></div>
         {user === null ?
           <Fragment>
+            <button className="" onClick={() => loginForm()}>Lisää tehtävä</button>
             <button className="login-button-header" onClick={() => loginForm()}>Kirjaudu</button>
             <button className="signup-button-header" onClick={() => signUpForm()}>Rekisteröidy</button>
           </Fragment>
