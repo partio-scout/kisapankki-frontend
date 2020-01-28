@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 
-const AddTask = ({}) => {
+const AddTask = ({setShowAddTask}) => {
 
+    return (
+        <div>
+            abc
+        </div>
+    )
 }
-
-return (
-    <div>
-
-    </div>
-)
-
 export default AddTask
