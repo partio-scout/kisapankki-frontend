@@ -8,7 +8,7 @@ const App = () => {
   const [ user, setUser ] = useState(null)
   const [ showLogin, setShowLogin ] = useState(false)
   const [ showSignUp, setShowSignUp ] = useState(false)
-  const [ showAddTask, setAddTask] = useState(false)
+  const [ showAddTask, setShowAddTask ] = useState(false)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -19,17 +19,21 @@ const App = () => {
   }, [])
 
   const addTaskForm = () => {
-    setAddTask(!showAddTask)
+    setShowAddTask(!showAddTask)
+    setShowLogin(false)
+    setShowSignUp(false)
   }
 
   const loginForm = () => {
     setShowLogin(!showLogin)
     setShowSignUp(false)
+    setShowAddTask(false)
   }
 
   const signUpForm = () => {
     setShowSignUp(!showSignUp)
     setShowLogin(false)
+    setShowAddTask(false)
   }
 
   const logout = () => {
@@ -43,7 +47,7 @@ const App = () => {
         <div className="logo"></div>
         {user === null ?
           <Fragment>
-            <button className="" onClick={() => addTaskForm()}>Lisää tehtävä</button>
+            <button className="addtask-button-header" onClick={() => addTaskForm()}>Lisää tehtävä</button>
             <button className="login-button-header" onClick={() => loginForm()}>Kirjaudu</button>
             <button className="signup-button-header" onClick={() => signUpForm()}>Rekisteröidy</button>
           </Fragment>
@@ -56,7 +60,7 @@ const App = () => {
       </div>
       <div className="container">
         <h1>Kisatehtäväpankki</h1>
-        {showAddTask && <AddTask setShowAddTask={setShowLogin}/> }
+        {showAddTask && <AddTask setShowAddTask={setShowAddTask}/> }
         {showLogin && <Login setUser={setUser} setShowLogin={setShowLogin} />}
         {showSignUp && <SignUp setUser={setUser} setShowSignUp={setShowSignUp} />}
       </div>

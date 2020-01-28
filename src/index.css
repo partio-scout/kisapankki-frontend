@@ -53,7 +53,7 @@ button:hover {
   background: rgb(37, 55, 100);
 }
 
-.login-button, .signup-button {
+.login-button, .signup-button, .addtask-button {
   margin-top: 5px;
 }
 
@@ -80,7 +80,7 @@ button:hover {
   margin: 10px;
 }
 
-.login-button-header, .signup-button-header, .logout-button-header {
+.login-button-header, .signup-button-header, .logout-button-header, .addtask-button-header {
   font-weight: bold;
   color: white;
   background-color: transparent;
@@ -122,7 +122,7 @@ button:hover {
     background-position: 0px 7px;
   }
 
-  .login-button-header, .signup-button-header, .logout-button-header {
+  .login-button-header, .signup-button-header, .logout-button-header, .addtask-button-header {
     padding: 0px 5px;
   }
   
