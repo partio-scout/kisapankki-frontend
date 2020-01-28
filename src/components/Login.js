@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import Notification from './Notification'
 import loginService from '../services/login'
 
-const Login = () => {
+const Login = ({ setUser, setShowLogin }) => {
+
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
+  const [password, setPassword] = useState('') 
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -14,10 +14,13 @@ const Login = () => {
       const user = await loginService.login({
         username, password,
       })
-
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
       setUser(user)
       setUsername('')
       setPassword('')
+      setShowLogin(false)
     } catch (exception) {
       setErrorMessage('Väärä käyttäjätunnus/salasana')
       setTimeout(() => {
