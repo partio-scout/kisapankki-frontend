@@ -35,7 +35,7 @@ const App = () => {
     setUser(null)
     toPage('tasks')
   }
-
+  
   return (
     <div>
       <div className="header">
