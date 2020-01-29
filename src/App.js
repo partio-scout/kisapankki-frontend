@@ -50,8 +50,11 @@ const App = () => {
           </Fragment>
           :
           <div>
-            <div className="logged">Kirjautuneena {user.username}</div>
-            <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            <div><button className="rule-button-header" onClick={() => setPage('rules')}>Lisää sääntö</button></div>
+            <div>
+              <div className="logged">Kirjautuneena {user.username}</div>
+              <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            </div>
           </div>
         }
       </div>
