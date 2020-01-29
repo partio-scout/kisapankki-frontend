@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import Admin from './components/Admin'
 
 const App = () => {
 
@@ -27,6 +28,8 @@ const App = () => {
       return <Login setUser={setUser} setPage={setPage} />
     } else if (page === 'signup') {
       return <SignUp setUser={setUser} setPage={setPage} />
+    } else if (page === 'admin') {
+      return <Admin />
     }
   }
 
@@ -53,6 +56,7 @@ const App = () => {
         }
       </div>
       <div className="container">
+        {user && page !== "admin" && <button className="admin-button" onClick={toPage('admin')}>Admin</button>}
         <h1>Kisatehtäväpankki</h1>
         {content()}
       </div>
