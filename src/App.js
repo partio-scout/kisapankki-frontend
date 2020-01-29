@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import TaskList from './components/TaskList'
 
 const App = () => {
 
@@ -22,7 +23,7 @@ const App = () => {
 
   const content = () => {
     if (page === 'tasks') {
-      return <div></div>
+      return <TaskList />
     } else if (page === 'login') {
       return <Login setUser={setUser} setPage={setPage} />
     } else if (page === 'signup') {
