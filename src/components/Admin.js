@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Notification from './Notification'
+import Rule from './Rule'
 
 const Admin = () => {
 
@@ -9,6 +10,7 @@ const Admin = () => {
     <div>
       <h2>Admin-alue</h2>
       <Notification message={errorMessage} />
+      <Rule />
     </div>
   )
 }

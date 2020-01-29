@@ -28,7 +28,7 @@ const App = () => {
       return <Login setUser={setUser} setPage={setPage} />
     } else if (page === 'signup') {
       return <SignUp setUser={setUser} setPage={setPage} />
-    } else if (page === 'admin') {
+    } else if (user && page === 'admin') {
       return <Admin />
     }
   }
@@ -50,7 +50,6 @@ const App = () => {
           </Fragment>
           :
           <div>
-            <div><button className="rule-button-header" onClick={() => setPage('rules')}>Lisää sääntö</button></div>
             <div>
               <div className="logged">Kirjautuneena {user.username}</div>
               <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
