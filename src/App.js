@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import Category from './components/Category'
 
 const App = () => {
 
@@ -27,6 +28,8 @@ const App = () => {
       return <Login setUser={setUser} setPage={setPage} />
     } else if (page === 'signup') {
       return <SignUp setUser={setUser} setPage={setPage} />
+    } else if (page === 'category') {
+      return <Category />
     }
   }
 
@@ -47,8 +50,11 @@ const App = () => {
           </Fragment>
           :
           <div>
-            <div className="logged">Kirjautuneena {user.username}</div>
-            <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            <div><button className="category-button-header" onClick={() => setPage('category')}>Lisää kategoria</button></div>
+            <div>
+              <div className="logged">Kirjautuneena {user.username}</div>
+              <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            </div>
           </div>
         }
       </div>
