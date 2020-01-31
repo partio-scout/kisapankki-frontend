@@ -78,6 +78,7 @@ button:hover {
   background-size: 130px;
   background-color: transparent;
   margin: 10px;
+  cursor: pointer;
 }
 
 .login-button-header, .signup-button-header, .logout-button-header, .addtask-button-header {

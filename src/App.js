@@ -5,10 +5,8 @@ import AddTask from './components/AddTask'
 
 const App = () => {
 
-  const [ user, setUser ] = useState(null)
-  const [ showLogin, setShowLogin ] = useState(false)
-  const [ showSignUp, setShowSignUp ] = useState(false)
-  const [ showAddTask, setShowAddTask ] = useState(false)
+  const [page, setPage] = useState('tasks')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -18,38 +16,35 @@ const App = () => {
     }
   }, [])
 
-  const addTaskForm = () => {
-    setShowAddTask(!showAddTask)
-    setShowLogin(false)
-    setShowSignUp(false)
+  const toPage = (page) => (event) => {
+    event.preventDefault()
+    setPage(page)
   }
 
-  const loginForm = () => {
-    setShowLogin(!showLogin)
-    setShowSignUp(false)
-    setShowAddTask(false)
-  }
-
-  const signUpForm = () => {
-    setShowSignUp(!showSignUp)
-    setShowLogin(false)
-    setShowAddTask(false)
+  const content = () => {
+    if (page === 'tasks') {
+      return <div></div>
+    } else if (page === 'login') {
+      return <Login setUser={setUser} setPage={setPage} />
+    } else if (page === 'signup') {
+      return <SignUp setUser={setUser} setPage={setPage} />
+    }
   }
 
   const logout = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
+    toPage('tasks')
   }
-
+  
   return (
     <div>
       <div className="header">
-        <div className="logo"></div>
+        <div className="logo" onClick={toPage('tasks')}></div>
         {user === null ?
           <Fragment>
-            <button className="addtask-button-header" onClick={() => addTaskForm()}>Lisää tehtävä</button>
-            <button className="login-button-header" onClick={() => loginForm()}>Kirjaudu</button>
-            <button className="signup-button-header" onClick={() => signUpForm()}>Rekisteröidy</button>
+            <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
+            <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
           </Fragment>
           :
           <div>
@@ -60,9 +55,7 @@ const App = () => {
       </div>
       <div className="container">
         <h1>Kisatehtäväpankki</h1>
-        {showAddTask && <AddTask setShowAddTask={setShowAddTask}/> }
-        {showLogin && <Login setUser={setUser} setShowLogin={setShowLogin} />}
-        {showSignUp && <SignUp setUser={setUser} setShowSignUp={setShowSignUp} />}
+        {content()}
       </div>
     </div>
   )
