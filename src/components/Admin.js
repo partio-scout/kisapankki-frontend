@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Notification from './Notification'
 import Rule from './Rule'
+import Language from './Language'
 
 const Admin = () => {
 
@@ -11,6 +12,7 @@ const Admin = () => {
       <h2>Admin-alue</h2>
       <Notification message={errorMessage} />
       <Rule />
+      <Language />
     </div>
   )
 }
