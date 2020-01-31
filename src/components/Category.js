@@ -23,21 +23,21 @@ const Category = () => {
 
   return (
     <div className="category-form">
-    <h2>Lisää kategoria</h2>
-    <Notification message={errorMessage} />
-    <form onSubmit={handleCategoryAdd}>
-      <div>
-        <input
-          className="category"
-          type="text"
-          value={category}
-          name="Category"
-          placeholder="Kategoria"
-          onChange={({ target }) => setCategory(target.value)}
-        />
-      </div>
-      <button type="submit" className="task-add-button">Lisää kategoria</button>
-    </form>
+      <h2>Lisää kategoria</h2>
+      <Notification message={errorMessage} />
+      <form onSubmit={handleCategoryAdd}>
+        <div>
+          <input
+            className="category"
+            type="text"
+            value={category}
+            name="Category"
+            placeholder="Kategoria"
+            onChange={({ target }) => setCategory(target.value)}
+          />
+        </div>
+        <button type="submit" className="task-add-button">Lisää kategoria</button>
+      </form>
     </div>
   )
 }
