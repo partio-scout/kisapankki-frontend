@@ -16,6 +16,8 @@ const App = () => {
     }
   }, [])
 
+  
+
   const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
@@ -28,6 +30,8 @@ const App = () => {
       return <Login setUser={setUser} setPage={setPage} />
     } else if (page === 'signup') {
       return <SignUp setUser={setUser} setPage={setPage} />
+    } else if (page === 'addtask') {
+      return <AddTask />
     }
   }
 
@@ -43,6 +47,7 @@ const App = () => {
         <div className="logo" onClick={toPage('tasks')}></div>
         {user === null ?
           <Fragment>
+            <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
             <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
             <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
           </Fragment>
