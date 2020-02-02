@@ -3,10 +3,9 @@ import Notification from './Notification'
 import loginService from '../services/login'
 
 const Login = ({ setUser, setPage }) => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('') 
+  const [password, setPassword] = useState('')
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -15,7 +14,7 @@ const Login = ({ setUser, setPage }) => {
         username, password,
       })
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user),
       )
       setUser(user)
       setUsername('')

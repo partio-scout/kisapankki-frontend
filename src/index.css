@@ -113,6 +113,11 @@ button:hover {
   font-size: 15px;
 }
 
+.admin-button {
+  float: right;
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 415px) {
   .header {
     padding-right: 5px;

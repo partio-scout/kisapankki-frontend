@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import addtaskService from '../services/addtask'
 import ruleService from '../services/rule'
+import categoryService from '../services/category'
+import ageGroupService from '../services/ageGroup'
 
 
 const AddTask = () => {
@@ -13,30 +15,48 @@ const AddTask = () => {
     const [supervisorInstructions, setSupervisorInstructions] = useState('')
     const [rules, setRules] = useState([])
     const [rule, setRule] = useState('')
-
+    const [categories, setCategories] = useState([])
+    const [category, setCategory] = useState('')
+    const [ageGroups, setAgeGroups] = useState([])
+    const [ageGroup, setAgeGroup] = useState('')
 
     useEffect(() => {
-        
         ruleService.getRules().then(response => {
             setRules(response)
         })
-    },[])
+        categoryService.getCategories().then(response => {
+            setCategories(response)
+        })
+        ageGroupService.getAgeGroups().then(response => {
+            setAgeGroups(response)
+        })
+    }, [])
 
     const handleRuleChange = (e) => {
         console.log(e.target.value)
         setRule(e.target.value)
     }
 
+    const handleCategoryChange = (e) => {
+        console.log(e.target.value)
+        setCategory(e.target.value)
+    }
 
+    const handleAgeGroupChange = (e) => {
+        console.log(e.target.value)
+        setAgeGroup(e.target.value)
+    }
 
     const handleAddTask = async (event) => {
         event.preventDefault()
         try {
             const task = await addtaskService.addtask({
-                name, rule
+                name, rule, category, ageGroup
             })
             setName('')
             setRules('')
+            setCategory('')
+            setAgeGroup('')
         } catch {
             setErrorMessage('Jotain meni vikaan')
             setTimeout(() => {
@@ -59,7 +79,6 @@ const AddTask = () => {
                         placeholder="Tehtävän otsikko"
                         onChange={({ target }) => setName(target.value)}
                     />
-
                 </div>
                 <div>
                     <textarea
@@ -72,8 +91,6 @@ const AddTask = () => {
                         placeholder="Tehtävänanto"
                         onChange={({ target }) => setAssignmentText(target.value)}
                     />
-
-
                 </div>
                 <div>
                     <textarea
@@ -100,10 +117,22 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <select onChange={(e)=>handleRuleChange(e)}>
-                        <option value='' />
+                    <select onChange={(e) => handleRuleChange(e)}>
+                        <option value="">Valitse sääntöluokka</option>
                         {rules.map((rule) =>
-                        <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
+                            <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <select onChange={(e) => handleCategoryChange(e)}>
+                        <option value="">Valitse kategoria</option>
+                        {categories.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <select onChange={(e) => handleAgeGroupChange(e)}>
+                        <option value="">Valitse ikäluokka</option>
+                        {ageGroups.map((ageGroup) => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
                 </div>
                 <div>
@@ -124,25 +153,7 @@ const AddTask = () => {
                         <option value="4"></option>
                     </select>
                 </div>
-                <div>
-                    <select>
-                        <option value="0"></option>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                    </select>
-                </div>
-                <div>
-                    <select>
-                        <option value="0"></option>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                    </select>
-                </div>
-                <button type="submit" className="signup-button">Lisää tehtävä</button>
+                <button type="submit" className="add-task-button">Lisää tehtävä</button>
             </form>
         </div>
     )
