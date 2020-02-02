@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Notification from './Notification'
 import Rule from './Rule'
 import Language from './Language'
+import AgeGroup from './AgeGroup'
 
 const Admin = () => {
 
@@ -13,6 +14,7 @@ const Admin = () => {
       <Notification message={errorMessage} />
       <Rule />
       <Language />
+      <AgeGroup />
     </div>
   )
 }

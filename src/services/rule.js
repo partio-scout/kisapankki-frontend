@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/rule`
 
-const rule = async (nnononono) => {
-  const response = await axios.post(baseUrl, nnononono)
+const rule = async (rule) => {
+  const response = await axios.post(baseUrl, rule)
   return response.data
 }
 
