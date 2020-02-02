@@ -3,6 +3,7 @@ import Notification from './Notification'
 import Rule from './Rule'
 import Language from './Language'
 import AgeGroup from './AgeGroup'
+import Category from './Category'
 
 const Admin = () => {
 
@@ -15,6 +16,7 @@ const Admin = () => {
       <Rule />
       <Language />
       <AgeGroup />
+      <Category />
     </div>
   )
 }
