@@ -3,7 +3,6 @@ import Notification from './Notification'
 import ageGroupService from '../services/ageGroup'
 
 const AgeGroup = () => {
-
   const [name, setName] = useState('')
   const [minAge, setMinAge] = useState('')
   const [maxAge, setMaxAge] = useState('')
@@ -14,7 +13,7 @@ const AgeGroup = () => {
     event.preventDefault()
     try {
       await ageGroupService.ageGroup({
-        name, minAge, maxAge, color
+        name, minAge, maxAge, color,
       })
       setName('')
       setMinAge('')
@@ -61,8 +60,7 @@ const AgeGroup = () => {
             onChange={({ target }) => {
               setMinAge(target.value)
               handleMaxAge(target.value)
-            }
-            }
+            }}
           />
         </div>
         <div>

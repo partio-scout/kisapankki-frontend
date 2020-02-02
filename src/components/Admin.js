@@ -6,7 +6,6 @@ import AgeGroup from './AgeGroup'
 import Category from './Category'
 
 const Admin = () => {
-
   const [errorMessage, setErrorMessage] = useState(null)
 
   return (

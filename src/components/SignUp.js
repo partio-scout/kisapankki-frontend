@@ -3,7 +3,6 @@ import Notification from './Notification'
 import signupService from '../services/signup'
 
 const SignUp = ({ setUser, setPage }) => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
@@ -17,7 +16,7 @@ const SignUp = ({ setUser, setPage }) => {
         name, username, password, key,
       })
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user),
       )
       setUser(user)
       setName('')

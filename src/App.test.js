@@ -51,5 +51,4 @@ describe('<App />', () => {
     const form = component.container.querySelector('.signup-form')
     expect(component.container).toContainElement(form)
   })
-
 })

@@ -3,7 +3,6 @@ import Notification from './Notification'
 import ruleService from '../services/rule'
 
 const Rule = () => {
-
   const [rules, setRules] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
 

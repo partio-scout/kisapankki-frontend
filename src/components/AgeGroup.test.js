@@ -16,7 +16,7 @@ describe('<AgeGroup />', () => {
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää ikäryhmä'
+      'Lisää ikäryhmä',
     )
   })
 
@@ -31,5 +31,4 @@ describe('<AgeGroup />', () => {
       'Lisää ikäryhmä',
     )
   })
-
 })

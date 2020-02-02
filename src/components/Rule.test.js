@@ -16,7 +16,7 @@ describe('<Rule />', () => {
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää sääntö'
+      'Lisää sääntö',
     )
   })
 
@@ -31,5 +31,4 @@ describe('<Rule />', () => {
       'Lisää sääntö',
     )
   })
-
 })

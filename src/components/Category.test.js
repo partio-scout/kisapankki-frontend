@@ -16,7 +16,7 @@ describe('<Category />', () => {
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää kategoria'
+      'Lisää kategoria',
     )
   })
 
@@ -31,5 +31,4 @@ describe('<Category />', () => {
       'Lisää kategoria',
     )
   })
-  
 })
