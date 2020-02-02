@@ -3,6 +3,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import AddTask from './components/AddTask'
 import Admin from './components/Admin'
+import taskService from './services/addtask'
 
 const App = () => {
   const [page, setPage] = useState('tasks')
@@ -13,6 +14,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      taskService.setToken(user.token)
     }
   }, [])
 
@@ -46,27 +48,22 @@ const App = () => {
     <div>
       <div className="header">
         <div className="logo" onClick={toPage('tasks')} />
-        {user === null
-          ? (
-            <>
-              <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
-              <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
-              <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
-            </>
-          )
-          : (
-            <>
-              <button className="admin-button" onClick={toPage('admin')}>Admin</button>
-              <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
-              <div>
-                <div className="logged">
-Kirjautuneena
-                  {user.username}
-                </div>
-                <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
-              </div>
-            </>
-          )}
+        {user === null ?
+          <>
+            <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
+            <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
+            <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
+          </>
+          :
+          <Fragment>
+            <button className="admin-button" onClick={toPage('admin')}>Admin</button>
+            <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
+            <div>
+              <div className="logged">Kirjautuneena {user.username} </div>
+              <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            </div>
+          </Fragment>
+        }
       </div>
       <div className="container">
         <h1>Kisatehtäväpankki</h1>

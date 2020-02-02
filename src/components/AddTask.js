@@ -4,6 +4,7 @@ import addtaskService from '../services/addtask'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import ageGroupService from '../services/ageGroup'
+import languageService from '../services/language'
 
 
 const AddTask = () => {
@@ -19,6 +20,10 @@ const AddTask = () => {
     const [category, setCategory] = useState('')
     const [ageGroups, setAgeGroups] = useState([])
     const [ageGroup, setAgeGroup] = useState('')
+    const [languages, setLanguages] = useState([])
+    const [language, setLanguage] = useState('')
+    const [creatorName, setCreatorName] = useState('')
+    const [creatorEmail, setCreatorEmail] = useState('')
 
     useEffect(() => {
         ruleService.getRules().then(response => {
@@ -29,6 +34,9 @@ const AddTask = () => {
         })
         ageGroupService.getAgeGroups().then(response => {
             setAgeGroups(response)
+        })
+        languageService.getLanguages().then(response => {
+            setLanguages(response)
         })
     }, [])
 
@@ -47,16 +55,29 @@ const AddTask = () => {
         setAgeGroup(e.target.value)
     }
 
+    const handleLanguageChange = (e) => {
+        console.log(e.target.value)
+        setLanguage(e.target.value)
+    }
+
     const handleAddTask = async (event) => {
         event.preventDefault()
         try {
             const task = await addtaskService.addtask({
-                name, rule, category, ageGroup
+                name, rule, category, ageGroup,
+                language, assignmentText, gradingScale,
+                creatorName, creatorEmail
             })
             setName('')
-            setRules('')
+            setRule('')
             setCategory('')
             setAgeGroup('')
+            setLanguage('')
+            setAssignmentText('')
+            setGradingScale('')
+            setCreatorEmail('')
+            setCreatorName('')
+            setSupervisorInstructions('')
         } catch {
             setErrorMessage('Jotain meni vikaan')
             setTimeout(() => {
@@ -100,7 +121,7 @@ const AddTask = () => {
                         type="text"
                         value={gradingScale}
                         name="GradingScale"
-                        placeholder="Arvostelu asteikko"
+                        placeholder="Arvosteluasteikko"
                         onChange={({ target }) => setGradingScale(target.value)}
                     />
                 </div>
@@ -111,7 +132,7 @@ const AddTask = () => {
                         className=""
                         type="text"
                         value={supervisorInstructions}
-                        name="supervisiorInstruction"
+                        name="supervisorInstruction"
                         placeholder="Ohjeet"
                         onChange={({ target }) => setSupervisorInstructions(target.value)}
                     />
@@ -136,22 +157,30 @@ const AddTask = () => {
                     </select>
                 </div>
                 <div>
-                    <select>
-                        <option value="0"></option>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
+                    <select onChange={(e) => handleLanguageChange(e)}>
+                        <option value="">Tehtävän kieli</option>
+                        {languages.map((language) => <option key={language.id} value={language.id}>{language.language}</option>)}
                     </select>
                 </div>
                 <div>
-                    <select>
-                        <option value="0"></option>
-                        <option value="1"></option>
-                        <option value="2"></option>
-                        <option value="3"></option>
-                        <option value="4"></option>
-                    </select>
+                    <input
+                        className=""
+                        type="text"
+                        value={creatorName}
+                        name="CreatorName"
+                        placeholder="Lisääjän nimi"
+                        onChange={({ target }) => setCreatorName(target.value)}
+                    />
+                </div>
+                <div>
+                    <input
+                        className=""
+                        type="text"
+                        value={creatorEmail}
+                        name="CreatorEmail"
+                        placeholder="Lisääjän sähköpostiosoite"
+                        onChange={({ target }) => setCreatorEmail(target.value)}
+                    />
                 </div>
                 <button type="submit" className="add-task-button">Lisää tehtävä</button>
             </form>
