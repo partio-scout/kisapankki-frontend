@@ -18,7 +18,6 @@ const App = () => {
     }
   }, [])
 
-
   const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
@@ -48,22 +47,25 @@ const App = () => {
     <div>
       <div className="header">
         <div className="logo" onClick={toPage('tasks')} />
+        <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
         {user === null ?
           <>
-            <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
             <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
             <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
           </>
           :
           <Fragment>
-            <button className="admin-button" onClick={toPage('admin')}>Admin</button>
-            <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
+            <button className="admin-button-header" onClick={toPage('admin')}>Admin</button>
             <div>
-              <div className="logged">Kirjautuneena {user.username} </div>
+              <div className="logged">Kirjautuneena {user.username}</div>
               <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
             </div>
           </Fragment>
         }
+      </div>
+      <div className="admin-task-buttons-mobile">
+        {user !== null && <button className="admin-button-mobile" onClick={toPage('admin')}>Admin</button>}
+        <button className="addtask-button-mobile" onClick={toPage('addtask')}>Lisää tehtävä</button>
       </div>
       <div className="container">
         <h1>Kisatehtäväpankki</h1>

@@ -37,7 +37,7 @@ const Language = () => {
             onChange={({ target }) => setLanguage(target.value)}
           />
         </div>
-        <button type="submit" className="language-add-button">Lisää kieli</button>
+        <button type="submit" className="language-add-button">Lisää</button>
       </form>
     </div>
   )

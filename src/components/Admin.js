@@ -10,7 +10,6 @@ const Admin = () => {
 
   return (
     <div>
-      <h2>Admin-alue</h2>
       <Notification message={errorMessage} />
       <Rule />
       <Language />

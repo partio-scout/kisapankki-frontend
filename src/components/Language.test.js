@@ -28,7 +28,7 @@ describe('<Language />', () => {
   test('renders submit button', () => {
     const button = component.container.querySelector('.language-add-button')
     expect(button).toHaveTextContent(
-      'Lisää kieli',
+      'Lisää',
     )
   })
 

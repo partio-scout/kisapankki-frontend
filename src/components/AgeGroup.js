@@ -85,7 +85,7 @@ const AgeGroup = () => {
             onChange={({ target }) => setColor(target.value)}
           />
         </div>
-        <button type="submit" className="age-group-submit-button">Lisää ikäryhmä</button>
+        <button type="submit" className="age-group-submit-button">Lisää</button>
       </form>
     </div>
   )

@@ -28,7 +28,7 @@ describe('<AgeGroup />', () => {
   test('renders submit button', () => {
     const button = component.container.querySelector('.age-group-submit-button')
     expect(button).toHaveTextContent(
-      'Lisää ikäryhmä',
+      'Lisää',
     )
   })
 })

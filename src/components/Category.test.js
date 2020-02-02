@@ -28,7 +28,7 @@ describe('<Category />', () => {
   test('renders submit button', () => {
     const button = component.container.querySelector('.category-add-button')
     expect(button).toHaveTextContent(
-      'Lisää kategoria',
+      'Lisää',
     )
   })
 })

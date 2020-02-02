@@ -103,8 +103,8 @@ const AddTask = () => {
                 </div>
                 <div>
                     <textarea
-                        rows="4"
-                        cols="50"
+                        rows="3"
+                        cols="35"
                         className=""
                         type="text"
                         value={assignmentText}
@@ -115,8 +115,8 @@ const AddTask = () => {
                 </div>
                 <div>
                     <textarea
-                        rows="4"
-                        cols="50"
+                        rows="3"
+                        cols="35"
                         className=""
                         type="text"
                         value={gradingScale}
@@ -127,8 +127,8 @@ const AddTask = () => {
                 </div>
                 <div>
                     <textarea
-                        rows="4"
-                        cols="50"
+                        rows="3"
+                        cols="35"
                         className=""
                         type="text"
                         value={supervisorInstructions}

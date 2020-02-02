@@ -36,7 +36,7 @@ const Rule = () => {
             onChange={({ target }) => setRules(target.value)}
           />
         </div>
-        <button type="submit" className="task-add-button">Lisää sääntö</button>
+        <button type="submit" className="task-add-button">Lisää</button>
       </form>
     </div>
   )

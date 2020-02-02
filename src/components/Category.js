@@ -36,7 +36,7 @@ const Category = () => {
             onChange={({ target }) => setCategory(target.value)}
           />
         </div>
-        <button type="submit" className="category-add-button">Lisää kategoria</button>
+        <button type="submit" className="category-add-button">Lisää</button>
       </form>
     </div>
   )
