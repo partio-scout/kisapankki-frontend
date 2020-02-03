@@ -27,14 +27,18 @@ const SignUp = ({ setUser, setPage }) => {
     setPasswordErrorMessage(null)
     if (name.length < 3) {
       setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
-    } 
+    }
     if (username.length < 3) {
       setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
     }
     if (password.length < 3) {
       setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
     }
-    if (name.length < 3 || username.length < 3 || password.length < 3) {
+    if (users.some(user => (user.username === username))) {
+      setUsernameErrorMessage('Käyttäjänimi on varattu')
+    }
+    if (name.length < 3 || username.length < 3 || password.length < 3
+      || users.some(user => (user.username === username))) {
       return
     }
     try {
