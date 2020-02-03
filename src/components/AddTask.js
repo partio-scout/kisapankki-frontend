@@ -41,22 +41,18 @@ const AddTask = () => {
     }, [])
 
     const handleRuleChange = (e) => {
-        console.log(e.target.value)
         setRule(e.target.value)
     }
 
     const handleCategoryChange = (e) => {
-        console.log(e.target.value)
         setCategory(e.target.value)
     }
 
     const handleAgeGroupChange = (e) => {
-        console.log(e.target.value)
         setAgeGroup(e.target.value)
     }
 
     const handleLanguageChange = (e) => {
-        console.log(e.target.value)
         setLanguage(e.target.value)
     }
 

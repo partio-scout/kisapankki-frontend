@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import signupService from '../services/signup'
 import tokenService from '../services/token'
@@ -9,9 +9,27 @@ const SignUp = ({ setUser, setPage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [key, setKey] = useState('')
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    signupService.getUsers().then(response => {
+      setUsers(response)
+    })
+  }, [])
 
   const handleSignUp = async (event) => {
     event.preventDefault()
+    if (users.some(user => (user.username === username))) {
+      setErrorMessage(`Käyttäjänimi ${username} on varattu`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      setName('')
+      setUsername('')
+      setPassword('')
+      setKey('')
+      return
+    }
     try {
       const user = await signupService.signup({
         name, username, password, key,
