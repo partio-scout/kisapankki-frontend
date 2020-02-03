@@ -36,7 +36,7 @@ const AgeGroup = () => {
   return (
     <div className="age-group-form">
       <h2>Lisää ikäryhmä</h2>
-      <Notification message={errorMessage} style="error" />
+      <Notification message={errorMessage} type="error" />
       <form onSubmit={handleAgeGroupAdd}>
         <div>
           <input

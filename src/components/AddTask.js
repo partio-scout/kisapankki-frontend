@@ -113,11 +113,11 @@ const AddTask = () => {
     return (
         <div>
             <h2>Lisää tehtävä</h2>
-            <Notification message={message} style="success" />
-            <Notification message={errorMessage} style="error" />
+            <Notification message={message} type="success" />
+            <Notification message={errorMessage} type="error" />
             <form onSubmit={handleAddTask}>
                 <div>
-                    <Notification message={nameErrorMessage} style="error" />
+                    <Notification message={nameErrorMessage} type="error" />
                     <input
                         className="task-title"
                         type="text"
@@ -128,7 +128,7 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <Notification message={assignmentTextErrorMessage} style="error" />
+                    <Notification message={assignmentTextErrorMessage} type="error" />
                     <textarea
                         rows="3"
                         cols="35"
@@ -186,7 +186,7 @@ const AddTask = () => {
                     </select>
                 </div>
                 <div>
-                    <Notification message={creatorNameErrorMessage} style="error" />
+                    <Notification message={creatorNameErrorMessage} type="error" />
                     <input
                         className=""
                         type="text"
@@ -195,7 +195,7 @@ const AddTask = () => {
                         placeholder="Lisääjän nimi"
                         onChange={({ target }) => setCreatorName(target.value)}
                     />
-                    <Notification message={creatorEmailErrorMessage} style="error" />
+                    <Notification message={creatorEmailErrorMessage} type="error" />
                     <input
                         className=""
                         type="text"

@@ -62,7 +62,7 @@ const SignUp = ({ setUser, setPage }) => {
   return (
     <div className="signup-form">
       <h2>Rekisteröidy</h2>
-      <Notification message={errorMessage} style="error" />
+      <Notification message={errorMessage} type="error" />
       <form onSubmit={handleSignUp}>
         <div>
           <Notification message={nameErrorMessage} />
