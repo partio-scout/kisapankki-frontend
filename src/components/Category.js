@@ -24,7 +24,7 @@ const Category = () => {
   return (
     <div className="category-form">
       <h2>Lisää kategoria</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleCategoryAdd}>
         <div>
           <input

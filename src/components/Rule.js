@@ -24,7 +24,7 @@ const Rule = () => {
   return (
     <div className="rule-form">
       <h2>Lisää sääntö</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleRuleAdd}>
         <div>
           <input

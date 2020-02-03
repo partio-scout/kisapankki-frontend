@@ -25,7 +25,7 @@ const Language = () => {
   return (
     <div className="language-form">
       <h2>Lisää kieli</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleLanguageAdd}>
         <div>
           <input

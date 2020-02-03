@@ -55,7 +55,7 @@ const SignUp = ({ setUser, setPage }) => {
   return (
     <div className="signup-form">
       <h2>Rekisteröidy</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleSignUp}>
         <div>
           <input

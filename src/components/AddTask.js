@@ -10,6 +10,7 @@ import languageService from '../services/language'
 const AddTask = () => {
 
     const [message, setMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const [name, setName] = useState('')
     const [assignmentText, setAssignmentText] = useState('')
     const [gradingScale, setGradingScale] = useState('')
@@ -24,6 +25,10 @@ const AddTask = () => {
     const [language, setLanguage] = useState('')
     const [creatorName, setCreatorName] = useState('')
     const [creatorEmail, setCreatorEmail] = useState('')
+    const [nameErrorMessage, setNameErrorMessage] = useState(null)
+    const [assignmentTextErrorMessage, setAssignmentTextErrorMessage] = useState(null)
+    const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
+    const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
 
     useEffect(() => {
         ruleService.getRules().then(response => {
@@ -58,6 +63,25 @@ const AddTask = () => {
 
     const handleAddTask = async (event) => {
         event.preventDefault()
+        setNameErrorMessage(null)
+        setAssignmentTextErrorMessage(null)
+        setCreatorNameErrorMessage(null)
+        setCreatorEmailErrorMessage(null)
+        if (name.length < 3) {
+            setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
+        } 
+        if (assignmentText.length < 5) {
+            setAssignmentTextErrorMessage('Tehtävänannossa pitää olla vähintään 5 kirjainta')
+        }
+        if (creatorName.length < 3) {
+            setCreatorNameErrorMessage('Lisääjän nimessä pitää olla vähintään 3 kirjainta')
+        }
+        if (creatorEmail.length < 5) {
+            setCreatorEmailErrorMessage('Lisääjän sähköpostissa pitää olla vähintään 5 kirjainta')
+        }
+        if (name.length < 3 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
+          return
+        }
         try {
             const task = await addtaskService.addtask({
                 name, rule, category, ageGroup,
@@ -75,10 +99,13 @@ const AddTask = () => {
             setCreatorName('')
             setSupervisorInstructions('')
             setMessage('Tehtävä lisätty!')
-        } catch {
-            setMessage('Jotain meni vikaan')
             setTimeout(() => {
                 setMessage(null)
+            }, 5000)
+        } catch {
+            setErrorMessage('Jotain meni vikaan')
+            setTimeout(() => {
+                setErrorMessage(null)
             }, 5000)
         }
     }
@@ -86,9 +113,11 @@ const AddTask = () => {
     return (
         <div>
             <h2>Lisää tehtävä</h2>
-            <Notification message={message} />
+            <Notification message={message} style="success" />
+            <Notification message={errorMessage} style="error" />
             <form onSubmit={handleAddTask}>
                 <div>
+                    <Notification message={nameErrorMessage} style="error" />
                     <input
                         className="task-title"
                         type="text"
@@ -99,6 +128,7 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
+                    <Notification message={assignmentTextErrorMessage} style="error" />
                     <textarea
                         rows="3"
                         cols="35"
@@ -155,6 +185,7 @@ const AddTask = () => {
                     </select>
                 </div>
                 <div>
+                    <Notification message={creatorNameErrorMessage} style="error" />
                     <input
                         className=""
                         type="text"
@@ -163,6 +194,7 @@ const AddTask = () => {
                         placeholder="Lisääjän nimi"
                         onChange={({ target }) => setCreatorName(target.value)}
                     />
+                    <Notification message={creatorEmailErrorMessage} style="error" />
                     <input
                         className=""
                         type="text"

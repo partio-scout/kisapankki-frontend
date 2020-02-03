@@ -33,7 +33,7 @@ const Login = ({ setUser, setPage }) => {
   return (
     <div className="login-form">
       <h2>Kirjaudu sisään</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleLogin}>
         <div>
           <input

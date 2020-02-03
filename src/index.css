@@ -116,9 +116,13 @@ button:hover {
   padding-left: 20px;
 }
 
+.success {
+  color: limegreen;
+  font-size: 15px;
+}
+
 .error {
   color: #ff0080;
-  margin-bottom: 5px;
   font-size: 15px;
 }
 
