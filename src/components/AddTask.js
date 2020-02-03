@@ -148,7 +148,7 @@ const AddTask = () => {
                         type="text"
                         value={gradingScale}
                         name="GradingScale"
-                        placeholder="Arvosteluasteikko"
+                        placeholder="Arvostelu"
                         onChange={({ target }) => setGradingScale(target.value)}
                     />
                 </div>
@@ -160,24 +160,25 @@ const AddTask = () => {
                         type="text"
                         value={supervisorInstructions}
                         name="supervisorInstruction"
-                        placeholder="Ohjeet"
+                        placeholder="Rastimiehen ohje"
                         onChange={({ target }) => setSupervisorInstructions(target.value)}
                     />
                 </div>
                 <div>
-                    <select value={rule} onChange={(e) => handleRuleChange(e)}>
-                        <option value="">Valitse sääntöluokka</option>
-                        {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
+                    <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
+                        <option value="">Valitse ikäluokka</option>
+                        {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
+
                     <select value={category} onChange={(e) => handleCategoryChange(e)}>
                         <option value="">Valitse kategoria</option>
                         {categories.map(category => <option key={category.id} value={category.id}>{category.category}</option>)}
                     </select>
                 </div>
                 <div>
-                    <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
-                        <option value="">Valitse ikäluokka</option>
-                        {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
+                    <select value={rule} onChange={(e) => handleRuleChange(e)}>
+                        <option value="">Valitse säännöt</option>
+                        {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
                     </select>
                     <select value={language} onChange={(e) => handleLanguageChange(e)}>
                         <option value="">Tehtävän kieli</option>

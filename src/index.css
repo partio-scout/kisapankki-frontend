@@ -135,8 +135,12 @@ button:hover {
 }
 
 @media screen and (max-width: 550px) {
-  textarea, .task-title {
+  textarea, input, .task-title {
     width: 90%;
+  }
+
+  select {
+    width: 95%;
   }
 
   .admin-button-header, .addtask-button-header {
