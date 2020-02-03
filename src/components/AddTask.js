@@ -9,7 +9,7 @@ import languageService from '../services/language'
 
 const AddTask = () => {
 
-    const [errorMessage, setErrorMessage] = useState('')
+    const [message, setMessage] = useState('')
     const [name, setName] = useState('')
     const [assignmentText, setAssignmentText] = useState('')
     const [gradingScale, setGradingScale] = useState('')
@@ -74,10 +74,15 @@ const AddTask = () => {
             setCreatorEmail('')
             setCreatorName('')
             setSupervisorInstructions('')
+            document.getElementById("select-rule").selectedIndex = 0
+            document.getElementById("select-category").selectedIndex = 0
+            document.getElementById("select-agegroup").selectedIndex = 0
+            document.getElementById("select-language").selectedIndex = 0
+            setMessage('Tehtävä lisätty!')
         } catch {
-            setErrorMessage('Jotain meni vikaan')
+            setMessage('Jotain meni vikaan')
             setTimeout(() => {
-                setErrorMessage(null)
+                setMessage(null)
             }, 5000)
         }
     }
@@ -85,7 +90,7 @@ const AddTask = () => {
     return (
         <div>
             <h2>Lisää tehtävä</h2>
-            <Notification message={errorMessage} />
+            <Notification message={message} />
             <form onSubmit={handleAddTask}>
                 <div>
                     <input
@@ -134,22 +139,22 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <select onChange={(e) => handleRuleChange(e)}>
+                    <select id="select-rule" onChange={(e) => handleRuleChange(e)}>
                         <option value="">Valitse sääntöluokka</option>
                         {rules.map((rule) =>
                             <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
                     </select>
-                    <select onChange={(e) => handleCategoryChange(e)}>
+                    <select id="select-category" onChange={(e) => handleCategoryChange(e)}>
                         <option value="">Valitse kategoria</option>
                         {categories.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)}
                     </select>
                 </div>
                 <div>
-                    <select onChange={(e) => handleAgeGroupChange(e)}>
+                    <select id="select-agegroup" onChange={(e) => handleAgeGroupChange(e)}>
                         <option value="">Valitse ikäluokka</option>
                         {ageGroups.map((ageGroup) => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
-                    <select onChange={(e) => handleLanguageChange(e)}>
+                    <select id="select-language" onChange={(e) => handleLanguageChange(e)}>
                         <option value="">Tehtävän kieli</option>
                         {languages.map((language) => <option key={language.id} value={language.id}>{language.language}</option>)}
                     </select>
