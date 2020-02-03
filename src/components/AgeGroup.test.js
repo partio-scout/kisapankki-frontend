@@ -20,7 +20,7 @@ describe('<AgeGroup />', () => {
     )
   })
 
-  test('renders input for rule', () => {
+  test('renders input for age group', () => {
     const inputs = component.container.querySelectorAll('input')
     expect(inputs.length).toBe(4)
   })
