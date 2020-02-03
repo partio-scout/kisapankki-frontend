@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import signupService from '../services/signup'
+import tokenService from '../services/token'
 
 const SignUp = ({ setUser, setPage }) => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -12,6 +12,13 @@ const SignUp = ({ setUser, setPage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [key, setKey] = useState('')
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    signupService.getUsers().then(response => {
+      setUsers(response)
+    })
+  }, [])
 
   const handleSignUp = async (event) => {
     event.preventDefault()
@@ -35,9 +42,10 @@ const SignUp = ({ setUser, setPage }) => {
         name, username, password, key,
       })
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user),
       )
       setUser(user)
+      tokenService.setToken(user.token)
       setName('')
       setUsername('')
       setPassword('')
@@ -54,7 +62,7 @@ const SignUp = ({ setUser, setPage }) => {
   return (
     <div className="signup-form">
       <h2>Rekisteröidy</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleSignUp}>
         <div>
           <Notification message={nameErrorMessage} />

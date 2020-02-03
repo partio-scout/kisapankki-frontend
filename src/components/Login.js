@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Notification from './Notification'
 import loginService from '../services/login'
+import tokenService from '../services/token'
 
 const Login = ({ setUser, setPage }) => {
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('') 
+  const [password, setPassword] = useState('')
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -15,9 +15,10 @@ const Login = ({ setUser, setPage }) => {
         username, password,
       })
       window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user),
       )
       setUser(user)
+      tokenService.setToken(user.token)
       setUsername('')
       setPassword('')
       setPage('tasks')
@@ -32,7 +33,7 @@ const Login = ({ setUser, setPage }) => {
   return (
     <div className="login-form">
       <h2>Kirjaudu sisään</h2>
-      <Notification message={errorMessage} />
+      <Notification message={errorMessage} style="error" />
       <form onSubmit={handleLogin}>
         <div>
           <input

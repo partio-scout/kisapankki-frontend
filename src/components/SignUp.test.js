@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import SignUp from './SignUp'
+jest.mock('../services/signup')
 
 afterEach(cleanup)
 
@@ -25,8 +26,8 @@ describe('<SignUp />', () => {
     expect(inputs.length).toBe(4)
   })
 
-  test('renders submit button', () => {
-    const button = component.container.querySelector('.signup-button')
+  test('renders submit button', async () => {
+    const button = component.container.querySelector('.signup-form')
     expect(button).toHaveTextContent(
       'Rekisteröidy',
     )
