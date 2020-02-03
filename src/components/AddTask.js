@@ -67,19 +67,19 @@ const AddTask = () => {
         setAssignmentTextErrorMessage(null)
         setCreatorNameErrorMessage(null)
         setCreatorEmailErrorMessage(null)
-        if (name.length < 3) {
-            setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
+        if (name.length < 1) {
+            setNameErrorMessage('Nimi ei saa olla tyhjä')
         } 
-        if (assignmentText.length < 5) {
-            setAssignmentTextErrorMessage('Tehtävänannossa pitää olla vähintään 5 kirjainta')
+        if (assignmentText.length < 1) {
+            setAssignmentTextErrorMessage('Tehtävänanto ei saa olla tyhjä')
         }
-        if (creatorName.length < 3) {
-            setCreatorNameErrorMessage('Lisääjän nimessä pitää olla vähintään 3 kirjainta')
+        if (creatorName.length < 1) {
+            setCreatorNameErrorMessage('Lisääjän nimi ei saa olla tyhjä')
         }
-        if (creatorEmail.length < 5) {
-            setCreatorEmailErrorMessage('Lisääjän sähköpostissa pitää olla vähintään 5 kirjainta')
+        if (creatorEmail.length < 1) {
+            setCreatorEmailErrorMessage('Lisääjän sähköposti ei saa olla tyhjä')
         }
-        if (name.length < 3 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
+        if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
           return
         }
         try {
