@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup, act, fireEvent } from '@testing-library/react'
 import App from './App'
 
 afterEach(cleanup)
@@ -40,14 +40,22 @@ describe('<App />', () => {
 
   test('after clicking login button <Login /> is rendered', () => {
     const button = component.container.querySelector('.login-button-header')
-    fireEvent.click(button)
+
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const form = component.container.querySelector('.login-form')
     expect(component.container).toContainElement(form)
   })
 
   test('after clicking signup button <SignUp /> rendered', () => {
     const button = component.container.querySelector('.signup-button-header')
-    fireEvent.click(button)
+
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const form = component.container.querySelector('.signup-form')
     expect(component.container).toContainElement(form)
   })
