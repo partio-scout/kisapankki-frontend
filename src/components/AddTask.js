@@ -74,10 +74,6 @@ const AddTask = () => {
             setCreatorEmail('')
             setCreatorName('')
             setSupervisorInstructions('')
-            document.getElementById("select-rule").selectedIndex = 0
-            document.getElementById("select-category").selectedIndex = 0
-            document.getElementById("select-agegroup").selectedIndex = 0
-            document.getElementById("select-language").selectedIndex = 0
             setMessage('Tehtävä lisätty!')
         } catch {
             setMessage('Jotain meni vikaan')
@@ -139,24 +135,23 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <select id="select-rule" onChange={(e) => handleRuleChange(e)}>
+                    <select value={rule} onChange={(e) => handleRuleChange(e)}>
                         <option value="">Valitse sääntöluokka</option>
-                        {rules.map((rule) =>
-                            <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
+                        {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
                     </select>
-                    <select id="select-category" onChange={(e) => handleCategoryChange(e)}>
+                    <select value={category} onChange={(e) => handleCategoryChange(e)}>
                         <option value="">Valitse kategoria</option>
-                        {categories.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)}
+                        {categories.map(category => <option key={category.id} value={category.id}>{category.category}</option>)}
                     </select>
                 </div>
                 <div>
-                    <select id="select-agegroup" onChange={(e) => handleAgeGroupChange(e)}>
+                    <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
                         <option value="">Valitse ikäluokka</option>
-                        {ageGroups.map((ageGroup) => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
+                        {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
-                    <select id="select-language" onChange={(e) => handleLanguageChange(e)}>
+                    <select value={language} onChange={(e) => handleLanguageChange(e)}>
                         <option value="">Tehtävän kieli</option>
-                        {languages.map((language) => <option key={language.id} value={language.id}>{language.language}</option>)}
+                        {languages.map(language => <option key={language.id} value={language.id}>{language.language}</option>)}
                     </select>
                 </div>
                 <div>
