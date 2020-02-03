@@ -65,7 +65,7 @@ const SignUp = ({ setUser, setPage }) => {
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleSignUp}>
         <div>
-          <Notification message={nameErrorMessage} />
+          <Notification message={nameErrorMessage} type="error" />
           <input
             className="name"
             type="text"
@@ -76,7 +76,7 @@ const SignUp = ({ setUser, setPage }) => {
           />
         </div>
         <div>
-          <Notification message={usernameErrorMessage} />
+          <Notification message={usernameErrorMessage} type="error" />
           <input
             className="username"
             type="text"
@@ -87,7 +87,7 @@ const SignUp = ({ setUser, setPage }) => {
           />
         </div>
         <div>
-          <Notification message={passwordErrorMessage} />
+          <Notification message={passwordErrorMessage} type="error" />
           <input
             className="password"
             type="password"
