@@ -5,6 +5,9 @@ import tokenService from '../services/token'
 
 const SignUp = ({ setUser, setPage }) => {
   const [errorMessage, setErrorMessage] = useState(null)
+  const [nameErrorMessage, setNameErrorMessage] = useState(null)
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -19,15 +22,19 @@ const SignUp = ({ setUser, setPage }) => {
 
   const handleSignUp = async (event) => {
     event.preventDefault()
-    if (users.some(user => (user.username === username))) {
-      setErrorMessage(`Käyttäjänimi ${username} on varattu`)
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-      setName('')
-      setUsername('')
-      setPassword('')
-      setKey('')
+    setNameErrorMessage(null)
+    setUsernameErrorMessage(null)
+    setPasswordErrorMessage(null)
+    if (name.length < 3) {
+      setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
+    } 
+    if (username.length < 3) {
+      setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
+    }
+    if (password.length < 3) {
+      setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
+    }
+    if (name.length < 3 || username.length < 3 || password.length < 3) {
       return
     }
     try {
@@ -45,7 +52,7 @@ const SignUp = ({ setUser, setPage }) => {
       setKey('')
       setPage('tasks')
     } catch (exception) {
-      setErrorMessage('Jotain meni vikaan')
+      setErrorMessage('Rekisteröityminen epäonnistui')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -58,6 +65,7 @@ const SignUp = ({ setUser, setPage }) => {
       <Notification message={errorMessage} style="error" />
       <form onSubmit={handleSignUp}>
         <div>
+          <Notification message={nameErrorMessage} />
           <input
             className="name"
             type="text"
@@ -68,6 +76,7 @@ const SignUp = ({ setUser, setPage }) => {
           />
         </div>
         <div>
+          <Notification message={usernameErrorMessage} />
           <input
             className="username"
             type="text"
@@ -78,6 +87,7 @@ const SignUp = ({ setUser, setPage }) => {
           />
         </div>
         <div>
+          <Notification message={passwordErrorMessage} />
           <input
             className="password"
             type="password"
