@@ -113,11 +113,11 @@ const AddTask = () => {
     return (
         <div>
             <h2>Lisää tehtävä</h2>
-            <Notification message={message} style="success" />
-            <Notification message={errorMessage} style="error" />
+            <Notification message={message} type="success" />
+            <Notification message={errorMessage} type="error" />
             <form onSubmit={handleAddTask}>
                 <div>
-                    <Notification message={nameErrorMessage} style="error" />
+                    <Notification message={nameErrorMessage} type="error" />
                     <input
                         className="task-title"
                         type="text"
@@ -128,7 +128,7 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <Notification message={assignmentTextErrorMessage} style="error" />
+                    <Notification message={assignmentTextErrorMessage} type="error" />
                     <textarea
                         rows="3"
                         cols="35"
@@ -148,7 +148,7 @@ const AddTask = () => {
                         type="text"
                         value={gradingScale}
                         name="GradingScale"
-                        placeholder="Arvosteluasteikko"
+                        placeholder="Arvostelu"
                         onChange={({ target }) => setGradingScale(target.value)}
                     />
                 </div>
@@ -160,24 +160,25 @@ const AddTask = () => {
                         type="text"
                         value={supervisorInstructions}
                         name="supervisorInstruction"
-                        placeholder="Ohjeet"
+                        placeholder="Rastimiehen ohje"
                         onChange={({ target }) => setSupervisorInstructions(target.value)}
                     />
                 </div>
                 <div>
-                    <select value={rule} onChange={(e) => handleRuleChange(e)}>
-                        <option value="">Valitse sääntöluokka</option>
-                        {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
+                    <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
+                        <option value="">Valitse ikäluokka</option>
+                        {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
+
                     <select value={category} onChange={(e) => handleCategoryChange(e)}>
                         <option value="">Valitse kategoria</option>
                         {categories.map(category => <option key={category.id} value={category.id}>{category.category}</option>)}
                     </select>
                 </div>
                 <div>
-                    <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
-                        <option value="">Valitse ikäluokka</option>
-                        {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
+                    <select value={rule} onChange={(e) => handleRuleChange(e)}>
+                        <option value="">Valitse säännöt</option>
+                        {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
                     </select>
                     <select value={language} onChange={(e) => handleLanguageChange(e)}>
                         <option value="">Tehtävän kieli</option>
@@ -185,7 +186,7 @@ const AddTask = () => {
                     </select>
                 </div>
                 <div>
-                    <Notification message={creatorNameErrorMessage} style="error" />
+                    <Notification message={creatorNameErrorMessage} type="error" />
                     <input
                         className=""
                         type="text"
@@ -194,7 +195,7 @@ const AddTask = () => {
                         placeholder="Lisääjän nimi"
                         onChange={({ target }) => setCreatorName(target.value)}
                     />
-                    <Notification message={creatorEmailErrorMessage} style="error" />
+                    <Notification message={creatorEmailErrorMessage} type="error" />
                     <input
                         className=""
                         type="text"
