@@ -1,4 +1,5 @@
 import axios from 'axios'
+import tokenService from './token'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/category`
 
@@ -7,9 +8,13 @@ const getCategories = async () => {
   return response.data
 }
 
-const category = async (cat) => {
-  const response = await axios.post(baseUrl, cat)
+const addCategory = async (cat) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() }
+  }
+
+  const response = await axios.post(baseUrl, cat, config)
   return response.data
 }
 
-export default { category, getCategories }
+export default { addCategory, getCategories }

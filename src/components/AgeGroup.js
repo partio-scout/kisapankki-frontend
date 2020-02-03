@@ -12,7 +12,7 @@ const AgeGroup = () => {
   const handleAgeGroupAdd = async (event) => {
     event.preventDefault()
     try {
-      await ageGroupService.ageGroup({
+      await ageGroupService.addAgeGroup({
         name, minAge, maxAge, color,
       })
       setName('')

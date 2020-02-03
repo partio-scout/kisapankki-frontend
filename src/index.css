@@ -27,20 +27,22 @@ input, select, textarea {
   border-radius: 4px;
   font-weight: 400;
   line-height: 1.5rem;
-  width: 250px;
+  width: 236px;
   padding: .5rem;
   color: #000;
   background: #fff;
   margin: 5px 0px;
   font-size: 15px;
+  margin-right: 10px;
 }
 
 select {
-  width: 270px;
+  width: 254px;
 }
 
 textarea {
   font-family: "PT Sans", sans-serif;
+  width: 500px;
 }
 
 button {
@@ -56,6 +58,7 @@ button {
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 5px;
+  z-index: 100;
 }
 
 button:hover {
@@ -123,7 +126,15 @@ button:hover {
   display: none;
 }
 
+.task-title {
+  width: 500px;
+}
+
 @media screen and (max-width: 550px) {
+  textarea, .task-title {
+    width: 90%;
+  }
+
   .admin-button-header, .addtask-button-header {
     display: none;
   }

@@ -9,7 +9,7 @@ const Category = () => {
   const handleCategoryAdd = async (event) => {
     event.preventDefault()
     try {
-      await categoryService.category({
+      await categoryService.addCategory({
         category,
       })
       setCategory('')

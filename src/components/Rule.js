@@ -9,7 +9,7 @@ const Rule = () => {
   const handleRuleAdd = async (event) => {
     event.preventDefault()
     try {
-      await ruleService.rule({
+      await ruleService.addRule({
         rules,
       })
       setRules('')

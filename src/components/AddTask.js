@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
-import addtaskService from '../services/addtask'
+import addtaskService from '../services/task'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import ageGroupService from '../services/ageGroup'
@@ -93,7 +93,7 @@ const AddTask = () => {
             <form onSubmit={handleAddTask}>
                 <div>
                     <input
-                        className=""
+                        className="task-title"
                         type="text"
                         value={name}
                         name="Name"
@@ -143,8 +143,6 @@ const AddTask = () => {
                         {rules.map((rule) =>
                             <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
                     </select>
-                </div>
-                <div>
                     <select onChange={(e) => handleCategoryChange(e)}>
                         <option value="">Valitse kategoria</option>
                         {categories.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)}
@@ -155,8 +153,6 @@ const AddTask = () => {
                         <option value="">Valitse ikäluokka</option>
                         {ageGroups.map((ageGroup) => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
                     </select>
-                </div>
-                <div>
                     <select onChange={(e) => handleLanguageChange(e)}>
                         <option value="">Tehtävän kieli</option>
                         {languages.map((language) => <option key={language.id} value={language.id}>{language.language}</option>)}
@@ -171,8 +167,6 @@ const AddTask = () => {
                         placeholder="Lisääjän nimi"
                         onChange={({ target }) => setCreatorName(target.value)}
                     />
-                </div>
-                <div>
                     <input
                         className=""
                         type="text"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Notification from './Notification'
 import loginService from '../services/login'
+import tokenService from '../services/token'
 
 const Login = ({ setUser, setPage }) => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -17,6 +18,7 @@ const Login = ({ setUser, setPage }) => {
         'loggedUser', JSON.stringify(user),
       )
       setUser(user)
+      tokenService.setToken(user.token)
       setUsername('')
       setPassword('')
       setPage('tasks')

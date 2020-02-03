@@ -3,7 +3,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import AddTask from './components/AddTask'
 import Admin from './components/Admin'
-import taskService from './services/addtask'
+import tokenService from './services/token'
 
 const App = () => {
   const [page, setPage] = useState('tasks')
@@ -14,7 +14,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      taskService.setToken(user.token)
+      tokenService.setToken(user.token)
     }
   }, [])
 
@@ -40,6 +40,7 @@ const App = () => {
   const logout = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
+    tokenService.setToken(null)
     toPage('tasks')
   }
 
@@ -49,10 +50,10 @@ const App = () => {
         <div className="logo" onClick={toPage('tasks')} />
         <button className="addtask-button-header" onClick={toPage('addtask')}>Lisää tehtävä</button>
         {user === null ?
-          <>
+          <Fragment>
             <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
             <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
-          </>
+          </Fragment>
           :
           <Fragment>
             <button className="admin-button-header" onClick={toPage('admin')}>Admin</button>
