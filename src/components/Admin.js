@@ -1,4 +1,5 @@
 import React from 'react'
+import AddAdmin from './AddAdmin'
 import Rule from './Rule'
 import Language from './Language'
 import AgeGroup from './AgeGroup'
@@ -8,6 +9,7 @@ const Admin = () => {
 
   return (
     <div>
+      <AddAdmin />
       <Rule />
       <Language />
       <AgeGroup />

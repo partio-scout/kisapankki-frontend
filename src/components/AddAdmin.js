@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import signupService from '../services/signup'
 
-const SignUp = ({ setPage }) => {
+const AddAdmin = ({ setPage }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -10,7 +10,6 @@ const SignUp = ({ setPage }) => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [key, setKey] = useState('')
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const SignUp = ({ setPage }) => {
     })
   }, [])
 
-  const handleSignUp = async (event) => {
+  const handleAddAdmin = async (event) => {
     event.preventDefault()
     setNameErrorMessage(null)
     setUsernameErrorMessage(null)
@@ -34,7 +33,7 @@ const SignUp = ({ setPage }) => {
       setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
     }
     if (users.some(user => (user.username === username))) {
-      setUsernameErrorMessage('Käyttäjänimi on varattu')
+      setUsernameErrorMessage('Käyttäjätunnus on varattu')
     }
     if (name.length < 3 || username.length < 3 || password.length < 3
       || users.some(user => (user.username === username))) {
@@ -42,15 +41,14 @@ const SignUp = ({ setPage }) => {
     }
     try {
       await signupService.signup({
-        name, username, password, key,
+        name, username, password
       })
       setName('')
       setUsername('')
       setPassword('')
-      setKey('')
       setPage('login')
     } catch (exception) {
-      setErrorMessage('Rekisteröityminen epäonnistui')
+      setErrorMessage('Lisääminen epäonnistui')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -59,9 +57,9 @@ const SignUp = ({ setPage }) => {
 
   return (
     <div className="signup-form">
-      <h2>Rekisteröidy</h2>
+      <h2>Lisää ylläpitäjä</h2>
       <Notification message={errorMessage} type="error" />
-      <form onSubmit={handleSignUp}>
+      <form onSubmit={handleAddAdmin}>
         <div>
           <Notification message={nameErrorMessage} type="error" />
           <input
@@ -95,20 +93,10 @@ const SignUp = ({ setPage }) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <div>
-          <input
-            className="key"
-            type="text"
-            value={key}
-            name="Key"
-            placeholder="Avain"
-            onChange={({ target }) => setKey(target.value)}
-          />
-        </div>
-        <button type="submit" className="signup-button">Rekisteröidy</button>
+        <button type="submit" className="signup-button">Lisää</button>
       </form>
     </div>
   )
 }
 
-export default SignUp
+export default AddAdmin

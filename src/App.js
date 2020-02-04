@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import Login from './components/Login'
-import SignUp from './components/SignUp'
 import AddTask from './components/AddTask'
 import Admin from './components/Admin'
 import tokenService from './services/token'
@@ -28,8 +27,6 @@ const App = () => {
       return <div />
     } if (page === 'login') {
       return <Login setUser={setUser} setPage={setPage} />
-    } if (page === 'signup') {
-      return <SignUp setPage={setPage} />
     } if (page === 'addtask') {
       return <AddTask />
     } if (user && page === 'admin') {
@@ -52,7 +49,6 @@ const App = () => {
         {user === null ?
           <Fragment>
             <button className="login-button-header" onClick={toPage('login')}>Kirjaudu</button>
-            <button className="signup-button-header" onClick={toPage('signup')}>Rekisteröidy</button>
           </Fragment>
           :
           <Fragment>
