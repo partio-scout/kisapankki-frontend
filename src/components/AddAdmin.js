@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom"
 import Notification from './Notification'
 import signupService from '../services/signup'
 
@@ -11,6 +12,7 @@ const AddAdmin = ({ setPage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
+  let history = useHistory()
 
   useEffect(() => {
     signupService.getUsers().then(response => {
@@ -46,7 +48,7 @@ const AddAdmin = ({ setPage }) => {
       setName('')
       setUsername('')
       setPassword('')
-      setPage('login')
+      history.push('/kirjautuminen')
     } catch (exception) {
       setErrorMessage('Lisääminen epäonnistui')
       setTimeout(() => {

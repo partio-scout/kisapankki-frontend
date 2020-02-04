@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, act, fireEvent } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 
 afterEach(cleanup)
@@ -10,7 +11,9 @@ describe('<App />', () => {
 
   beforeEach(() => {
     component = render(
-      <App />,
+      <Router>
+        <App />
+      </Router>
     )
   })
 

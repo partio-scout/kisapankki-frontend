@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import { useHistory } from "react-router-dom"
 import Notification from './Notification'
 import loginService from '../services/login'
 import tokenService from '../services/token'
 
-const Login = ({ setUser, setPage }) => {
+const Login = ({ setUser }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  let history = useHistory()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -21,7 +23,7 @@ const Login = ({ setUser, setPage }) => {
       tokenService.setToken(user.token)
       setUsername('')
       setPassword('')
-      setPage('tasks')
+      history.push('/')
     } catch (exception) {
       setErrorMessage('Väärä käyttäjätunnus/salasana')
       setTimeout(() => {
