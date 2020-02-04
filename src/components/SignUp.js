@@ -45,16 +45,11 @@ const SignUp = ({ setUser, setPage }) => {
       const user = await signupService.signup({
         name, username, password, key,
       })
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user),
-      )
-      setUser(user)
-      tokenService.setToken(user.token)
       setName('')
       setUsername('')
       setPassword('')
       setKey('')
-      setPage('tasks')
+      setPage('login')
     } catch (exception) {
       setErrorMessage('Rekisteröityminen epäonnistui')
       setTimeout(() => {
