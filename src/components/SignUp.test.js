@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, fireEvent } from '@testing-library/react'
+import { render, cleanup, fireEvent, act } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import SignUp from './SignUp'
 jest.mock('../services/signup')
 
@@ -11,7 +12,9 @@ describe('<SignUp />', () => {
 
   beforeEach(() => {
     component = render(
-      <SignUp />,
+      <Router>
+        <SignUp />
+      </Router>
     )
   })
 
@@ -35,7 +38,10 @@ describe('<SignUp />', () => {
 
   test('shows error message if name is less than 3 characters', () => {
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
+
+    act(() => {
+      fireEvent.click(button)
+    })
   
     const div = component.container.querySelector('.signup-form')
     expect(div).toHaveTextContent('Nimessä pitää olla vähintään 3 kirjainta')
@@ -43,10 +49,16 @@ describe('<SignUp />', () => {
 
   test('does not show error message if name is at least 3 characters', () => {
     const input = component.container.querySelector('.name')
-    fireEvent.change(input, { target: { value: 'nimi' } })
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'nimi' } })
+    })
 
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
+
+    act(() => {
+      fireEvent.click(button)
+    })
   
     const div = component.container.querySelector('.signup-form')
     expect(div).not.toHaveTextContent('Nimessä pitää olla vähintään 3 kirjainta')
@@ -54,38 +66,56 @@ describe('<SignUp />', () => {
 
   test('shows error message if username is less than 3 characters', () => {
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
-  
+    
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const div = component.container.querySelector('.signup-form')
     expect(div).toHaveTextContent('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
   })
 
   test('does not show error message if username is at least 3 characters', () => {
     const input = component.container.querySelector('.username')
-    fireEvent.change(input, { target: { value: 'käyttäjätunnus' } })
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'käyttäjätunnus' } })
+    })
 
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
-  
+    
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const div = component.container.querySelector('.signup-form')
     expect(div).not.toHaveTextContent('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
   })
 
   test('shows error message if password is less than 3 characters', () => {
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
-  
+    
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const div = component.container.querySelector('.signup-form')
     expect(div).toHaveTextContent('Salasanassa pitää olla vähintään 3 kirjainta')
   })
 
   test('does not show error message if password is at least 3 characters', () => {
     const input = component.container.querySelector('.password')
-    fireEvent.change(input, { target: { value: 'salasana' } })
+
+    act(() => {
+      fireEvent.change(input, { target: { value: 'salasana' } })
+    })
 
     const button = component.container.querySelector('.signup-button')
-    fireEvent.click(button)
-  
+
+    act(() => {
+      fireEvent.click(button)
+    })
+
     const div = component.container.querySelector('.signup-form')
     expect(div).not.toHaveTextContent('Salasanassa pitää olla vähintään 3 kirjainta')
   })
