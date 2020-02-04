@@ -29,7 +29,7 @@ const App = () => {
     } if (page === 'login') {
       return <Login setUser={setUser} setPage={setPage} />
     } if (page === 'signup') {
-      return <SignUp setUser={setUser} setPage={setPage} />
+      return <SignUp setPage={setPage} />
     } if (page === 'addtask') {
       return <AddTask />
     } if (user && page === 'admin') {

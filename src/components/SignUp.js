@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import signupService from '../services/signup'
-import tokenService from '../services/token'
 
-const SignUp = ({ setUser, setPage }) => {
+const SignUp = ({ setPage }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -42,7 +41,7 @@ const SignUp = ({ setUser, setPage }) => {
       return
     }
     try {
-      const user = await signupService.signup({
+      await signupService.signup({
         name, username, password, key,
       })
       setName('')

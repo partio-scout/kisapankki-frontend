@@ -83,7 +83,7 @@ const AddTask = () => {
           return
         }
         try {
-            const task = await addtaskService.addtask({
+            await addtaskService.addtask({
                 name, rule, category, ageGroup,
                 language, assignmentText, gradingScale,
                 creatorName, creatorEmail
