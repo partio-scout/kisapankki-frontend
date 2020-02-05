@@ -1,23 +1,11 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, act } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import AddTask from './AddTask'
-
-act(() => {
-  jest.mock('../services/category')
-})
-
-act(() => {
-  jest.mock('../services/rule')
-})
-
-act(() => {
-  jest.mock('../services/ageGroup')
-})
-
-act(() => {
-  jest.mock('../services/language')
-})
+jest.mock('../services/category')
+jest.mock('../services/rule')
+jest.mock('../services/ageGroup')
+jest.mock('../services/language')
 
 afterEach(cleanup)
 

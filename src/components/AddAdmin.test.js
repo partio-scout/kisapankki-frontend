@@ -3,10 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AddAdmin from './AddAdmin'
-
-act(() => {
-  jest.mock('../services/user')
-})
+jest.mock('../services/user')
 
 afterEach(cleanup)
 
