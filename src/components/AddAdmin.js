@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from "react-router-dom"
 import Notification from './Notification'
-import signupService from '../services/signup'
+import userService from '../services/user'
 
-const AddAdmin = ({ setPage }) => {
+const AddAdmin = () => {
+  const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -12,10 +12,9 @@ const AddAdmin = ({ setPage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
-  let history = useHistory()
 
   useEffect(() => {
-    signupService.getUsers().then(response => {
+    userService.getUsers().then(response => {
       setUsers(response)
     })
   }, [])
@@ -42,13 +41,16 @@ const AddAdmin = ({ setPage }) => {
       return
     }
     try {
-      await signupService.signup({
+      await userService.addUser({
         name, username, password
       })
       setName('')
       setUsername('')
       setPassword('')
-      history.push('/kirjautuminen')
+      setMessage('Ylläpitäjä lisätty!')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     } catch (exception) {
       setErrorMessage('Lisääminen epäonnistui')
       setTimeout(() => {
@@ -60,6 +62,7 @@ const AddAdmin = ({ setPage }) => {
   return (
     <div className="signup-form">
       <h2>Lisää ylläpitäjä</h2>
+      <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleAddAdmin}>
         <div>

@@ -24,20 +24,8 @@ describe('<App />', () => {
     )
   })
 
-  test('renders signup button in header', () => {
-    const button = component.container.querySelector('.signup-button-header')
-    expect(button).toHaveTextContent(
-      'Rekisteröidy',
-    )
-  })
-
   test('does not render <Login /> at start', () => {
     const form = component.container.querySelector('.login-form')
-    expect(component.container).not.toContainElement(form)
-  })
-
-  test('does not render <SignUp /> at start', () => {
-    const form = component.container.querySelector('.signup-form')
     expect(component.container).not.toContainElement(form)
   })
 
@@ -49,17 +37,6 @@ describe('<App />', () => {
     })
 
     const form = component.container.querySelector('.login-form')
-    expect(component.container).toContainElement(form)
-  })
-
-  test('after clicking signup button <SignUp /> rendered', () => {
-    const button = component.container.querySelector('.signup-button-header')
-
-    act(() => {
-      fireEvent.click(button)
-    })
-
-    const form = component.container.querySelector('.signup-form')
     expect(component.container).toContainElement(form)
   })
 })
