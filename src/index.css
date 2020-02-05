@@ -6,6 +6,13 @@
 @font-face {
   font-family: "PT Sans";
   src: url("./fonts/pt-sans/PTC55F.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "PT Sans";
+  src: url("./fonts/pt-sans/PTC75F.ttf");
+  font-weight: bold;
 }
 
 body {
@@ -100,6 +107,12 @@ button:hover {
   margin: 0px;
 }
 
+.username-header {
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
 .logout {
   display : flex;
   align-items : center;
@@ -113,7 +126,7 @@ button:hover {
 }
 
 .container {
-  padding-left: 20px;
+  padding: 0px 20px 20px 20px;
 }
 
 .success {

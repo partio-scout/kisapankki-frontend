@@ -7,7 +7,6 @@ jest.mock('../services/rule')
 jest.mock('../services/ageGroup')
 jest.mock('../services/language')
 
-
 afterEach(cleanup)
 
 describe('<AddTask/>', () => {
