@@ -114,7 +114,7 @@ id: "5e38888bb226c84d544b2b06"
 
 | Type  | POST  |
 |---|---|
-| Uri | api/task  |
+| Uri | api/rule  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -166,7 +166,7 @@ id: "5e37d86d14f20730f1253fcf"
 
 | Type  | Get  |
 |---|---|
-| Uri | api/gategories  |
+| Uri | api/categories  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -185,7 +185,7 @@ id: "5e3888a5b226c84d544b2b08"
 
 | Type  | POST  |
 |---|---|
-| Uri | api/gategories  |
+| Uri | api/categories  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -196,7 +196,7 @@ id: "5e3888a5b226c84d544b2b08"
 
 | Type  | get  |
 |---|---|
-| Uri | api/agegroup  |
+| Uri | api/ageGroup  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -218,7 +218,7 @@ id: "5e37d88014f20730f1253fd1"
 
 | Type  | get  |
 |---|---|
-| Uri | api/agegroup  |
+| Uri | api/ageGroup  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
