@@ -1,5 +1,5 @@
 # Project
-## Our goal is to build task bank/management webapplication with React and NodeJS development environment's.
+Our goal is to build task bank/management webapplication with React and NodeJS development environment's.
 
 # Users
 ## Super admin, admin, user
