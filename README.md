@@ -11,8 +11,8 @@
   * [Heroku](https://kisapankki-staging.herokuapp.com/)
 
 ## Documentation
-* [Description of the project](documents/description.md)
-* [Backend API]()
+* [Project](documents/project.md)
+* [Backend API](documents/api.md)
 
 ## Project progress
 * [Definition of done](documents/dod.md)
