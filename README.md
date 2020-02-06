@@ -20,4 +20,3 @@
 * [Sprint task boards @Trello](https://trello.com/partioprojekti/home)
 
 [![CircleCI](https://circleci.com/gh/partio-scout/kisapankki-frontend.svg?style=svg)](https://circleci.com/gh/partio-scout/kisapankki-frontend)
-)
