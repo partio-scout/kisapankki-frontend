@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from "react-router-dom"
 import Notification from './Notification'
-import signupService from '../services/signup'
+import userService from '../services/user'
 
-const SignUp = () => {
+const AddAdmin = () => {
+  const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -11,17 +11,15 @@ const SignUp = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [key, setKey] = useState('')
   const [users, setUsers] = useState([])
-  let history = useHistory()
 
   useEffect(() => {
-    signupService.getUsers().then(response => {
+    userService.getUsers().then(response => {
       setUsers(response)
     })
   }, [])
 
-  const handleSignUp = async (event) => {
+  const handleAddAdmin = async (event) => {
     event.preventDefault()
     setNameErrorMessage(null)
     setUsernameErrorMessage(null)
@@ -36,23 +34,25 @@ const SignUp = () => {
       setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
     }
     if (users.some(user => (user.username === username))) {
-      setUsernameErrorMessage('Käyttäjänimi on varattu')
+      setUsernameErrorMessage('Käyttäjätunnus on varattu')
     }
     if (name.length < 3 || username.length < 3 || password.length < 3
       || users.some(user => (user.username === username))) {
       return
     }
     try {
-      await signupService.signup({
-        name, username, password, key,
+      await userService.addUser({
+        name, username, password
       })
       setName('')
       setUsername('')
       setPassword('')
-      setKey('')
-      history.push('/kirjautuminen')
+      setMessage('Ylläpitäjä lisätty!')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     } catch (exception) {
-      setErrorMessage('Rekisteröityminen epäonnistui')
+      setErrorMessage('Lisääminen epäonnistui')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -61,9 +61,10 @@ const SignUp = () => {
 
   return (
     <div className="signup-form">
-      <h2>Rekisteröidy</h2>
+      <h2>Lisää ylläpitäjä</h2>
+      <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
-      <form onSubmit={handleSignUp}>
+      <form onSubmit={handleAddAdmin}>
         <div>
           <Notification message={nameErrorMessage} type="error" />
           <input
@@ -97,20 +98,10 @@ const SignUp = () => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <div>
-          <input
-            className="key"
-            type="text"
-            value={key}
-            name="Key"
-            placeholder="Avain"
-            onChange={({ target }) => setKey(target.value)}
-          />
-        </div>
-        <button type="submit" className="signup-button">Rekisteröidy</button>
+        <button type="submit" className="signup-button">Lisää</button>
       </form>
     </div>
   )
 }
 
-export default SignUp
+export default AddAdmin

@@ -1,17 +1,13 @@
 import React from 'react'
-import Rule from './Rule'
-import Language from './Language'
-import AgeGroup from './AgeGroup'
-import Category from './Category'
+import { Link } from 'react-router-dom'
 
 const Admin = () => {
 
   return (
     <div>
-      <Rule />
-      <Language />
-      <AgeGroup />
-      <Category />
+      <h2>Admin-sivu</h2>
+      <Link to="/lisaa_admin">Lisää ylläpitäjä</Link><br/>
+      <Link to="/lisaa_pudotusvalikkoon">Lisää pudotusvalikkoon</Link>
     </div>
   )
 }

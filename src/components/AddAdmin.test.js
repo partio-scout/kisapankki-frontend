@@ -2,37 +2,37 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import SignUp from './SignUp'
-jest.mock('../services/signup')
+import AddAdmin from './AddAdmin'
+jest.mock('../services/user')
 
 afterEach(cleanup)
 
-describe('<SignUp />', () => {
+describe('<AddAdmin />', () => {
   let component
 
   beforeEach(() => {
     component = render(
       <Router>
-        <SignUp />
+        <AddAdmin />
       </Router>
     )
   })
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Rekisteröidy',
+      'Lisää ylläpitäjä',
     )
   })
 
-  test('renders inputs for name, username, password and key', () => {
+  test('renders inputs for name, username and password', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(4)
+    expect(inputs.length).toBe(3)
   })
 
   test('renders submit button', async () => {
     const button = component.container.querySelector('.signup-form')
     expect(button).toHaveTextContent(
-      'Rekisteröidy',
+      'Lisää',
     )
   })
 
