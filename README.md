@@ -1,4 +1,4 @@
-﻿**Kisapankki Frontend**
+# Kisapankki Frontend
 
 ## Links
 * Frontend:
