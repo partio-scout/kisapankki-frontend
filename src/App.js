@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import {Route, Link, Redirect } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import Login from './components/Login'
 import TaskList from './components/TaskList'
 import AddAdmin from './components/AddAdmin'
@@ -7,6 +7,7 @@ import AddTaskDropdown from './components/AddTaskDropdown'
 import AddTask from './components/AddTask'
 import Admin from './components/Admin'
 import User from './components/User'
+import Task from './components/Task'
 import tokenService from './services/token'
 
 const App = () => {
@@ -52,16 +53,17 @@ const App = () => {
         <Link to="/lisaa_tehtava"><button className="addtask-button-mobile">Lisää tehtävä</button></Link>
       </div>
       <div className="container">
-        <h1>Kisatehtäväpankki</h1>
-          <Route exact path="/" render={() => <TaskList/>} />
-          <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
-          <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
-          <Route path="/lisaa_tehtava" render={() => <AddTask />} />
-          <Route path="/omasivu" render={() => user ? <User /> : <Redirect to="/" />} />
-          <Route path="/admin" render={() => user ? <Admin /> : <Redirect to="/" />} />
-          <Route path="/lisaa_admin" render={() => user ? <AddAdmin /> : <Redirect to="/" />} />
-          <Route path="/lisaa_pudotusvalikkoon" render={() => user ? <AddTaskDropdown /> : <Redirect to="/" />} />
-        </div>
+
+        <Route exact path="/" render={() => <TaskList />} />
+        <Route exact path="/tehtava/:id" render={({ match }) => <Task id={match.params.id} />} />
+        <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
+        <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
+        <Route path="/lisaa_tehtava" render={() => <AddTask />} />
+        <Route path="/omasivu" render={() => user ? <User /> : <Redirect to="/" />} />
+        <Route path="/admin" render={() => user ? <Admin /> : <Redirect to="/" />} />
+        <Route path="/lisaa_admin" render={() => user ? <AddAdmin /> : <Redirect to="/" />} />
+        <Route path="/lisaa_pudotusvalikkoon" render={() => user ? <AddTaskDropdown /> : <Redirect to="/" />} />
+      </div>
     </div>
   )
 }

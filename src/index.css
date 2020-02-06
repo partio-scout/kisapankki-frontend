@@ -72,6 +72,24 @@ button:hover {
   background: rgb(37, 55, 100);
 }
 
+table {
+background-color: whitesmoke;
+}
+
+th {
+  padding-top: 15px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #c7cad1;
+  color: black;
+}
+
+td, th{
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+
 .header {
   background-color: rgb(37, 55, 100);
   height: 80px;

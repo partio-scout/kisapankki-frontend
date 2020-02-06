@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
-import Task from '../components/Task'
-import {BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const TaskList = () => {
@@ -16,23 +15,35 @@ const TaskList = () => {
 
 
   return (
-    <Router>
-      <div className="task-list">
-        <h2>Tehtävät</h2>
-        {tasks.map(task => 
-        <ul key={task.id}>
-        <Link to={`/task/${task.id}`}>{task.name}</Link>
-        <Route exact path="/task/:id" render={() => <Task task={task}/>} />
-        
-        </ul>)}
+    <div className="task-list">
+      <h1>Kisatehtäväpankki</h1>
 
+      <table className="table">
+        <tr>
+          <th>Tehtavä</th>
+          <th>Ikäryhmä</th>
+          <th>Kilpailu kategoria</th>
+        </tr>
 
-        
-     
+        <tbody>
+          {tasks.map(task =>
+            <tr key={task.id}>
+              <td>
+                <Link to={`/tehtava/${task.id}`}>{task.name}</Link>
 
-        
-      </div>
-    </Router>
+              </td>
+              <td> {task.ageGroup.name}</td>
+              <td>{task.category.category}</td>
+
+            </tr>
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
   )
 }
 
