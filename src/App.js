@@ -1,13 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import {Route, Link, Redirect } from 'react-router-dom'
 import Login from './components/Login'
-<<<<<<< HEAD
-import SignUp from './components/SignUp'
 import TaskList from './components/TaskList'
-=======
 import AddAdmin from './components/AddAdmin'
 import AddTaskDropdown from './components/AddTaskDropdown'
->>>>>>> master
 import AddTask from './components/AddTask'
 import Admin from './components/Admin'
 import User from './components/User'
