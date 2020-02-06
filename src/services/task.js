@@ -8,6 +8,11 @@ const getTasks = async () => {
   return response.data
 }
 
+const getOneTask = async (id) => {
+  const response = await axios.get(baseUrl/id)
+  return response.data
+}
+
 const addtask = async (task) => {
   let config = null
   let token = tokenService.getToken()
@@ -22,4 +27,4 @@ const addtask = async (task) => {
   return response.data
 }
 
-export default { addtask, getTasks }
+export default { addtask, getTasks, getOneTask }

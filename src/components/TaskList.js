@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
 import Task from '../components/Task'
-import {
-  BrowserRouter as Router,
-  Route, Link, Redirect, withRouter
-} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
 const TaskList = () => {
 
   const [tasks, setTasks] = useState([])
 
-  
-  
-
-  
-  
   useEffect(() => {
     taskService.getTasks().then(response => {
       setTasks(response)

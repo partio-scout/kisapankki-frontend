@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom"
 import Notification from './Notification'
 import signupService from '../services/signup'
 
-const SignUp = ({ setPage }) => {
+const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
@@ -12,6 +13,7 @@ const SignUp = ({ setPage }) => {
   const [password, setPassword] = useState('')
   const [key, setKey] = useState('')
   const [users, setUsers] = useState([])
+  let history = useHistory()
 
   useEffect(() => {
     signupService.getUsers().then(response => {
@@ -48,7 +50,7 @@ const SignUp = ({ setPage }) => {
       setUsername('')
       setPassword('')
       setKey('')
-      setPage('login')
+      history.push('/kirjautuminen')
     } catch (exception) {
       setErrorMessage('Rekisteröityminen epäonnistui')
       setTimeout(() => {

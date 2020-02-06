@@ -69,7 +69,7 @@ const AddTask = () => {
         setCreatorEmailErrorMessage(null)
         if (name.length < 1) {
             setNameErrorMessage('Nimi ei saa olla tyhjä')
-        } 
+        }
         if (assignmentText.length < 1) {
             setAssignmentTextErrorMessage('Tehtävänanto ei saa olla tyhjä')
         }
@@ -80,13 +80,13 @@ const AddTask = () => {
             setCreatorEmailErrorMessage('Lisääjän sähköposti ei saa olla tyhjä')
         }
         if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
-          return
+            return
         }
         try {
             await addtaskService.addtask({
                 name, rule, category, ageGroup,
                 language, assignmentText, gradingScale,
-                creatorName, creatorEmail
+                creatorName, creatorEmail, supervisorInstructions
             })
             setName('')
             setRule('')
