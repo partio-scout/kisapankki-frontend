@@ -1,8 +1,11 @@
 # Project
 Our goal is to build task bank/management webapplication with React and NodeJS development environment's.
 
+# Test user/admin
+Name: testi
+Salasana: testi
+
 # Users
-## Super admin, admin, user
 
 ### Super admin features
 * Add more admins to system
