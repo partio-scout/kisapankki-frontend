@@ -2,8 +2,8 @@
 Our goal is to build task bank/management webapplication with React and NodeJS development environment's.
 
 # Test user/admin
-Name: testi
-Salasana: testi
+* Käyttäjätunnus/User: testi
+* Salasana/Password: testi
 
 # Users
 
