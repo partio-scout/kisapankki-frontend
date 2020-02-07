@@ -10,6 +10,7 @@
 | Comments  |   |
 | Expected updates  |   |
 ##### Data
+
 ```json
 {
 name: "Nilkan nyrjähdys",
@@ -91,6 +92,23 @@ id: "5e394ce084150c0004ed201c"
 
 ##### Data
 
+```json
+{
+  name: 'Kissan karvojen syönti',
+  assignmentText: 'Syödään kissan karvoja.',
+  supervisorInstructions: 'Kerää kissan karvat sohvan kulmasta.',
+  gradingScale: '1-10',
+  creatorName: 'Make',
+  creatorEmail: 'make@kake.com',
+  pending: false,
+  ageGroup: 5e37d88014f20730f1253fd1,
+  category: 5e3888a5b226c84d544b2b08,
+  language: 5e37d86d14f20730f1253fcf,
+  rules: 5e388894b226c84d544b2b07,
+  id: '5e3d292787210b37a2b35cd1'
+}
+``` 
+
 # Rules
 
 | Type  | GET  |
@@ -121,6 +139,16 @@ id: "5e38888bb226c84d544b2b06"
 
 ##### Data
 
+```json
+{
+  task: [],
+  rules: 'Edelliset',
+  __v: 0,
+  id: '5e3d2aebbd03d6386ee720a7'
+}
+``` 
+
+
 # Log in
 
 | Type  | POST  |
@@ -131,6 +159,7 @@ id: "5e38888bb226c84d544b2b06"
 | Expected updates  |   |
 
 ##### Data
+
 
 # Languages
 
@@ -162,6 +191,16 @@ id: "5e37d86d14f20730f1253fcf"
 
 ##### Data
 
+```json
+{ 
+task: [], 
+language: 'Saksa',
+__v: 0, 
+id: '5e3d2bdc1cd0b138e2ffc319' 
+}
+
+``` 
+
 # Categories
 
 | Type  | Get  |
@@ -191,6 +230,14 @@ id: "5e3888a5b226c84d544b2b08"
 | Expected updates  |   |
 
 ##### Data
+
+```json
+{ 
+task: [], 
+category: 'Sukellus', 
+id: '5e3d2c67b040c2392855c7a5' 
+}
+``` 
 
 # Age groups
 
@@ -224,3 +271,15 @@ id: "5e37d88014f20730f1253fd1"
 | Expected updates  |   |
 
 ##### Data
+
+```json
+{
+  task: [],
+  name: 'Teinit',
+  maxAge: 19,
+  minAge: 10,
+  color: 'Pinkki',
+  id: '5e3d2ce4fb003a397693dc28'
+}
+
+``` 
