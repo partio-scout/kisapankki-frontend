@@ -11,7 +11,7 @@
 | Expected updates  |   |
 ##### Data
 
-```json
+```
 {
 name: "Nilkan nyrjähdys",
 assignmentText: "Kuinka auttaisit ystävääsi kun hän on nyrjäyttänyt nilkkansa?",
@@ -92,7 +92,7 @@ id: "5e394ce084150c0004ed201c"
 
 ##### Data
 
-```json
+```
 {
   name: 'Kissan karvojen syönti',
   assignmentText: 'Syödään kissan karvoja.',
@@ -120,7 +120,7 @@ id: "5e394ce084150c0004ed201c"
 
 ##### Data
 
-```json
+```
 {
 task: [ ],
 rules: "Vanhat",
@@ -139,7 +139,7 @@ id: "5e38888bb226c84d544b2b06"
 
 ##### Data
 
-```json
+```
 {
   task: [],
   rules: 'Edelliset',
@@ -172,7 +172,7 @@ id: "5e38888bb226c84d544b2b06"
 
 ##### Data
 
-```json
+```
 {
 task: [ ],
 language: "Suomi",
@@ -191,7 +191,7 @@ id: "5e37d86d14f20730f1253fcf"
 
 ##### Data
 
-```json
+```
 { 
 task: [], 
 language: 'Saksa',
@@ -212,7 +212,7 @@ id: '5e3d2bdc1cd0b138e2ffc319'
 
 ##### Data
 
-```json
+```
 {
 task: [ ],
 category: "Kätevyys",
@@ -231,7 +231,7 @@ id: "5e3888a5b226c84d544b2b08"
 
 ##### Data
 
-```json
+```
 { 
 task: [], 
 category: 'Sukellus', 
@@ -250,7 +250,7 @@ id: '5e3d2c67b040c2392855c7a5'
 
 ##### Data
 
-```json
+```
 {
 task: [ ],
 name: "Sudenpennut",
@@ -272,7 +272,7 @@ id: "5e37d88014f20730f1253fd1"
 
 ##### Data
 
-```json
+```
 {
   task: [],
   name: 'Teinit',
