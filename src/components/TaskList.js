@@ -19,13 +19,13 @@ const TaskList = () => {
       <h1>Kisatehtäväpankki</h1>
 
       <table className="table">
-        <tr>
-          <th>Tehtavä</th>
-          <th>Ikäryhmä</th>
-          <th>Kilpailu kategoria</th>
-        </tr>
 
         <tbody>
+          <tr>
+            <th>Tehtävä</th>
+            <th>Ikäryhmä</th>
+            <th>Kilpailu kategoria</th>
+          </tr>
           {tasks.map(task =>
             <tr key={task.id}>
               <td>
