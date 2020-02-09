@@ -3,6 +3,7 @@ import taskService from '../services/task'
 
 const Task = (taskId) => {
   const [task, setTask] = useState(null)
+  
 
   useEffect(() => {
     taskService.getOneTask(taskId).then(response => {
@@ -25,6 +26,7 @@ const Task = (taskId) => {
           <div>{task.category.category}</div>
           <div>{task.language.language}</div>
           <div>{task.rules.rules}</div>
+        
 
         </div>
 

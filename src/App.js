@@ -54,7 +54,7 @@ const App = () => {
       </div>
       <div className="container">
 
-        <Route exact path="/" render={() => <TaskList />} />
+        <Route exact path="/" render={() => <TaskList user={user}/>} />
         <Route exact path="/tehtava/:id" render={({ match }) => <Task id={match.params.id} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/rekisteroityminen" render={() => <AddAdmin />} />

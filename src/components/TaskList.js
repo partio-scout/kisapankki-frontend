@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import taskService from '../services/task'
 import { Link } from 'react-router-dom'
 
 
-const TaskList = () => {
+const TaskList = (user) => {
 
   const [tasks, setTasks] = useState([])
+  
 
   useEffect(() => {
     taskService.getTasks().then(response => {
@@ -18,29 +19,35 @@ const TaskList = () => {
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
 
-      <table className="table">
-        <tr>
-          <th>Tehtavä</th>
-          <th>Ikäryhmä</th>
-          <th>Kilpailu kategoria</th>
-        </tr>
+        
+         
+        
 
-        <tbody>
+       
           {tasks.map(task =>
-            <tr key={task.id}>
-              <td>
-                <Link to={`/tehtava/${task.id}`}>{task.name}</Link>
 
-              </td>
-              <td> {task.ageGroup.name}</td>
-              <td>{task.category.category}</td>
+          <div className = {`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
+             
+           
+             <span><Link to={`/tehtava/${task.id}`}>{task.name}</Link></span>
 
-            </tr>
+              <span className = "task-list-agegroup">{task.ageGroup.name}</span>
+
+              <span className= "task-list-category">{task.category.category}</span>
+            {user &&
+            <Fragment>
+              <button>Hyväksy</button>
+              <button>Muokkaa</button>
+              <button>Poista</button>
+              </Fragment>
+            }
+            </div>
+         
           )}
 
-        </tbody>
+     
 
-      </table>
+     
 
     </div>
 
