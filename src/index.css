@@ -72,6 +72,10 @@ button:hover {
   background: rgb(37, 55, 100);
 }
 
+.deleteButton:hover {
+  background: red;
+}
+
 table {
 background-color: whitesmoke;
 }

@@ -41,4 +41,9 @@ const updateTask = async (task) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, updateTask }
+const deleteTask = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, updateTask, deleteTask }
