@@ -27,4 +27,18 @@ const addtask = async (task) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask }
+const updateTask = async (task) => {
+  let config = null
+  let token = tokenService.getToken()
+
+  if (token) {
+    config = {
+      headers: { Authorization: token }
+    }
+  }
+
+  const response = await axios.post(`${baseUrl}/${task.id}`, task, config)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, updateTask }
