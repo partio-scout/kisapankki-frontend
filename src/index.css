@@ -155,11 +155,11 @@ button:hover {
 }
 
 .sudenpennut {
-  background-color:rgb(163, 147, 122);
+  background-color: rosybrown;
 }
 
 .seniorit {
-  background-color: paleturquoise ;
+  background-color: rgba(199,202,209,.4);
 }
 
 .task-list-item span {
@@ -168,9 +168,9 @@ button:hover {
 }
 
 .task-list button {
-  
+  margin-right: 8px; 
+  background:grey;
 }
-
 
 
 @media screen and (max-width: 550px) {
