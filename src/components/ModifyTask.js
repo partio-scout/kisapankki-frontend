@@ -119,10 +119,10 @@ const ModifyTask = ({ setModifyVisible, task }) => {
 
   return (
     <div>
-      <h2>Lisää tehtävä</h2>
+      <h2>Muokkaa tehtävää</h2>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
-      <form onSubmit={handleModifyTask}>
+      <form onSubmit={handleModifyTask} className="modify-form">
         <div>
           <Notification message={nameErrorMessage} type="error" />
           <input
@@ -214,7 +214,7 @@ const ModifyTask = ({ setModifyVisible, task }) => {
         </div>
         <div>
           <button type="submit" className="save-task-button">Tallenna tehtävä</button>
-          <button onClick={() => handleCancel()}>Palaa</button>
+          <button onClick={() => handleCancel()} className="return-button">Palaa</button>
         </div>
       </form>
     </div>

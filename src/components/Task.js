@@ -55,7 +55,7 @@ const Task = (taskId) => {
             </div>
 
           }
-          <button onClick={() => setModifyVisible(true)}>Muokkaa tehtävää</button>
+          <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa tehtävää</button>
           <button className="deleteButton" onClick={() => handleDelete()}>Poista tehtävä</button>
         </div>
 

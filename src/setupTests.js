@@ -13,6 +13,7 @@ let categories = {}
 let languages = {}
 let ageGroups = {}
 let rules = {}
+let tasks = {}
 
 const localStorageMock = {
   setItem: (key, item) => {
@@ -21,6 +22,7 @@ const localStorageMock = {
     languages[key] = item
     ageGroups[key] = item
     rules[key] = item
+    tasks[key] = item
   },
   getItem: (key) => {
     users[key]
@@ -28,9 +30,29 @@ const localStorageMock = {
     languages[key]
     ageGroups[key]
     rules[key]
+    tasks[key]
 
   },
-  clear: users = {}
+  clear: users = {},
+  clear: categories = {},
+  clear: languages = {},
+  clear: ageGroups = {},
+  clear: rules = {},
+  clear: tasks = {}
 }
+
+const originalError = console.error
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return
+    }
+    originalError.call(console, ...args)
+  }
+})
+
+afterAll(() => {
+  console.error = originalError
+})
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })
