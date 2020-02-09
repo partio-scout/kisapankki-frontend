@@ -8,7 +8,6 @@ const Language = () => {
 
   const handleLanguageAdd = async (event) => {
     event.preventDefault()
-    console.log(language)
     try {
       await languageService.addLanguage({
         language,

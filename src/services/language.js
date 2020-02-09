@@ -10,7 +10,7 @@ const getLanguages = async () => {
 
 const addLanguage = async (language) => {
   const config = {
-    headers: { Authorization: tokenService.getToken() }
+    headers: { Authorization: tokenService.getToken() },
   }
 
   const response = await axios.post(baseUrl, language, config)

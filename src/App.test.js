@@ -13,7 +13,7 @@ describe('<App />', () => {
     component = render(
       <Router>
         <App />
-      </Router>
+      </Router>,
     )
   })
 

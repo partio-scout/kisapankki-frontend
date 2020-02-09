@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AddAdmin from './AddAdmin'
+
 jest.mock('../services/user')
 
 afterEach(cleanup)
@@ -14,7 +15,7 @@ describe('<AddAdmin />', () => {
     component = render(
       <Router>
         <AddAdmin />
-      </Router>
+      </Router>,
     )
   })
 
@@ -42,7 +43,7 @@ describe('<AddAdmin />', () => {
     act(() => {
       fireEvent.click(button)
     })
-  
+
     const div = component.container.querySelector('.signup-form')
     expect(div).toHaveTextContent('Nimessä pitää olla vähintään 3 kirjainta')
   })
@@ -59,14 +60,14 @@ describe('<AddAdmin />', () => {
     act(() => {
       fireEvent.click(button)
     })
-  
+
     const div = component.container.querySelector('.signup-form')
     expect(div).not.toHaveTextContent('Nimessä pitää olla vähintään 3 kirjainta')
   })
 
   test('shows error message if username is less than 3 characters', () => {
     const button = component.container.querySelector('.signup-button')
-    
+
     act(() => {
       fireEvent.click(button)
     })
@@ -83,7 +84,7 @@ describe('<AddAdmin />', () => {
     })
 
     const button = component.container.querySelector('.signup-button')
-    
+
     act(() => {
       fireEvent.click(button)
     })
@@ -94,7 +95,7 @@ describe('<AddAdmin />', () => {
 
   test('shows error message if password is less than 3 characters', () => {
     const button = component.container.querySelector('.signup-button')
-    
+
     act(() => {
       fireEvent.click(button)
     })
@@ -119,5 +120,4 @@ describe('<AddAdmin />', () => {
     const div = component.container.querySelector('.signup-form')
     expect(div).not.toHaveTextContent('Salasanassa pitää olla vähintään 3 kirjainta')
   })
-
 })

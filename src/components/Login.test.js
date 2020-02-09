@@ -13,7 +13,7 @@ describe('<Login />', () => {
     component = render(
       <Router>
         <Login />
-      </Router>
+      </Router>,
     )
   })
 

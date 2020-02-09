@@ -9,10 +9,10 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 
 let users = {}
-let categories = {}
-let languages = {}
-let ageGroups = {}
-let rules = {}
+const categories = {}
+const languages = {}
+const ageGroups = {}
+const rules = {}
 
 const localStorageMock = {
   setItem: (key, item) => {
@@ -28,9 +28,8 @@ const localStorageMock = {
     languages[key]
     ageGroups[key]
     rules[key]
-
   },
-  clear: users = {}
+  clear: users = {},
 }
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })

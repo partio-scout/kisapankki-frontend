@@ -14,7 +14,7 @@ const AddAdmin = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    userService.getUsers().then(response => {
+    userService.getUsers().then((response) => {
       setUsers(response)
     })
   }, [])
@@ -33,16 +33,16 @@ const AddAdmin = () => {
     if (password.length < 3) {
       setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
     }
-    if (users.some(user => (user.username === username))) {
+    if (users.some((user) => (user.username === username))) {
       setUsernameErrorMessage('Käyttäjätunnus on varattu')
     }
     if (name.length < 3 || username.length < 3 || password.length < 3
-      || users.some(user => (user.username === username))) {
+      || users.some((user) => (user.username === username))) {
       return
     }
     try {
       await userService.addUser({
-        name, username, password
+        name, username, password,
       })
       setName('')
       setUsername('')

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import tokenService from './token'
+
 const baseUrl = `${process.env.REACT_APP_API_URL}/task`
 
 
@@ -15,11 +16,11 @@ const getOneTask = async (id) => {
 
 const addtask = async (task) => {
   let config = null
-  let token = tokenService.getToken()
+  const token = tokenService.getToken()
 
   if (token) {
     config = {
-      headers: { Authorization: token }
+      headers: { Authorization: token },
     }
   }
 
@@ -29,11 +30,11 @@ const addtask = async (task) => {
 
 const updateTask = async (task) => {
   let config = null
-  let token = tokenService.getToken()
+  const token = tokenService.getToken()
 
   if (token) {
     config = {
-      headers: { Authorization: token }
+      headers: { Authorization: token },
     }
   }
 
