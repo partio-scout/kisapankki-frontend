@@ -8,37 +8,14 @@ import Adapter from 'enzyme-adapter-react-16'
 
 configure({ adapter: new Adapter() })
 
-let users = {}
-let categories = {}
-let languages = {}
-let ageGroups = {}
-let rules = {}
-let tasks = {}
+let savedItems = {}
 
 const localStorageMock = {
   setItem: (key, item) => {
-    users[key] = item
-    categories[key] = item
-    languages[key] = item
-    ageGroups[key] = item
-    rules[key] = item
-    tasks[key] = item
+    savedItems[key] = item
   },
-  getItem: (key) => {
-    users[key]
-    categories[key]
-    languages[key]
-    ageGroups[key]
-    rules[key]
-    tasks[key]
-
-  },
-  clear: users = {},
-  clear: categories = {},
-  clear: languages = {},
-  clear: ageGroups = {},
-  clear: rules = {},
-  clear: tasks = {}
+  getItem: (key) => savedItems[key],
+  clear: savedItems = {}
 }
 
 const originalError = console.error
