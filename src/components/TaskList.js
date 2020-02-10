@@ -6,12 +6,16 @@ import taskService from '../services/task'
 const TaskList = (user) => {
   const [tasks, setTasks] = useState([])
 
-
   useEffect(() => {
     taskService.getTasks().then((response) => {
       setTasks(response)
     })
   }, [])
+
+
+  const handlePending = () => {
+    taskService.makePendingFalse()
+  }
 
 
   return (
@@ -22,8 +26,8 @@ const TaskList = (user) => {
       {tasks.map((task) => (
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
 
+          <Link to={`/tehtava/${task.id}`} className="task-list-item">{task.name}  </Link>
 
-          <span>{task.name}</span>
 
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
 
@@ -31,14 +35,13 @@ const TaskList = (user) => {
           {user
             && (
               <>
-                <button>Hyväksy</button>
-                <button>Muokkaa</button>
-                <button>Poista</button>
+                <button className="modify-view-button" >Hyväksy</button>
+                <button className="modify-view-button" >Muokkaa</button>
+                <button className="deleteButton">Poista tehtävä</button>
               </>
             )}
         </div>
       ))}
-
 
 
     </div>
