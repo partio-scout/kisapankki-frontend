@@ -23,7 +23,7 @@ const TaskList = (user) => {
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
 
 
-          <span><Link to={`/tehtava/${task.id}`}>{task.name}</Link></span>
+          <span>{task.name}</span>
 
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
 
@@ -38,6 +38,7 @@ const TaskList = (user) => {
             )}
         </div>
       ))}
+
 
 
     </div>
