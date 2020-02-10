@@ -199,7 +199,7 @@ const ModifyTask = ({ setModifyVisible, task }) => {
             type="text"
             defaultValue={creatorName}
             name="CreatorName"
-            placeholder="Lisääjän nimi"
+            placeholder="Muokkaajan nimi"
             onChange={({ target }) => setCreatorName(target.value)}
           />
           <Notification message={creatorEmailErrorMessage} type="error" />
@@ -208,7 +208,7 @@ const ModifyTask = ({ setModifyVisible, task }) => {
             type="text"
             defaultValue={creatorEmail}
             name="CreatorEmail"
-            placeholder="Lisääjän sähköpostiosoite"
+            placeholder="Muokkaajan sähköpostiosoite"
             onChange={({ target }) => setCreatorEmail(target.value)}
           />
         </div>
