@@ -32,7 +32,7 @@ describe('<ChangePassword />', () => {
   test('renders submit button', async () => {
     const button = component.container.querySelector('.change-password-button')
     expect(button).toHaveTextContent(
-      'Vaihda',
+      'Tallenna',
     )
   })
 

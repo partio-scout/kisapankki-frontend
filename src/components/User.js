@@ -21,13 +21,13 @@ const User = ({ user, setUser }) => {
   return (
     <div>
       {user &&
-        <div>
+        <div className="user-info">
           {!showEdit && !showChangePassword &&
-          <div className="user-info">
+          <div>
             <Notification message={message} type="success" />
             <h2>Omat tiedot</h2>
-            <div><b>Nimi: </b>{user.name}</div>
-            <div><b>Käyttäjätunnus: </b>{user.username}</div>
+            <p><b>Nimi: </b>{user.name}</p>
+            <p><b>Käyttäjätunnus: </b>{user.username}</p>
             <button className="edit-user-button" onClick={() => editUser()}>Muokkaa</button>
             <button className="change-password-button" onClick={() => changePassword()}>Vaihda salasana</button>
           </div>

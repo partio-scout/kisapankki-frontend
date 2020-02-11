@@ -32,7 +32,7 @@ describe('<EditUser />', () => {
   test('renders submit button', async () => {
     const button = component.container.querySelector('.edit-button')
     expect(button).toHaveTextContent(
-      'Muokkaa',
+      'Tallenna',
     )
   })
 

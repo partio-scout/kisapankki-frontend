@@ -75,7 +75,7 @@ const ChangePassword = ({ setShowChangePassword, setMessage }) => {
             onChange={({ target }) => setNewPasswordAgain(target.value)}
           />
         </div>
-        <button type="submit" className="change-password-button">Vaihda</button>
+        <button type="submit" className="change-password-button">Tallenna</button>
         <button onClick={() => setShowChangePassword(false)} className="cancel-button">Peruuta</button>
       </form>
     </div>

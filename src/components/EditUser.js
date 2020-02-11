@@ -54,6 +54,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
       <form onSubmit={handleEditUser}>
         <div>
           <Notification message={nameErrorMessage} type="error" />
+          <label>Nimi</label><br/>
           <input
             className="name"
             type="text"
@@ -65,6 +66,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
         </div>
         <div>
           <Notification message={usernameErrorMessage} type="error" />
+          <label>Käyttäjätunnus</label><br/>
           <input
             className="username"
             type="text"
@@ -74,7 +76,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <button type="submit" className="edit-button">Muokkaa</button>
+        <button type="submit" className="edit-button">Tallenna</button>
         <button onClick={() => setShowEdit(false)} className="cancel-button">Peruuta</button>
       </form>
     </div>
