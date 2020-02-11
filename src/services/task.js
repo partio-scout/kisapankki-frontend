@@ -49,7 +49,11 @@ const updateTask = async (task) => {
 }
 
 const deleteTask = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`)
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
   return response.data
 }
 
