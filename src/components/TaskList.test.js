@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, waitForElement } from '@testing-library/react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
 
 
@@ -9,11 +10,17 @@ jest.mock('../services/task')
 afterEach(cleanup)
 
 describe('<TaskList />', () => {
-  test('renders all tasks it gets from backend', async () => {
-    const component = render(
-      <TaskList />,
+  let component
+
+  beforeEach(() => {
+    component = render(
+      <Router>
+        <TaskList />
+      </Router>,
     )
-    component.rerender(<TaskList />)
+  })
+
+  test('renders all tasks it gets from backend', async () => {
     await waitForElement(
       () => component.container.querySelector('.task-list-item'),
     )
@@ -32,17 +39,6 @@ describe('<TaskList />', () => {
     )
     expect(component.container).toHaveTextContent(
       'testikategoria',
-    ) 
-    
-    // test('after clicking modify button <ModifyTask /> is rendered', () => {
-    //   const button = component.container.querySelector('.modify-view-button')
-
-    //   fireEvent.click(button)
-
-    //   const form = component.container.querySelector('.modify-form')
-    //   expect(component.container).toContainElement(form)
-    // })
-
-
+    )
   })
 })

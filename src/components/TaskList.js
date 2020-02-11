@@ -26,7 +26,10 @@ const TaskList = (user) => {
       {tasks.map((task) => (
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
 
-          <Link to={`/tehtava/${task.id}`} className="task-list-item">{task.name}  </Link>
+          <Link to={`/tehtava/${task.id}`}>
+            {task.name}
+
+          </Link>
 
 
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
@@ -35,8 +38,7 @@ const TaskList = (user) => {
           {user
             && (
               <>
-                <button className="modify-view-button" >Hyväksy</button>
-                <button className="modify-view-button" >Muokkaa</button>
+                <button className="modify-view-button">Muokkaa</button>
                 <button className="deleteButton">Poista tehtävä</button>
               </>
             )}
