@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
+import tokenService from '../services/token'
 
-
-const TaskList = (user) => {
+const TaskList = () => {
   const [tasks, setTasks] = useState([])
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     taskService.getTasks().then((response) => {
       setTasks(response)
     })
+
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      tokenService.setToken(user.token)
+    }
   }, [])
 
 
@@ -32,7 +40,7 @@ const TaskList = (user) => {
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
 
           <span className="task-list-category">{task.category.category}</span>
-          {user
+          {user !== null
             && (
               <>
                 <button className="modify-view-button" >Hyväksy</button>
