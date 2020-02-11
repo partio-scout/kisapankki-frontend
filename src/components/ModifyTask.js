@@ -7,7 +7,7 @@ import ageGroupService from '../services/ageGroup'
 import languageService from '../services/language'
 
 
-const ModifyTask = ({ setModifyVisible, task }) => {
+const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -85,7 +85,7 @@ const ModifyTask = ({ setModifyVisible, task }) => {
       return
     }
     try {
-      await taskService.updateTask({
+      const modifiedTask = await taskService.updateTask({
         name, rule, category, ageGroup,
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions, id
@@ -101,6 +101,7 @@ const ModifyTask = ({ setModifyVisible, task }) => {
       setCreatorName('')
       setSupervisorInstructions('')
       setMessage('Tehtävä tallennettu!')
+      setTask(modifiedTask)
       setTimeout(() => {
         setMessage(null)
         setModifyVisible(false)
