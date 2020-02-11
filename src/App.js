@@ -24,6 +24,7 @@ const App = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
     tokenService.setToken(null)
+    window.location.reload()
   }
 
   return (
@@ -45,22 +46,22 @@ const App = () => {
             </div>
           </Fragment>
         }
+
       </div>
       <div className="admin-task-buttons-mobile">
         {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
         <Link to="/lisaa_tehtava"><button className="addtask-button-mobile">Lisää tehtävä</button></Link>
       </div>
       <div className="container">
-        <h1>Kisatehtäväpankki</h1>
-          <Route exact path="/" render={() => <div />} />
-          <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
-          <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
-          <Route path="/lisaa_tehtava" render={() => <AddTask />} />
-          <Route path="/omasivu" render={() => user ? <User /> : <Redirect to="/" />} />
-          <Route path="/admin" render={() => user ? <Admin /> : <Redirect to="/" />} />
-          <Route path="/lisaa_admin" render={() => user ? <AddAdmin /> : <Redirect to="/" />} />
-          <Route path="/lisaa_pudotusvalikkoon" render={() => user ? <AddTaskDropdown /> : <Redirect to="/" />} />
-        </div>
+        <Route exact path="/" render={() => <div><h1>Kisatehtäväpankki</h1></div>} />
+        <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
+        <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
+        <Route path="/lisaa_tehtava" render={() => <AddTask />} />
+        <Route path="/omasivu" render={() =>  user ? <User user={user} setUser={setUser} /> : <Redirect to="/" />} />
+        <Route path="/admin" render={() => user ? <Admin /> : <Redirect to="/" />} />
+        <Route path="/lisaa_admin" render={() => user ? <AddAdmin /> : <Redirect to="/" />} />
+        <Route path="/lisaa_pudotusvalikkoon" render={() => user ? <AddTaskDropdown /> : <Redirect to="/" />} />
+      </div>
     </div>
   )
 }
