@@ -2,10 +2,16 @@ import axios from 'axios'
 import tokenService from './token'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/task`
+const baseUrlPending = `${process.env.REACT_APP_API_URL}/pending}`
 
 
 const getTasks = async () => {
   const response = await axios.get(baseUrl)
+  return response.data
+}
+
+const getPendingTasks = async () => {
+  const response = await axios.get(baseUrlPending)
   return response.data
 }
 
@@ -47,4 +53,4 @@ const deleteTask = async (id) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, updateTask, deleteTask }
+export default { addtask, getTasks, getOneTask, updateTask, deleteTask, getPendingTasks }
