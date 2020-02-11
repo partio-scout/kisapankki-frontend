@@ -9,38 +9,40 @@ const TaskListPending = () => {
   useEffect(() => {
     taskService.getPendingTasks().then((response) => {
       setTasks(response)
-    }, [])
+    })
+  }, [])
 
 
-    return (
-      <div className="task-list">
-        <h1>Hyväksyttävät kisatehtävät</h1>
+  return (
+    <div className="task-list">
+      <h1>Hyväksyttävät kisatehtävät</h1>
 
 
-        {tasks.map((task) => (
-          <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
+      {tasks.map((task) => (
+        <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
 
-            <Link to={`/tehtava/${task.id}`}>
-              {task.name}
+          <Link to={`/tehtava/${task.id}`}>
+            {task.name}
 
-            </Link>
-
-
-            <span className="task-list-agegroup">{task.ageGroup.name}</span>
-
-            <span className="task-list-category">{task.category.category}</span>
-
-            <button className="modify-view-button">Muokkaa</button>
-            <button className="deleteButton">Poista tehtävä</button>
-
-          </div>
-        ))}
+          </Link>
 
 
-      </div>
+          <span className="task-list-agegroup">{task.ageGroup.name}</span>
+          {!task.pending
+            && <span className="task-list-agegroup">pending</span>}
 
-    )
-  })
+          <span className="task-list-category">{task.category.category}</span>
+
+          <button className="modify-view-button">Muokkaa</button>
+          <button className="deleteButton">Poista tehtävä</button>
+
+        </div>
+      ))}
+
+
+    </div>
+
+  )
 }
 
 export default TaskListPending

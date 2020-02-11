@@ -2,7 +2,7 @@ import axios from 'axios'
 import tokenService from './token'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/task`
-const baseUrlPending = `${process.env.REACT_APP_API_URL}/pending}`
+const baseUrlPending = `${process.env.REACT_APP_API_URL}/task/pending`
 
 
 const getTasks = async () => {

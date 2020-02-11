@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Link, Redirect } from 'react-router-dom'
 import Login from './components/Login'
+import TaskList from './components/TaskList'
 import TaskListPending from './components/TaskListPending'
 import AddAdmin from './components/AddAdmin'
 import AddTaskDropdown from './components/AddTaskDropdown'
@@ -46,7 +47,9 @@ const App = () => {
               <Link to="/admin"><button className="admin-button-header">Admin</button></Link>
               <div>
                 <div className="logged">
-                  Kirjautuneena <Link to="/omasivu" className="username-header">{user.username}</Link>
+                  Kirjautuneena
+                  {' '}
+                  <Link to="/omasivu" className="username-header">{user.username}</Link>
                 </div>
                 <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
               </div>
@@ -59,7 +62,7 @@ const App = () => {
       </div>
       <div className="container">
 
-        <Route exact path="/" render={() => <TaskListPending/>} />
+        <Route exact path="/" render={() => <TaskList/>} />
         <Route exact path="/tehtava/:id" render={({ match }) => <Task id={match.params.id} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/rekisteroityminen" render={() => <AddAdmin />} />

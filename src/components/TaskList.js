@@ -41,6 +41,8 @@ const TaskList = () => {
 
 
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
+         
+        
 
           <span className="task-list-category">{task.category.category}</span>
           {user !== null
