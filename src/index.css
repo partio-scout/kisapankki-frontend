@@ -152,23 +152,18 @@ button:hover {
 }
 
 .task-list-item { 
-  border: 2px powderblue;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.sudenpennut {
-  background-color: rosybrown;
-}
-
-.seniorit {
   background-color: rgba(199,202,209,.4);
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
+
 
 .task-list-item span {
-  margin-right: 10px;
+  width: 300px;
+  margin-right: 80px;
   display: inline-block;
+  
 }
 
 .task-list button {

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import taskService from '../services/task'
 import tokenService from '../services/token'
 
+
+
 const TaskList = () => {
   const [tasks, setTasks] = useState([])
   const [user, setUser] = useState(null)
@@ -20,9 +22,12 @@ const TaskList = () => {
     }
   }, [])
 
-
-  const handlePending = () => {
-    taskService.makePendingFalse()
+  const handleDelete = (task) => {
+   
+    try {
+      taskService.deleteTask(task.id) 
+    } catch { 
+    }
   }
 
 
@@ -32,24 +37,25 @@ const TaskList = () => {
 
 
       {tasks.map((task) => (
-        <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
+        <div className="task-list-item" key={task.id}>
+          <span>
+            <Link to={`/tehtava/${task.id}`}>
+              {task.name}
 
-          <Link to={`/tehtava/${task.id}`}>
-            {task.name}
-
-          </Link>
+            </Link>
 
 
-          <span className="task-list-agegroup">{task.ageGroup.name}</span>
-         
-        
+          </span>
 
-          <span className="task-list-category">{task.category.category}</span>
+
+          <span>{task.ageGroup.name}</span>
+          <span>{task.category.category}</span>
+          
           {user !== null
             && (
               <>
                 <button className="modify-view-button">Muokkaa</button>
-                <button className="deleteButton">Poista tehtävä</button>
+                <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
               </>
             )}
         </div>

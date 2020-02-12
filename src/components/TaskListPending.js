@@ -28,8 +28,6 @@ const TaskListPending = () => {
 
 
           <span className="task-list-agegroup">{task.ageGroup.name}</span>
-          {!task.pending
-            && <span className="task-list-agegroup">pending</span>}
 
           <span className="task-list-category">{task.category.category}</span>
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Route, Link, Redirect } from 'react-router-dom'
 import Login from './components/Login'
 import TaskList from './components/TaskList'
-import TaskListPending from './components/TaskListPending'
 import AddAdmin from './components/AddAdmin'
 import AddTaskDropdown from './components/AddTaskDropdown'
 import AddTask from './components/AddTask'
@@ -62,7 +61,7 @@ const App = () => {
       </div>
       <div className="container">
 
-        <Route exact path="/" render={() => <TaskList/>} />
+        <Route exact path="/" render={() => <TaskList />} />
         <Route exact path="/tehtava/:id" render={({ match }) => <Task id={match.params.id} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
