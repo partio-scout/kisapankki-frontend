@@ -4,6 +4,11 @@ import { render, cleanup, fireEvent } from '@testing-library/react'
 import Task from './Task'
 
 jest.mock('../services/task')
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
 
 afterEach(cleanup)
 
@@ -11,7 +16,7 @@ describe('<Task />', () => {
   let component
 
   beforeEach(() => {
-    component = render(<Task id={1} />)
+    component = render(<Task id={1}/>)
   })
 
   test('renders task name', () => {
@@ -59,12 +64,6 @@ describe('<Task />', () => {
   test('renders task category', () => {
     expect(component.container).toHaveTextContent(
       'testikategoria',
-    )
-  })
-
-  test('renders task language', () => {
-    expect(component.container).toHaveTextContent(
-      'testikieli',
     )
   })
 
