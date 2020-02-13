@@ -14,9 +14,14 @@ afterEach(cleanup)
 
 describe('<Task />', () => {
   let component
+  let match = {
+    params:{
+      id:1
+    }
+  }
 
   beforeEach(() => {
-    component = render(<Task id={1}/>)
+    component = render(<Task match={match}/>)
   })
 
   test('renders task name', () => {
