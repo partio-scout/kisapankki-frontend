@@ -54,9 +54,8 @@ const App = () => {
         <Link to="/lisaa_tehtava"><button className="addtask-button-mobile">Lisää tehtävä</button></Link>
       </div>
       <div className="container">
-
         <Route exact path="/" render={() => <TaskList />} />
-        <Route exact path="/tehtava/:id" render={({ match }) => <Task id={match.params.id} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />

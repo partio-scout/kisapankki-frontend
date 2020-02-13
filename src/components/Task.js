@@ -2,28 +2,19 @@ import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
-import tokenService from '../services/token'
 import { useHistory } from 'react-router-dom'
 
-const Task = (taskId) => {
+const Task = ({ match, user }) => {
   const [task, setTask] = useState(null)
-  const [user, setUser] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
   const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const history = useHistory()
 
   useEffect(() => {
-    taskService.getOneTask(taskId).then((response) => {
+    taskService.getOneTask(match.params.id).then((response) => {
       setTask(response)
     })
-
-    const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      tokenService.setToken(user.token)
-    }
   }, [])
 
     const handleDelete = () => {
@@ -70,7 +61,6 @@ const Task = (taskId) => {
                 <p>{task.creatorName}</p>
                 <p>{task.creatorEmail}</p>
               </div>
-
             }
             {user !== null &&
               <div>

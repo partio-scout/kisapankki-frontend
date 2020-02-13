@@ -16,7 +16,7 @@ const getPendingTasks = async () => {
 }
 
 const getOneTask = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id.id}`)
+  const response = await axios.get(`${baseUrl}/${id}`)
   return response.data
 }
 
