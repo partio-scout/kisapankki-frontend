@@ -44,7 +44,7 @@ const updateTask = async (task) => {
     }
   }
 
-  const response = await axios.post(`${baseUrl}/${task.id}`, task, config)
+  const response = await axios.put(`${baseUrl}/${task.id}`, task, config)
   return response.data
 }
 
@@ -56,5 +56,6 @@ const deleteTask = async (id) => {
   const response = await axios.delete(`${baseUrl}/${id}`, config)
   return response.data
 }
+
 
 export default { addtask, getTasks, getOneTask, updateTask, deleteTask, getPendingTasks }

@@ -8,6 +8,8 @@ import tokenService from '../services/token'
 const TaskList = () => {
   const [tasks, setTasks] = useState([])
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     taskService.getTasks().then((response) => {
@@ -23,12 +25,12 @@ const TaskList = () => {
   }, [])
 
   const handleDelete = (task) => {
-   
     try {
-      taskService.deleteTask(task.id) 
-    } catch { 
+      taskService.deleteTask(task.id)
+    } catch {
     }
   }
+
 
 
   return (
@@ -50,7 +52,7 @@ const TaskList = () => {
 
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>
-          
+
           {user !== null
             && (
               <>
