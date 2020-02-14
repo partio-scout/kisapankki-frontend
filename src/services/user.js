@@ -1,6 +1,7 @@
 import axios from 'axios'
+import tokenService from './token'
 
-const baseUrl = `${process.env.REACT_APP_API_URL}/signup`
+const baseUrl = `${process.env.REACT_APP_API_URL}/user`
 
 const getUsers = async () => {
   const response = await axios.get(baseUrl)
@@ -12,4 +13,13 @@ const addUser = async (credentials) => {
   return response.data
 }
 
-export default { addUser, getUsers }
+const editUser = async (user) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() }
+  }
+
+  const response = await axios.put(baseUrl, user, config)
+  return response.data
+}
+
+export default { addUser, getUsers, editUser }

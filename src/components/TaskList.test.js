@@ -11,11 +11,12 @@ afterEach(cleanup)
 
 describe('<TaskList />', () => {
   let component
+  let user = 'not null'
 
   beforeEach(() => {
     component = render(
       <Router>
-        <TaskList />
+        <TaskList user={user} />
       </Router>,
     )
   })
@@ -41,4 +42,15 @@ describe('<TaskList />', () => {
       'testikategoria',
     )
   })
+
+  test('renders modify-button', () => {
+    const button = component.container.querySelector('.modify-view-button')
+    expect(button).toHaveTextContent('Muokkaa')
+  })
+
+  test('renders delete-button', () => {
+    const button = component.container.querySelector('.deleteButton')
+    expect(button).toHaveTextContent('Poista')
+  })
+
 })

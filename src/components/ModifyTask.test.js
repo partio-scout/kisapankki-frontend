@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import ModifyTask from './ModifyTask'
+
 jest.mock('../services/category')
 jest.mock('../services/rule')
 jest.mock('../services/ageGroup')
@@ -11,7 +12,7 @@ afterEach(cleanup)
 
 describe('<ModifyTask/>', () => {
   let component
-  let task = {
+  const task = {
     id: 1,
     name: 'testitehtävä',
     assignmentText: 'testitehtävänanto',
@@ -20,18 +21,18 @@ describe('<ModifyTask/>', () => {
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
     ageGroup: {
-      name: 'testi-ikäryhmä'
+      name: 'testi-ikäryhmä',
     },
     category: {
-      category: 'testikategoria'
+      category: 'testikategoria',
     },
     language: {
-      language: 'testikieli'
+      language: 'testikieli',
     },
     rules: {
-      rules: 'testisäännöt'
+      rules: 'testisäännöt',
     },
-    pending: false
+    pending: false,
   }
 
   beforeEach(() => {
@@ -65,5 +66,4 @@ describe('<ModifyTask/>', () => {
     const button = component.container.querySelector('.save-task-button')
     expect(button).toHaveTextContent('Tallenna tehtävä')
   })
-
 })

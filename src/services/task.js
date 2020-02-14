@@ -11,7 +11,10 @@ const getTasks = async () => {
 }
 
 const getPendingTasks = async () => {
-  const response = await axios.get(baseUrlPending)
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+  const response = await axios.get(baseUrlPending, config)
   return response.data
 }
 

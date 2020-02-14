@@ -4,7 +4,6 @@ import TaskListPending from './TaskListPending'
 
 const Admin = () => (
   <div>
-    <h2>Hyväksyntää odottavat kisatehtävät</h2>
     <TaskListPending />
     <Link to="/lisaa_admin">Lisää ylläpitäjä</Link>
     <br />
