@@ -64,7 +64,7 @@ const acceptTask = async (id) => {
   const config = {
     headers: { Authorization: tokenService.getToken() },
   }
-  const response = await axios.put(`${baseUrl}/${id}/accept`, config)
+  const response = await axios.put(`${baseUrl}/${id}/accept`, id, config)
   return response.data
 }
 

@@ -18,7 +18,7 @@ const TaskList = (user) => {
     try {
       await taskService.deleteTask(task.id)
       setTasks(tasks.filter(t => t.id !== task.id))
-    } catch {
+    } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
