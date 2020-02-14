@@ -21,10 +21,10 @@ const TaskListPending = () => {
       {tasks.map((task) => (
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
           <span>
-          <Link to={`/tehtava/${task.id}`}>
-            {task.name}
+            <Link to={`/tehtava/${task.id}`}>
+              {task.name}
           
-          </Link>
+            </Link>
           </span>
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>

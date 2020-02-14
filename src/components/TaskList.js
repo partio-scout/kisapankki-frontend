@@ -26,11 +26,6 @@ const TaskList = (user) => {
     }
   }
 
-  const handleModify = (task) => {
-
-  }
-
-
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
@@ -45,17 +40,13 @@ const TaskList = (user) => {
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>
 
-          {user !== null
-            && (
-              <>
-                <button className="modify-view-button">Muokkaa</button>
-                <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
-              </>
-            )}
+          {user !== null &&
+            <div>
+              <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
+            </div>
+          }
         </div>
       ))}
-
-
     </div>
 
   )
