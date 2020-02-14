@@ -6,7 +6,6 @@ import Notification from './Notification'
 
 const TaskList = (user) => {
   const [tasks, setTasks] = useState([])
-  const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
@@ -18,18 +17,24 @@ const TaskList = (user) => {
   const handleDelete = (task) => {
     try {
       taskService.deleteTask(task.id)
-      window.location.reload()
+      setTasks(tasks.filter(t => t.id !== task.id))
     } catch {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 
+  const handleModify = (task) => {
+
+  }
 
 
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
-      <Notification message={message} type="success" />
-      <Notification message={errorMessage} type="error" />
+      <Notification message={errorMessage} />
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>

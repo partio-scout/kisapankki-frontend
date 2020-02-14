@@ -35,24 +35,20 @@ const App = () => {
         <Link to="/"><div className="logo" /></Link>
         <Link to="/lisaa_tehtava"><button className="addtask-button-header">Lisää tehtävä</button></Link>
 
-        {user === null
-          ? (
-            <>
-              <Link to="/kirjautuminen"><button className="login-button-header">Kirjaudu</button></Link>
-            </>
-          )
-          : (
-            <>
-              <Link to="/admin"><button className="admin-button-header">Admin</button></Link>
-              <div>
-                <div className="logged">
-Kirjautuneena
-                  <Link to="/omasivu" className="username-header">{user.username}</Link>
-                </div>
-                <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
-              </div>
-            </>
-          )}
+        {user === null ?
+          <Fragment>
+            <Link to="/kirjautuminen"><button className="login-button-header">Kirjaudu</button></Link>
+          </Fragment>
+
+          :
+          <Fragment>
+            <Link to="/admin"><button className="admin-button-header">Admin</button></Link>
+            <div>
+              <div className="logged">Kirjautuneena <Link to="/omasivu" className="username-header">{user.username}</Link></div>
+              <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
+            </div>
+          </Fragment>
+        }
 
       </div>
       <div className="admin-task-buttons-mobile">
