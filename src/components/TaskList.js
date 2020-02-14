@@ -7,7 +7,6 @@ import Notification from './Notification'
 
 const TaskList = (user) => {
   const [tasks, setTasks] = useState([])
-  //const [user, setUser] = useState(null)
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -16,19 +15,12 @@ const TaskList = (user) => {
       setTasks(response)
     })
 
-    // const loggedUserJSON = window.localStorage.getItem('loggedUser')
-    // if (loggedUserJSON) {
-    //   const user = JSON.parse(loggedUserJSON)
-    //   setUser(user)
-    //   tokenService.setToken(user.token)
-    // }
   }, [])
 
   const handleDelete = (task) => {
-
     try {
       taskService.deleteTask(task.id)
-      window.location.reload()
+     
     } catch {
     }
   }

@@ -60,4 +60,12 @@ const deleteTask = async (id) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, updateTask, deleteTask, getPendingTasks }
+const acceptTask = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+  const response = await axios.put(`${baseUrl}/${id}/accept`, config)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, updateTask, deleteTask, getPendingTasks, acceptTask }

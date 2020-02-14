@@ -12,6 +12,12 @@ const TaskListPending = () => {
     })
   }, [])
 
+  const handleAccept = (id) => {
+    try {
+    taskService.acceptTask(id)
+  } catch {
+
+  }
 
   return (
     <div className="task-list">
@@ -21,16 +27,18 @@ const TaskListPending = () => {
       {tasks.map((task) => (
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
           <span>
-          <Link to={`/tehtava/${task.id}`}>
-            {task.name}
-          
-          </Link>
+            <Link to={`/tehtava/${task.id}`}>
+              {task.name}
+
+            </Link>
           </span>
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>
 
+          <button className="modify-view-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
           <button className="modify-view-button">Muokkaa</button>
           <button className="deleteButton">Poista tehtävä</button>
+
 
         </div>
       ))}
