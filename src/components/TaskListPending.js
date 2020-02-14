@@ -42,7 +42,7 @@ const TaskListPending = () => {
           <span>
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
-
+          
             </Link>
           </span>
           <span>{task.ageGroup.name}</span>

@@ -48,7 +48,7 @@ const ChangePassword = ({ setShowChangePassword, setMessage }) => {
       <h2>Vaihda salasana</h2>
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleChangePassword}>
-      <div>
+        <div>
           <input
             className="old-password"
             type="password"
