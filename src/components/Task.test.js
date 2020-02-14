@@ -15,13 +15,14 @@ afterEach(cleanup)
 describe('<Task />', () => {
   let component
   let match = {
-    params:{
-      id:1
+    params: {
+      id: 1
     }
   }
+  let user = 'not null'
 
   beforeEach(() => {
-    component = render(<Task match={match}/>)
+    component = render(<Task match={match} user={user} />)
   })
 
   test('renders task name', () => {
@@ -102,6 +103,5 @@ describe('<Task />', () => {
 
     expect(component.container).not.toContainElement(form)
   })
-
 
 })

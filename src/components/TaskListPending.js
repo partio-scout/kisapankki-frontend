@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
+import Notification from './Notification'
 
 
 const TaskListPending = () => {
   const [tasks, setTasks] = useState([])
+  const [message, setMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     taskService.getPendingTasks().then((response) => {
@@ -14,15 +17,25 @@ const TaskListPending = () => {
 
   const handleAccept = (id) => {
     try {
-    taskService.acceptTask(id)
-  } catch {
-
+      taskService.acceptTask(id)
+      setTasks(tasks.filter(t => t.id !== id))
+      setMessage('Tehtävä hyväksytty')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    } catch (exception) {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
   }
 
   return (
     <div className="task-list">
       <h1>Hyväksyntää odottavat kisatehtävät</h1>
-
+      <Notification message={message} type="success" />
+      <Notification message={errorMessage} type="error" />
 
       {tasks.map((task) => (
         <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
@@ -36,7 +49,6 @@ const TaskListPending = () => {
           <span>{task.category.category}</span>
 
           <button className="modify-view-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
-          <button className="modify-view-button">Muokkaa</button>
           <button className="deleteButton">Poista tehtävä</button>
 
 
