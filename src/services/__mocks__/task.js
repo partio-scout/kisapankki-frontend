@@ -46,9 +46,35 @@ const tasks = [
   },
 ]
 
+const pendingTasks = [
+  {
+    id: 1,
+    name: 'pending',
+    assignmentText: 'text',
+    supervisorInstructions: 'ohjeet pending',
+    gradingScale: 'arvostelu pending',
+    creatorName: 'pend',
+    creatorEmail: 'true@true',
+    ageGroup: {
+      name: 'testi-ikäryhmä pending',
+    },
+    category: {
+      category: 'pendingkategory',
+    },
+    language: {
+      language: 'pending',
+    },
+    rules: {
+      rules: 'testisäännöt true',
+    },
+    pending: true,
+  },
+]
+
 const getOneTask = (id) => Promise.resolve(tasks[0])
 
 const getTasks = () => Promise.resolve(tasks)
 
+const getPendingTasks = () => Promise.resolve(pendingTasks)
 
-export default { getOneTask, getTasks }
+export default { getOneTask, getTasks, getPendingTasks }

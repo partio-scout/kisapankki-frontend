@@ -4,7 +4,7 @@ import taskService from '../services/task'
 import Notification from './Notification'
 
 
-const TaskList = (user) => {
+const TaskList = ({user}) => {
   const [tasks, setTasks] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -41,9 +41,7 @@ const TaskList = (user) => {
           <span>{task.category.category}</span>
 
           {user !== null &&
-            <div>
-              <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
-            </div>
+              <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>  
           }
         </div>
       ))}

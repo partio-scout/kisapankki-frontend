@@ -167,8 +167,8 @@ button:hover {
 }
 
 .task-list button {
-  margin-right: 8px; 
   background:grey;
+  margin-right: 8px;
 }
 
 .task-view-info-background {

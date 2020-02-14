@@ -31,6 +31,18 @@ const TaskListPending = () => {
     }
   }
 
+  const handleDelete = async (task) => {
+    try {
+      await taskService.deleteTask(task.id)
+      setTasks(tasks.filter(t => t.id !== task.id))
+    } catch (exeption) {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   return (
     <div className="task-list">
       <h1>Hyväksyntää odottavat kisatehtävät</h1>
@@ -48,8 +60,8 @@ const TaskListPending = () => {
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>
 
-          <button className="modify-view-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
-          <button className="deleteButton">Poista tehtävä</button>
+          <button className="task-list-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
+          <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
 
 
         </div>
