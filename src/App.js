@@ -28,6 +28,7 @@ const App = () => {
     setUser(null)
     tokenService.setToken(null)
     history.push('/')
+    window.location.reload()
   }
 
   return (
