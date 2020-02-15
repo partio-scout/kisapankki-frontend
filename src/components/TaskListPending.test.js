@@ -47,7 +47,7 @@ describe('<TaskListPending />', () => {
   })
 
   test('renders accept-button', () => {
-    const button = component.container.querySelector('.task-list-button')
+    const button = component.container.querySelector('.acceptButton')
     expect(button).toHaveTextContent('Hyväksy')
   })
 

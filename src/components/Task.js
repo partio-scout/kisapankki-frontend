@@ -23,9 +23,29 @@ const Task = ({ match, user }) => {
       setMessage('Tehtävä poistettu')
       setTimeout(() => {
         setMessage(null)
-        history.push('/')
+        if (task.pending) {
+          history.push('/admin')
+        } else {
+          history.push('/')
+        }
       }, 5000)
     } catch {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
+  const handleAccept = () => {
+    try {
+      taskService.acceptTask(task.id)
+      setMessage('Tehtävä hyväksytty')
+      setTimeout(() => {
+        setMessage(null)
+        history.push('/admin')
+      }, 5000)
+    } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
@@ -60,13 +80,16 @@ const Task = ({ match, user }) => {
               <h3>Tehtävän viimeisin muokkaaja:</h3>
               <p>{task.creatorName}</p>
               <p>{task.creatorEmail}</p>
+
+
+              {user !== null &&
+                <div>
+                  <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa tehtävää</button>
+                  {task.pending && <button className="acceptButton" onClick={() => handleAccept()}>Hyväksy tehtävä</button>}
+                  <button className="deleteButton" onClick={() => handleDelete()}>Poista tehtävä</button>
+                </div>}
             </div>
           }
-          {user !== null &&
-            <div>
-              <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa tehtävää</button>
-              <button className="deleteButton" onClick={() => handleDelete()}>Poista tehtävä</button>
-            </div>}
         </div>
 
       }

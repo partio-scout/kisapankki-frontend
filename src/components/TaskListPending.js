@@ -54,13 +54,13 @@ const TaskListPending = () => {
           <span>
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
-          
+
             </Link>
           </span>
           <span>{task.ageGroup.name}</span>
           <span>{task.category.category}</span>
 
-          <button className="task-list-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
+          <button className="acceptButton" onClick={() => handleAccept(task.id)}>Hyväksy</button>
           <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>
 
 

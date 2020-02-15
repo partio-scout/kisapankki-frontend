@@ -76,6 +76,10 @@ button:hover {
   background: red;
 }
 
+.acceptButton:hover {
+  background: limegreen;
+}
+
 .header {
   background-color: rgb(37, 55, 100);
   height: 80px;
