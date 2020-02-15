@@ -79,6 +79,12 @@ describe('<Task />', () => {
     )
   })
 
+  test('renders delete button', () => {
+    const button = component.container.querySelector('.deleteButton')
+
+    expect(component.container).toContainElement(button)
+  })
+
   test('after clicking modify button <ModifyTask /> is rendered', () => {
     const button = component.container.querySelector('.modify-view-button')
 

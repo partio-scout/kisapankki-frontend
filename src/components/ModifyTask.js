@@ -29,6 +29,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [assignmentTextErrorMessage, setAssignmentTextErrorMessage] = useState(null)
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
+  const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
 
   let id = task.id
 
@@ -69,6 +70,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
     setAssignmentTextErrorMessage(null)
     setCreatorNameErrorMessage(null)
     setCreatorEmailErrorMessage(null)
+    setDropDownErrorMessage(null)
     if (name.length < 1) {
       setNameErrorMessage('Nimi ei saa olla tyhjä')
     }
@@ -81,7 +83,11 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
     if (creatorEmail.length < 1) {
       setCreatorEmailErrorMessage('Lisääjän sähköposti ei saa olla tyhjä')
     }
-    if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
+    if (language === '' || rule === '' || ageGroup === '' || category === '') {
+      setDropDownErrorMessage('Valitsethan arvon kaikkiin pudotuskenttiin')
+    }
+    if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1
+      || language === '' || rule === '' || ageGroup === '' || category === '') {
       return
     }
     try {
@@ -90,21 +96,11 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions, id
       })
-      setName('')
-      setRule('')
-      setCategory('')
-      setAgeGroup('')
-      setLanguage('')
-      setAssignmentText('')
-      setGradingScale('')
-      setCreatorEmail('')
-      setCreatorName('')
-      setSupervisorInstructions('')
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
       setTimeout(() => {
         setMessage(null)
-        setModifyVisible(false)
+        window.location.reload()
       }, 5000)
     } catch {
       setErrorMessage('Jotain meni vikaan')
@@ -173,6 +169,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
           />
         </div>
         <div>
+          <Notification message={dropDownErrorMessage} type="error" />
           <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
             <option value="">Valitse ikäluokka</option>
             {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
