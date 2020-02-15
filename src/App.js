@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Route, Link, Redirect } from 'react-router-dom'
+import { Route, Link, Redirect, useHistory } from 'react-router-dom'
 import Login from './components/Login'
 import TaskList from './components/TaskList'
 import AddAdmin from './components/AddAdmin'
@@ -12,6 +12,7 @@ import tokenService from './services/token'
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const history = useHistory()
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -26,7 +27,7 @@ const App = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
     tokenService.setToken(null)
-    window.location.reload()
+    history.push('/')
   }
 
   return (
