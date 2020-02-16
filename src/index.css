@@ -72,6 +72,14 @@ button:hover {
   background: rgb(37, 55, 100);
 }
 
+.deleteButton:hover {
+  background: red;
+}
+
+.acceptButton:hover {
+  background: limegreen;
+}
+
 .header {
   background-color: rgb(37, 55, 100);
   height: 80px;
@@ -147,6 +155,35 @@ button:hover {
   width: 500px;
 }
 
+.task-list-item { 
+  background-color: rgba(199,202,209,.4);
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+
+.task-list-item span {
+  width: 300px;
+  margin-right: 80px;
+  display: inline-block;
+  
+}
+
+.task-list button {
+  background:grey;
+  margin-right: 8px;
+}
+
+.task-view-info-background {
+  background-color: rgb(37, 55, 100);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.task-view-info {
+  color: white;
+}
 .user-info button {
   margin-right: 10px;
 }

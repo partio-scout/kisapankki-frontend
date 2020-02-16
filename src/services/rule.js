@@ -10,7 +10,7 @@ const getRules = async () => {
 
 const addRule = async (rule) => {
   const config = {
-    headers: { Authorization: tokenService.getToken() }
+    headers: { Authorization: tokenService.getToken() },
   }
 
   const response = await axios.post(baseUrl, rule, config)

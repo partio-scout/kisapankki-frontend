@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
-import AddTask from './AddTask'
+import ModifyTask from './ModifyTask'
 
 jest.mock('../services/category')
 jest.mock('../services/rule')
@@ -10,18 +10,40 @@ jest.mock('../services/language')
 
 afterEach(cleanup)
 
-describe('<AddTask/>', () => {
+describe('<ModifyTask/>', () => {
   let component
+  const task = {
+    id: 1,
+    name: 'testitehtävä',
+    assignmentText: 'testitehtävänanto',
+    supervisorInstructions: 'testiohjeet',
+    gradingScale: 'testiarvosteluperusteet',
+    creatorName: 'testiluoja',
+    creatorEmail: 'testiposti',
+    ageGroup: {
+      name: 'testi-ikäryhmä',
+    },
+    category: {
+      category: 'testikategoria',
+    },
+    language: {
+      language: 'testikieli',
+    },
+    rules: {
+      rules: 'testisäännöt',
+    },
+    pending: false,
+  }
 
   beforeEach(() => {
     component = render(
-      <AddTask />,
+      <ModifyTask task={task} />,
     )
   })
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää tehtävä',
+      'Muokkaa tehtävää',
     )
   })
 
@@ -41,7 +63,7 @@ describe('<AddTask/>', () => {
   })
 
   test('renders button for task', () => {
-    const button = component.container.querySelector('.add-task-button')
-    expect(button).toHaveTextContent('Lisää tehtävä')
+    const button = component.container.querySelector('.save-task-button')
+    expect(button).toHaveTextContent('Tallenna tehtävä')
   })
 })

@@ -10,7 +10,7 @@ const getCategories = async () => {
 
 const addCategory = async (cat) => {
   const config = {
-    headers: { Authorization: tokenService.getToken() }
+    headers: { Authorization: tokenService.getToken() },
   }
 
   const response = await axios.post(baseUrl, cat, config)

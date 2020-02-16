@@ -29,6 +29,7 @@ const AddTask = () => {
     const [assignmentTextErrorMessage, setAssignmentTextErrorMessage] = useState(null)
     const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
     const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
+    const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
 
     useEffect(() => {
         ruleService.getRules().then(response => {
@@ -67,6 +68,7 @@ const AddTask = () => {
         setAssignmentTextErrorMessage(null)
         setCreatorNameErrorMessage(null)
         setCreatorEmailErrorMessage(null)
+        setDropDownErrorMessage(null)
         if (name.length < 1) {
             setNameErrorMessage('Nimi ei saa olla tyhjä')
         }
@@ -79,7 +81,11 @@ const AddTask = () => {
         if (creatorEmail.length < 1) {
             setCreatorEmailErrorMessage('Lisääjän sähköposti ei saa olla tyhjä')
         }
-        if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1) {
+        if (language === '' || rule === '' || ageGroup === '' || category === '') {
+            setDropDownErrorMessage('Valitsethan arvon kaikkiin pudotuskenttiin')
+        }
+        if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1
+            || language === '' || rule === '' || ageGroup === '' || category === '') {
             return
         }
         try {
@@ -165,6 +171,7 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
+                <Notification message={dropDownErrorMessage} type="error" />
                     <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
                         <option value="">Valitse ikäluokka</option>
                         {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}

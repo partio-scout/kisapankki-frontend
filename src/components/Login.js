@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 import Notification from './Notification'
 import loginService from '../services/login'
 import tokenService from '../services/token'
@@ -8,7 +8,7 @@ const Login = ({ setUser }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  let history = useHistory()
+  const history = useHistory()
 
   const handleLogin = async (event) => {
     event.preventDefault()

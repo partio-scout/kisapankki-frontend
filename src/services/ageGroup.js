@@ -10,9 +10,9 @@ const getAgeGroups = async () => {
 
 const addAgeGroup = async (ageGroup) => {
   const config = {
-    headers: { Authorization: tokenService.getToken() }
+    headers: { Authorization: tokenService.getToken() },
   }
-  
+
   const response = await axios.post(baseUrl, ageGroup, config)
   return response.data
 }

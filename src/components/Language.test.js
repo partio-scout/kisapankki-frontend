@@ -16,7 +16,7 @@ describe('<Language />', () => {
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää kieli'
+      'Lisää kieli',
     )
   })
 
@@ -31,5 +31,4 @@ describe('<Language />', () => {
       'Lisää',
     )
   })
-
 })
