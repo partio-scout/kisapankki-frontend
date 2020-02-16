@@ -28,7 +28,7 @@ const Task = ({ match, user }) => {
         } else {
           history.push('/')
         }
-      }, 5000)
+      }, 2000)
     } catch {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -44,7 +44,7 @@ const Task = ({ match, user }) => {
       setTimeout(() => {
         setMessage(null)
         history.push('/admin')
-      }, 5000)
+      }, 2000)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
