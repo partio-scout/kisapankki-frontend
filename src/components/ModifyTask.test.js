@@ -7,6 +7,11 @@ jest.mock('../services/category')
 jest.mock('../services/rule')
 jest.mock('../services/ageGroup')
 jest.mock('../services/language')
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}))
 
 afterEach(cleanup)
 

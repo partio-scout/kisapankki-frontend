@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Notification from './Notification'
 import taskService from '../services/task'
 import ruleService from '../services/rule'
@@ -30,6 +31,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
+  const history = useHistory()
 
   let id = task.id
 
@@ -100,7 +102,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       setTask(modifiedTask)
       setTimeout(() => {
         setMessage(null)
-        window.location.reload()
+        history.push('/')
       }, 5000)
     } catch {
       setErrorMessage('Jotain meni vikaan')
