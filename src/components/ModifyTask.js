@@ -103,7 +103,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       setTimeout(() => {
         setMessage(null)
         history.push('/')
-      }, 5000)
+      }, 1000)
     } catch {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
