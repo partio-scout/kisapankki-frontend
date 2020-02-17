@@ -1,11 +1,15 @@
 # Project
 Our goal is to build task bank/management webapplication with React and NodeJS development environment's.
 
-# Test user/admin
-* Käyttäjätunnus/User: testi
-* Salasana/Password: testi
+# Setting up
+You can run project with command npm install and then npm start.
+Browser should open http://localhost:3000/ address for local environment
+
+# Env files
+You have to setup your own env files.
 
 # Users
+## Super admin, admin, user
 
 ### Super admin features
 * Add more admins to system
@@ -18,3 +22,8 @@ Our goal is to build task bank/management webapplication with React and NodeJS d
 
 ### User features
 * Add tasks to pending list
+
+### Database tables
+
+![Tables](/documents/tietokantataulut.jpg)
+

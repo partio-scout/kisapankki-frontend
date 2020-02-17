@@ -10,8 +10,7 @@
 | Comments  |   |
 | Expected updates  |   |
 ##### Data
-
-```
+```json
 {
 name: "Nilkan nyrjähdys",
 assignmentText: "Kuinka auttaisit ystävääsi kun hän on nyrjäyttänyt nilkkansa?",
@@ -81,7 +80,30 @@ id: "5e394ce084150c0004ed201c"
 }
 ``` 
 
-# Add task
+# Delete task
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+# See task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+
+# Edit task
 
 | Type  | POST  |
 |---|---|
@@ -92,22 +114,16 @@ id: "5e394ce084150c0004ed201c"
 
 ##### Data
 
-```
-{
-  name: 'Kissan karvojen syönti',
-  assignmentText: 'Syödään kissan karvoja.',
-  supervisorInstructions: 'Kerää kissan karvat sohvan kulmasta.',
-  gradingScale: '1-10',
-  creatorName: 'Make',
-  creatorEmail: 'make@kake.com',
-  pending: false,
-  ageGroup: 5e37d88014f20730f1253fd1,
-  category: 5e3888a5b226c84d544b2b08,
-  language: 5e37d86d14f20730f1253fcf,
-  rules: 5e388894b226c84d544b2b07,
-  id: '5e3d292787210b37a2b35cd1'
-}
-``` 
+# Add task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
 
 # Rules
 
@@ -120,7 +136,7 @@ id: "5e394ce084150c0004ed201c"
 
 ##### Data
 
-```
+```json
 {
 task: [ ],
 rules: "Vanhat",
@@ -139,16 +155,6 @@ id: "5e38888bb226c84d544b2b06"
 
 ##### Data
 
-```
-{
-  task: [],
-  rules: 'Edelliset',
-  __v: 0,
-  id: '5e3d2aebbd03d6386ee720a7'
-}
-``` 
-
-
 # Log in
 
 | Type  | POST  |
@@ -159,7 +165,6 @@ id: "5e38888bb226c84d544b2b06"
 | Expected updates  |   |
 
 ##### Data
-
 
 # Languages
 
@@ -172,7 +177,7 @@ id: "5e38888bb226c84d544b2b06"
 
 ##### Data
 
-```
+```json
 {
 task: [ ],
 language: "Suomi",
@@ -191,16 +196,6 @@ id: "5e37d86d14f20730f1253fcf"
 
 ##### Data
 
-```
-{ 
-task: [], 
-language: 'Saksa',
-__v: 0, 
-id: '5e3d2bdc1cd0b138e2ffc319' 
-}
-
-``` 
-
 # Categories
 
 | Type  | Get  |
@@ -212,7 +207,7 @@ id: '5e3d2bdc1cd0b138e2ffc319'
 
 ##### Data
 
-```
+```json
 {
 task: [ ],
 category: "Kätevyys",
@@ -231,14 +226,6 @@ id: "5e3888a5b226c84d544b2b08"
 
 ##### Data
 
-```
-{ 
-task: [], 
-category: 'Sukellus', 
-id: '5e3d2c67b040c2392855c7a5' 
-}
-``` 
-
 # Age groups
 
 | Type  | get  |
@@ -250,7 +237,7 @@ id: '5e3d2c67b040c2392855c7a5'
 
 ##### Data
 
-```
+```json
 {
 task: [ ],
 name: "Sudenpennut",
@@ -271,15 +258,3 @@ id: "5e37d88014f20730f1253fd1"
 | Expected updates  |   |
 
 ##### Data
-
-```
-{
-  task: [],
-  name: 'Teinit',
-  maxAge: 19,
-  minAge: 10,
-  color: 'Pinkki',
-  id: '5e3d2ce4fb003a397693dc28'
-}
-
-``` 
