@@ -213,8 +213,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
           />
         </div>
         <div>
-          <button type="submit" className="save-task-button">Tallenna tehtävä</button>
-          <button onClick={() => handleCancel()} className="return-button">Palaa</button>
+          <button type="submit" className="save-task-button">Tallenna</button>
+          <button onClick={() => handleCancel()} className="return-button">Peruuta</button>
         </div>
       </form>
     </div>

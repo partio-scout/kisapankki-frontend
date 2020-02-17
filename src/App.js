@@ -41,7 +41,6 @@ const App = () => {
           <Fragment>
             <Link to="/kirjautuminen"><button className="login-button-header">Kirjaudu</button></Link>
           </Fragment>
-
           :
           <Fragment>
             <Link to="/admin"><button className="admin-button-header">Admin</button></Link>
@@ -61,7 +60,6 @@ const App = () => {
         <Route exact path="/" render={() => <TaskList user={user} />} />
         <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
-        <Route path="/rekisteroityminen" render={() => <AddAdmin />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (user ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
         <Route path="/admin" render={() => (user ? <Admin /> : <Redirect to="/" />)} />

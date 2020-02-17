@@ -44,7 +44,7 @@ describe('<TaskList />', () => {
   })
 
   test('renders delete-button', () => {
-    const button = component.container.querySelector('.deleteButton')
+    const button = component.container.querySelector('.delete-button')
     expect(button).toHaveTextContent('Poista')
   })
 

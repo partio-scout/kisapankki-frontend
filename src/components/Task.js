@@ -55,7 +55,6 @@ const Task = ({ match, user }) => {
 
   return (
     <div>
-      <br />
       {modifyVisible ?
         <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} />
         :
@@ -84,9 +83,9 @@ const Task = ({ match, user }) => {
 
               {user !== null &&
                 <div>
-                  <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa tehtävää</button>
-                  {task.pending && <button className="acceptButton" onClick={() => handleAccept()}>Hyväksy tehtävä</button>}
-                  <button className="deleteButton" onClick={() => handleDelete()}>Poista tehtävä</button>
+                  <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
+                  {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
+                  <button className="delete-button" onClick={() => handleDelete()}>Poista</button>
                 </div>}
             </div>
           }

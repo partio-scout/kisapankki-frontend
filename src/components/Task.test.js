@@ -80,7 +80,7 @@ describe('<Task />', () => {
   })
 
   test('renders delete button', () => {
-    const button = component.container.querySelector('.deleteButton')
+    const button = component.container.querySelector('.delete-button')
 
     expect(component.container).toContainElement(button)
   })

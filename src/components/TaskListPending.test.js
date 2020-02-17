@@ -41,13 +41,13 @@ describe('<TaskListPending />', () => {
   
   })
 
-  test('renders delete-button', () => {
-    const button = component.container.querySelector('.deleteButton')
+  test('renders delete button', () => {
+    const button = component.container.querySelector('.delete-button')
     expect(button).toHaveTextContent('Poista')
   })
 
-  test('renders accept-button', () => {
-    const button = component.container.querySelector('.acceptButton')
+  test('renders accept button', () => {
+    const button = component.container.querySelector('.accept-button')
     expect(button).toHaveTextContent('Hyväksy')
   })
 
