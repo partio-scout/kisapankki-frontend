@@ -72,11 +72,11 @@ button:hover {
   background: rgb(37, 55, 100);
 }
 
-.deleteButton:hover {
+.delete-button:hover {
   background: red;
 }
 
-.acceptButton:hover {
+.accept-button:hover {
   background: limegreen;
 }
 
@@ -162,12 +162,10 @@ button:hover {
   margin-bottom: 15px;
 }
 
-
 .task-list-item span {
   width: 300px;
   margin-right: 80px;
   display: inline-block;
-  
 }
 
 .task-list button {
@@ -178,13 +176,19 @@ button:hover {
 .task-view-info-background {
   background-color: rgb(37, 55, 100);
   border-radius: 4px;
-  padding: 8px;
+  padding: 10px;
+  margin-top: 20px;
 }
 
 .task-view-info {
   color: white;
 }
-.user-info button {
+
+.task-view-info h2 {
+  margin-top: 0px;
+}
+
+.user-info button, .save-task-button, .modify-view-button, .accept-button {
   margin-right: 10px;
 }
 
@@ -197,15 +201,17 @@ button:hover {
   margin-bottom: 10px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 570px) {
   textarea, input, .task-title {
-    width: 90%;
+    width: calc(100% - 20px);
   }
 
   select {
-    width: 95%;
+    width: 100%;
   }
+}
 
+@media screen and (max-width: 535px) {
   .admin-button-header, .addtask-button-header {
     display: none;
   }

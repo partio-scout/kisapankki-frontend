@@ -41,7 +41,7 @@ const TaskList = ({user}) => {
           <span>{task.category.category}</span>
 
           {user !== null &&
-              <button className="deleteButton" onClick={() => handleDelete(task)}>Poista tehtävä</button>  
+              <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
           }
         </div>
       ))}

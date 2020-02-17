@@ -69,6 +69,6 @@ describe('<ModifyTask/>', () => {
 
   test('renders button for task', () => {
     const button = component.container.querySelector('.save-task-button')
-    expect(button).toHaveTextContent('Tallenna tehtävä')
+    expect(button).toHaveTextContent('Tallenna')
   })
 })
