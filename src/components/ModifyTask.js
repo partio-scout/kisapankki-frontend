@@ -102,7 +102,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       setTask(modifiedTask)
       setTimeout(() => {
         setMessage(null)
-        history.push('/')
+        window.location.reload()
       }, 1000)
     } catch {
       setErrorMessage('Jotain meni vikaan')
