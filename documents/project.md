@@ -27,3 +27,4 @@ You have to setup your own env files.
 
 ![Tables](/documents/tietokantataulut.jpg)
 
+https://www.draw.io/ Import from Trello -> Documentation -> Untitled Diagram.xml
