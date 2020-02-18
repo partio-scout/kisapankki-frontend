@@ -7,7 +7,7 @@
 * Backend:
   * Development
     * [Code](https://github.com/partio-scout/kisapankki-backend)
-* Heroku
+* Test Application
   * [Heroku](https://kisapankki-staging.herokuapp.com/)
 
 ## Documentation
