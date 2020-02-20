@@ -37,8 +37,8 @@ const TaskList = ({user}) => {
               {task.name}
             </Link>
           </span>
-          <span>{task.ageGroup.name}</span>
-          <span>{task.category.category}</span>
+          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+          <span>{task.category.name}</span>
 
           {user !== null &&
               <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>

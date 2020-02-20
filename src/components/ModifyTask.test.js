@@ -5,7 +5,7 @@ import ModifyTask from './ModifyTask'
 
 jest.mock('../services/category')
 jest.mock('../services/rule')
-jest.mock('../services/ageGroup')
+jest.mock('../services/series')
 jest.mock('../services/language')
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
@@ -25,17 +25,17 @@ describe('<ModifyTask/>', () => {
     gradingScale: 'testiarvosteluperusteet',
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
-    ageGroup: {
+    series: [{
       name: 'testi-ikäryhmä',
-    },
+    }],
     category: {
-      category: 'testikategoria',
+      name: 'testikategoria',
     },
     language: {
-      language: 'testikieli',
+      name: 'testikieli',
     },
     rules: {
-      rules: 'testisäännöt',
+      name: 'testisäännöt',
     },
     pending: false,
   }

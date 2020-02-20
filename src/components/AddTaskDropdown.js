@@ -1,14 +1,14 @@
 import React from 'react'
 import Rule from './Rule'
 import Language from './Language'
-import AgeGroup from './AgeGroup'
+import Series from './Series'
 import Category from './Category'
 
 const AddTaskDropdown = () => (
   <div>
     <Rule />
     <Language />
-    <AgeGroup />
+    <Series />
     <Category />
   </div>
 )
