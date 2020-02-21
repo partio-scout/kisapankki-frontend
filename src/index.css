@@ -173,6 +173,13 @@ button:hover {
   margin-right: 8px;
 }
 
+.task-list-select {
+  margin-right: 80px;
+  width: 500px;
+  margin-bottom: 15px
+
+}
+
 .task-view-info-background {
   background-color: rgb(37, 55, 100);
   border-radius: 4px;
