@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
 import Notification from './Notification'
-import Search from './SearchTasks'
+import Search from './Search'
 
 const TaskList = ({user}) => {
   const [tasks, setTasks] = useState([])
