@@ -50,8 +50,7 @@ const TaskList = ({ user }) => {
 
   useEffect(() => {
     if (selectedCategory && selectedCategory.id) {
-      const s = allTasks.filter(task => task.category.id === selectedCategory.id)
-      setTasks(s)
+      setTasks(allTasks.filter(task => task.category.id === selectedCategory.id))
     }
   }, [selectedCategory])
 
@@ -69,7 +68,7 @@ const TaskList = ({ user }) => {
 
   const handleCategoryFiltering = (category) => {
     if (category) {
-    setSelectedCategory(category)
+      setSelectedCategory(category)
     } else {
       setSelectedCategory("")
       setTasks(allTasks)
@@ -86,8 +85,6 @@ const TaskList = ({ user }) => {
     setSelectedRule(rule)
   }
 
-  // const toggleClearable = () =>
-  //   setIsClearable(!isClearable)
 
   return (
     <div className="task-list">
