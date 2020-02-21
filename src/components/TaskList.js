@@ -5,8 +5,12 @@ import ageGroupService from '../services/ageGroup'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
+<<<<<<< HEAD
 import Select from 'react-select'
 
+=======
+import Search from './Search'
+>>>>>>> master
 
 
 const TaskList = ({ user }) => {
@@ -120,6 +124,7 @@ const TaskList = ({ user }) => {
 
       </div>
 
+      <Search setTasks={setTasks} />
       <Notification message={errorMessage} />
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
