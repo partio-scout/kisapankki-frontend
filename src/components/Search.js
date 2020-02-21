@@ -10,9 +10,8 @@ const Search = ({ setTasks }) => {
   const handleSearch = async (event) => {
     event.preventDefault()
     try {
-      taskService.getSearchedTasks({ search }).then((response) => {
-        setTasks(response)
-      })
+      const response = await taskService.getSearchedTasks({ search })
+      setTasks(response)
     } catch (exception) {
       setErrorMessage('Haku ei onnistunut')
       setTimeout(() => {
@@ -30,7 +29,7 @@ const Search = ({ setTasks }) => {
           type="text"
           defaultValue=''
           name="Search"
-          placeholder="Haku termi"
+          placeholder="Hakutermi"
           onChange={({ target }) => setSearch(target.value)}
         />
         <button type="submit" className="search-tasks-button">Hae</button>
