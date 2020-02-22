@@ -10,7 +10,6 @@
 | Comments  |   |
 | Expected updates  |   |
 ##### Data
-
 ```
 {
 name: "Nilkan nyrjähdys",
@@ -81,6 +80,40 @@ id: "5e394ce084150c0004ed201c"
 }
 ``` 
 
+# Delete task
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+# See single task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+
+# Edit task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
 # Add task
 
 | Type  | POST  |
@@ -107,7 +140,7 @@ id: "5e394ce084150c0004ed201c"
   rules: 5e388894b226c84d544b2b07,
   id: '5e3d292787210b37a2b35cd1'
 }
-``` 
+```
 
 # Rules
 
@@ -148,7 +181,6 @@ id: "5e38888bb226c84d544b2b06"
 }
 ``` 
 
-
 # Log in
 
 | Type  | POST  |
@@ -159,7 +191,6 @@ id: "5e38888bb226c84d544b2b06"
 | Expected updates  |   |
 
 ##### Data
-
 
 # Languages
 
@@ -198,8 +229,7 @@ name: 'Saksa',
 __v: 0, 
 id: '5e3d2bdc1cd0b138e2ffc319' 
 }
-
-``` 
+```
 
 # Categories
 
@@ -237,7 +267,7 @@ task: [],
 category: 'Sukellus', 
 id: '5e3d2c67b040c2392855c7a5' 
 }
-``` 
+```
 
 # Age groups
 
@@ -281,5 +311,4 @@ id: "5e37d88014f20730f1253fd1"
   color: 'Pinkki',
   id: '5e3d2ce4fb003a397693dc28'
 }
-
-``` 
+```

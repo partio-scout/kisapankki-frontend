@@ -18,6 +18,11 @@ const getPendingTasks = async () => {
   return response.data
 }
 
+const getSearchedTasks = async (search) => {
+  const response = await axios.post(`${baseUrl}/search`, search)
+  return response.data
+}
+
 const getOneTask = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`)
   return response.data
@@ -68,4 +73,4 @@ const acceptTask = async (id) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, updateTask, deleteTask, getPendingTasks, acceptTask }
+export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask }
