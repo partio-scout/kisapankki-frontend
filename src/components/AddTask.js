@@ -5,6 +5,8 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import ageGroupService from '../services/ageGroup'
 import languageService from '../services/language'
+import {Editor as epidor, EditorState} from 'draft-js';
+import Editor from './editor';
 
 
 const AddTask = () => {
@@ -133,8 +135,11 @@ const AddTask = () => {
                         onChange={({ target }) => setName(target.value)}
                     />
                 </div>
+                <Editor/>
+
                 <div>
                     <Notification message={assignmentTextErrorMessage} type="error" />
+                    
                     <textarea
                         rows="3"
                         cols="35"
