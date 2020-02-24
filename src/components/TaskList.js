@@ -14,13 +14,14 @@ const TaskList = ({ user }) => {
   const [allTasks, setAllTasks] = useState([])
   const [tasks, setTasks] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
-  const [selectedRules, setSelectedRule] = useState('')
-  const [selectedAgeGroups, setSelectedAgeGroup] = useState('')
+  const [selectedRules, setSelectedRules] = useState('')
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [categories, setCategories] = useState([])
   const [ageGroups, setAgeGroups] = useState([])
   const [rules, setRules] = useState([])
   const [isClearable, setIsClearable] = useState(true)
+
 
 
   useEffect(() => {
@@ -49,10 +50,24 @@ const TaskList = ({ user }) => {
   }, [])
 
   useEffect(() => {
-    if (selectedCategory && selectedCategory.id) {
+    if (selectedCategory) {
       setTasks(allTasks.filter(task => task.category.id === selectedCategory.id))
     }
   }, [selectedCategory])
+
+  useEffect(() => {
+    if (selectedAgeGroup) {
+      setTasks(allTasks.filter(task => task.ageGroup.id === selectedAgeGroup.id))
+    }
+  }, [selectedAgeGroup])
+
+  useEffect(() => {
+    if (selectedRules) {
+      setTasks(allTasks.filter(task => task.rules.id === selectedRules.id))
+    }
+  }, [selectedRules])
+
+
 
   const handleDelete = async (task) => {
     try {
@@ -73,16 +88,23 @@ const TaskList = ({ user }) => {
       setSelectedCategory("")
       setTasks(allTasks)
     }
-
   }
 
   const handleAgeGroupFiltering = (ageGroup) => {
-    setSelectedAgeGroup(ageGroup)
-
+    if (ageGroup) {
+      setSelectedAgeGroup(ageGroup)
+    } else {
+      setSelectedAgeGroup("")
+      setTasks(allTasks)
+    }
   }
-
-  const handleRuleFiltering = (rule) => {
-    setSelectedRule(rule)
+  const handleRuleFiltering = (rules) => {
+    if (rules) {
+      setSelectedRules(rules)
+    } else {
+      setSelectedRules("")
+      setTasks(allTasks)
+    }
   }
 
 
@@ -115,6 +137,7 @@ const TaskList = ({ user }) => {
           isClearable={isClearable}
 
         />
+
 
       </div>
 
