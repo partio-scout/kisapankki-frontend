@@ -6,7 +6,6 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
 import Select from 'react-select'
-
 import Search from './Search'
 
 
@@ -112,13 +111,16 @@ const TaskList = ({ user }) => {
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
 
-      <div className="task-list-select">
+      <div className="task-list-filter">
+        <Search setTasks={setTasks} />
+
         <Select className="task-list-select"
           getOptionLabel={option => `${option.name}`}
           getOptionValue={option => `${option.name}`}
           onChange={handleCategoryFiltering}
           options={categories}
           isClearable={isClearable}
+          placeholder="Kategoria"
         />
 
         <Select className="task-list-select"
@@ -127,6 +129,7 @@ const TaskList = ({ user }) => {
           onChange={handleSeriesFiltering}
           options={seriess}
           isClearable={isClearable}
+          placeholder="Sarja"
 
         />
         <Select className="task-list-select"
@@ -135,12 +138,11 @@ const TaskList = ({ user }) => {
           onChange={handleRuleFiltering}
           options={rules}
           isClearable={isClearable}
+          placeholder="Säännöt"
 
         />
-
-
       </div>
-      <Search setTasks={setTasks} />
+
       <Notification message={errorMessage} />
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
