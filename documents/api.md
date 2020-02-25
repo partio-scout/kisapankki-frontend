@@ -1,6 +1,11 @@
 **Backend API**
 
-
+              editorState={this.state.editorState} updateEditorState={this.updateEditorState.bind(this)}
+          placeholder="Click"
+         editorState={this.state.editorState}
+           onChange={this.
+            updateEditorState.
+            bind(this)} />
 # Tasks
 
 | Type  | GET  |

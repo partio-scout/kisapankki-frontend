@@ -135,7 +135,7 @@ const AddTask = () => {
                         onChange={({ target }) => setName(target.value)}
                     />
                 </div>
-                <Editor/>
+                <Editor />
 
                 <div>
                     <Notification message={assignmentTextErrorMessage} type="error" />
