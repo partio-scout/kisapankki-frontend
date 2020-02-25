@@ -23,12 +23,12 @@ const Search = ({ setTasks }) => {
   return (
     <div>
       <Notification message={errorMessage} type="error" />
-      <form onSubmit={handleSearch} className="Search-form">
+      <form onSubmit={handleSearch} className="search-form">
         <input
-          className="Search-input"
+          className="search-input"
           type="text"
           defaultValue=''
-          name="Search"
+          name="search"
           placeholder="Hakutermi"
           onChange={({ target }) => setSearch(target.value)}
         />

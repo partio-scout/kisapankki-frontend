@@ -176,8 +176,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             onChange={({ target }) => setSupervisorInstructions(target.value)}
           />
         </div>
+        <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">
-          <Notification message={dropDownErrorMessage} type="error" />
           <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
             <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
             {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
