@@ -5,7 +5,7 @@ import AddTask from './AddTask'
 
 jest.mock('../services/category')
 jest.mock('../services/rule')
-jest.mock('../services/ageGroup')
+jest.mock('../services/series')
 jest.mock('../services/language')
 
 afterEach(cleanup)

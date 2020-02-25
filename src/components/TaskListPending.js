@@ -31,10 +31,10 @@ const TaskListPending = () => {
     }
   }
 
-  const handleDelete = async (task) => {
+  const handleDelete = async (id) => {
     try {
-      await taskService.deleteTask(task.id)
-      setTasks(tasks.filter(t => t.id !== task.id))
+      await taskService.deleteTask(id)
+      setTasks(tasks.filter(t => t.id !== id))
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -50,17 +50,17 @@ const TaskListPending = () => {
       <Notification message={errorMessage} type="error" />
 
       {tasks.map((task) => (
-        <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
+        <div className={`task-list-item`} key={task.id}>
           <span>
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
             </Link>
           </span>
-          <span>{task.ageGroup.name}</span>
-          <span>{task.category.category}</span>
+          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+          <span>{task.category.name}</span>
           <span>
             <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
-            <button className="delete-button" onClick={() => handleDelete(task)}>Poista</button>
+            <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
           </span>
         </div>
       ))}
