@@ -155,6 +155,10 @@ button:hover {
   width: 500px;
 }
 
+.search-form {
+  margin-bottom: 10px;
+}
+
 .task-list-item {
   display: flex;
   flex-direction: row;
@@ -165,6 +169,14 @@ button:hover {
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 15px;
+}
+
+.pending {
+  background-color: #f7dcdb;
+}
+
+.task-list-item span {
+  width: 200px;
 }
 
 .task-list button {
@@ -197,6 +209,11 @@ button:hover {
 
 .user-info button, .save-task-button, .modify-view-button, .accept-button {
   margin-right: 10px;
+}
+
+.user-info p {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .edit-user-form label {

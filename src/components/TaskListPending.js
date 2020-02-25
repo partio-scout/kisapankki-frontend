@@ -50,7 +50,7 @@ const TaskListPending = () => {
       <Notification message={errorMessage} type="error" />
 
       {tasks.map((task) => (
-        <div className={`task-list-item`} key={task.id}>
+        <div className={`task-list-item pending`} key={task.id}>
           <span>
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
