@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
-import ageGroupService from '../services/ageGroup'
+import seriesService from '../services/series'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
@@ -15,10 +15,10 @@ const TaskList = ({ user }) => {
   const [tasks, setTasks] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedRules, setSelectedRules] = useState('')
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState('')
+  const [selectedSeries, setSelectedSeries] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [categories, setCategories] = useState([])
-  const [ageGroups, setAgeGroups] = useState([])
+  const [seriess, setSeriess] = useState([])
   const [rules, setRules] = useState([])
   const [isClearable, setIsClearable] = useState(true)
 
@@ -38,8 +38,8 @@ const TaskList = ({ user }) => {
   }, [])
 
   useEffect(() => {
-    ageGroupService.getAgeGroups().then((response) => {
-      setAgeGroups(response)
+    seriesService.getSeries().then((response) => {
+      setSeriess(response)
     })
   }, [])
 
@@ -56,10 +56,10 @@ const TaskList = ({ user }) => {
   }, [selectedCategory])
 
   useEffect(() => {
-    if (selectedAgeGroup) {
-      setTasks(allTasks.filter(task => task.ageGroup.id === selectedAgeGroup.id))
+    if (selectedSeries) {
+      setTasks(allTasks.map(task => task.series.id).filter(id => id === selectedSeries.id))
     }
-  }, [selectedAgeGroup])
+  }, [selectedSeries])
 
   useEffect(() => {
     if (selectedRules) {
@@ -90,11 +90,11 @@ const TaskList = ({ user }) => {
     }
   }
 
-  const handleAgeGroupFiltering = (ageGroup) => {
-    if (ageGroup) {
-      setSelectedAgeGroup(ageGroup)
+  const handleSeriesFiltering = (series) => {
+    if (series) {
+      setSelectedSeries(series)
     } else {
-      setSelectedAgeGroup("")
+      setSelectedSeries("")
       setTasks(allTasks)
     }
   }
@@ -114,8 +114,8 @@ const TaskList = ({ user }) => {
 
       <div className="task-list-select">
         <Select className="task-list-select"
-          getOptionLabel={option => `${option.category}`}
-          getOptionValue={option => `${option.category}`}
+          getOptionLabel={option => `${option.name}`}
+          getOptionValue={option => `${option.name}`}
           onChange={handleCategoryFiltering}
           options={categories}
           isClearable={isClearable}
@@ -124,14 +124,14 @@ const TaskList = ({ user }) => {
         <Select className="task-list-select"
           getOptionLabel={option => `${option.name}`}
           getOptionValue={option => `${option.name}`}
-          onChange={handleAgeGroupFiltering}
-          options={ageGroups}
+          onChange={handleSeriesFiltering}
+          options={seriess}
           isClearable={isClearable}
 
         />
         <Select className="task-list-select"
-          getOptionLabel={option => `${option.rules}`}
-          getOptionValue={option => `${option.rules}`}
+          getOptionLabel={option => `${option.name}`}
+          getOptionValue={option => `${option.name}`}
           onChange={handleRuleFiltering}
           options={rules}
           isClearable={isClearable}
@@ -140,7 +140,6 @@ const TaskList = ({ user }) => {
 
 
       </div>
-
       <Search setTasks={setTasks} />
       <Notification message={errorMessage} />
       {tasks.map((task) => (
@@ -150,8 +149,8 @@ const TaskList = ({ user }) => {
               {task.name}
             </Link>
           </span>
-          <span>{task.ageGroup.name}</span>
-          <span>{task.category.category}</span>
+          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+          <span>{task.category.name}</span>
 
           {user !== null &&
             <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>

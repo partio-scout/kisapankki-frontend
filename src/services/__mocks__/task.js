@@ -7,17 +7,17 @@ const tasks = [
     gradingScale: 'testiarvosteluperusteet',
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
-    ageGroup: {
+    series: [{
       name: 'testi-ikäryhmä',
-    },
+    }],
     category: {
-      category: 'testikategoria',
+      name: 'testikategoria',
     },
     language: {
-      language: 'testikieli',
+      name: 'testikieli',
     },
     rules: {
-      rules: 'testisäännöt',
+      name: 'testisäännöt',
     },
     pending: false,
   },
@@ -30,17 +30,17 @@ const tasks = [
     gradingScale: 'testiarvosteluperusteet2',
     creatorName: 'nooraTestiluoja',
     creatorEmail: 'testiposti@noora',
-    ageGroup: {
+    series: [{
       name: 'toinen-ikäryhmä',
-    },
+    }],
     category: {
-      category: 'testikategorianro2',
+      name: 'testikategorianro2',
     },
     language: {
-      language: 'testikielisuomi',
+      name: 'testikielisuomi',
     },
     rules: {
-      rules: 'testisäännöt2',
+      name: 'testisäännöt2',
     },
     pending: false,
   },
@@ -55,17 +55,17 @@ const pendingTasks = [
     gradingScale: 'arvostelu pending',
     creatorName: 'pend',
     creatorEmail: 'true@true',
-    ageGroup: {
+    series: [{
       name: 'testi-ikäryhmä pending',
-    },
+    }],
     category: {
-      category: 'pendingkategory',
+      name: 'pendingkategory',
     },
     language: {
-      language: 'pending',
+      name: 'pending',
     },
     rules: {
-      rules: 'testisäännöt true',
+      name: 'testisäännöt true',
     },
     pending: true,
   },
