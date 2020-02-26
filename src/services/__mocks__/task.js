@@ -8,15 +8,19 @@ const tasks = [
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
     series: [{
+      id: '1',
       name: 'testi-ikäryhmä',
     }],
     category: {
+      id: '1',
       name: 'testikategoria',
     },
     language: {
+      id: '1',
       name: 'testikieli',
     },
     rules: {
+      id: '1',
       name: 'testisäännöt',
     },
     pending: false,
@@ -31,15 +35,19 @@ const tasks = [
     creatorName: 'nooraTestiluoja',
     creatorEmail: 'testiposti@noora',
     series: [{
+      id: '2',
       name: 'toinen-ikäryhmä',
     }],
     category: {
+      id: '2',
       name: 'testikategorianro2',
     },
     language: {
+      id: '2',
       name: 'testikielisuomi',
     },
     rules: {
+      id: '2',
       name: 'testisäännöt2',
     },
     pending: false,
@@ -56,15 +64,19 @@ const pendingTasks = [
     creatorName: 'pend',
     creatorEmail: 'true@true',
     series: [{
+      id: '3',
       name: 'testi-ikäryhmä pending',
     }],
     category: {
+      id: '3',
       name: 'pendingkategory',
     },
     language: {
+      id: '3',
       name: 'pending',
     },
     rules: {
+      id: '3',
       name: 'testisäännöt true',
     },
     pending: true,

@@ -48,7 +48,12 @@ const TaskListPending = () => {
       <h1>Hyväksyntää odottavat kisatehtävät</h1>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
-
+      <div className="task-list-title">
+        <span>Tehtävän nimi</span>
+        <span>Sarja</span>
+        <span>Kategoria</span>
+        <span></span>
+      </div>
       {tasks.map((task) => (
         <div className={`task-list-item pending`} key={task.id}>
           <span>

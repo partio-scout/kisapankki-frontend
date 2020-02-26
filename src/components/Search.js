@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import taskService from '../services/task'
 import Notification from './Notification'
 
-const Search = ({ setTasks }) => {
+const Search = ({ setTasks, setAllTasks }) => {
 
   const [search, setSearch] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -12,6 +12,7 @@ const Search = ({ setTasks }) => {
     try {
       const response = await taskService.getSearchedTasks({ search })
       setTasks(response)
+      setAllTasks(response)
     } catch (exception) {
       setErrorMessage('Haku ei onnistunut')
       setTimeout(() => {

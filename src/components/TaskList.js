@@ -6,68 +6,90 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
 import Select from 'react-select'
-
 import Search from './Search'
-
 
 const TaskList = ({ user }) => {
   const [allTasks, setAllTasks] = useState([])
   const [tasks, setTasks] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
-  const [selectedRules, setSelectedRules] = useState('')
-  const [selectedSeries, setSelectedSeries] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedSeries, setSelectedSeries] = useState('')
+  const [selectedRules, setSelectedRules] = useState('')
   const [categories, setCategories] = useState([])
   const [seriess, setSeriess] = useState([])
   const [rules, setRules] = useState([])
   const [isClearable, setIsClearable] = useState(true)
-
-
 
   useEffect(() => {
     taskService.getTasks().then((response) => {
       setTasks(response)
       setAllTasks(response)
     })
-  }, [])
 
-  useEffect(() => {
     categoryService.getCategories().then((response) => {
       setCategories(response)
     })
-  }, [])
 
-  useEffect(() => {
     seriesService.getSeries().then((response) => {
       setSeriess(response)
     })
-  }, [])
 
-  useEffect(() => {
     ruleService.getRules().then((response) => {
       setRules(response)
     })
   }, [])
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedSeries && selectedCategory && selectedRules) {
+      let array = []
+      for (let i = 0; i < allTasks.length; i++) {
+        for (let j = 0; j < allTasks[i].series.length; j++) {
+          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].category.id === selectedCategory.id && allTasks[i].rules.id === selectedRules.id) {
+            array.push(allTasks[i])
+          }
+        }
+      }
+      setTasks(array)
+    } else if (selectedSeries && selectedCategory) {
+      let array = []
+      for (let i = 0; i < allTasks.length; i++) {
+        for (let j = 0; j < allTasks[i].series.length; j++) {
+          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].category.id === selectedCategory.id) {
+            array.push(allTasks[i])
+          }
+        }
+      }
+      setTasks(array)
+    } else if (selectedSeries && selectedRules) {
+      let array = []
+      for (let i = 0; i < allTasks.length; i++) {
+        for (let j = 0; j < allTasks[i].series.length; j++) {
+          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].rules.id === selectedRules.id) {
+            array.push(allTasks[i])
+          }
+        }
+      }
+      setTasks(array)
+    } else if (selectedCategory && selectedRules) {
+      setTasks(allTasks.filter(task => task.category.id === selectedCategory.id && task.rules.id === selectedRules.id))
+    } else if (selectedSeries) {
+      let array = []
+      for (let i = 0; i < allTasks.length; i++) {
+        for (let j = 0; j < allTasks[i].series.length; j++) {
+          if (allTasks[i].series[j].id === selectedSeries.id) {
+            array.push(allTasks[i])
+          }
+        }
+      }
+      setTasks(array)
+    } else if (selectedCategory) {
       setTasks(allTasks.filter(task => task.category.id === selectedCategory.id))
-    }
-  }, [selectedCategory])
-
-  useEffect(() => {
-    if (selectedSeries) {
-      setTasks(allTasks.map(task => task.series.id).filter(id => id === selectedSeries.id))
-    }
-  }, [selectedSeries])
-
-  useEffect(() => {
-    if (selectedRules) {
+    } else if (selectedRules) {
       setTasks(allTasks.filter(task => task.rules.id === selectedRules.id))
+    } else {
+      setTasks(allTasks)
     }
-  }, [selectedRules])
-
-
+  }, [selectedCategory, selectedSeries, selectedRules])
 
   const handleDelete = async (task) => {
     try {
@@ -85,7 +107,7 @@ const TaskList = ({ user }) => {
     if (category) {
       setSelectedCategory(category)
     } else {
-      setSelectedCategory("")
+      setSelectedCategory('')
       setTasks(allTasks)
     }
   }
@@ -94,7 +116,7 @@ const TaskList = ({ user }) => {
     if (series) {
       setSelectedSeries(series)
     } else {
-      setSelectedSeries("")
+      setSelectedSeries('')
       setTasks(allTasks)
     }
   }
@@ -102,46 +124,62 @@ const TaskList = ({ user }) => {
     if (rules) {
       setSelectedRules(rules)
     } else {
-      setSelectedRules("")
+      setSelectedRules('')
       setTasks(allTasks)
     }
   }
-
 
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
 
-      <div className="task-list-select">
-        <Select className="task-list-select"
-          getOptionLabel={option => `${option.name}`}
-          getOptionValue={option => `${option.name}`}
-          onChange={handleCategoryFiltering}
-          options={categories}
-          isClearable={isClearable}
-        />
+      <div className="search-filter-container">
+        <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
 
-        <Select className="task-list-select"
-          getOptionLabel={option => `${option.name}`}
-          getOptionValue={option => `${option.name}`}
-          onChange={handleSeriesFiltering}
-          options={seriess}
-          isClearable={isClearable}
+        <div className="filter">
+          <Select
+            className="filter-series"
+            getOptionLabel={option => `${option.name}`}
+            getOptionValue={option => `${option.id}`}
+            onChange={handleSeriesFiltering}
+            options={seriess}
+            isClearable={isClearable}
+            placeholder={"Sarja"}
+          />
+        </div>
 
-        />
-        <Select className="task-list-select"
-          getOptionLabel={option => `${option.name}`}
-          getOptionValue={option => `${option.name}`}
-          onChange={handleRuleFiltering}
-          options={rules}
-          isClearable={isClearable}
+        <div className="filter">
+          <Select
+            className="filter-category"
+            getOptionLabel={option => `${option.name}`}
+            getOptionValue={option => `${option.id}`}
+            onChange={handleCategoryFiltering}
+            options={categories}
+            isClearable={isClearable}
+            placeholder={"Kategoria"}
+          />
+        </div>
 
-        />
-
-
+        <div className="filter">
+          <Select
+            className="filter-rules"
+            getOptionLabel={option => `${option.name}`}
+            getOptionValue={option => `${option.id}`}
+            onChange={handleRuleFiltering}
+            options={rules}
+            isClearable={isClearable}
+            placeholder={"Säännöt"}
+          />
+        </div>
       </div>
-      <Search setTasks={setTasks} />
+
       <Notification message={errorMessage} />
+      <div className="task-list-title">
+        <span>Tehtävän nimi</span>
+        <span>Sarja</span>
+        <span>Kategoria</span>
+        <span></span>
+      </div>
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>
@@ -151,9 +189,7 @@ const TaskList = ({ user }) => {
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category.name}</span>
-
-          {user !== null &&
-            <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
+          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
           }
         </div>
       ))}
