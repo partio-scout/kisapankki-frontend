@@ -76,8 +76,7 @@ describe('<TaskList />', () => {
 
     const selectInput = select.find('input').first()
     selectInput.simulate('change', { target: { value: '1' } })
-    expect(select.text()).toContain('sarja1')
-    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('sarja1')
@@ -90,9 +89,8 @@ describe('<TaskList />', () => {
 
     const selectInput = select.find('input').first()
     selectInput.simulate('change', { target: { value: '2' } })
-    expect(select.text()).toContain('kategoria2')
     selectInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
-    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('kategoria2')
@@ -105,8 +103,7 @@ describe('<TaskList />', () => {
 
     const selectInput = select.find('input').first()
     selectInput.simulate('change', { target: { value: '1' } })
-    expect(select.text()).toContain('säännöt1')
-    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('tehtävä1')
@@ -117,17 +114,17 @@ describe('<TaskList />', () => {
     const selectSeriesInput = component.find('Select[name="filter-series"]').find('input').first()
     selectSeriesInput.simulate('change', { target: { value: '2' } })
     selectSeriesInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
-    selectSeriesInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectSeriesInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     const selectCategoryInput = component.find('Select[name="filter-category"]').find('input').first()
     selectCategoryInput.simulate('change', { target: { value: '2' } })
     selectCategoryInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
-    selectCategoryInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectCategoryInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     const selectRulesInput = component.find('Select[name="filter-rules"]').find('input').first()
     selectRulesInput.simulate('change', { target: { value: '2' } })
     selectRulesInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
-    selectRulesInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+    selectRulesInput.simulate('keyDown', { keyCode: 13, key: 'Enter' })
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('tehtävä2')
