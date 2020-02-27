@@ -1,11 +1,11 @@
 const series = [
   {
     id: '1',
-    name: 'testi-ikäryhmä',
+    name: 'sarja1',
   },
   {
     id: '2',
-    name: 'toinen-ikäryhmä',
+    name: 'sarja2',
   },
   {
     id: '3',

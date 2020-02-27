@@ -1,7 +1,7 @@
 const tasks = [
   {
     id: 1,
-    name: 'testitehtävä',
+    name: 'tehtävä1',
     assignmentText: 'testitehtävänanto',
     supervisorInstructions: 'testiohjeet',
     gradingScale: 'testiarvosteluperusteet',
@@ -9,26 +9,26 @@ const tasks = [
     creatorEmail: 'testiposti',
     series: [{
       id: '1',
-      name: 'testi-ikäryhmä',
+      name: 'sarja1',
     }],
     category: {
       id: '1',
-      name: 'testikategoria',
+      name: 'kategoria1',
     },
     language: {
       id: '1',
-      name: 'testikieli',
+      name: 'kieli1',
     },
     rules: {
       id: '1',
-      name: 'testisäännöt',
+      name: 'säännöt1',
     },
     pending: false,
   },
 
   {
     id: 2,
-    name: 'toinen testitehtävä',
+    name: 'tehtävä2',
     assignmentText: 'testitehtävänanto nro 2',
     supervisorInstructions: 'myös toiset testiohjeet',
     gradingScale: 'testiarvosteluperusteet2',
@@ -36,19 +36,19 @@ const tasks = [
     creatorEmail: 'testiposti@noora',
     series: [{
       id: '2',
-      name: 'toinen-ikäryhmä',
+      name: 'sarja2',
     }],
     category: {
       id: '2',
-      name: 'testikategorianro2',
+      name: 'kategoria2',
     },
     language: {
       id: '2',
-      name: 'testikielisuomi',
+      name: 'kieli2',
     },
     rules: {
       id: '2',
-      name: 'testisäännöt2',
+      name: 'säännöt2',
     },
     pending: false,
   },

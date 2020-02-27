@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, waitForElement, fireEvent, wait } from '@testing-library/react'
+import { render, cleanup, waitForElement } from '@testing-library/react'
+import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
 
@@ -32,16 +33,16 @@ describe('<TaskList />', () => {
     expect(tasks.length).toBe(2)
 
     expect(component.container).toHaveTextContent(
-      'testitehtävä',
+      'tehtävä1',
     )
     expect(component.container).toHaveTextContent(
-      'toinen testitehtävä',
+      'tehtävä2',
     )
     expect(component.container).toHaveTextContent(
-      'toinen-ikäryhmä',
+      'sarja1',
     )
     expect(component.container).toHaveTextContent(
-      'testikategoria',
+      'kategoria1',
     )
   })
 
@@ -50,93 +51,86 @@ describe('<TaskList />', () => {
     expect(dropdowns.length).toBe(3)
   })
 
-  // test('renders correct tasks after selecting filter by series', async () => {
-  //   await waitForElement(
-  //     () => component.container.querySelector('.task-list-item')
-  //   )
-
-  //   let tasks = component.container.querySelectorAll('.task-list-item')
-  //   let select = component.container.querySelector('.filter-series')
-
-  //   fireEvent.change(select, { target: { value: '1' } })
-
-  //   await wait(() => expect(tasks.length).toBe(1))
-
-  //   expect(component.container).toHaveTextContent(
-  //     'testi-ikäryhmä',
-  //   )
-  //   expect(component.container).not.toHaveTextContent(
-  //     'toinen-ikäryhmä',
-  //   )
-  // })
-
-  // test('renders correct tasks after selecting filter by category', async () => {
-  //   await waitForElement(
-  //     () => component.container.querySelector('.task-list-item')
-  //   )
-
-  //   let tasks = component.container.querySelectorAll('.task-list-item')
-  //   let select = component.container.querySelector('filter-category')
-
-  //   fireEvent.change(select, { target: { value: '1' } })
-
-  //   await wait(() => expect(tasks.length).toBe(1))
-
-  //   expect(component.container).toHaveTextContent(
-  //     'testikategoria',
-  //   )
-  //   expect(component.container).not.toHaveTextContent(
-  //     'testikategorianro2',
-  //   )
-  // })
-
-  // test('renders correct tasks after selecting filter by rules', async () => {
-  //   await waitForElement(
-  //     () => component.container.querySelector('.task-list-item')
-  //   )
-
-  //   let tasks = component.container.querySelectorAll('.task-list-item')
-  //   let select = component.container.querySelector('.filter-rules')
-
-  //   fireEvent.change(select, { target: { value: '1' } })
-
-  //   await wait(() => expect(tasks.length).toBe(1))
-
-  //   expect(component.container).toHaveTextContent(
-  //     'testitehtävä',
-  //   )
-  //   expect(component.container).not.toHaveTextContent(
-  //     'toinen testitehtävä',
-  //   )
-  // })
-
-  // test('renders correct tasks after selecting filter by series, category and rules', async () => {
-  //   await waitForElement(
-  //     () => component.container.querySelector('.task-list-item')
-  //   )
-
-  //   let tasks = component.container.querySelectorAll('.task-list-item')
-  //   let selectSeries = component.container.querySelector('.filter-series')
-  //   let selectCategory = component.container.querySelector('.filter-category')
-  //   let selectRules = component.container.querySelector('.filter-rules')
-
-  //   fireEvent.change(selectSeries, { target: { value: '1' } })
-  //   fireEvent.change(selectCategory, { target: { value: '1' } })
-  //   fireEvent.change(selectRules, { target: { value: '1' } })
-
-  //   await wait(() => expect(tasks.length).toBe(1))
-
-  //   expect(component.container).toHaveTextContent(
-  //     'testitehtävä',
-  //   )
-  //   expect(component.container).not.toHaveTextContent(
-  //     'toinen testitehtävä',
-  //   )
-  // })
-
   test('renders delete-button', () => {
     const button = component.container.querySelector('.delete-button')
     expect(button).toHaveTextContent('Poista')
   })
 
+})
+
+describe('<TaskList />', () => {
+  let component
+  let user = 'not null'
+
+  beforeEach(() => {
+    component = mount(
+      <Router>
+        <TaskList user={user} />
+      </Router>,
+    )
+  })
+
+  test('renders correct tasks after selecting filter by series', async () => {
+    let select = component.find('Select[name="filter-series"]')
+    expect(select.text()).toContain('Sarja')
+
+    const selectInput = select.find('input').first()
+    selectInput.simulate('change', { target: { value: '1' } })
+    expect(select.text()).toContain('sarja1')
+    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    expect(component.find('.task-list-item').length).toEqual(1)
+    expect(component.text()).toContain('sarja1')
+    expect(component.text()).not.toContain('sarja2')
+  })
+
+  test('renders correct tasks after selecting filter by category', async () => {
+    let select = component.find('Select[name="filter-category"]')
+    expect(select.text()).toContain('Kategoria')
+
+    const selectInput = select.find('input').first()
+    selectInput.simulate('change', { target: { value: '2' } })
+    expect(select.text()).toContain('kategoria2')
+    selectInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
+    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    expect(component.find('.task-list-item').length).toEqual(1)
+    expect(component.text()).toContain('kategoria2')
+    expect(component.text()).not.toContain('kategoria1')
+  })
+
+  test('renders correct tasks after selecting filter by rules', async () => {
+    let select = component.find('Select[name="filter-rules"]')
+    expect(select.text()).toContain('Säännöt')
+
+    const selectInput = select.find('input').first()
+    selectInput.simulate('change', { target: { value: '1' } })
+    expect(select.text()).toContain('säännöt1')
+    selectInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    expect(component.find('.task-list-item').length).toEqual(1)
+    expect(component.text()).toContain('tehtävä1')
+    expect(component.text()).not.toContain('tehtävä2')
+  })
+
+  test('renders correct tasks after selecting filter by series, category and rules', async () => {
+    const selectSeriesInput = component.find('Select[name="filter-series"]').find('input').first()
+    selectSeriesInput.simulate('change', { target: { value: '2' } })
+    selectSeriesInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
+    selectSeriesInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    const selectCategoryInput = component.find('Select[name="filter-category"]').find('input').first()
+    selectCategoryInput.simulate('change', { target: { value: '2' } })
+    selectCategoryInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
+    selectCategoryInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    const selectRulesInput = component.find('Select[name="filter-rules"]').find('input').first()
+    selectRulesInput.simulate('change', { target: { value: '2' } })
+    selectRulesInput.simulate('keyDown', { keyCode: 40, key: 'ArrowDown' })
+    selectRulesInput.simulate('keyDown', { keyCode: 9, key: 'Tab' })
+
+    expect(component.find('.task-list-item').length).toEqual(1)
+    expect(component.text()).toContain('tehtävä2')
+    expect(component.text()).not.toContain('tehtävä1')
+  })
 })

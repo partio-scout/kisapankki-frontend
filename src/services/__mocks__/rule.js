@@ -1,11 +1,11 @@
 const rules = [
   {
     id: '1',
-    name: 'testisäännöt',
+    name: 'säännöt1',
   },
   {
     id: '2',
-    name: 'testisäännöt2',
+    name: 'säännöt2',
   },
   {
     id: '3',

@@ -1,11 +1,11 @@
 const categories = [
   {
     id: '1',
-    name: 'testikategoria',
+    name: 'kategoria1',
   },
   {
     id: '2',
-    name: 'testikategorianro2',
+    name: 'kategoria2',
   },
   {
     id: '3',

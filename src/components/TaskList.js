@@ -138,7 +138,7 @@ const TaskList = ({ user }) => {
 
         <div className="filter">
           <Select
-            className="filter-series"
+            name="filter-series"
             getOptionLabel={option => `${option.name}`}
             getOptionValue={option => `${option.id}`}
             onChange={handleSeriesFiltering}
@@ -150,7 +150,7 @@ const TaskList = ({ user }) => {
 
         <div className="filter">
           <Select
-            className="filter-category"
+            name="filter-category"
             getOptionLabel={option => `${option.name}`}
             getOptionValue={option => `${option.id}`}
             onChange={handleCategoryFiltering}
@@ -162,7 +162,7 @@ const TaskList = ({ user }) => {
 
         <div className="filter">
           <Select
-            className="filter-rules"
+            name="filter-rules"
             getOptionLabel={option => `${option.name}`}
             getOptionValue={option => `${option.id}`}
             onChange={handleRuleFiltering}
