@@ -24,7 +24,7 @@ h1, h2 {
   font-family: "Source Sans Pro", sans-serif;
 }
 
-h2 {
+h1, h2 {
   margin-bottom: 10px;
 }
 
@@ -155,8 +155,39 @@ button:hover {
   width: 500px;
 }
 
-.search-form {
+.search-filter-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.search, .filter {
+  width: calc(25% - 10px);
+  min-width: 250px;
+  margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.filter input {
+  box-shadow: none;
+}
+
+.search-form {
+  width: 100%;
+}
+
+.search-input {
+  width: calc(100% - 100px);
+}
+
+.task-list-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  vertical-align: top;
+  padding: 5px 15px;
+  font-weight: bold;
 }
 
 .task-list-item {
@@ -175,7 +206,7 @@ button:hover {
   background-color: #f7dcdb;
 }
 
-.task-list-item span {
+.task-list-item span, .task-list-title span {
   width: 200px;
 }
 

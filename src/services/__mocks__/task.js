@@ -1,46 +1,54 @@
 const tasks = [
   {
     id: 1,
-    name: 'testitehtävä',
+    name: 'tehtävä1',
     assignmentText: 'testitehtävänanto',
     supervisorInstructions: 'testiohjeet',
     gradingScale: 'testiarvosteluperusteet',
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
     series: [{
-      name: 'testi-ikäryhmä',
+      id: '1',
+      name: 'sarja1',
     }],
     category: {
-      name: 'testikategoria',
+      id: '1',
+      name: 'kategoria1',
     },
     language: {
-      name: 'testikieli',
+      id: '1',
+      name: 'kieli1',
     },
     rules: {
-      name: 'testisäännöt',
+      id: '1',
+      name: 'säännöt1',
     },
     pending: false,
   },
 
   {
     id: 2,
-    name: 'toinen testitehtävä',
+    name: 'tehtävä2',
     assignmentText: 'testitehtävänanto nro 2',
     supervisorInstructions: 'myös toiset testiohjeet',
     gradingScale: 'testiarvosteluperusteet2',
     creatorName: 'nooraTestiluoja',
     creatorEmail: 'testiposti@noora',
     series: [{
-      name: 'toinen-ikäryhmä',
+      id: '2',
+      name: 'sarja2',
     }],
     category: {
-      name: 'testikategorianro2',
+      id: '2',
+      name: 'kategoria2',
     },
     language: {
-      name: 'testikielisuomi',
+      id: '2',
+      name: 'kieli2',
     },
     rules: {
-      name: 'testisäännöt2',
+      id: '2',
+      name: 'säännöt2',
     },
     pending: false,
   },
@@ -56,15 +64,19 @@ const pendingTasks = [
     creatorName: 'pend',
     creatorEmail: 'true@true',
     series: [{
+      id: '3',
       name: 'testi-ikäryhmä pending',
     }],
     category: {
+      id: '3',
       name: 'pendingkategory',
     },
     language: {
+      id: '3',
       name: 'pending',
     },
     rules: {
+      id: '3',
       name: 'testisäännöt true',
     },
     pending: true,

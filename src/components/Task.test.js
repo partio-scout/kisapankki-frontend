@@ -27,7 +27,7 @@ describe('<Task />', () => {
 
   test('renders task name', () => {
     expect(component.container).toHaveTextContent(
-      'testitehtävä',
+      'tehtävä1',
     )
   })
 
@@ -63,19 +63,19 @@ describe('<Task />', () => {
 
   test('renders task age group', () => {
     expect(component.container).toHaveTextContent(
-      'testi-ikäryhmä',
+      'sarja1',
     )
   })
 
   test('renders task category', () => {
     expect(component.container).toHaveTextContent(
-      'testikategoria',
+      'kategoria1',
     )
   })
 
   test('renders task rules', () => {
     expect(component.container).toHaveTextContent(
-      'testisäännöt',
+      'säännöt1',
     )
   })
 
