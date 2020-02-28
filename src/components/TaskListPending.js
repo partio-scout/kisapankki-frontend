@@ -31,10 +31,10 @@ const TaskListPending = () => {
     }
   }
 
-  const handleDelete = async (task) => {
+  const handleDelete = async (id) => {
     try {
-      await taskService.deleteTask(task.id)
-      setTasks(tasks.filter(t => t.id !== task.id))
+      await taskService.deleteTask(id)
+      setTasks(tasks.filter(t => t.id !== id))
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -48,19 +48,24 @@ const TaskListPending = () => {
       <h1>Hyväksyntää odottavat kisatehtävät</h1>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
-
+      <div className="task-list-title">
+        <span>Tehtävän nimi</span>
+        <span>Sarja</span>
+        <span>Kategoria</span>
+        <span></span>
+      </div>
       {tasks.map((task) => (
-        <div className={`task-list-item ${task.ageGroup.name.toLowerCase()}`} key={task.id}>
+        <div className={`task-list-item pending`} key={task.id}>
           <span>
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
             </Link>
           </span>
-          <span>{task.ageGroup.name}</span>
-          <span>{task.category.category}</span>
+          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+          <span>{task.category.name}</span>
           <span>
             <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
-            <button className="delete-button" onClick={() => handleDelete(task)}>Poista</button>
+            <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
           </span>
         </div>
       ))}

@@ -1,46 +1,54 @@
 const tasks = [
   {
     id: 1,
-    name: 'testitehtävä',
+    name: 'tehtävä1',
     assignmentText: 'testitehtävänanto',
     supervisorInstructions: 'testiohjeet',
     gradingScale: 'testiarvosteluperusteet',
     creatorName: 'testiluoja',
     creatorEmail: 'testiposti',
-    ageGroup: {
-      name: 'testi-ikäryhmä',
-    },
+    series: [{
+      id: '1',
+      name: 'sarja1',
+    }],
     category: {
-      category: 'testikategoria',
+      id: '1',
+      name: 'kategoria1',
     },
     language: {
-      language: 'testikieli',
+      id: '1',
+      name: 'kieli1',
     },
     rules: {
-      rules: 'testisäännöt',
+      id: '1',
+      name: 'säännöt1',
     },
     pending: false,
   },
 
   {
     id: 2,
-    name: 'toinen testitehtävä',
+    name: 'tehtävä2',
     assignmentText: 'testitehtävänanto nro 2',
     supervisorInstructions: 'myös toiset testiohjeet',
     gradingScale: 'testiarvosteluperusteet2',
     creatorName: 'nooraTestiluoja',
     creatorEmail: 'testiposti@noora',
-    ageGroup: {
-      name: 'toinen-ikäryhmä',
-    },
+    series: [{
+      id: '2',
+      name: 'sarja2',
+    }],
     category: {
-      category: 'testikategorianro2',
+      id: '2',
+      name: 'kategoria2',
     },
     language: {
-      language: 'testikielisuomi',
+      id: '2',
+      name: 'kieli2',
     },
     rules: {
-      rules: 'testisäännöt2',
+      id: '2',
+      name: 'säännöt2',
     },
     pending: false,
   },
@@ -55,17 +63,21 @@ const pendingTasks = [
     gradingScale: 'arvostelu pending',
     creatorName: 'pend',
     creatorEmail: 'true@true',
-    ageGroup: {
+    series: [{
+      id: '3',
       name: 'testi-ikäryhmä pending',
-    },
+    }],
     category: {
-      category: 'pendingkategory',
+      id: '3',
+      name: 'pendingkategory',
     },
     language: {
-      language: 'pending',
+      id: '3',
+      name: 'pending',
     },
     rules: {
-      rules: 'testisäännöt true',
+      id: '3',
+      name: 'testisäännöt true',
     },
     pending: true,
   },

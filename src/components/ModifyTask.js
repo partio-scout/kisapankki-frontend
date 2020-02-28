@@ -4,9 +4,8 @@ import Notification from './Notification'
 import taskService from '../services/task'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
-import ageGroupService from '../services/ageGroup'
+import seriesService from '../services/series'
 import languageService from '../services/language'
-
 
 const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
@@ -20,8 +19,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [rule, setRule] = useState(task.rules.id)
   const [categories, setCategories] = useState([])
   const [category, setCategory] = useState(task.category.id)
-  const [ageGroups, setAgeGroups] = useState([])
-  const [ageGroup, setAgeGroup] = useState(task.ageGroup.id)
+  const [seriess, setSeriess] = useState([])
+  const [series, setSeries] = useState(task.series.map(s => s.id))
   const [languages, setLanguages] = useState([])
   const [language, setLanguage] = useState(task.language.id)
   const [creatorName, setCreatorName] = useState(task.creatorName)
@@ -42,8 +41,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
     categoryService.getCategories().then(response => {
       setCategories(response)
     })
-    ageGroupService.getAgeGroups().then(response => {
-      setAgeGroups(response)
+    seriesService.getSeries().then(response => {
+      setSeriess(response)
     })
     languageService.getLanguages().then(response => {
       setLanguages(response)
@@ -58,8 +57,15 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
     setCategory(e.target.value)
   }
 
-  const handleAgeGroupChange = (e) => {
-    setAgeGroup(e.target.value)
+  const handleSeriesChange = (e) => {
+    let options = e.target.options
+    let values = []
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected && options[i].value !== '') {
+        values.push(options[i].value)
+      }
+    }
+    setSeries(values)
   }
 
   const handleLanguageChange = (e) => {
@@ -85,16 +91,16 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
     if (creatorEmail.length < 1) {
       setCreatorEmailErrorMessage('Lisääjän sähköposti ei saa olla tyhjä')
     }
-    if (language === '' || rule === '' || ageGroup === '' || category === '') {
+    if (language === '' || rule === '' || series === '' || category === '') {
       setDropDownErrorMessage('Valitsethan arvon kaikkiin pudotuskenttiin')
     }
     if (name.length < 1 || assignmentText.length < 1 || creatorName.length < 1 || creatorEmail.length < 1
-      || language === '' || rule === '' || ageGroup === '' || category === '') {
+      || language === '' || rule === '' || series === '' || category === '') {
       return
     }
     try {
       const modifiedTask = await taskService.updateTask({
-        name, rule, category, ageGroup,
+        name, rule, category, series,
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions, id
       })
@@ -170,27 +176,32 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             onChange={({ target }) => setSupervisorInstructions(target.value)}
           />
         </div>
-        <div>
-          <Notification message={dropDownErrorMessage} type="error" />
-          <select value={ageGroup} onChange={(e) => handleAgeGroupChange(e)}>
-            <option value="">Valitse ikäluokka</option>
-            {ageGroups.map(ageGroup => <option key={ageGroup.id} value={ageGroup.id}>{ageGroup.name}</option>)}
-          </select>
-
-          <select value={category} onChange={(e) => handleCategoryChange(e)}>
-            <option value="">Valitse kategoria</option>
-            {categories.map(category => <option key={category.id} value={category.id}>{category.category}</option>)}
+        <Notification message={dropDownErrorMessage} type="error" />
+        <div className="dropdowns">
+          <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
+            <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
+            {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
           </select>
         </div>
-        <div>
-          <select value={rule} onChange={(e) => handleRuleChange(e)}>
-            <option value="">Valitse säännöt</option>
-            {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.rules}</option>)}
-          </select>
-          <select value={language} onChange={(e) => handleLanguageChange(e)}>
-            <option value="">Tehtävän kieli</option>
-            {languages.map(language => <option key={language.id} value={language.id}>{language.language}</option>)}
-          </select>
+        <div className="dropdowns">
+          <div>
+            <select value={category} onChange={(e) => handleCategoryChange(e)}>
+              <option value="">Kategoria</option>
+              {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
+            </select>
+          </div>
+          <div>
+            <select value={rule} onChange={(e) => handleRuleChange(e)}>
+              <option value="">Säännöt</option>
+              {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.name}</option>)}
+            </select>
+          </div>
+          <div>
+            <select value={language} onChange={(e) => handleLanguageChange(e)}>
+              <option value="">Kieli</option>
+              {languages.map(language => <option key={language.id} value={language.id}>{language.name}</option>)}
+            </select>
+          </div>
         </div>
         <div>
           <Notification message={creatorNameErrorMessage} type="error" />

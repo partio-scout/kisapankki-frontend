@@ -1,32 +1,32 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
-import AgeGroup from './AgeGroup'
+import Series from './Series'
 
 afterEach(cleanup)
 
-describe('<AgeGroup />', () => {
+describe('<Series />', () => {
   let component
 
   beforeEach(() => {
     component = render(
-      <AgeGroup />,
+      <Series />,
     )
   })
 
   test('renders heading', () => {
     expect(component.container).toHaveTextContent(
-      'Lisää ikäryhmä',
+      'Lisää sarja',
     )
   })
 
-  test('renders input for age group', () => {
+  test('renders input for series', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(4)
+    expect(inputs.length).toBe(1)
   })
 
   test('renders submit button', () => {
-    const button = component.container.querySelector('.age-group-submit-button')
+    const button = component.container.querySelector('.series-submit-button')
     expect(button).toHaveTextContent(
       'Lisää',
     )

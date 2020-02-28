@@ -9,7 +9,6 @@
 | Comments  |   |
 | Expected updates  |   |
 ##### Data
-
 ```
 {
 name: "Nilkan nyrjähdys",
@@ -19,7 +18,7 @@ gradingScale: "1-5p - koho - kompressio - kylmä",
 creatorName: "Arttu",
 creatorEmail: "sähköposti@sähköposti.com",
 pending: false,
-ageGroup: {
+series: {
 task: [
 "5e37d8c114f20730f1253fd5",
 "5e37f16c8f51645b31d01137",
@@ -66,7 +65,7 @@ task: [
 "5e3848d8e54e612fd06d3c6e",
 "5e384a0ce54e612fd06d3c71"
 ],
-language: "Suomi",
+name: "Suomi",
 __v: 15,
 id: "5e37d86d14f20730f1253fcf"
 },
@@ -79,6 +78,40 @@ id: "5e38888bb226c84d544b2b06"
 id: "5e394ce084150c0004ed201c"
 }
 ``` 
+
+# Delete task
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+# See single task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
+
+
+# Edit task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+##### Data
 
 # Add task
 
@@ -100,13 +133,13 @@ id: "5e394ce084150c0004ed201c"
   creatorName: 'Make',
   creatorEmail: 'make@kake.com',
   pending: false,
-  ageGroup: 5e37d88014f20730f1253fd1,
+  series: 5e37d88014f20730f1253fd1,
   category: 5e3888a5b226c84d544b2b08,
   language: 5e37d86d14f20730f1253fcf,
   rules: 5e388894b226c84d544b2b07,
   id: '5e3d292787210b37a2b35cd1'
 }
-``` 
+```
 
 # Rules
 
@@ -147,7 +180,6 @@ id: "5e38888bb226c84d544b2b06"
 }
 ``` 
 
-
 # Log in
 
 | Type  | POST  |
@@ -158,7 +190,6 @@ id: "5e38888bb226c84d544b2b06"
 | Expected updates  |   |
 
 ##### Data
-
 
 # Languages
 
@@ -174,7 +205,7 @@ id: "5e38888bb226c84d544b2b06"
 ```
 {
 task: [ ],
-language: "Suomi",
+name: "Suomi",
 __v: 15,
 id: "5e37d86d14f20730f1253fcf"
 },
@@ -193,12 +224,11 @@ id: "5e37d86d14f20730f1253fcf"
 ```
 { 
 task: [], 
-language: 'Saksa',
+name: 'Saksa',
 __v: 0, 
 id: '5e3d2bdc1cd0b138e2ffc319' 
 }
-
-``` 
+```
 
 # Categories
 
@@ -236,13 +266,13 @@ task: [],
 category: 'Sukellus', 
 id: '5e3d2c67b040c2392855c7a5' 
 }
-``` 
+```
 
 # Age groups
 
 | Type  | get  |
 |---|---|
-| Uri | api/ageGroup  |
+| Uri | api/series  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -264,7 +294,7 @@ id: "5e37d88014f20730f1253fd1"
 
 | Type  | get  |
 |---|---|
-| Uri | api/ageGroup  |
+| Uri | api/series  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -280,5 +310,4 @@ id: "5e37d88014f20730f1253fd1"
   color: 'Pinkki',
   id: '5e3d2ce4fb003a397693dc28'
 }
-
-``` 
+```
