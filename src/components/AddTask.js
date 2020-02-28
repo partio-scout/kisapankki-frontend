@@ -5,8 +5,9 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
-import {Editor as epidor, EditorState} from 'draft-js';
+import {Editor as epidor} from 'draft-js';
 import Editor from './editor';
+import { stateToHTML } from "draft-js-export-html";
 
 
 const AddTask = () => {
@@ -97,6 +98,10 @@ const AddTask = () => {
             || language === '' || rule === '' || series === '' || category === '') {
             return
         }
+        setAssignmentText(JSON.stringify(assignmentText)) 
+        setGradingScale(JSON.stringify(gradingScale)) 
+        setSupervisorInstructions(JSON.stringify(supervisorInstructions)) 
+
         try {
             await addtaskService.addtask({
                 name, rule, category, series,
@@ -142,12 +147,20 @@ const AddTask = () => {
                         onChange={({ target }) => setName(target.value)}
                     />
                 </div>
-                <Editor editorState={assignmentText} setEditorState={setAssignmentText} />
-
                 <div>
+                    <Editor setText={setAssignmentText} placeHolder="Tehtävänanto" />
+                </div>
+                <div>
+                    <Editor setText={setGradingScale} placeHolder="Arvostelu" />
+                </div>
+                <div>
+                    <Editor setText={setSupervisorInstructions} placeHolder="Rastimiehen ohje" />
+                </div>
+
+                {/* <div>
                     <Notification message={assignmentTextErrorMessage} type="error" />
                     
-                    {/* <textarea
+                    <textarea
                         rows="3"
                         cols="35"
                         className=""
@@ -156,7 +169,7 @@ const AddTask = () => {
                         name="AssignmentText"
                         placeholder="Tehtävänanto"
                         onChange={({ target }) => setAssignmentText(target.value)}
-                    /> */}
+                    />
                 </div>
                 <div>
                     <textarea
@@ -181,7 +194,7 @@ const AddTask = () => {
                         placeholder="Rastimiehen ohje"
                         onChange={({ target }) => setSupervisorInstructions(target.value)}
                     />
-                </div>
+                </div> */}
                 <Notification message={dropDownErrorMessage} type="error" />
                 <div className="dropdowns">
                     <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">

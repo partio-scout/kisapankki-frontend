@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { EditorState, Editor as DraftEditor } from "draft-js";
+import { EditorState, Editor as DraftEditor, convertToRaw } from "draft-js";
 import styled from "styled-components"
 import Toolbar from "./containers/index"
+import { stateToHTML } from "draft-js-export-html";
 
 const EditorWrapper = styled.div`
 min-width: 700px;
@@ -22,12 +23,16 @@ font-weight: 300;
 box-shadow: 0px 0px 3px 1px rgba(15, 15, 15, 0.17)
 `;
 
-const Editor = () => {
+const Editor = ( {setText, placeHolder} ) => {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty(),
   );
 
-  const [placeHolder, setPlaceHolder] = useState("Click")
+
+  useEffect(() => {
+    setText(convertToRaw(editorState.getCurrentContent()));
+  }, [editorState])
+
 
   return  (
     <EditorWrapper>
