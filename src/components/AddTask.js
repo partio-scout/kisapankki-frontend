@@ -135,12 +135,12 @@ const AddTask = () => {
                         onChange={({ target }) => setName(target.value)}
                     />
                 </div>
-                <Editor />
+                <Editor editorState={assignmentText} setEditorState={setAssignmentText} />
 
                 <div>
                     <Notification message={assignmentTextErrorMessage} type="error" />
                     
-                    <textarea
+                    {/* <textarea
                         rows="3"
                         cols="35"
                         className=""
@@ -149,7 +149,7 @@ const AddTask = () => {
                         name="AssignmentText"
                         placeholder="Tehtävänanto"
                         onChange={({ target }) => setAssignmentText(target.value)}
-                    />
+                    /> */}
                 </div>
                 <div>
                     <textarea
