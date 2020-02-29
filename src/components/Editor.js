@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { EditorState, Editor as DraftEditor, convertToRaw } from "draft-js";
+import { EditorState, Editor as DraftEditor, convertToRaw, RichUtils } from "draft-js";
 import styled from "styled-components"
 import Toolbar from "./containers/index"
 import { stateToHTML } from "draft-js-export-html";
@@ -37,6 +37,32 @@ const Editor = ({ setText, placeHolder }) => {
     editor.focus()
   }
 
+  const onChange = () => {
+    setEditorState(editorState)
+  }
+
+  const handleKeyCommand = (command) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command)
+
+    if (newState) {
+      onChange(newState)
+      return 'handled'
+    }
+    return 'not handled'
+  }
+
+  const onUnderlineClick = () => {
+    onChange(RichUtils.toggleInlineStyle(editorState, 'UNDERLINE'));
+  }
+
+  const onBoldClick = () => {
+    onChange(RichUtils.toggleInlineStyle(editorState, 'BOLD'))
+  }
+
+  const onItalicClick = () => {
+    onChange(RichUtils.toggleInlineStyle(editorState, 'ITALIC'))
+  }
+
 
   return (
     <EditorWrapper>
@@ -52,6 +78,26 @@ const Editor = ({ setText, placeHolder }) => {
       </EditorContainer>
     </EditorWrapper>
   );
+
+  /*return (
+    <EditorWrapper>
+      <div>
+        <button type="button" onClick={onUnderlineClick}>U</button>
+        <button type="button" onClick={onBoldClick}><b>B</b></button>
+        <button type="button" onClick={onItalicClick}><em>I</em></button>
+      </div>
+      <EditorContainer onClick={focus}>
+        <DraftEditor
+          editorState={editorState}
+          placeHolder={placeHolder}
+          handleKeyCommand={handleKeyCommand}
+          onChange={onChange}
+          ref={(element) => { editor = element }}
+        />
+      </EditorContainer>
+    </EditorWrapper>
+
+  )*/
 }
 
 export default Editor

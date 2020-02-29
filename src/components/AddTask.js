@@ -5,7 +5,7 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
-import Editor from './editor';
+import Editor from './Editor';
 import TestEditor from './TestEditor'
 
 
