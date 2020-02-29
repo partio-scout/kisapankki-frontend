@@ -5,9 +5,8 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
-import {Editor as epidor} from 'draft-js';
 import Editor from './editor';
-import { stateToHTML } from "draft-js-export-html";
+import TestEditor from './TestEditor'
 
 
 const AddTask = () => {
@@ -98,9 +97,9 @@ const AddTask = () => {
             || language === '' || rule === '' || series === '' || category === '') {
             return
         }
-        setAssignmentText(JSON.stringify(assignmentText)) 
-        setGradingScale(JSON.stringify(gradingScale)) 
-        setSupervisorInstructions(JSON.stringify(supervisorInstructions)) 
+        setAssignmentText(JSON.stringify(assignmentText))
+        setGradingScale(JSON.stringify(gradingScale))
+        setSupervisorInstructions(JSON.stringify(supervisorInstructions))
 
         try {
             await addtaskService.addtask({
@@ -146,6 +145,10 @@ const AddTask = () => {
                         placeholder="Tehtävän otsikko"
                         onChange={({ target }) => setName(target.value)}
                     />
+                </div>
+                <div>
+                    <h2>Artun testieditori</h2>
+                    <TestEditor />
                 </div>
                 <div>
                     <Editor setText={setAssignmentText} placeHolder="Tehtävänanto" />
