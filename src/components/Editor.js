@@ -37,7 +37,7 @@ const Editor = ({ setText, placeHolder }) => {
     editor.focus()
   }
 
-  const onChange = () => {
+  const onChange = (editorState) => {
     setEditorState(editorState)
   }
 
@@ -64,7 +64,7 @@ const Editor = ({ setText, placeHolder }) => {
   }
 
 
-  return (
+  /*return (
     <EditorWrapper>
       <Toolbar editorState={editorState} updateEditorState={setEditorState} />
       <EditorContainer onClick={focus}>
@@ -77,14 +77,14 @@ const Editor = ({ setText, placeHolder }) => {
 
       </EditorContainer>
     </EditorWrapper>
-  );
+  );*/
 
-  /*return (
+  return (
     <EditorWrapper>
       <div>
-        <button type="button" onClick={onUnderlineClick}>U</button>
-        <button type="button" onClick={onBoldClick}><b>B</b></button>
-        <button type="button" onClick={onItalicClick}><em>I</em></button>
+        <button type="button" onClick={onUnderlineClick.bind(this)}>U</button>
+        <button type="button" onClick={onBoldClick.bind(this)}><b>B</b></button>
+        <button type="button" onClick={onItalicClick.bind(this)}><em>I</em></button>
       </div>
       <EditorContainer onClick={focus}>
         <DraftEditor
@@ -97,7 +97,7 @@ const Editor = ({ setText, placeHolder }) => {
       </EditorContainer>
     </EditorWrapper>
 
-  )*/
+  )
 }
 
 export default Editor

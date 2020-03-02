@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import Editor from 'draft-js-plugins-editor'
 import { EditorState } from 'draft-js'
 import createToolbarPlugin from 'draft-js-static-toolbar-plugin'
-import {
+/*import {
   ItalicButton,
   BoldButton,
   UnderlineButton,
@@ -12,7 +12,7 @@ import {
   UnorderedListButton,
   OrderedListButton,
   BlockquoteButton,
-} from 'draft-js-buttons'
+} from 'draft-js-buttons'*/
 
 const TestEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())

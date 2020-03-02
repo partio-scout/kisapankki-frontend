@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
+import TaskTextDisplay from './TaskTextDisplay'
 import { useHistory } from 'react-router-dom'
 
 const Task = ({ match, user }) => {
@@ -53,6 +54,8 @@ const Task = ({ match, user }) => {
     }
   }
 
+
+
   return (
     <div>
       {modifyVisible ?
@@ -65,11 +68,11 @@ const Task = ({ match, user }) => {
             <div className="task-view-info">
               <h2>{task.name}</h2>
               <h3>Tehtävänanto:</h3>
-              <p>{task.assignmentText}</p>
+              <TaskTextDisplay text={task.assignmentText} />
               <h3>Rastimiehen ohjeet:</h3>
-              <p>{task.supervisorInstructions}</p>
+              <TaskTextDisplay text={task.supervisorInstructions} />
               <h3>Arvosteluasteikko:</h3>
-              <p>{task.gradingScale}</p>
+              <TaskTextDisplay text={task.gradingScale} />
               <h3>Sarja:</h3>
               {task.series.map(s => <span key={task.id + s.id}>{s.name}<br /></span>)}
               <h3>Kategoria:</h3>
@@ -77,7 +80,7 @@ const Task = ({ match, user }) => {
               <h3>Sääntöluokka:</h3>
               <p>{task.rules.name}</p>
               <h3>Tehtävän viimeisin muokkaaja:</h3>
-              <p>{task.creatorName}<br/>{task.creatorEmail}</p>
+              <p>{task.creatorName}<br />{task.creatorEmail}</p>
 
               {user !== null &&
                 <div>

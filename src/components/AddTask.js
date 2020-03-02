@@ -7,6 +7,8 @@ import seriesService from '../services/series'
 import languageService from '../services/language'
 import Editor from './Editor';
 import TestEditor from './TestEditor'
+import MDEditor from './MDEditor'
+import CKeditor from './CKEditor'
 
 
 const AddTask = () => {
@@ -129,6 +131,7 @@ const AddTask = () => {
         }
     }
 
+
     return (
         <div>
             <h2>Lisää tehtävä</h2>
@@ -147,10 +150,18 @@ const AddTask = () => {
                     />
                 </div>
                 <div>
-                    <h2>Artun testieditori</h2>
-                    <TestEditor />
+                    <h3>Tehtävänanto</h3>
+                    <MDEditor setText={setAssignmentText} placeHolder="Tehtävänanto" />
                 </div>
                 <div>
+                    <h3>Arvostelu</h3>
+                    <MDEditor setText={setGradingScale} placeHolder="Arvostelu" />
+                </div>
+                <div>
+                    <h3>Rastimiehen ohje</h3>
+                    <MDEditor setText={setSupervisorInstructions} placeHolder="Rastimiehen ohje" />
+                </div>
+                {/*<div>
                     <Editor setText={setAssignmentText} placeHolder="Tehtävänanto" />
                 </div>
                 <div>
@@ -160,7 +171,7 @@ const AddTask = () => {
                     <Editor setText={setSupervisorInstructions} placeHolder="Rastimiehen ohje" />
                 </div>
 
-                {/* <div>
+                 <div>
                     <Notification message={assignmentTextErrorMessage} type="error" />
                     
                     <textarea
@@ -197,7 +208,7 @@ const AddTask = () => {
                         placeholder="Rastimiehen ohje"
                         onChange={({ target }) => setSupervisorInstructions(target.value)}
                     />
-                </div> */}
+                </div>*/}
                 <Notification message={dropDownErrorMessage} type="error" />
                 <div className="dropdowns">
                     <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
