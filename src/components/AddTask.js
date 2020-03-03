@@ -5,10 +5,7 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
-import Editor from './Editor';
-import TestEditor from './TestEditor'
 import MDEditor from './MDEditor'
-import CKeditor from './CKEditor'
 
 
 const AddTask = () => {
@@ -19,6 +16,9 @@ const AddTask = () => {
     const [assignmentText, setAssignmentText] = useState('')
     const [gradingScale, setGradingScale] = useState('')
     const [supervisorInstructions, setSupervisorInstructions] = useState('')
+    const [assignmentTextMD, setAssignmentTextMD] = useState('')
+    const [gradingScaleMD, setGradingScaleMD] = useState('')
+    const [supervisorInstructionsMD, setSupervisorInstructionsMD] = useState('')
     const [rules, setRules] = useState([])
     const [rule, setRule] = useState('')
     const [categories, setCategories] = useState([])
@@ -107,7 +107,8 @@ const AddTask = () => {
             await addtaskService.addtask({
                 name, rule, category, series,
                 language, assignmentText, gradingScale,
-                creatorName, creatorEmail, supervisorInstructions
+                creatorName, creatorEmail, supervisorInstructions,
+                assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
             })
             setName('')
             setRule('')
@@ -151,64 +152,17 @@ const AddTask = () => {
                 </div>
                 <div>
                     <h3>Tehtävänanto</h3>
-                    <MDEditor setText={setAssignmentText} placeHolder="Tehtävänanto" />
+                    <Notification message={assignmentTextErrorMessage} type="error" />
+                    <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} placeHolder="Tehtävänanto" />
                 </div>
                 <div>
                     <h3>Arvostelu</h3>
-                    <MDEditor setText={setGradingScale} placeHolder="Arvostelu" />
+                    <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} placeHolder="Arvostelu" />
                 </div>
                 <div>
                     <h3>Rastimiehen ohje</h3>
-                    <MDEditor setText={setSupervisorInstructions} placeHolder="Rastimiehen ohje" />
+                    <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} placeHolder="Rastimiehen ohje" />
                 </div>
-                {/*<div>
-                    <Editor setText={setAssignmentText} placeHolder="Tehtävänanto" />
-                </div>
-                <div>
-                    <Editor setText={setGradingScale} placeHolder="Arvostelu" />
-                </div>
-                <div>
-                    <Editor setText={setSupervisorInstructions} placeHolder="Rastimiehen ohje" />
-                </div>
-
-                 <div>
-                    <Notification message={assignmentTextErrorMessage} type="error" />
-                    
-                    <textarea
-                        rows="3"
-                        cols="35"
-                        className=""
-                        type="text"
-                        value={assignmentText}
-                        name="AssignmentText"
-                        placeholder="Tehtävänanto"
-                        onChange={({ target }) => setAssignmentText(target.value)}
-                    />
-                </div>
-                <div>
-                    <textarea
-                        rows="3"
-                        cols="35"
-                        className=""
-                        type="text"
-                        value={gradingScale}
-                        name="GradingScale"
-                        placeholder="Arvostelu"
-                        onChange={({ target }) => setGradingScale(target.value)}
-                    />
-                </div>
-                <div>
-                    <textarea
-                        rows="3"
-                        cols="35"
-                        className=""
-                        type="text"
-                        value={supervisorInstructions}
-                        name="supervisorInstruction"
-                        placeholder="Rastimiehen ohje"
-                        onChange={({ target }) => setSupervisorInstructions(target.value)}
-                    />
-                </div>*/}
                 <Notification message={dropDownErrorMessage} type="error" />
                 <div className="dropdowns">
                     <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">

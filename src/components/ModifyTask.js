@@ -6,6 +6,7 @@ import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
+import MDEditor from './MDEditor'
 
 const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
@@ -15,6 +16,9 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [assignmentText, setAssignmentText] = useState(task.assignmentText)
   const [gradingScale, setGradingScale] = useState(task.gradingScale)
   const [supervisorInstructions, setSupervisorInstructions] = useState(task.supervisorInstructions)
+  const [assignmentTextMD, setAssignmentTextMD] = useState(task.assignmentTextMD)
+  const [gradingScaleMD, setGradingScaleMD] = useState(task.gradingScaleMD)
+  const [supervisorInstructionsMD, setSupervisorInstructionsMD] = useState(task.supervisorInstructionsMD)
   const [rules, setRules] = useState([])
   const [rule, setRule] = useState(task.rules.id)
   const [categories, setCategories] = useState([])
@@ -30,7 +34,6 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
-  const history = useHistory()
 
   let id = task.id
 
@@ -102,7 +105,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       const modifiedTask = await taskService.updateTask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
-        creatorName, creatorEmail, supervisorInstructions, id
+        creatorName, creatorEmail, supervisorInstructions, id,
+        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
       })
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
@@ -140,41 +144,17 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
           />
         </div>
         <div>
+          <h3>Tehtävänanto</h3>
           <Notification message={assignmentTextErrorMessage} type="error" />
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={assignmentText}
-            name="AssignmentText"
-            placeholder="Tehtävänanto"
-            onChange={({ target }) => setAssignmentText(target.value)}
-          />
+          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} value={assignmentTextMD} placeHolder="Tehtävänanto" />
         </div>
         <div>
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={gradingScale}
-            name="GradingScale"
-            placeholder="Arvostelu"
-            onChange={({ target }) => setGradingScale(target.value)}
-          />
+          <h3>Arvostelu</h3>
+          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} value={gradingScaleMD} placeHolder="Arvostelu" />
         </div>
         <div>
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={supervisorInstructions}
-            name="supervisorInstruction"
-            placeholder="Rastimiehen ohje"
-            onChange={({ target }) => setSupervisorInstructions(target.value)}
-          />
+          <h3>Rastimiehen ohje</h3>
+          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} value={supervisorInstructionsMD} placeHolder="Rastimiehen ohje" />
         </div>
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">

@@ -1,12 +1,12 @@
 import React from 'react'
 
 const TaskTextDisplay = ({ text }) => {
-  const evilConverter = () => {
+  const htmlConverter = () => {
     return { __html: `${text}` }
   }
 
   return (
-    <div dangerouslySetInnerHTML={evilConverter()} />
+    <div dangerouslySetInnerHTML={htmlConverter()} />
   )
 }
 
