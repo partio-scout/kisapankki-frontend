@@ -45,7 +45,7 @@ const App = () => {
           <Fragment>
             <Link to="/admin"><button className="admin-button-header">Admin</button></Link>
             <div>
-              <div className="logged">Kirjautuneena <Link to="/omasivu" className="username-header">{user.username}</Link></div>
+              <div className="logged">Kirjautuneena <Link to="/admin" className="username-header">{user.username}</Link></div>
               <div className="logout"><button className="logout-button-header" onClick={() => logout()}>Kirjaudu ulos</button></div>
             </div>
           </Fragment>

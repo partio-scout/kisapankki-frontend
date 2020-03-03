@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import Notification from './Notification'
 import taskService from '../services/task'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
+import MDEditor from './MDEditor'
 
 const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
@@ -15,6 +15,9 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [assignmentText, setAssignmentText] = useState(task.assignmentText)
   const [gradingScale, setGradingScale] = useState(task.gradingScale)
   const [supervisorInstructions, setSupervisorInstructions] = useState(task.supervisorInstructions)
+  const [assignmentTextMD, setAssignmentTextMD] = useState(task.assignmentTextMD)
+  const [gradingScaleMD, setGradingScaleMD] = useState(task.gradingScaleMD)
+  const [supervisorInstructionsMD, setSupervisorInstructionsMD] = useState(task.supervisorInstructionsMD)
   const [rules, setRules] = useState([])
   const [rule, setRule] = useState(task.rules.id)
   const [categories, setCategories] = useState([])
@@ -30,7 +33,6 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
-  const history = useHistory()
 
   let id = task.id
 
@@ -102,7 +104,8 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       const modifiedTask = await taskService.updateTask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
-        creatorName, creatorEmail, supervisorInstructions, id
+        creatorName, creatorEmail, supervisorInstructions, id,
+        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
       })
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
@@ -110,7 +113,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
         setMessage(null)
         window.location.reload()
       }, 1000)
-    } catch {
+    } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
@@ -123,7 +126,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   }
 
   return (
-    <div>
+    <div className="modify-task-container">
       <h2>Muokkaa tehtävää</h2>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
@@ -135,93 +138,71 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             type="text"
             defaultValue={name}
             name="Name"
-            placeholder="Tehtävän otsikko"
+            placeholder="Tehtävän nimi"
             onChange={({ target }) => setName(target.value)}
           />
         </div>
         <div>
+          <h4>Tehtävänanto</h4>
           <Notification message={assignmentTextErrorMessage} type="error" />
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={assignmentText}
-            name="AssignmentText"
-            placeholder="Tehtävänanto"
-            onChange={({ target }) => setAssignmentText(target.value)}
-          />
+          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} value={assignmentTextMD} placeHolder="Tehtävänanto" />
         </div>
         <div>
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={gradingScale}
-            name="GradingScale"
-            placeholder="Arvostelu"
-            onChange={({ target }) => setGradingScale(target.value)}
-          />
+          <h4>Arvostelu</h4>
+          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} value={gradingScaleMD} placeHolder="Arvostelu" />
         </div>
-        <div>
-          <textarea
-            rows="3"
-            cols="35"
-            className=""
-            type="text"
-            defaultValue={supervisorInstructions}
-            name="supervisorInstruction"
-            placeholder="Rastimiehen ohje"
-            onChange={({ target }) => setSupervisorInstructions(target.value)}
-          />
+        <div className="instructions">
+          <h4>Rastimiehen ohje</h4>
+          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} value={supervisorInstructionsMD} placeHolder="Rastimiehen ohje" />
         </div>
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">
-          <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
-            <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
-            {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
-          </select>
-        </div>
-        <div className="dropdowns">
+          <div>
+            <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
+              <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
+              {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
+            </select>
+          </div>
           <div>
             <select value={category} onChange={(e) => handleCategoryChange(e)}>
               <option value="">Kategoria</option>
               {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
             </select>
-          </div>
-          <div>
+            <br/>
             <select value={rule} onChange={(e) => handleRuleChange(e)}>
               <option value="">Säännöt</option>
               {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.name}</option>)}
             </select>
-          </div>
-          <div>
+            <br/>
             <select value={language} onChange={(e) => handleLanguageChange(e)}>
               <option value="">Kieli</option>
               {languages.map(language => <option key={language.id} value={language.id}>{language.name}</option>)}
             </select>
           </div>
         </div>
-        <div>
-          <Notification message={creatorNameErrorMessage} type="error" />
-          <input
-            className=""
-            type="text"
-            defaultValue={creatorName}
-            name="CreatorName"
-            placeholder="Muokkaajan nimi"
-            onChange={({ target }) => setCreatorName(target.value)}
-          />
-          <Notification message={creatorEmailErrorMessage} type="error" />
-          <input
-            className=""
-            type="text"
-            defaultValue={creatorEmail}
-            name="CreatorEmail"
-            placeholder="Muokkaajan sähköpostiosoite"
-            onChange={({ target }) => setCreatorEmail(target.value)}
-          />
+        <div className="creator">
+          <div>
+            <Notification message={creatorNameErrorMessage} type="error" />
+            <input
+              className=""
+              type="text"
+              defaultValue={creatorName}
+              name="CreatorName"
+              placeholder="Muokkaajan nimi"
+              onChange={({ target }) => setCreatorName(target.value)}
+            />
+          </div>
+          <div>
+            <Notification message={creatorEmailErrorMessage} type="error" />
+            <input
+              className=""
+              type="text"
+              defaultValue={creatorEmail}
+              name="CreatorEmail"
+              placeholder="Muokkaajan sähköpostiosoite"
+              onChange={({ target }) => setCreatorEmail(target.value)}
+            />
+          </div>
         </div>
         <div>
           <button type="submit" className="save-task-button">Tallenna</button>
