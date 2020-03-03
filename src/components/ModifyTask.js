@@ -126,7 +126,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   }
 
   return (
-    <div>
+    <div className="modify-task-container">
       <h2>Muokkaa tehtävää</h2>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
@@ -138,69 +138,71 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             type="text"
             defaultValue={name}
             name="Name"
-            placeholder="Tehtävän otsikko"
+            placeholder="Tehtävän nimi"
             onChange={({ target }) => setName(target.value)}
           />
         </div>
         <div>
-          <h3>Tehtävänanto</h3>
+          <h4>Tehtävänanto</h4>
           <Notification message={assignmentTextErrorMessage} type="error" />
           <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} value={assignmentTextMD} placeHolder="Tehtävänanto" />
         </div>
         <div>
-          <h3>Arvostelu</h3>
+          <h4>Arvostelu</h4>
           <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} value={gradingScaleMD} placeHolder="Arvostelu" />
         </div>
-        <div>
-          <h3>Rastimiehen ohje</h3>
+        <div className="instructions">
+          <h4>Rastimiehen ohje</h4>
           <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} value={supervisorInstructionsMD} placeHolder="Rastimiehen ohje" />
         </div>
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">
-          <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
-            <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
-            {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
-          </select>
-        </div>
-        <div className="dropdowns">
+          <div>
+            <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
+              <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
+              {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
+            </select>
+          </div>
           <div>
             <select value={category} onChange={(e) => handleCategoryChange(e)}>
               <option value="">Kategoria</option>
               {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
             </select>
-          </div>
-          <div>
+            <br/>
             <select value={rule} onChange={(e) => handleRuleChange(e)}>
               <option value="">Säännöt</option>
               {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.name}</option>)}
             </select>
-          </div>
-          <div>
+            <br/>
             <select value={language} onChange={(e) => handleLanguageChange(e)}>
               <option value="">Kieli</option>
               {languages.map(language => <option key={language.id} value={language.id}>{language.name}</option>)}
             </select>
           </div>
         </div>
-        <div>
-          <Notification message={creatorNameErrorMessage} type="error" />
-          <input
-            className=""
-            type="text"
-            defaultValue={creatorName}
-            name="CreatorName"
-            placeholder="Muokkaajan nimi"
-            onChange={({ target }) => setCreatorName(target.value)}
-          />
-          <Notification message={creatorEmailErrorMessage} type="error" />
-          <input
-            className=""
-            type="text"
-            defaultValue={creatorEmail}
-            name="CreatorEmail"
-            placeholder="Muokkaajan sähköpostiosoite"
-            onChange={({ target }) => setCreatorEmail(target.value)}
-          />
+        <div className="creator">
+          <div>
+            <Notification message={creatorNameErrorMessage} type="error" />
+            <input
+              className=""
+              type="text"
+              defaultValue={creatorName}
+              name="CreatorName"
+              placeholder="Muokkaajan nimi"
+              onChange={({ target }) => setCreatorName(target.value)}
+            />
+          </div>
+          <div>
+            <Notification message={creatorEmailErrorMessage} type="error" />
+            <input
+              className=""
+              type="text"
+              defaultValue={creatorEmail}
+              name="CreatorEmail"
+              placeholder="Muokkaajan sähköpostiosoite"
+              onChange={({ target }) => setCreatorEmail(target.value)}
+            />
+          </div>
         </div>
         <div>
           <button type="submit" className="save-task-button">Tallenna</button>

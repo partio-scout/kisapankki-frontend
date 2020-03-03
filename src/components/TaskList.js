@@ -174,12 +174,14 @@ const TaskList = ({ user }) => {
       </div>
 
       <Notification message={errorMessage} />
+      {tasks && tasks.length > 0 &&
       <div className="task-list-title">
         <span>Tehtävän nimi</span>
         <span>Sarja</span>
         <span>Kategoria</span>
-        <span></span>
+        {user && <span></span>}
       </div>
+      }
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>

@@ -3,7 +3,7 @@ import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css'
 
-const MDEditor = ({ setText, placeHolder, setMD, value }) => {
+const MDEditor = ({ setText, placeholder, setMD, value }) => {
   const mdParser = new MarkdownIt()
 
   const handleEditorChange = ({ html, text }) => {
@@ -14,7 +14,7 @@ const MDEditor = ({ setText, placeHolder, setMD, value }) => {
   return (
     <MdEditor
       value={value}
-      placeHolder={placeHolder}
+      placeholder={placeholder}
       renderHTML={(text) => mdParser.render(text)}
       onChange={handleEditorChange}
     />

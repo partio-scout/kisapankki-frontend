@@ -28,6 +28,11 @@ h1, h2 {
   margin-bottom: 10px;
 }
 
+h3, h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 input, select, textarea {
   border: 1px solid #c7cad1;
   box-shadow: inset 0 2px 4px rgba(199,202,209,.4);
@@ -43,13 +48,16 @@ input, select, textarea {
   margin-right: 10px;
 }
 
-select {
-  width: 254px;
-}
-
 textarea {
   font-family: "PT Sans", sans-serif;
-  width: 500px;
+}
+
+.add-task-container select, .modify-task-container select {
+  width: 100%;
+}
+
+.add-task-container input, .modify-task-container input {
+  width: calc(100% - 18px);
 }
 
 button {
@@ -137,6 +145,17 @@ button:hover {
   padding: 0px 20px 20px 20px;
 }
 
+.add-task-container, .modify-task-container {
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rc-md-editor {
+  min-height: 200px;
+}
+
 .success {
   color: limegreen;
   font-size: 15px;
@@ -149,10 +168,6 @@ button:hover {
 
 .admin-task-buttons-mobile {
   display: none;
-}
-
-.task-title {
-  width: 500px;
 }
 
 .search-filter-container {
@@ -197,7 +212,7 @@ button:hover {
   justify-content: space-between;
   vertical-align: top;
   background-color: rgba(199,202,209,.4);
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 5px;
   margin-bottom: 15px;
 }
@@ -206,8 +221,13 @@ button:hover {
   background-color: #f7dcdb;
 }
 
-.task-list-item span, .task-list-title span {
+.task-list-title span {
   width: 200px;
+}
+
+.task-list-item span {
+  width: 200px;
+  padding: 5px 0px;
 }
 
 .task-list button {
@@ -260,13 +280,27 @@ button:hover {
   margin-bottom: 5px;
 }
 
-.dropdowns {
-  display: inline-block;
+.instructions {
+  margin-bottom: 10px;
+}
+
+.dropdowns, .creator {
+  display: flex;
+  align-content: space-between;
   vertical-align: top;
+}
+
+.dropdowns div, .creator div {
+  flex-basis: 100%;
+  margin-right: 5px;
 }
 
 .multiple-series {
   height: 132px;
+}
+
+.series-info {
+  font-weight: bold;
 }
 
 .color-picker {
@@ -285,6 +319,10 @@ table, th, td {
 @media screen and (max-width: 570px) {
   .container {
     padding: 0px 10px 10px 10px;
+  }
+
+  .add-task-container, .modify-task-container {
+    width: 100%;
   }
 
   h2 {
