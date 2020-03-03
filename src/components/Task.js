@@ -30,7 +30,7 @@ const Task = ({ match, user }) => {
           history.push('/')
         }
       }, 2000)
-    } catch {
+    } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)

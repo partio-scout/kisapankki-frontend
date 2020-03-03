@@ -9,7 +9,6 @@ const MDEditor = ({ setText, placeHolder, setMD, value }) => {
   const handleEditorChange = ({ html, text }) => {
     setText(html)
     setMD(text)
-    console.log('handler', html, text)
   }
 
   return (

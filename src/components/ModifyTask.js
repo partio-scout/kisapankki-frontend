@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import Notification from './Notification'
 import taskService from '../services/task'
 import ruleService from '../services/rule'
@@ -114,7 +113,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
         setMessage(null)
         window.location.reload()
       }, 1000)
-    } catch {
+    } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
