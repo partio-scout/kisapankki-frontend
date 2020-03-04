@@ -316,6 +316,10 @@ table, th, td {
   padding: 5px;
 }
 
+.button-type-underline, .button-type-image {
+  display: none!important;
+}
+
 @media screen and (max-width: 570px) {
   .container {
     padding: 0px 10px 10px 10px;
