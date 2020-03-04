@@ -61,10 +61,10 @@ const App = () => {
         <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
-        <Route path="/omasivu" render={() => (user ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
-        <Route path="/admin" render={() => (user ? <Admin /> : <Redirect to="/" />)} />
-        <Route path="/lisaa_admin" render={() => (user ? <AddAdmin /> : <Redirect to="/" />)} />
-        <Route path="/lisaa_pudotusvalikkoon" render={() => (user ? <AddTaskDropdown /> : <Redirect to="/" />)} />
+        <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
+        <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin /> : <Redirect to="/" />)} />
+        <Route path="/lisaa_admin" render={() => (localStorage.getItem('loggedUser') ? <AddAdmin /> : <Redirect to="/" />)} />
+        <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown /> : <Redirect to="/" />)} />
       </div>
     </div>
   )

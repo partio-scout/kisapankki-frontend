@@ -41,6 +41,8 @@ const Series = () => {
           <CirclePicker 
             color={color}
             onChangeComplete={color => setColor(color.hex)}
+            colors={["#253764", "#28aae1", "#f04150", "#f0a01e", "#f0e105", "#14a54b",
+                    "#f5ea2e", "#d4791e", "#5e0f75", "#33652e", "#6e470a", "#607d8b"]}
           />
         </div>
         <button type="submit" className="series-submit-button">Lisää</button>
