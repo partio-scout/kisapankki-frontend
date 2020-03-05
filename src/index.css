@@ -316,6 +316,30 @@ table, th, td {
   padding: 5px;
 }
 
+.files {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 10px);
+  height: 60px;
+  border-width: 2px;
+  border-color: #B3B3B3;
+  border-style: dashed;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.files span {
+  margin-right: 10px;
+}
+
+.files b {
+  color: #ff0080;
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 570px) {
   .container {
     padding: 0px 10px 10px 10px;
