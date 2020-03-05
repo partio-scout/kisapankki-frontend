@@ -61,11 +61,11 @@ const Task = ({ match, user }) => {
       {modifyVisible ?
         <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} />
         :
-        <div className="task-view-info-background">
+        <div className="info-background">
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
-            <div className="task-view-info">
+            <div className="info">
               <h2>{task.name}</h2>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />

@@ -16,9 +16,23 @@ const TaskList = ({ user }) => {
   const [selectedSeries, setSelectedSeries] = useState('')
   const [selectedRules, setSelectedRules] = useState('')
   const [categories, setCategories] = useState([])
-  const [seriess, setSeriess] = useState([])
+  const [series, setSeries] = useState([])
   const [rules, setRules] = useState([])
   const [isClearable, setIsClearable] = useState(true)
+  const [seriess, setSeriess] = useState([])
+
+
+
+  const handleSeriesChange = (e) => {
+    let options = e.target.options
+    let values = []
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected && options[i].value !== '') {
+        values.push(options[i].value)
+      }
+    }
+    setSeries(values)
+  }
 
   useEffect(() => {
     taskService.getTasks().then((response) => {
@@ -137,7 +151,10 @@ const TaskList = ({ user }) => {
         <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
 
         <div className="filter">
-          <Select
+          <select multiple value={series} onChange={handleSeriesFiltering} className="multiple-series">
+              {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
+          </select>
+          {/* <Select
             name="filter-series"
             getOptionLabel={option => `${option.name}`}
             getOptionValue={option => `${option.id}`}
@@ -145,7 +162,7 @@ const TaskList = ({ user }) => {
             options={seriess}
             isClearable={isClearable}
             placeholder={"Sarja"}
-          />
+          /> */}
         </div>
 
         <div className="filter">
