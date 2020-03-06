@@ -10,6 +10,13 @@ const TaskListPending = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
+    if (!tokenService.getToken()) {
+      const loggedUserJSON = window.localStorage.getItem('loggedUser')
+      if (loggedUserJSON) {
+        const loggedUser = JSON.parse(loggedUserJSON)
+        tokenService.setToken(loggedUser.token)
+      }
+    }
     taskService.getPendingTasks().then((response) => {
       setTasks(response)
     })
