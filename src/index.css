@@ -236,14 +236,18 @@ button:hover {
 }
 
 .task-view-info-background {
-  background-color: #f2f5f5;
+  background-color: #253764;
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
 }
 
+.info-background {
+  background-color: #F4F5F7;
+}
+
 .task-view-info {
-  color: black;
+  color: white;
 }
 
 .task-view-info h2 {
@@ -391,4 +395,3 @@ table, th, td {
   }
   
 }
-
