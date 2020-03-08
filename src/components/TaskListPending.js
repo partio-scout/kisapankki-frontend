@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
 import Notification from './Notification'
+import tokenService from '../services/token'
 
 
 const TaskListPending = () => {
@@ -10,6 +11,13 @@ const TaskListPending = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
+    if (!tokenService.getToken()) {
+      const loggedUserJSON = window.localStorage.getItem('loggedUser')
+      if (loggedUserJSON) {
+        const loggedUser = JSON.parse(loggedUserJSON)
+        tokenService.setToken(loggedUser.token)
+      }
+    }
     taskService.getPendingTasks().then((response) => {
       setTasks(response)
     })
