@@ -5,12 +5,12 @@ import { useHistory } from 'react-router-dom'
 
 
 const Category = () => {
-  const [category, setCategory] = useState('')
-  const [updatedCategory, setUpdatedCategory] = useState('')
+  const [newCategoryName, setNewCategoryName] = useState('')
+  const [modifiedCategoryName, setModifiedCategoryName] = useState('')
+  const [modifiedCategoryId, setModifiedCategoryId] = useState ('')
   const [categories, setCategories] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
-  const history = useHistory()
 
   useEffect(() => {
     categoryService.getCategories().then((response) => {
@@ -21,11 +21,11 @@ const Category = () => {
   const handleCategoryAdd = async (event) => {
     event.preventDefault()
     try {
-      await categoryService.addCategory({
-        category,
+      const addedCategory = await categoryService.addCategory({
+        category: newCategoryName
       })
-      setCategory('')
-      history.push('/lisaa_pudotusvalikkoon')
+      setNewCategoryName('')
+      setCategories(categories.concat(addedCategory))
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -38,7 +38,6 @@ const Category = () => {
     try {
       await categoryService.deleteCategory(category.id)
       setCategories(categories.filter(c => c.id !== category.id))
-      history.push('/lisaa_pudotusvalikkoon')
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -48,33 +47,36 @@ const Category = () => {
   }
 
   const handleCategoryModify = async (event) => {
-    event.preventDefault()
+    event.preventDefault() 
+    const modifiedCategory = {id: modifiedCategoryId, name: modifiedCategoryName}
     try {
-      await categoryService.editCategory({
-        category,
-      })
-      setCategory('')
-      setUpdatedCategory('')
-
-      setTimeout(() => {
-        //setMessage(null)
-
-      }, 1000)
+      await categoryService.editCategory(modifiedCategory)
+      setModifyVisible(false)
+      setCategories(categories.map(category => category.id !== modifiedCategory.id ? category : modifiedCategory))
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
-        // setErrorMessage(null)
+        setErrorMessage(null)
       }, 5000)
     }
   }
 
+ 
+
   const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
   const showWhenVisible = { display: modifyVisible ? '' : 'none' }
 
+  const handleShowModify = (category) => {
+    setModifyVisible(true)
+    setModifiedCategoryId(category.id)
+    setModifiedCategoryName(category.name)
+  }
   
-
+  
+  
   return (
-    <div className="category-form">
+    <div className="category-form" >
+      
       <h2>Lisää kategoria</h2>
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleCategoryAdd}>
@@ -82,10 +84,10 @@ const Category = () => {
           <input
             className="category"
             type="text"
-            value={category}
+            value={newCategoryName}
             name="Category"
             placeholder="Kategoria"
-            onChange={({ target }) => setCategory(target.value)}
+            onChange={({ target }) => setNewCategoryName(target.value)}
           />
         </div>
         <button type="submit" className="category-add-button">Lisää</button>
@@ -93,34 +95,33 @@ const Category = () => {
 
       {categories.map((category) => (
         <div key={category.id}>{category.name}
-          <button className="delete-button" style={hideWhenVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
-          <button className="modify-button" style={hideWhenVisible} onClick={() => setModifyVisible(true)}>Muokkaa</button>
+          <button style={hideWhenVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
+          <button style={hideWhenVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
         </div>))
       }
-      <div className="edit-rule-form" style={showWhenVisible}>
+      <div style={showWhenVisible}>
         < form onSubmit={handleCategoryModify} >
           <h3>Muokkaa Kategoriaa</h3>
           <div>
             <input
+              className="category"
               type="text"
-              value= {category}
+              value={modifiedCategoryName}
               name="Category"
-              onChange={({ target }) => setCategory(target.value)}
+              onChange={({ target }) => setModifiedCategoryName(target.value)}
             />
           </div>
           <div>
-            <button type="submit" className="save-task-button">Tallenna muutos</button>
-
+            <button type="submit" >Tallenna muutos</button>
           </div>
         </form>
         <button onClick={() => setModifyVisible(false)} className="return-button">Peruuta</button>
       </div>
 
-
-
-
-
     </div>
+
+
+
   )
 }
 

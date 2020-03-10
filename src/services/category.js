@@ -18,6 +18,7 @@ const addCategory = async (cat) => {
 }
 
 const editCategory = async (category) => {
+  console.log(category)
   const config = {
     headers: { Authorization: tokenService.getToken() },
   }
