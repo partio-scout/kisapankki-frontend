@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import categoryService from '../services/category'
-import { useHistory } from 'react-router-dom'
+
 
 
 const Category = () => {
@@ -60,8 +60,6 @@ const Category = () => {
       }, 5000)
     }
   }
-
- 
 
   const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
   const showWhenVisible = { display: modifyVisible ? '' : 'none' }

@@ -23,7 +23,7 @@ const Rule = () => {
 
   return (
     <div className="rule-form">
-      <h2>Lisää sääntö</h2>
+      <h3>Lisää sääntö</h3>
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleRuleAdd}>
         <div>
