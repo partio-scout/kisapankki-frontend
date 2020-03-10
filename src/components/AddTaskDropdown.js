@@ -5,23 +5,22 @@ import Series from './Series'
 import Category from './Category'
 
 const AddTaskDropdown = () => {
-  const [showRules, setShowRules] = useState(false)
+  const [showCategories, setShowCategories] = useState(false)
 
 
   return (
     <div >
-
-      {showRules ?
+      {showCategories ?
         <React.Fragment>
-          <button className = "hoo" onClick={() => setShowRules(!showRules)}>Sulje säännöt</button>
-          <Rule />
+          <button className = "hoo" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
+          <Category />
         </React.Fragment>
         :
-        <button className = "hoo" onClick={() => setShowRules(!showRules)}>Säännöt</button>
+        <button className = "hoo" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
       }
       <Language />
       <Series />
-      <Category />
+      <Rule />
     </div>
   )
 }

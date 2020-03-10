@@ -7,7 +7,7 @@ import categoryService from '../services/category'
 const Category = () => {
   const [newCategoryName, setNewCategoryName] = useState('')
   const [modifiedCategoryName, setModifiedCategoryName] = useState('')
-  const [modifiedCategoryId, setModifiedCategoryId] = useState ('')
+  const [modifiedCategoryId, setModifiedCategoryId] = useState('')
   const [categories, setCategories] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -47,8 +47,8 @@ const Category = () => {
   }
 
   const handleCategoryModify = async (event) => {
-    event.preventDefault() 
-    const modifiedCategory = {id: modifiedCategoryId, name: modifiedCategoryName}
+    event.preventDefault()
+    const modifiedCategory = { id: modifiedCategoryId, name: modifiedCategoryName }
     try {
       await categoryService.editCategory(modifiedCategory)
       setModifyVisible(false)
@@ -69,37 +69,39 @@ const Category = () => {
     setModifiedCategoryId(category.id)
     setModifiedCategoryName(category.name)
   }
-  
-  
-  
+
+
+
   return (
     <div className="category-form" >
-      
-      <h2>Lisää kategoria</h2>
+
+
       <Notification message={errorMessage} type="error" />
-      <form onSubmit={handleCategoryAdd}>
+      <form style={hideWhenVisible} onSubmit={handleCategoryAdd}>
         <div>
           <input
             className="category"
             type="text"
             value={newCategoryName}
             name="Category"
-            placeholder="Kategoria"
+            placeholder="Uusi kategoria"
             onChange={({ target }) => setNewCategoryName(target.value)}
           />
+          <button type="submit" className="category-add-button">Lisää</button>
         </div>
-        <button type="submit" className="category-add-button">Lisää</button>
+
       </form>
 
       {categories.map((category) => (
-        <div key={category.id}>{category.name}
+        <div style={hideWhenVisible} className="category-list-item" key={category.id}>{category.name}
+
           <button style={hideWhenVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
           <button style={hideWhenVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
+
         </div>))
       }
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible }className="category-list-item">
         < form onSubmit={handleCategoryModify} >
-          <h3>Muokkaa Kategoriaa</h3>
           <div>
             <input
               className="category"
@@ -108,12 +110,15 @@ const Category = () => {
               name="Category"
               onChange={({ target }) => setModifiedCategoryName(target.value)}
             />
+            <button type="submit" className="category-save-button">Tallenna</button>
+            <button onClick={() => setModifyVisible(false)} className="return-button">Peruuta</button>
           </div>
+
           <div>
-            <button type="submit" >Tallenna muutos</button>
+
           </div>
         </form>
-        <button onClick={() => setModifyVisible(false)} className="return-button">Peruuta</button>
+        
       </div>
 
     </div>
