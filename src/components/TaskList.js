@@ -12,13 +12,14 @@ const TaskList = ({ user }) => {
   const [allTasks, setAllTasks] = useState([])
   const [tasks, setTasks] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedSeries, setSelectedSeries] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState([])
+  const [selectedSeries, setSelectedSeries] = useState([])
   const [selectedRules, setSelectedRules] = useState('')
   const [categories, setCategories] = useState([])
-  const [seriess, setSeriess] = useState([])
+  const [series, setSeries] = useState([])
   const [rules, setRules] = useState([])
   const [isClearable, setIsClearable] = useState(true)
+  const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
     taskService.getTasks().then((response) => {
@@ -40,50 +41,50 @@ const TaskList = ({ user }) => {
   }, [])
 
   useEffect(() => {
-    if (selectedSeries && selectedCategory && selectedRules) {
+    if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
       let array = []
       for (let i = 0; i < allTasks.length; i++) {
         for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].category.id === selectedCategory.id && allTasks[i].rules.id === selectedRules.id) {
+          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
             array.push(allTasks[i])
           }
         }
       }
       setTasks(array)
-    } else if (selectedSeries && selectedCategory) {
+    } else if (selectedSeries.length > 0 && selectedCategory.length > 0) {
       let array = []
       for (let i = 0; i < allTasks.length; i++) {
         for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].category.id === selectedCategory.id) {
+          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && !array.includes(allTasks[i])) {
             array.push(allTasks[i])
           }
         }
       }
       setTasks(array)
-    } else if (selectedSeries && selectedRules) {
+    } else if (selectedSeries.length > 0 && selectedRules) {
       let array = []
       for (let i = 0; i < allTasks.length; i++) {
         for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (allTasks[i].series[j].id === selectedSeries.id && allTasks[i].rules.id === selectedRules.id) {
+          if (selectedSeries.includes(allTasks[i].series[j].id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
             array.push(allTasks[i])
           }
         }
       }
       setTasks(array)
-    } else if (selectedCategory && selectedRules) {
-      setTasks(allTasks.filter(task => task.category.id === selectedCategory.id && task.rules.id === selectedRules.id))
-    } else if (selectedSeries) {
+    } else if (selectedCategory.length > 0 && selectedRules) {
+      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id) && task.rules.id === selectedRules.id))
+    } else if (selectedSeries.length > 0) {
       let array = []
       for (let i = 0; i < allTasks.length; i++) {
         for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (allTasks[i].series[j].id === selectedSeries.id) {
+          if (selectedSeries.includes(allTasks[i].series[j].id) && !array.includes(allTasks[i])) {
             array.push(allTasks[i])
           }
         }
       }
       setTasks(array)
-    } else if (selectedCategory) {
-      setTasks(allTasks.filter(task => task.category.id === selectedCategory.id))
+    } else if (selectedCategory.length > 0) {
+      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id)))
     } else if (selectedRules) {
       setTasks(allTasks.filter(task => task.rules.id === selectedRules.id))
     } else {
@@ -103,23 +104,24 @@ const TaskList = ({ user }) => {
     }
   }
 
-  const handleCategoryFiltering = (category) => {
-    if (category) {
-      setSelectedCategory(category)
+  const handleSeriesFiltering = (series) => {
+    if (series && series.length > 0) {
+      setSelectedSeries(series.map(s => s.id))
     } else {
-      setSelectedCategory('')
+      setSelectedSeries([])
       setTasks(allTasks)
     }
   }
 
-  const handleSeriesFiltering = (series) => {
-    if (series) {
-      setSelectedSeries(series)
+  const handleCategoryFiltering = (category) => {
+    if (category && category.length > 0) {
+      setSelectedCategory(category.map(c => c.id))
     } else {
-      setSelectedSeries('')
+      setSelectedCategory([])
       setTasks(allTasks)
     }
   }
+
   const handleRuleFiltering = (rules) => {
     if (rules) {
       setSelectedRules(rules)
@@ -132,7 +134,6 @@ const TaskList = ({ user }) => {
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
-
       <div className="search-filter-container">
         <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
 
@@ -145,6 +146,7 @@ const TaskList = ({ user }) => {
             options={seriess}
             isClearable={isClearable}
             placeholder={"Sarja"}
+            isMulti={true}
           />
         </div>
 
@@ -157,6 +159,7 @@ const TaskList = ({ user }) => {
             options={categories}
             isClearable={isClearable}
             placeholder={"Kategoria"}
+            isMulti={true}
           />
         </div>
 

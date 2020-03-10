@@ -242,6 +242,10 @@ button:hover {
   margin-top: 20px;
 }
 
+.info-background {
+  background-color: #F4F5F7;
+}
+
 .task-view-info {
   color: white;
 }
@@ -391,4 +395,3 @@ table, th, td {
   }
   
 }
-
