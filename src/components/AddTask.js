@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
-import addtaskService from '../services/task'
+import taskService from '../services/task'
+import fileService from '../services/file'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
@@ -106,23 +107,22 @@ const AddTask = () => {
 
     let formData = new FormData()
 
-    let json = {
-      name, rule, category, series,
-      language, assignmentText, gradingScale,
-      creatorName, creatorEmail, supervisorInstructions,
-      assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
-    }
-
-    formData.append('json', JSON.stringify(json))
-
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-          formData.append('file', files[i], files[i].name)
+          formData.append('files', files[i], files[i].name)
       }
     }
 
     try {
-      await addtaskService.addtask(formData)
+      const addedFiles = await fileService.addFiles(formData)
+      console.log(addedFiles)
+      await taskService.addtask({
+        name, rule, category, series,
+        language, assignmentText, gradingScale,
+        creatorName, creatorEmail, supervisorInstructions,
+        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD,
+        files: addedFiles
+      })
       setName('')
       setRule('')
       setCategory('')

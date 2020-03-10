@@ -34,11 +34,7 @@ const addtask = async (task) => {
 
   if (token) {
     config = {
-      headers: { Authorization: token, 'Content-Type': 'multipart/form-data' }
-    }
-  } else {
-    config = {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { Authorization: token }
     }
   }
 
