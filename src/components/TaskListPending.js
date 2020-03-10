@@ -72,7 +72,7 @@ const TaskListPending = () => {
             </Link>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-          <span>{task.category.name}</span>
+          <span>{task.category && task.category.name}</span>
           <span>
             <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
             <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
