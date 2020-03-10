@@ -175,15 +175,15 @@ const AddTask = () => {
         <div>
           <h4>Tehtävänanto</h4>
           <Notification message={assignmentTextErrorMessage} type="error" />
-          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} placeholder="Tehtävänanto" />
+          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} />
         </div>
         <div>
           <h4>Arvostelu</h4>
-          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} placeholder="Arvostelu" />
+          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} />
         </div>
         <div className="instructions">
           <h4>Rastimiehen ohje</h4>
-          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} placeholder="Rastimiehen ohje" />
+          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} />
         </div>
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">

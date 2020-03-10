@@ -61,11 +61,11 @@ const Task = ({ match, user }) => {
       {modifyVisible ?
         <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} />
         :
-        <div className="task-view-info-background">
+        <div className="info-background">
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
-            <div className="task-view-info">
+            <div className="info">
               <h2>{task.name}</h2>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
@@ -76,9 +76,9 @@ const Task = ({ match, user }) => {
               <h3>Sarja:</h3>
               {task.series.map(s => <span key={task.id + s.id}>{s.name}<br /></span>)}
               <h3>Kategoria:</h3>
-              <p>{task.category.name}</p>
+              <p>{task.category && task.category.name}</p>
               <h3>Sääntöluokka:</h3>
-              <p>{task.rules.name}</p>
+              <p>{task.rules && task.rules.name}</p>
               <h3>Tehtävän viimeisin muokkaaja:</h3>
               <p>{task.creatorName}<br />{task.creatorEmail}</p>
 

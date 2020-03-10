@@ -63,7 +63,7 @@ textarea {
 button {
   border: 0;
   border-radius: 4px;
-  background: #28a9e1;
+  background: #28aae1;
   color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 0.9rem;
@@ -77,19 +77,19 @@ button {
 }
 
 button:hover {
-  background: rgb(37, 55, 100);
+  background: #253764;
 }
 
 .delete-button:hover {
-  background: red;
+  background: #f04150;
 }
 
 .accept-button:hover {
-  background: limegreen;
+  background: #14a54b;
 }
 
 .header {
-  background-color: rgb(37, 55, 100);
+  background-color: #253764;
   height: 80px;
   display: flex;
   justify-content: flex-end;
@@ -157,12 +157,12 @@ button:hover {
 }
 
 .success {
-  color: limegreen;
+  color: #14a54b;
   font-size: 15px;
 }
 
 .error {
-  color: #ff0080;
+  color: #f04150;
   font-size: 15px;
 }
 
@@ -211,14 +211,14 @@ button:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   vertical-align: top;
-  background-color: rgba(199,202,209,.4);
+  background-color: #f4f5f7;
   padding: 10px 15px;
   border-radius: 5px;
   margin-bottom: 15px;
 }
 
 .pending {
-  background-color: #f7dcdb;
+  background-color: #FDF5E8;
 }
 
 .task-list-title span {
@@ -236,10 +236,14 @@ button:hover {
 }
 
 .task-view-info-background {
-  background-color: rgb(37, 55, 100);
+  background-color: #253764;
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
+}
+
+.info-background {
+  background-color: #F4F5F7;
 }
 
 .task-view-info {
@@ -340,6 +344,10 @@ table, th, td {
   margin-left: 5px;
 }
 
+.button-type-underline, .button-type-image {
+  display: none!important;
+}
+
 @media screen and (max-width: 570px) {
   .container {
     padding: 0px 10px 10px 10px;
@@ -411,4 +419,3 @@ table, th, td {
   }
   
 }
-
