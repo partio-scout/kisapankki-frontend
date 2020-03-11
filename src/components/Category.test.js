@@ -3,6 +3,8 @@ import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import Category from './Category'
 
+jest.mock('../services/category')
+
 afterEach(cleanup)
 
 describe('<Category />', () => {
@@ -14,21 +16,34 @@ describe('<Category />', () => {
     )
   })
 
-  test('renders heading', () => {
-    expect(component.container).toHaveTextContent(
-      'Lisää kategoria',
-    )
-  })
-
-  test('renders input for category', () => {
+  test('renders input for addingCategory and editingCategory', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(1)
+    expect(inputs.length).toBe(2)
   })
 
-  test('renders submit button', () => {
+  test('renders submit button for categoryAdding', () => {
     const button = component.container.querySelector('.category-add-button')
     expect(button).toHaveTextContent(
       'Lisää',
     )
+  })
+  test('renders submit button for saving editedCategory', () => {
+    const button = component.container.querySelector('.category-save-button')
+    expect(button).toHaveTextContent(
+      'Tallenna',
+    )
+  })
+
+  test('renders all categories it gets from backend',  () => {
+    const categories = component.container.querySelectorAll('.category-list-item')
+    expect(categories.length).toBe(3)
+    
+    expect(component.container).toHaveTextContent(
+      'kategoria1',
+    )
+    expect(component.container).toHaveTextContent(
+      'pendingkategory',
+    )
+
   })
 })

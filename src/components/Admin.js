@@ -9,7 +9,7 @@ const Admin = () => (
     <br />
     <Link to="/lisaa_admin">Lisää ylläpitäjä</Link>
     <br />
-    <Link to="/lisaa_pudotusvalikkoon">Lisää sääntö/kieli/sarja/kategoria</Link>
+    <Link to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä/kieliä/sarjoja/kategorioita</Link>
   </div>
 )
 

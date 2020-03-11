@@ -17,4 +17,25 @@ const addCategory = async (cat) => {
   return response.data
 }
 
-export default { addCategory, getCategories }
+const editCategory = async (category) => {
+  console.log(category)
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+  
+  const response = await axios.put(`${baseUrl}/${category.id}`, category, config)
+  return response.data
+
+}
+
+const deleteCategory = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
+
+export default { addCategory, getCategories, editCategory, deleteCategory }
