@@ -333,9 +333,15 @@ table, th, td {
   background-color: white;
 }
 
-.category-list-item {
- 
+.category-list-item button, .category-form-item  button {
+  margin-top: 10px;
+  margin-left: 10px;
 }
+
+.category-form{
+  margin-top: 20px; 
+}
+
 
 @media screen and (max-width: 570px) {
   .container {

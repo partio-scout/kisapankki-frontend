@@ -75,7 +75,6 @@ const Category = () => {
   return (
     <div className="category-form" >
 
-
       <Notification message={errorMessage} type="error" />
       <form style={hideWhenVisible} onSubmit={handleCategoryAdd}>
         <div>
@@ -100,7 +99,7 @@ const Category = () => {
 
         </div>))
       }
-      <div style={showWhenVisible }className="category-list-item">
+      <div style={showWhenVisible } className="category-form-item">
         < form onSubmit={handleCategoryModify} >
           <div>
             <input
@@ -111,7 +110,7 @@ const Category = () => {
               onChange={({ target }) => setModifiedCategoryName(target.value)}
             />
             <button type="submit" className="category-save-button">Tallenna</button>
-            <button onClick={() => setModifyVisible(false)} className="return-button">Peruuta</button>
+            <button onClick={() => setModifyVisible(false)}>Peruuta</button>
           </div>
 
           <div>
