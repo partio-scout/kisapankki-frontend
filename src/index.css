@@ -352,7 +352,12 @@ table, th, td {
   margin-left: 10px;
 }
 
-.category-form, .rule-form {
+.serie-list-item button, .serie-form-item  button {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.category-form, .rule-form, .serie-form {
   margin-top: 20px; 
 }
 
