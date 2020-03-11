@@ -336,6 +336,10 @@ table, th, td {
 .task-types:hover {
   background-color: white;
 }
+.task-types-menu {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 
 .category-list-item button, .category-form-item  button {
   margin-top: 10px;
@@ -347,9 +351,21 @@ table, th, td {
   margin-left: 10px;
 }
 
-.category-form, .rule-form {
+.serie-list-item button, .serie-form-item  button {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.language-list-item button, .language-form-item  button {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.category-form, .rule-form, .serie-form, .language-form{
   margin-top: 20px; 
 }
+
+
 
 
 @media screen and (max-width: 570px) {
