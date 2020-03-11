@@ -88,14 +88,14 @@ const Language = () => {
       </form>
 
       {languages.map((language) => (
-        <div style={hideWhenVisible} className="category-list-item" key={language.id}>{language.name}
+        <div style={hideWhenVisible} className="language-list-item" key={language.id}>{language.name}
 
           <button style={hideWhenVisible} onClick={() => handleLanguageDelete(language)}>Poista</button>
           <button style={hideWhenVisible} onClick={() => handleShowModify(language)}>Muokkaa</button>
 
         </div>))
       }
-      <div style={showWhenVisible} className="category-form-item">
+      <div style={showWhenVisible} className="language-form-item">
         < form onSubmit={handleLanguageModify} >
           <div>
             <input
@@ -105,7 +105,7 @@ const Language = () => {
               name="Language"
               onChange={({ target }) => setModifiedLanguageName(target.value)}
             />
-            <button type="submit" className="category-save-button">Tallenna</button>
+            <button type="submit" className="language-save-button">Tallenna</button>
             <button onClick={() => setModifyVisible(false)}>Peruuta</button>
           </div>
 
