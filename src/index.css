@@ -337,6 +337,11 @@ table, th, td {
   background-color: white;
 }
 
+.task-types-menu {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .category-list-item button, .category-form-item  button {
   margin-top: 10px;
   margin-left: 10px;
