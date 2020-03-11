@@ -17,4 +17,24 @@ const addLanguage = async (language) => {
   return response.data
 }
 
-export default { addLanguage, getLanguages }
+const editLanguage = async (language) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.put(`${baseUrl}/${language.id}`, language, config)
+  return response.data
+
+}
+
+
+const deleteLanguage = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
+export default { addLanguage, getLanguages, deleteLanguage, editLanguage }
