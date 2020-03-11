@@ -320,7 +320,7 @@ table, th, td {
   display: none!important;
 }
 
-.hoo {
+.task-types {
   background-color: white;
   color: #000;
   padding: 0;
@@ -329,7 +329,7 @@ table, th, td {
   letter-spacing: unset;
 
 }
-.hoo:hover {
+.task-types:hover {
   background-color: white;
 }
 
@@ -338,7 +338,12 @@ table, th, td {
   margin-left: 10px;
 }
 
-.category-form{
+.rule-list-item button, .rule-form-item  button {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.category-form, .rule-form {
   margin-top: 20px; 
 }
 

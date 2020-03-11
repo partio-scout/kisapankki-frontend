@@ -6,21 +6,29 @@ import Category from './Category'
 
 const AddTaskDropdown = () => {
   const [showCategories, setShowCategories] = useState(false)
+  const [showRules, setShowRules] = useState(false)
 
 
   return (
     <div >
       {showCategories ?
         <React.Fragment>
-          <button className = "hoo" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
+          <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
           <Category />
         </React.Fragment>
         :
-        <button className = "hoo" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
+        <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
       }
       <Language />
       <Series />
-      <Rule />
+      {showRules ?
+        <React.Fragment>
+          <button className="task-types" onClick={() => setShowRules(!showRules)}>Sulje säännöt</button>
+          <Rule />
+        </React.Fragment>
+        :
+        <button className="task-types" onClick={() => setShowRules(!showRules)}>Säännöt</button>
+      }
     </div>
   )
 }
