@@ -12,6 +12,7 @@ const AddAdmin = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     userService.getUsers().then((response) => {
@@ -42,10 +43,11 @@ const AddAdmin = () => {
     }
     try {
       await userService.addUser({
-        name, username, password,
+        name, username, email, password,
       })
       setName('')
       setUsername('')
+      setEmail('')
       setPassword('')
       setMessage('Ylläpitäjä lisätty!')
       setTimeout(() => {
@@ -85,6 +87,17 @@ const AddAdmin = () => {
             name="Username"
             placeholder="Käyttäjätunnus"
             onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          <Notification message={usernameErrorMessage} type="error" />
+          <input
+            className="email"
+            type="email"
+            value={email}
+            name="email"
+            placeholder="Sähköpostiosoite"
+            onChange={({ target }) => setEmail(target.value)}
           />
         </div>
         <div>
