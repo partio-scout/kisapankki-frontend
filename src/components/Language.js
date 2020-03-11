@@ -80,7 +80,7 @@ const Language = () => {
             type="text"
             value={languageName}
             name="Language"
-            placeholder="Kieli"
+            placeholder="Uusi kieli"
             onChange={({ target }) => setLanguageName(target.value)}
           />
           <button type="submit" className="language-add-button">Lisää</button>
