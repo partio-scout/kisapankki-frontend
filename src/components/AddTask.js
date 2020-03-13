@@ -109,13 +109,14 @@ const AddTask = () => {
 
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-          formData.append('files', files[i], files[i].name)
+          formData.append('filesToAdd', files[i], files[i].name)
       }
     }
 
+    let addedFiles = []
+
     try {
-      const addedFiles = await fileService.addFiles(formData)
-      console.log(addedFiles)
+      addedFiles = await fileService.updateFiles(formData)
       await taskService.addtask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
@@ -240,13 +241,13 @@ const AddTask = () => {
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               <div className="files">
-                <span>Liitetiedostot</span>
+                <div className="title">Liitetiedostot</div>
                 {files.length > 0 &&
-                  <div>
+                  <React.Fragment>
                     {files.map((file) => (
-                      <span key={file.name}>{file.name}<b onClick={(e) => handleDeleteFile(e, file.name)}>x</b></span>
+                      <div key={file.name}>{file.name}<b onClick={(e) => handleDeleteFile(e, file.name)}>x</b></div>
                     ))}
-                  </div>
+                  </React.Fragment>
                 }
               </div>
             </div>

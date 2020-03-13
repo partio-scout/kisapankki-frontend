@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/file`
 
-const addFiles = async (files) => {
+const updateFiles = async (files) => {
   const config = {
     headers: { 'Content-Type': 'multipart/form-data' }
   }
@@ -11,4 +11,4 @@ const addFiles = async (files) => {
   return response.data
 }
 
-export default { addFiles }
+export default { updateFiles }
