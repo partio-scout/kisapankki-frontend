@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import taskService from '../services/task'
+import fileService from '../services/file'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
 import MDEditor from './MDEditor'
+import Dropzone from 'react-dropzone'
 
 const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
@@ -33,6 +35,9 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
+  const [oldFiles, setOldFiles] = useState(task.files || [])
+  const [newFiles, setNewFiles] = useState([])
+  const [filesToDelete, setFilesToDelete] = useState([])
 
   let id = task.id
 
@@ -100,12 +105,27 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       || language === '' || rule === '' || series === '' || category === '') {
       return
     }
+
+    let formData = new FormData()
+
+    formData.append('filesToDelete', filesToDelete)
+
+    if (newFiles.length > 0) {
+      for (let i = 0; i < newFiles.length; i++) {
+          formData.append('filesToAdd', newFiles[i], newFiles[i].name)
+      }
+    }
+
+    let addedFiles = []
+
     try {
+      addedFiles = await fileService.updateFiles(formData)
       const modifiedTask = await taskService.updateTask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions, id,
-        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
+        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD,
+        files: oldFiles.concat(addedFiles)
       })
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
@@ -123,6 +143,21 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
   const handleCancel = () => {
     setModifyVisible(false)
+  }
+
+  const onDrop = (files) => {
+    setNewFiles(newFiles.concat(files))
+  }
+
+  const handleDeleteOldFile = (e, name) => {
+    e.stopPropagation()
+    setOldFiles(oldFiles.filter(file => file !== name))
+    setFilesToDelete(filesToDelete.concat(name))
+  }
+
+  const handleDeleteNewFile = (e, name) => {
+    e.stopPropagation()
+    setNewFiles(newFiles.filter(file => file.name !== name))
   }
 
   return (
@@ -204,6 +239,32 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             />
           </div>
         </div>
+
+        <Dropzone onDrop={onDrop}>
+          {({getRootProps, getInputProps}) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <div className="files">
+                <div className="title">Liitetiedostot</div>
+                {oldFiles && oldFiles.length > 0 &&
+                  <React.Fragment>
+                    {oldFiles.map((file) => (
+                      <div key={file}>{file.substring(file.indexOf('-') + 1, file.length)}<b onClick={(e) => handleDeleteOldFile(e, file)}>x</b></div>
+                    ))}
+                  </React.Fragment>
+                }
+                {newFiles && newFiles.length > 0 &&
+                  <React.Fragment>
+                    {newFiles.map((file) => (
+                      <div key={file.name}>{file.name}<b onClick={(e) => handleDeleteNewFile(e, file.name)}>x</b></div>
+                    ))}
+                  </React.Fragment>
+                }
+              </div>
+            </div>
+          )}
+        </Dropzone>
+
         <div>
           <button type="submit" className="save-task-button">Tallenna</button>
           <button onClick={() => handleCancel()} className="return-button">Peruuta</button>
