@@ -17,4 +17,24 @@ const addSeries = async (series) => {
   return response.data
 }
 
-export default { addSeries, getSeries }
+const editSerie = async (serie) => {
+  console.log(serie)
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+  
+  const response = await axios.put(`${baseUrl}/${serie.id}`, serie, config)
+  return response.data
+
+}
+
+const deleteSerie = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
+export default { addSeries, getSeries, deleteSerie, editSerie }

@@ -17,4 +17,23 @@ const addRule = async (rule) => {
   return response.data
 }
 
-export default { addRule, getRules }
+const editRule = async (rule) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+  
+  const response = await axios.put(`${baseUrl}/${rule.id}`, rule, config)
+  return response.data
+
+}
+
+const deleteRule = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
+export default { addRule, getRules, editRule, deleteRule }
