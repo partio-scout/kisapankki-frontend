@@ -13,6 +13,7 @@ const User = ({ user, setUser }) => {
     setShowEdit(true)
   }
 
+
   const changePassword = () => {
     setShowEdit(false)
     setShowChangePassword(true)
