@@ -34,7 +34,7 @@ const addtask = async (task) => {
 
   if (token) {
     config = {
-      headers: { Authorization: token },
+      headers: { Authorization: token }
     }
   }
 

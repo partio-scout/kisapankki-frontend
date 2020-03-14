@@ -27,7 +27,7 @@ describe('<AddTask/>', () => {
 
   test('renders inputs for task', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(6)
+    expect(inputs.length).toBe(7)
   })
 
   test('renders textareas for task', () => {

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
-import addtaskService from '../services/task'
+import taskService from '../services/task'
+import fileService from '../services/file'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
 import MDEditor from './MDEditor'
-
+import Dropzone from 'react-dropzone'
 
 const AddTask = () => {
 
@@ -34,6 +35,7 @@ const AddTask = () => {
   const [creatorNameErrorMessage, setCreatorNameErrorMessage] = useState(null)
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
+  const [files, setFiles] = useState([])
 
   useEffect(() => {
     ruleService.getRules().then(response => {
@@ -103,12 +105,24 @@ const AddTask = () => {
     setGradingScale(JSON.stringify(gradingScale))
     setSupervisorInstructions(JSON.stringify(supervisorInstructions))
 
+    let formData = new FormData()
+
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+          formData.append('filesToAdd', files[i], files[i].name)
+      }
+    }
+
+    let addedFiles = []
+
     try {
-      await addtaskService.addtask({
+      addedFiles = await fileService.updateFiles(formData)
+      await taskService.addtask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions,
-        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD
+        assignmentTextMD, gradingScaleMD, supervisorInstructionsMD,
+        files: addedFiles
       })
       setName('')
       setRule('')
@@ -133,6 +147,14 @@ const AddTask = () => {
     }
   }
 
+  const onDrop = (newFiles) => {
+    setFiles(files.concat(newFiles))
+  }
+
+  const handleDeleteFile = (e, name) => {
+    e.stopPropagation()
+    setFiles(files.filter(file => file.name !== name))
+  }
 
   return (
     <div className="add-task-container">
@@ -213,6 +235,25 @@ const AddTask = () => {
             />
           </div>
         </div>
+
+        <Dropzone onDrop={onDrop}>
+          {({getRootProps, getInputProps}) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <div className="files">
+                <div className="title">Liitetiedostot</div>
+                {files.length > 0 &&
+                  <React.Fragment>
+                    {files.map((file) => (
+                      <div key={file.name}>{file.name}<b onClick={(e) => handleDeleteFile(e, file.name)}>x</b></div>
+                    ))}
+                  </React.Fragment>
+                }
+              </div>
+            </div>
+          )}
+        </Dropzone>
+
         <button type="submit" className="add-task-button">Lisää tehtävä</button>
       </form>
     </div>

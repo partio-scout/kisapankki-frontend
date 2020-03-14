@@ -6,6 +6,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import { useHistory } from 'react-router-dom'
 
 const Task = ({ match, user }) => {
+
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
   const [message, setMessage] = useState(null)
@@ -54,8 +55,6 @@ const Task = ({ match, user }) => {
     }
   }
 
-
-
   return (
     <div>
       {modifyVisible ?
@@ -81,8 +80,15 @@ const Task = ({ match, user }) => {
               <p>{task.rules && task.rules.name}</p>
               <h3>Tehtävän viimeisin muokkaaja:</h3>
               <p>{task.creatorName}<br />{task.creatorEmail}</p>
-
-              {user !== null &&
+              <h3>Liitetiedostot:</h3>
+              {task.files && task.files.map((file) => (
+                <div key={file}>
+                  <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
+                    {file.substring(file.indexOf('-') + 1, file.length)}
+                  </a>
+                </div>
+              ))}
+              {user &&
                 <div>
                   <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
                   {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
