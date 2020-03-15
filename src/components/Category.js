@@ -92,14 +92,13 @@ const Category = () => {
       </form>
 
       {categories.map((category) => (
-        <div style={hideWhenVisible} className="category-list-item" key={category.id}>{category.name}
-
+        <div style={hideWhenVisible} className="category-list-item" key={category.id}>
+          <p>{category.name}</p>
           <button style={hideWhenVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
           <button style={hideWhenVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
-
         </div>))
       }
-      <div style={showWhenVisible } className="category-form-item">
+      <div style={showWhenVisible} className="category-form-item">
         < form onSubmit={handleCategoryModify} >
           <div>
             <input
@@ -117,7 +116,7 @@ const Category = () => {
 
           </div>
         </form>
-        
+
       </div>
 
     </div>

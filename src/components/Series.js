@@ -102,11 +102,10 @@ const Series = () => {
 
       </form>
       {series.map((serie) => (
-        <div style={hideWhenVisible} className="serie-list-item" key={serie.id}>{serie.name}
-
+        <div style={hideWhenVisible} className="serie-list-item" key={serie.id}>
+          <p>{serie.name}</p>
           <button style={hideWhenVisible} onClick={() => handleSerieDelete(serie)}>Poista</button>
           <button style={hideWhenVisible} onClick={() => handleShowModify(serie)}>Muokkaa</button>
-
         </div>))
       }
       <div style={showWhenVisible} className="serie-form-item">
