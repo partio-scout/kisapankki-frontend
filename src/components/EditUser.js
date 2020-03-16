@@ -58,6 +58,10 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
   return (
 
     <div className="edit-user-form">
+          {console.log(email)}
+          {console.log(email)}
+
+
       <h2>Omat tiedot</h2>
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleEditUser}>

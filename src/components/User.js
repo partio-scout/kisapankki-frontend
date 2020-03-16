@@ -37,6 +37,10 @@ const User = ({ user, setUser }) => {
                   <b>Käyttäjätunnus: </b>
                   {user.username}
                 </p>
+                <p>
+                  <b>Sähköposti: </b>
+                  {user.email}
+                </p>
                 <button className="edit-user-button" onClick={() => editUser()}>Muokkaa</button>
                 <button className="change-password-button" onClick={() => changePassword()}>Vaihda salasana</button>
               </div>
