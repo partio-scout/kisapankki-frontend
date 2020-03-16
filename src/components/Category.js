@@ -36,7 +36,7 @@ const Category = () => {
 
   const handleCategoryDelete = async (category) => {
     try {
-      if (window.confirm(`haluatko poistaa kategorian: ${category.name}`)) {
+      if (window.confirm(`Haluatko poistaa kategorian: ${category.name}`)) {
         await categoryService.deleteCategory(category.id)
         setCategories(categories.filter(c => c.id !== category.id))
       }

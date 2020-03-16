@@ -21,16 +21,18 @@ const Task = ({ match, user }) => {
 
   const handleDelete = () => {
     try {
-      taskService.deleteTask(task.id)
-      setMessage('Tehtävä poistettu')
-      setTimeout(() => {
-        setMessage(null)
-        if (task.pending) {
-          history.push('/admin')
-        } else {
-          history.push('/')
-        }
-      }, 2000)
+      if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
+        taskService.deleteTask(task.id)
+        setMessage('Tehtävä poistettu')
+        setTimeout(() => {
+          setMessage(null)
+          if (task.pending) {
+            history.push('/admin')
+          } else {
+            history.push('/')
+          }
+        }, 2000)
+      }
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {

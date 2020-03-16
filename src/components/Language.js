@@ -34,7 +34,7 @@ const Language = () => {
 
   const handleLanguageDelete = async (language) => {
     try {
-      if (window.confirm(`haluatko poistaa kielen: ${language.name}`)) {
+      if (window.confirm(`Haluatko poistaa kielen: ${language.name}`)) {
         await languageService.deleteLanguage(language.id)
         setLanguages(languages.filter(l => l.id !== language.id))
       }

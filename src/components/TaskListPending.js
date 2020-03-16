@@ -41,8 +41,10 @@ const TaskListPending = () => {
 
   const handleDelete = async (id) => {
     try {
-      await taskService.deleteTask(id)
-      setTasks(tasks.filter(t => t.id !== id))
+      if (window.confirm(`Haluatko poistaa tehtävän: ${tasks.find(t => t.id === id).name}`)) {
+        await taskService.deleteTask(id)
+        setTasks(tasks.filter(t => t.id !== id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -57,12 +59,12 @@ const TaskListPending = () => {
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
       {tasks && tasks.length > 0 &&
-      <div className="task-list-title">
-        <span>Tehtävän nimi</span>
-        <span>Sarja</span>
-        <span>Kategoria</span>
-        <span></span>
-      </div>
+        <div className="task-list-title">
+          <span>Tehtävän nimi</span>
+          <span>Sarja</span>
+          <span>Kategoria</span>
+          <span></span>
+        </div>
       }
       {tasks.map((task) => (
         <div className={`task-list-item pending`} key={task.id}>

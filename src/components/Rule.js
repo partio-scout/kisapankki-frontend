@@ -35,7 +35,7 @@ const Rule = () => {
 
   const handleRuleDelete = async (rule) => {
     try {
-      if (window.confirm(`haluatko poistaa säännön: ${rule.name}`)) {
+      if (window.confirm(`Haluatko poistaa säännön: ${rule.name}`)) {
         await ruleService.deleteRule(rule.id)
         setRules(rules.filter(r => r.id !== rule.id))
       }
