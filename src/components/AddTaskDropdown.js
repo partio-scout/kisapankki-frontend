@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import Rule from './Rule'
 import Language from './Language'
 import Series from './Series'
@@ -15,40 +15,40 @@ const AddTaskDropdown = () => {
     <div >
       <div className="task-types-menu">
         {showCategories ?
-          <React.Fragment>
+          <Fragment>
             <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
             <Category />
-          </React.Fragment>
+          </Fragment>
           :
           <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
         }
       </div>
       <div className="task-types-menu">
         {showLanguages ?
-          <React.Fragment>
+          <Fragment>
             <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Sulje kielet</button>
             <Language />
-          </React.Fragment>
+          </Fragment>
           :
           <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Kielet</button>
         }
       </div>
       <div className="task-types-menu">
         {showSeries ?
-          <React.Fragment>
+          <Fragment>
             <button className="task-types" onClick={() => setShowSeries(!showSeries)}>Sulje sarjat</button>
             <Series />
-          </React.Fragment>
+          </Fragment>
           :
           <button className="task-types" onClick={() => setShowSeries(!showSeries)}>Sarjat</button>
         }
       </div>
       <div className="task-types-menu">
         {showRules ?
-          <React.Fragment>
+          <Fragment>
             <button className="task-types" onClick={() => setShowRules(!showRules)}>Sulje säännöt</button>
             <Rule />
-          </React.Fragment>
+          </Fragment>
           :
           <button className="task-types" onClick={() => setShowRules(!showRules)}>Säännöt</button>
         }

@@ -76,7 +76,7 @@ button {
   z-index: 100;
 }
 
-button:hover {
+button:hover, .search-tasks-button:hover, .task-types:hover {
   background: #253764;
 }
 
@@ -232,18 +232,10 @@ button:hover {
 }
 
 .task-view-info-background {
-  background-color: #253764;
+  background-color: #F4F5F7;
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
-}
-
-.info-background {
-  background-color: #F4F5F7;
-}
-
-.task-view-info {
-  color: white;
 }
 
 .task-view-info h2 {
@@ -278,6 +270,7 @@ button:hover {
 
 .series-info {
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .instructions {
@@ -299,17 +292,13 @@ button:hover {
   height: 132px;
 }
 
-.series-info {
-  font-weight: bold;
-}
-
 .color-picker {
   padding: 5px;
 }
 
 table, th, td {
   border: 1px;
-  border-color: white;
+  border-color: darkslategray;
   border-style: solid;
   border-radius: 4px;
   border-collapse: collapse;
@@ -355,25 +344,25 @@ table, th, td {
 }
 
 .task-types {
-  background-color: white;
-  color: #000;
-  padding: 0;
+  background: #28aae1;
+  color: #fff;
+  padding: 10px;
   text-transform: none;
   font-size: 25px;
   letter-spacing: unset;
 
 }
-.task-types:hover {
-  background-color: white;
-}
-.task-types-menu {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
 
 .task-types-menu {
   margin-top: 50px;
-  margin-bottom: 50px;
+}
+
+.category-list-item, .language-list-item, .serie-list-item, .rule-list-item {
+  display: flex;
+}
+
+.category-list-item p, .language-list-item p, .serie-list-item p, .rule-list-item p {
+  width: 150px;
 }
 
 .category-list-item button, .category-form-item  button {
