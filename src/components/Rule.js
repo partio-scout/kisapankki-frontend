@@ -35,8 +35,10 @@ const Rule = () => {
 
   const handleRuleDelete = async (rule) => {
     try {
-      await ruleService.deleteRule(rule.id)
-      setRules(rules.filter(r => r.id !== rule.id))
+      if (window.confirm(`haluatko poistaa säännön: ${rule.name}`)) {
+        await ruleService.deleteRule(rule.id)
+        setRules(rules.filter(r => r.id !== rule.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -94,7 +96,7 @@ const Rule = () => {
 
         </div>))
       }
-      <div style={showWhenVisible } className="rule-form-item">
+      <div style={showWhenVisible} className="rule-form-item">
         < form onSubmit={handleRuleModify} >
           <div>
             <input
@@ -112,7 +114,7 @@ const Rule = () => {
 
           </div>
         </form>
-        
+
       </div>
 
 

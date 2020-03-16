@@ -36,8 +36,10 @@ const Category = () => {
 
   const handleCategoryDelete = async (category) => {
     try {
-      await categoryService.deleteCategory(category.id)
-      setCategories(categories.filter(c => c.id !== category.id))
+      if (window.confirm(`haluatko poistaa kategorian: ${category.name}`)) {
+        await categoryService.deleteCategory(category.id)
+        setCategories(categories.filter(c => c.id !== category.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -99,7 +101,7 @@ const Category = () => {
 
         </div>))
       }
-      <div style={showWhenVisible } className="category-form-item">
+      <div style={showWhenVisible} className="category-form-item">
         < form onSubmit={handleCategoryModify} >
           <div>
             <input
@@ -117,7 +119,7 @@ const Category = () => {
 
           </div>
         </form>
-        
+
       </div>
 
     </div>

@@ -36,8 +36,10 @@ const Series = () => {
 
   const handleSerieDelete = async (serie) => {
     try {
-      await seriesService.deleteSerie(serie.id)
-      setSeries(series.filter(s => s.id !== serie.id))
+      if (window.confirm(`haluatko poistaa sarjan: ${serie.name}`)) {
+        await seriesService.deleteSerie(serie.id)
+        setSeries(series.filter(s => s.id !== serie.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {

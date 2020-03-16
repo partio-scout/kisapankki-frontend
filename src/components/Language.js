@@ -34,8 +34,10 @@ const Language = () => {
 
   const handleLanguageDelete = async (language) => {
     try {
-      await languageService.deleteLanguage(language.id)
-      setLanguages(languages.filter(l => l.id !== language.id))
+      if (window.confirm(`haluatko poistaa kielen: ${language.name}`)) {
+        await languageService.deleteLanguage(language.id)
+        setLanguages(languages.filter(l => l.id !== language.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
