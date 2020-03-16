@@ -95,8 +95,8 @@ const Category = () => {
       </form>
 
       {categories.map((category) => (
-        <div style={hideWhenModifyFormIsVisible} className="category-list-item" key={category.id}>{category.name}
-
+        <div style={hideWhenModifyFormIsVisible} className="category-list-item" key={category.id}>
+          <p>{category.name}</p>
           <button style={hideWhenModifyFormIsVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
           <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
 

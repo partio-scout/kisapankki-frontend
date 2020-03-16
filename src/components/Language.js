@@ -90,8 +90,8 @@ const Language = () => {
       </form>
 
       {languages.map((language) => (
-        <div style={hideWhenModifyFormIsVisible} className="language-list-item" key={language.id}>{language.name}
-
+        <div style={hideWhenModifyFormIsVisible} className="language-list-item" key={language.id}>
+          <p>{language.name}</p>
           <button style={hideWhenModifyFormIsVisible} onClick={() => handleLanguageDelete(language)}>Poista</button>
           <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(language)}>Muokkaa</button>
 
