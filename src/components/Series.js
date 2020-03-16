@@ -65,8 +65,8 @@ const Series = () => {
 
   }
 
-  const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
-  const showWhenVisible = { display: modifyVisible ? '' : 'none' }
+  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
+  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
 
   const handleShowModify = (serie) => {
     console.log(serie.color)
@@ -81,7 +81,7 @@ const Series = () => {
   return (
     <div className="series-form">
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenVisible} onSubmit={handleSeriesAdd}>
+      <form style={hideWhenModifyFormIsVisible} onSubmit={handleSeriesAdd}>
         <div>
           <input
             className="name"
@@ -104,14 +104,14 @@ const Series = () => {
 
       </form>
       {series.map((serie) => (
-        <div style={hideWhenVisible} className="serie-list-item" key={serie.id}>{serie.name}
+        <div style={hideWhenModifyFormIsVisible} className="serie-list-item" key={serie.id}>{serie.name}
 
-          <button style={hideWhenVisible} onClick={() => handleSerieDelete(serie)}>Poista</button>
-          <button style={hideWhenVisible} onClick={() => handleShowModify(serie)}>Muokkaa</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleSerieDelete(serie)}>Poista</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(serie)}>Muokkaa</button>
 
         </div>))
       }
-      <div style={showWhenVisible} className="serie-form-item">
+      <div style={hideWhenAddingFormIsVisible} className="serie-form-item">
         < form onSubmit={handleSerieModify} >
           <div>
             <input

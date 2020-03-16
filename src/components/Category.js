@@ -63,8 +63,9 @@ const Category = () => {
     }
   }
 
-  const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
-  const showWhenVisible = { display: modifyVisible ? '' : 'none' }
+ 
+  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
+  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
 
   const handleShowModify = (category) => {
     setModifyVisible(true)
@@ -78,7 +79,7 @@ const Category = () => {
     <div className="category-form" >
 
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenVisible} onSubmit={handleCategoryAdd}>
+      <form style={hideWhenModifyFormIsVisible} onSubmit={handleCategoryAdd}>
         <div>
           <input
             className="category"
@@ -94,14 +95,14 @@ const Category = () => {
       </form>
 
       {categories.map((category) => (
-        <div style={hideWhenVisible} className="category-list-item" key={category.id}>{category.name}
+        <div style={hideWhenModifyFormIsVisible} className="category-list-item" key={category.id}>{category.name}
 
-          <button style={hideWhenVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
-          <button style={hideWhenVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
 
         </div>))
       }
-      <div style={showWhenVisible} className="category-form-item">
+      <div style={hideWhenAddingFormIsVisible} className="category-form-item">
         < form onSubmit={handleCategoryModify} >
           <div>
             <input
