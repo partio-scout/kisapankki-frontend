@@ -87,11 +87,10 @@ const Rule = () => {
       </form>
 
       {rules.map((rule) => (
-        <div style={hideWhenVisible} className="rule-list-item" key={rule.id}>{rule.name}
-
+        <div style={hideWhenVisible} className="rule-list-item" key={rule.id}>
+          <p>{rule.name}</p>
           <button style={hideWhenVisible} onClick={() => handleRuleDelete(rule)}>Poista</button>
           <button style={hideWhenVisible} onClick={() => handleShowModify(rule)}>Muokkaa</button>
-
         </div>))
       }
       <div style={showWhenVisible } className="rule-form-item">
