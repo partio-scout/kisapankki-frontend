@@ -35,8 +35,10 @@ const Rule = () => {
 
   const handleRuleDelete = async (rule) => {
     try {
-      await ruleService.deleteRule(rule.id)
-      setRules(rules.filter(r => r.id !== rule.id))
+      if (window.confirm(`Haluatko poistaa säännön: ${rule.name}`)) {
+        await ruleService.deleteRule(rule.id)
+        setRules(rules.filter(r => r.id !== rule.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -60,8 +62,8 @@ const Rule = () => {
     }
   }
 
-  const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
-  const showWhenVisible = { display: modifyVisible ? '' : 'none' }
+  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
+  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
 
   const handleShowModify = (rule) => {
     setModifyVisible(true)
@@ -72,7 +74,7 @@ const Rule = () => {
   return (
     <div className="rule-form">
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenVisible} onSubmit={handleRuleAdd}>
+      <form style={hideWhenModifyFormIsVisible} onSubmit={handleRuleAdd}>
         <div>
           <input
             className="rule"
@@ -87,13 +89,14 @@ const Rule = () => {
       </form>
 
       {rules.map((rule) => (
-        <div style={hideWhenVisible} className="rule-list-item" key={rule.id}>
+        <div style={hideWhenModifyFormIsVisible} className="rule-list-item" key={rule.id}>
           <p>{rule.name}</p>
-          <button style={hideWhenVisible} onClick={() => handleRuleDelete(rule)}>Poista</button>
-          <button style={hideWhenVisible} onClick={() => handleShowModify(rule)}>Muokkaa</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleRuleDelete(rule)}>Poista</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(rule)}>Muokkaa</button>
+
         </div>))
       }
-      <div style={showWhenVisible } className="rule-form-item">
+      <div style={hideWhenAddingFormIsVisible} className="rule-form-item">
         < form onSubmit={handleRuleModify} >
           <div>
             <input
@@ -111,7 +114,7 @@ const Rule = () => {
 
           </div>
         </form>
-        
+
       </div>
 
 

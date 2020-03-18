@@ -34,8 +34,10 @@ const Language = () => {
 
   const handleLanguageDelete = async (language) => {
     try {
-      await languageService.deleteLanguage(language.id)
-      setLanguages(languages.filter(l => l.id !== language.id))
+      if (window.confirm(`Haluatko poistaa kielen: ${language.name}`)) {
+        await languageService.deleteLanguage(language.id)
+        setLanguages(languages.filter(l => l.id !== language.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -60,9 +62,9 @@ const Language = () => {
   }
 
 
+  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
+  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
 
-  const hideWhenVisible = { display: modifyVisible ? 'none' : '' }
-  const showWhenVisible = { display: modifyVisible ? '' : 'none' }
 
   const handleShowModify = (language) => {
     setModifyVisible(true)
@@ -73,7 +75,7 @@ const Language = () => {
   return (
     <div className="language-form">
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenVisible} onSubmit={handleLanguageAdd}>
+      <form style={hideWhenModifyFormIsVisible} onSubmit={handleLanguageAdd}>
         <div>
           <input
             className="language"
@@ -88,13 +90,14 @@ const Language = () => {
       </form>
 
       {languages.map((language) => (
-        <div style={hideWhenVisible} className="language-list-item" key={language.id}>
+        <div style={hideWhenModifyFormIsVisible} className="language-list-item" key={language.id}>
           <p>{language.name}</p>
-          <button style={hideWhenVisible} onClick={() => handleLanguageDelete(language)}>Poista</button>
-          <button style={hideWhenVisible} onClick={() => handleShowModify(language)}>Muokkaa</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleLanguageDelete(language)}>Poista</button>
+          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(language)}>Muokkaa</button>
+
         </div>))
       }
-      <div style={showWhenVisible} className="language-form-item">
+      <div style={hideWhenAddingFormIsVisible} className="language-form-item">
         < form onSubmit={handleLanguageModify} >
           <div>
             <input

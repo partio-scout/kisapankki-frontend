@@ -94,8 +94,10 @@ const TaskList = ({ user }) => {
 
   const handleDelete = async (task) => {
     try {
-      await taskService.deleteTask(task.id)
-      setTasks(tasks.filter(t => t.id !== task.id))
+      if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
+        await taskService.deleteTask(task.id)
+        setTasks(tasks.filter(t => t.id !== task.id))
+      }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -178,12 +180,12 @@ const TaskList = ({ user }) => {
 
       <Notification message={errorMessage} />
       {tasks && tasks.length > 0 &&
-      <div className="task-list-title">
-        <span>Tehtävän nimi</span>
-        <span>Sarja</span>
-        <span>Kategoria</span>
-        {user && <span></span>}
-      </div>
+        <div className="task-list-title">
+          <span>Tehtävän nimi</span>
+          <span>Sarja</span>
+          <span>Kategoria</span>
+          {user && <span></span>}
+        </div>
       }
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
