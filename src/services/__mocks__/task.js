@@ -24,6 +24,7 @@ const tasks = [
       name: 'säännöt1',
     },
     pending: false,
+    views: 5
   },
 
   {
@@ -51,6 +52,7 @@ const tasks = [
       name: 'säännöt2',
     },
     pending: false,
+    views: 0
   },
 ]
 

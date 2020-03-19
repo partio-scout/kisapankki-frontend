@@ -193,6 +193,7 @@ const TaskList = ({ user }) => {
             <Link to={`/tehtava/${task.id}`}>
               {task.name}
             </Link>
+            <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>

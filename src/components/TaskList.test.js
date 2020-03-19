@@ -80,6 +80,7 @@ describe('<TaskList />', () => {
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('sarja1')
+    expect(component.text()).toContain('Katselukertoja: 5')
     expect(component.text()).not.toContain('sarja2')
   })
 
@@ -94,6 +95,7 @@ describe('<TaskList />', () => {
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('kategoria2')
+    expect(component.text()).toContain('Katselukertoja: 0')
     expect(component.text()).not.toContain('kategoria1')
   })
 
@@ -107,6 +109,7 @@ describe('<TaskList />', () => {
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('tehtävä1')
+    expect(component.text()).toContain('Katselukertoja: 5')
     expect(component.text()).not.toContain('tehtävä2')
   })
 
@@ -128,6 +131,7 @@ describe('<TaskList />', () => {
 
     expect(component.find('.task-list-item').length).toEqual(1)
     expect(component.text()).toContain('tehtävä2')
+    expect(component.text()).toContain('Katselukertoja: 0')
     expect(component.text()).not.toContain('tehtävä1')
   })
 })
