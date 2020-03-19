@@ -389,6 +389,13 @@ table, th, td {
   margin-top: 20px; 
 }
 
+.rating { 
+  margin-left: 1150px;
+}
+
+.ratingStars { 
+  margin-top: 20px;
+}
 
 
 

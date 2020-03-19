@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
+import Rating from './Rating'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
@@ -66,7 +67,8 @@ const Task = ({ match, user }) => {
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
-            <div className="task-view-info">
+            <div className="task-view-info"> 
+              <Rating task={task} />
               <h2>{task.name}</h2>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
