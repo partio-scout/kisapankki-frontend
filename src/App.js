@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { Route, Link, Redirect, useHistory } from 'react-router-dom'
 import Login from './components/Login'
+import FrontPage from './components/FrontPage'
 import TaskList from './components/TaskList'
 import AddAdmin from './components/AddAdmin'
 import AddTaskDropdown from './components/AddTaskDropdown'
@@ -35,6 +36,7 @@ const App = () => {
     <div>
       <div className="header">
         <Link to="/"><div className="logo" /></Link>
+        <Link to="/tehtavat"><button className="addtask-button-header">Tehtävät</button></Link>
         <Link to="/lisaa_tehtava"><button className="addtask-button-header">Lisää tehtävä</button></Link>
 
         {user === null ?
@@ -57,8 +59,9 @@ const App = () => {
         <Link to="/lisaa_tehtava"><button className="addtask-button-mobile">Lisää tehtävä</button></Link>
       </div>
       <div className="container">
-        <Route exact path="/" render={() => <TaskList user={user} />} />
+        <Route exact path="/" render={() => <FrontPage />} />
         <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />

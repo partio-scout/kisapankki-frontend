@@ -145,7 +145,17 @@ button:hover, .search-tasks-button:hover, .task-types:hover {
   padding: 0px 20px 20px 20px;
 }
 
-.add-task-container, .modify-task-container {
+.new-favorite-lists {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.new-list, .favorite-list {
+  width: 49%;
+}
+
+.add-task-container, .modify-task-container, .frontpage-container {
   width: 80%;
   display: block;
   margin-left: auto;
@@ -201,8 +211,15 @@ button:hover, .search-tasks-button:hover, .task-types:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   vertical-align: top;
-  padding: 5px 15px;
   font-weight: bold;
+}
+
+.task-list-title span:not(:first-of-type) {
+  margin: 5px 15px;
+}
+
+.task-list-title span:first-child {
+  margin: 5px 25px 5px 5px;
 }
 
 .task-list-item {
@@ -224,6 +241,10 @@ button:hover, .search-tasks-button:hover, .task-types:hover {
 .task-list-item span {
   width: 200px;
   padding: 5px 0px;
+}
+
+.frontpage-item span {
+  width: 150px;
 }
 
 .task-list button {
