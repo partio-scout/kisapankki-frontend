@@ -73,4 +73,9 @@ const acceptTask = async (id) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask }
+const updateViews = async (id) => {
+  const response = await axios.post(`${baseUrl}/${id}/views`)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews }

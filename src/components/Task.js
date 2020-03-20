@@ -67,7 +67,9 @@ const Task = ({ match, user }) => {
           <Notification message={errorMessage} type="error" />
           {task &&
             <div className="task-view-info">
-              <h2>{task.name}</h2>
+              <div>
+                <h2>{task.name}</h2>
+              </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
               <h3>Rastimiehen ohjeet:</h3>

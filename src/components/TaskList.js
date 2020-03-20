@@ -190,9 +190,10 @@ const TaskList = ({ user }) => {
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>
-            <Link to={`/tehtava/${task.id}`}>
+            <Link to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
               {task.name}
             </Link>
+            <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
