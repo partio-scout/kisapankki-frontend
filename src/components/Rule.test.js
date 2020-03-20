@@ -7,18 +7,46 @@ jest.mock('../services/rule')
 
 afterEach(cleanup)
 
+const rules = [
+  {
+    id: '1',
+    name: 'säännöt1',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' } ]
+  },
+  {
+    id: '2',
+    name: 'säännöt2',
+    acceptedCategories: [ { id: '2', name: 'kategoria2' } ]
+  },
+  {
+    id: '3',
+    name: 'testisäännöt true',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' }, { id: '2', name: 'kategoria2' }]
+  },
+]
+
+const categories = [
+  {
+    id: '1',
+    name: 'kategoria1',
+  },
+  {
+    id: '2',
+    name: 'kategoria2',
+  },
+  {
+    id: '3',
+    name: 'pendingkategory',
+  },
+]
+
 describe('<Rule />', () => {
   let component
 
   beforeEach(() => {
     component = render(
-      <Rule />,
+      <Rule rules={rules} setRules={'not null'} categories={categories} />,
     )
-  })
-
-  test('renders inputs for  addingRule and editingRule', () => {
-    const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(2)
   })
 
   test('renders submit button for ruleAdding', () => {
@@ -27,11 +55,18 @@ describe('<Rule />', () => {
       'Lisää',
     )
   })
-  
-  test('renders submit button for saving editedRule', () => {
-    const button = component.container.querySelector('.rule-save-button')
+
+  test('renders modify button', () => {
+    const button = component.container.querySelector('.modify-button')
     expect(button).toHaveTextContent(
-      'Tallenna',
+      'Muokkaa',
+    )
+  })
+  
+  test('renders delete button', () => {
+    const button = component.container.querySelector('.delete-button')
+    expect(button).toHaveTextContent(
+      'Poista',
     )
   })
 

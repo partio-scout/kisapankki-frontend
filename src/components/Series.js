@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import { CirclePicker } from 'react-color'
 import Notification from './Notification'
 import seriesService from '../services/series'
 
-const Series = () => {
+const Series = ({ series, setSeries }) => {
   const [name, setName] = useState('')
   const [modifiedSerieName, setModifiedSerieName] = useState('')
   const [modifiedSerieId, setModifiedSerieId] = useState('')
   const [modifiedSerieColor, setModifiedSerieColor] = useState('')
-  const [series, setSeries] = useState([])
   const [color, setColor] = useState('#ffffff')
   const [errorMessage, setErrorMessage] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
-
-  useEffect(() => {
-    seriesService.getSeries().then((response) => {
-      setSeries(response)
-    })
-  }, [])
 
   const handleSeriesAdd = async (event) => {
     event.preventDefault()
@@ -46,7 +39,6 @@ const Series = () => {
         setErrorMessage(null)
       }, 5000)
     }
-
   }
 
   const handleSerieModify = async (event) => {
@@ -62,33 +54,63 @@ const Series = () => {
         setErrorMessage(null)
       }, 5000)
     }
-
   }
 
-  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
-  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
-
   const handleShowModify = (serie) => {
-    console.log(serie.color)
     setModifyVisible(true)
     setModifiedSerieId(serie.id)
     setModifiedSerieName(serie.name)
     setModifiedSerieColor(serie.color)
-
   }
-
 
   return (
     <div className="series-form">
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenModifyFormIsVisible} onSubmit={handleSeriesAdd}>
+
+      {series && series.map((serie) => (
+        <div className="serie-list-item" key={serie.id}>
+          {modifyVisible && modifiedSerieId === serie.id ?
+            <div className="serie-form-item">
+              <form onSubmit={handleSerieModify} >
+                <div>
+                  <input
+                    className="serie"
+                    type="text"
+                    value={modifiedSerieName}
+                    name="Serie"
+                    onChange={({ target }) => setModifiedSerieName(target.value)}
+                  />
+                  <button type="submit" className="serie-save-button">Tallenna</button>
+                  <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  <div className="color-picker">
+                    <CirclePicker
+                      color={modifiedSerieColor}
+                      onChangeComplete={color => setModifiedSerieColor(color.hex)}
+                      colors={["#253764", "#28aae1", "#f04150", "#f0a01e", "#f0e105", "#14a54b",
+                        "#f5ea2e", "#d4791e", "#5e0f75", "#33652e", "#6e470a", "#607d8b"]}
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          :
+          <Fragment>
+            <p>{serie.name}<span style={{ backgroundColor: serie.color, display: 'inline-block', borderRadius: '50%', height: '27px', width: '27px' }} /></p>
+            <button onClick={() => handleShowModify(serie)} className="modify-button">Muokkaa</button>
+            <button onClick={() => handleSerieDelete(serie)} className="delete-button">Poista</button>
+          </Fragment>
+          }
+        </div>))
+      }
+
+      <form onSubmit={handleSeriesAdd} className="add-form">
         <div>
           <input
             className="name"
             type="text"
             value={name}
             name="Name"
-            placeholder="Nimi"
+            placeholder="Uusi sarja"
             onChange={({ target }) => setName(target.value)}
           />
           <button type="submit" className="series-submit-button">Lisää</button>
@@ -101,44 +123,7 @@ const Series = () => {
               "#f5ea2e", "#d4791e", "#5e0f75", "#33652e", "#6e470a", "#607d8b"]}
           />
         </div>
-
       </form>
-      {series.map((serie) => (
-        <div style={hideWhenModifyFormIsVisible} className="serie-list-item" key={serie.id}>
-          <p>{serie.name}</p>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleSerieDelete(serie)}>Poista</button>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(serie)}>Muokkaa</button>
-
-        </div>))
-      }
-      <div style={hideWhenAddingFormIsVisible} className="serie-form-item">
-        < form onSubmit={handleSerieModify} >
-          <div>
-            <input
-              className="serie"
-              type="text"
-              value={modifiedSerieName}
-              name="Serie"
-              onChange={({ target }) => setModifiedSerieName(target.value)}
-            />
-            <div className="color-picker">
-              <CirclePicker
-                color={modifiedSerieColor}
-                onChangeComplete={color => setModifiedSerieColor(color.hex)}
-                colors={["#253764", "#28aae1", "#f04150", "#f0a01e", "#f0e105", "#14a54b",
-                  "#f5ea2e", "#d4791e", "#5e0f75", "#33652e", "#6e470a", "#607d8b"]}
-              />
-            </div>
-            <button type="submit" className="serie-save-button">Tallenna</button>
-            <button onClick={() => setModifyVisible(false)}>Peruuta</button>
-          </div>
-
-          <div>
-
-          </div>
-        </form>
-
-      </div>
 
     </div>
   )

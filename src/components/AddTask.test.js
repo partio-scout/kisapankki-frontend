@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
+import { mount } from 'enzyme'
 import AddTask from './AddTask'
 
 jest.mock('../services/category')
@@ -43,5 +44,23 @@ describe('<AddTask/>', () => {
   test('renders button for task', () => {
     const button = component.container.querySelector('.add-task-button')
     expect(button).toHaveTextContent('Lisää tehtävä')
+  })
+})
+
+describe('<AddTask />', () => {
+  let component
+
+  beforeEach(() => {
+    component = mount(
+      <AddTask />,
+    )
+  })
+
+  test('allows to select accepted category', () => {
+
+  })
+
+  test('does not allow to select unaccepted category', () => {
+
   })
 })
