@@ -38,7 +38,7 @@ const User = ({ user, setUser }) => {
                   {user.username}
                 </p>
                 <p>
-                  <b>Sähköposti: </b>
+                  <b>Sähköpostiosoite: </b>
                   {user.email}
                 </p>
                 <button className="edit-user-button" onClick={() => editUser()}>Muokkaa</button>

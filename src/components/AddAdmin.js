@@ -8,6 +8,7 @@ const AddAdmin = () => {
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -25,11 +26,12 @@ const AddAdmin = () => {
     setNameErrorMessage(null)
     setUsernameErrorMessage(null)
     setPasswordErrorMessage(null)
+    setEmailErrorMessage(null)
     if (name.length < 3) {
       setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
     }
     if (email.length < 5) {
-      setNameErrorMessage('Sähköpostissa pitää olla vähintään 5 kirjainta')
+      setEmailErrorMessage('Sähköpostissa pitää olla vähintään 5 kirjainta')
     }
     if (username.length < 3) {
       setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
@@ -73,7 +75,7 @@ const AddAdmin = () => {
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleAddAdmin}>
-        <div>
+        <div className="Testi">
           <Notification message={nameErrorMessage} type="error" />
           <input
             className="name"
@@ -96,7 +98,7 @@ const AddAdmin = () => {
           />
         </div>
         <div>
-          <Notification message={usernameErrorMessage} type="error" />
+          <Notification message={emailErrorMessage} type="error" />
           <input
             className="email"
             type="email"

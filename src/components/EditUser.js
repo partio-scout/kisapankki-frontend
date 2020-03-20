@@ -25,7 +25,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
       setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
     }
     if (email.length < 5) {
-      setEmailErrorMessage('Sähköpostissa pitää olla vähintään 3 kirjainta')
+      setEmailErrorMessage('Sähköpostissa pitää olla vähintään 5 kirjainta')
     }
     if (name.length < 3 || username.length < 3) {
       return
