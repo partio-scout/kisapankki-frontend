@@ -30,9 +30,6 @@ const AddAdmin = () => {
     if (name.length < 3) {
       setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
     }
-    if (email.length < 5) {
-      setEmailErrorMessage('Sähköpostissa pitää olla vähintään 5 kirjainta')
-    }
     if (username.length < 3) {
       setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
     }
@@ -42,9 +39,7 @@ const AddAdmin = () => {
     if (users.some((user) => (user.username === username))) {
       setUsernameErrorMessage('Käyttäjätunnus on varattu')
     }
-    if (users.some((user) => (user.email === email))) {
-      setUsernameErrorMessage('Sähköpostiosoite on varattu')
-    }
+
     if (name.length < 3 || username.length < 3 || password.length < 3
       || users.some((user) => (user.username === username))) {
       return

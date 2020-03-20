@@ -23,6 +23,7 @@ const Login = ({ setUser }) => {
       setUser(user)
       tokenService.setToken(user.token)
       setUsername('')
+      setEmail('')
       setPassword('')
       history.push('/')
     } catch (exception) {
