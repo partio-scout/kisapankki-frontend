@@ -69,7 +69,6 @@ const Task = ({ match, user }) => {
             <div className="task-view-info">
               <div>
                 <h2>{task.name}</h2>
-                <p>Katselukertoja: {task.views}</p>
               </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
