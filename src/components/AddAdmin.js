@@ -8,10 +8,12 @@ const AddAdmin = () => {
   const [nameErrorMessage, setNameErrorMessage] = useState(null)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(null)
+  const [emailErrorMessage, setEmailErrorMessage] = useState(null)
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     userService.getUsers().then((response) => {
@@ -24,6 +26,7 @@ const AddAdmin = () => {
     setNameErrorMessage(null)
     setUsernameErrorMessage(null)
     setPasswordErrorMessage(null)
+    setEmailErrorMessage(null)
     if (name.length < 3) {
       setNameErrorMessage('Nimessä pitää olla vähintään 3 kirjainta')
     }
@@ -36,16 +39,18 @@ const AddAdmin = () => {
     if (users.some((user) => (user.username === username))) {
       setUsernameErrorMessage('Käyttäjätunnus on varattu')
     }
+
     if (name.length < 3 || username.length < 3 || password.length < 3
       || users.some((user) => (user.username === username))) {
       return
     }
     try {
       await userService.addUser({
-        name, username, password,
+        name, username, email, password,
       })
       setName('')
       setUsername('')
+      setEmail('')
       setPassword('')
       setMessage('Ylläpitäjä lisätty!')
       setTimeout(() => {
@@ -65,7 +70,7 @@ const AddAdmin = () => {
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleAddAdmin}>
-        <div>
+        <div className="Testi">
           <Notification message={nameErrorMessage} type="error" />
           <input
             className="name"
@@ -85,6 +90,17 @@ const AddAdmin = () => {
             name="Username"
             placeholder="Käyttäjätunnus"
             onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          <Notification message={emailErrorMessage} type="error" />
+          <input
+            className="email"
+            type="email"
+            value={email}
+            name="email"
+            placeholder="Sähköpostiosoite"
+            onChange={({ target }) => setEmail(target.value)}
           />
         </div>
         <div>

@@ -13,6 +13,7 @@ const User = ({ user, setUser }) => {
     setShowEdit(true)
   }
 
+
   const changePassword = () => {
     setShowEdit(false)
     setShowChangePassword(true)
@@ -35,6 +36,10 @@ const User = ({ user, setUser }) => {
                 <p>
                   <b>Käyttäjätunnus: </b>
                   {user.username}
+                </p>
+                <p>
+                  <b>Sähköpostiosoite: </b>
+                  {user.email}
                 </p>
                 <button className="edit-user-button" onClick={() => editUser()}>Muokkaa</button>
                 <button className="change-password-button" onClick={() => changePassword()}>Vaihda salasana</button>

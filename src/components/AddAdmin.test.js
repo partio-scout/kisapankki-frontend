@@ -27,7 +27,7 @@ describe('<AddAdmin />', () => {
 
   test('renders inputs for name, username and password', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(3)
+    expect(inputs.length).toBe(4)
   })
 
   test('renders submit button', async () => {
