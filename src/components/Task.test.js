@@ -79,10 +79,6 @@ describe('<Task />', () => {
     )
   })
 
-  test('renders correct views', () => {
-    expect(component.container).toHaveTextContent('Katselukertoja: 5')
-  })
-
   test('renders delete button', () => {
     const button = component.container.querySelector('.delete-button')
 
