@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
+import { mount } from 'enzyme'
 import AddTask from './AddTask'
 
 jest.mock('../services/category')
@@ -43,5 +44,28 @@ describe('<AddTask/>', () => {
   test('renders button for task', () => {
     const button = component.container.querySelector('.add-task-button')
     expect(button).toHaveTextContent('Lisää tehtävä')
+  })
+})
+
+describe('<AddTask />', () => {
+  let component
+
+  beforeEach(() => {
+    component = mount(
+      <AddTask />,
+    )
+  })
+
+  test('allows to select only accepted category', () => {
+    component.update()
+    expect(component.find('.rule-options').length).toEqual(3)
+    expect(component.find('.rule-options').at(0).text()).toBe("säännöt1")
+    expect(component.find('.rule-options').at(1).text()).toBe("säännöt2")
+    expect(component.find('.rule-options').at(2).text()).toBe("testisäännöt true")
+    expect(component.find('.category-options').length).toEqual(0)
+    component.find('.rule-select').simulate('change', { target: { value: '1' } })
+    expect(component.find('.category-options').length).toEqual(2)
+    expect(component.find('.category-options').at(0).text()).toBe("kategoria1")
+    expect(component.find('.category-options').at(1).text()).toBe("kategoria2")
   })
 })

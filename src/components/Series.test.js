@@ -7,20 +7,33 @@ jest.mock('../services/series')
 
 afterEach(cleanup)
 
+const series = [
+  {
+    id: '1',
+    name: 'sarja1',
+  },
+  {
+    id: '2',
+    name: 'sarja2',
+  },
+  {
+    id: '3',
+    name: 'testi-ikäryhmä pending',
+  },
+]
+
 describe('<Series />', () => {
   let component
 
   beforeEach(() => {
     component = render(
-      <Series />,
+      <Series series={series} setSeries={'not null'} />
     )
   })
 
- 
-
-  test('renders input for addingSeries and Modifying', () => {
+  test('renders input for addingSeries', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(2)
+    expect(inputs.length).toBe(1)
   })
 
   test('renders submit button for adding newSerie', () => {
@@ -30,10 +43,17 @@ describe('<Series />', () => {
     )
   })
 
-  test('renders submit button for saving editedSerie', () => {
-    const button = component.container.querySelector('.serie-save-button')
+  test('renders modify button', () => {
+    const button = component.container.querySelector('.modify-button')
     expect(button).toHaveTextContent(
-      'Tallenna',
+      'Muokkaa',
+    )
+  })
+
+  test('renders delete button', () => {
+    const button = component.container.querySelector('.delete-button')
+    expect(button).toHaveTextContent(
+      'Poista',
     )
   })
 
