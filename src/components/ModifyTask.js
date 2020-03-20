@@ -3,7 +3,6 @@ import Notification from './Notification'
 import taskService from '../services/task'
 import fileService from '../services/file'
 import ruleService from '../services/rule'
-import categoryService from '../services/category'
 import seriesService from '../services/series'
 import languageService from '../services/language'
 import MDEditor from './MDEditor'
@@ -44,9 +43,12 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
   useEffect(() => {
     ruleService.getRules().then(response => {
       setRules(response)
-    })
-    categoryService.getCategories().then(response => {
-      setCategories(response)
+      if (task.rules && task.rules.id) {
+        const foundRule = response.find(r => r.id === task.rules.id)
+        if (foundRule) {
+          setCategories(foundRule.acceptedCategories)
+        }
+      }
     })
     seriesService.getSeries().then(response => {
       setSeriess(response)
@@ -58,6 +60,13 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
 
   const handleRuleChange = (e) => {
     setRule(e.target.value)
+    setCategory('')
+    if (e.target.value) {
+      const foundRule = rules.find(r => r.id === e.target.value)
+      setCategories(foundRule.acceptedCategories)
+    } else {
+      setCategories([])
+    }
   }
 
   const handleCategoryChange = (e) => {
@@ -199,14 +208,14 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
             </select>
           </div>
           <div>
-            <select value={category} onChange={(e) => handleCategoryChange(e)}>
-              <option value="">Kategoria</option>
-              {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
-            </select>
-            <br/>
             <select value={rule} onChange={(e) => handleRuleChange(e)}>
               <option value="">Säännöt</option>
               {rules.map(rule => <option key={rule.id} value={rule.id}>{rule.name}</option>)}
+            </select>
+            <br/>
+            <select value={category} onChange={(e) => handleCategoryChange(e)}>
+              <option value="">Kategoria</option>
+              {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
             </select>
             <br/>
             <select value={language} onChange={(e) => handleLanguageChange(e)}>

@@ -91,7 +91,7 @@ const Task = ({ match, user }) => {
                 </div>
               ))}
               {user &&
-                <div>
+                <div className="buttons">
                   <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
                   {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
                   <button className="delete-button" onClick={() => handleDelete()}>Poista</button>
