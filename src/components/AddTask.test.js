@@ -56,11 +56,16 @@ describe('<AddTask />', () => {
     )
   })
 
-  test('allows to select accepted category', () => {
-
-  })
-
-  test('does not allow to select unaccepted category', () => {
-
+  test('allows to select only accepted category', () => {
+    component.update()
+    expect(component.find('.rule-options').length).toEqual(3)
+    expect(component.find('.rule-options').at(0).text()).toBe("säännöt1")
+    expect(component.find('.rule-options').at(1).text()).toBe("säännöt2")
+    expect(component.find('.rule-options').at(2).text()).toBe("testisäännöt true")
+    expect(component.find('.category-options').length).toEqual(0)
+    component.find('.rule-select').simulate('change', { target: { value: '1' } })
+    expect(component.find('.category-options').length).toEqual(2)
+    expect(component.find('.category-options').at(0).text()).toBe("kategoria1")
+    expect(component.find('.category-options').at(1).text()).toBe("kategoria2")
   })
 })
