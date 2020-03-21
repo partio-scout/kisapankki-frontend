@@ -49,7 +49,7 @@ const Rating = ({ task }) => {
           starSpacing="10px"
         />
       </div>
-      <div >arvoteluja yhteensä: {task.ratingsSUM}</div>
+      <div >arvoteluja yhteensä: {task.ratingsAmount}</div>
     </div>
   )
 }
