@@ -1,41 +1,31 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 import StarRatings from 'react-star-ratings'
+import taskService from '../services/task'
+import Notification from './Notification'
 
 const Rating = ({ task }) => {
-  const [rating, setRating] = useState(0)
-  const [allStars, setAllStars] = useState(0)
-  const [ka, setKa] = useState(0)
-  const [oneStar, setOneStar] = useState(0)
-  const [twoStars, setTwoStars] = useState(0)
-  const [threeStars, setThreeStars] = useState(0)
-  const [fiveStars, setFiveStars] = useState(0)
-  const [fourStars, setFourStars] = useState(0)
+  const [rating, setRating] = useState()
+  const [errorMessage, setErrorMessage] = useState(null)
+
 
   const changeRating = (newRating) => {
-    setAllStars(allStars + 1)
-    if (newRating === 1) {
-      setOneStar(oneStar + 1)
-    }
-    if (newRating === 2) {
-      setTwoStars(twoStars + 1)
-    }
-    if (newRating === 3) {
-      setThreeStars(threeStars + 1)
-    }
-    if (newRating === 4) {
-      setFourStars(fourStars + 1)
-    }
-    if (newRating === 5) {
-      setFiveStars(fiveStars + 1)
-    }
-    if (allStars !== 0) {
-      setKa(((oneStar * 1) + (twoStars * 2) + (threeStars * 3) + (fourStars *4) + (fiveStars *5 )) / allStars)
+    try {
+      taskService.addRating(task.id, {
+        rating: newRating
+      })
+
+    } catch (exception) {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 
+
   return (
     <div className="rating">
+      <Notification message={errorMessage} type="error" />
       <StarRatings
         rating={rating}
         changeRating={changeRating}
@@ -45,13 +35,13 @@ const Rating = ({ task }) => {
       />
       <div className="ratingStars">
         <StarRatings
-          rating={ka}
+          rating={task.ratingsAVG}
           starRatedColor="yellow"
           starDimension="20px"
           starSpacing="10px"
         />
       </div>
-      <div >arvoteluja yhteensä: {allStars}</div>
+      <div >arvoteluja yhteensä: {50000}</div>
     </div>
   )
 }
