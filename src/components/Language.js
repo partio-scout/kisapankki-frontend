@@ -69,7 +69,7 @@ const Language = ({ languages, setLanguages }) => {
           {modifyVisible && modifiedLanguageId === language.id ?
             <div className="language-form-item">
               <form onSubmit={handleLanguageModify} >
-                <div>
+                <div className="item-modify">
                   <input
                     className="language"
                     type="text"
@@ -77,23 +77,27 @@ const Language = ({ languages, setLanguages }) => {
                     name="Language"
                     onChange={({ target }) => setModifiedLanguageName(target.value)}
                   />
-                  <button type="submit" className="language-save-button">Tallenna</button>
-                  <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  <div className="item-buttons-save">
+                    <button type="submit" className="language-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
                 </div>
               </form>
             </div>
             :
             <Fragment>
-              <p>{language.name}</p>
-              <button onClick={() => handleShowModify(language)} className="modify-button">Muokkaa</button>
-              <button onClick={() => handleLanguageDelete(language)} className="delete-button">Poista</button>
+              <p className="item-name">{language.name}</p>
+              <div className="item-buttons">
+                <button onClick={() => handleShowModify(language)} className="modify-button">Muokkaa</button>
+                <button onClick={() => handleLanguageDelete(language)} className="delete-button">Poista</button>
+              </div>
             </Fragment>
             }
         </div>))
       }
 
       <form onSubmit={handleLanguageAdd} className="add-form">
-        <div>
+        <div className="item-add">
           <input
             className="language"
             type="text"

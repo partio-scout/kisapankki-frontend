@@ -69,7 +69,7 @@ const Category = ({ categories, setCategories }) => {
           {modifyVisible && modifiedCategoryId === category.id ?
             <div className="category-form-item">
               <form onSubmit={handleCategoryModify} >
-                <div>
+                <div className="item-modify">
                   <input
                     className="category"
                     type="text"
@@ -77,23 +77,27 @@ const Category = ({ categories, setCategories }) => {
                     name="Category"
                     onChange={({ target }) => setModifiedCategoryName(target.value)}
                   />
-                  <button type="submit" className="category-save-button">Tallenna</button>
-                  <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  <div className="item-buttons-save">
+                    <button type="submit" className="category-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
                 </div>
               </form>
             </div>
             :
             <Fragment>
-              <p>{category.name}</p>
-              <button onClick={() => handleShowModify(category)} className="modify-button">Muokkaa</button>
-              <button onClick={() => handleCategoryDelete(category)} className="delete-button">Poista</button>
+              <p className="item-name">{category.name}</p>
+              <div className="item-buttons">
+                <button onClick={() => handleShowModify(category)} className="modify-button">Muokkaa</button>
+                <button onClick={() => handleCategoryDelete(category)} className="delete-button">Poista</button>
+              </div>
             </Fragment>
           }
         </div>))
       }
 
       <form onSubmit={handleCategoryAdd} className="add-form">
-        <div>
+        <div className="item-add">
           <input
             className="category"
             type="text"
