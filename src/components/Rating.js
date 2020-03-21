@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import StarRatings from 'react-star-ratings'
 import taskService from '../services/task'
 import Notification from './Notification'
@@ -9,16 +9,20 @@ const Rating = ({ task }) => {
   const [confirmMessage, setConfirmMessage] = useState(null)
 
 
+
+
   const changeRating = (newRating) => {
     try {
       taskService.addRating(task.id, {
         rating: newRating
       })
-      setConfirmMessage('arvostelu lähetetty')
+      setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)
-      }, 5000)
-    } catch (exception) {
+      }, 2000)
+
+    }
+    catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
@@ -26,9 +30,8 @@ const Rating = ({ task }) => {
     }
   }
 
-
   return (
-    <div className="rating">
+    <div>
       <Notification message={errorMessage} type="error" />
       <Notification message={confirmMessage} type="success" />
       <StarRatings
@@ -38,7 +41,7 @@ const Rating = ({ task }) => {
         starSpacing="10px"
 
       />
-      <div className="ratingStars">
+      <div className="rating">
         <StarRatings
           rating={task.ratingsAVG}
           starRatedColor="yellow"
@@ -46,7 +49,7 @@ const Rating = ({ task }) => {
           starSpacing="10px"
         />
       </div>
-      <div >arvoteluja yhteensä: {50000}</div>
+      <div >arvoteluja yhteensä: {task.ratingsSUM}</div>
     </div>
   )
 }
