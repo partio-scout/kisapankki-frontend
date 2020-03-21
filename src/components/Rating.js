@@ -6,6 +6,7 @@ import Notification from './Notification'
 const Rating = ({ task }) => {
   const [rating, setRating] = useState()
   const [errorMessage, setErrorMessage] = useState(null)
+  const [confirmMessage, setConfirmMessage] = useState(null)
 
 
   const changeRating = (newRating) => {
@@ -13,7 +14,10 @@ const Rating = ({ task }) => {
       taskService.addRating(task.id, {
         rating: newRating
       })
-
+      setConfirmMessage('arvostelu lähetetty')
+      setTimeout(() => {
+        setConfirmMessage(null)
+      }, 5000)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -26,6 +30,7 @@ const Rating = ({ task }) => {
   return (
     <div className="rating">
       <Notification message={errorMessage} type="error" />
+      <Notification message={confirmMessage} type="success" />
       <StarRatings
         rating={rating}
         changeRating={changeRating}
