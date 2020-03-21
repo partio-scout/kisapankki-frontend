@@ -10,6 +10,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
   const [name, setName] = useState(user.name)
   const [username, setUsername] = useState(user.username)
   const [email, setEmail] = useState(user.email)
+  const [allowNotifications, setAllowNotifications] = useState(user.allowNotifications)
 
   const handleEditUser = async (event) => {
 
@@ -32,7 +33,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
     }
     try {
       const editedUser = await userService.editUser({
-        name, username, email,
+        name, username, email, allowNotifications
       })
       setUser(editedUser)
       window.localStorage.setItem(
@@ -58,16 +59,12 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
   return (
 
     <div className="edit-user-form">
-          {console.log(email)}
-          {console.log(email)}
-
-
       <h2>Omat tiedot</h2>
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleEditUser}>
         <div>
           <Notification message={nameErrorMessage} type="error" />
-          <label>Nimi</label><br/>
+          <label>Nimi</label><br />
           <input
             className="name"
             type="text"
@@ -79,7 +76,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
         </div>
         <div>
           <Notification message={usernameErrorMessage} type="error" />
-          <label>Käyttäjätunnus</label><br/>
+          <label>Käyttäjätunnus</label><br />
           <input
             className="username"
             type="text"
@@ -91,7 +88,7 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
         </div>
         <div>
           <Notification message={emailErrorMessage} type="error" />
-          <label>Sähköposti</label><br/>
+          <label>Sähköposti</label><br />
           <input
             className="email"
             type="text"
@@ -100,6 +97,31 @@ const EditUser = ({ setShowEdit, user, setUser, setMessage }) => {
             placeholder="Sähköposti"
             onChange={({ target }) => setEmail(target.value)}
           />
+        </div>
+        <div>
+          <label>
+            Vastaanota ilmoituksia:
+            <div className="admin-radio" onChange={({ target }) => setAllowNotifications(target.value)}>
+              <label>
+                <input
+                  type="radio"
+                  name="notifications"
+                  value={true}
+                  defaultChecked={allowNotifications}
+                />
+                Kyllä
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="notifications"
+                  value={false}
+                  defaultChecked={!allowNotifications}
+                />
+                Ei
+              </label>
+            </div>
+          </label>
         </div>
         <button type="submit" className="edit-button">Tallenna</button>
         <button onClick={() => setShowEdit(false)} className="cancel-button">Peruuta</button>

@@ -14,6 +14,7 @@ const AddAdmin = () => {
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
   const [email, setEmail] = useState('')
+  const [allowNotifications, setAllowNotifications] = useState(true)
 
   useEffect(() => {
     userService.getUsers().then((response) => {
@@ -46,12 +47,13 @@ const AddAdmin = () => {
     }
     try {
       await userService.addUser({
-        name, username, email, password,
+        name, username, email, password, allowNotifications
       })
       setName('')
       setUsername('')
       setEmail('')
       setPassword('')
+      setAllowNotifications(true)
       setMessage('Ylläpitäjä lisätty!')
       setTimeout(() => {
         setMessage(null)
@@ -113,6 +115,30 @@ const AddAdmin = () => {
             placeholder="Salasana"
             onChange={({ target }) => setPassword(target.value)}
           />
+        </div>
+        <div>
+          <label>
+            Vastaanota ilmoituksia:
+            <div className="admin-radio" onChange={({ target }) => setAllowNotifications(target.value)}>
+              <label>
+                <input
+                  type="radio"
+                  name="notifications"
+                  value={true}
+                  defaultChecked
+                />
+                Kyllä
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="notifications"
+                  value={false}
+                />
+                Ei
+              </label>
+            </div>
+          </label>
         </div>
         <button type="submit" className="signup-button">Lisää</button>
       </form>
