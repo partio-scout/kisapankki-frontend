@@ -24,9 +24,9 @@ describe('<EditUser />', () => {
     )
   })
 
-  test('renders inputs for name and username', () => {
+  test('renders inputs for name, username, email and notification options', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(3)
+    expect(inputs.length).toBe(5)
   })
 
   test('renders submit button', async () => {
