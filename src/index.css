@@ -193,7 +193,7 @@ button:hover, .search-tasks-button:hover {
 }
 
 .search-input {
-  width: calc(100% - 100px);
+  width: calc(100% - 105px);
 }
 
 .task-list-title {
@@ -375,11 +375,33 @@ table, th, td {
   flex-flow: wrap;
 }
 
-.category-list-item p, .language-list-item p, .serie-list-item p, .rule-list-item p {
-  width: 150px;
+.item-name {
   display: flex;
   justify-content: space-between;
+  min-width: 150px;
   margin: 5px;
+  overflow-wrap: break-word;
+}
+
+.item-name span {
+  min-width: 27px;
+}
+
+.item-buttons {
+  display: flex;
+}
+
+.item-modify {
+  width: 100%;
+}
+
+.item-modify input {
+  display: inline-block;
+  width: 142px;
+}
+
+.item-buttons-save {
+  display: inline-block;
 }
 
 .category-list-item button, .category-form-item  button {
@@ -407,8 +429,12 @@ table, th, td {
 }
 
 .crls-container input {
-  width: 130px;
   box-shadow: none;
+  margin-right: 0;
+}
+
+.item-add input {
+  margin-right: 5px;
 }
 
 .break {
@@ -442,16 +468,16 @@ table, th, td {
 } */
 
 .add-form input {
-  width: 250px;
+  width: 260px;
 }
 
 .add-acceptedCategories {
-  width: 350px;
+  width: 356px;
   margin-bottom: 7px;
 }
 
 .modify-acceptedCategories {
-  width: 370px;
+  width: 374px;
   margin-bottom: 7px;
 }
 
@@ -509,6 +535,36 @@ table, th, td {
 
   .task-view-info-background {
     margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .item-name {
+    width: calc(100% - 165px);
+    min-width: 100px;
+  }
+
+  .item-buttons button, .item-buttons-save button {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .item-add input {
+    width: calc(100% - 103px);
+  }
+
+  .item-modify input {
+    display: inline-block;
+    width: calc(100% - 188px);
+  }
+  
+  .item-buttons-save {
+    display: inline-block;
+    width: 170px;
+  }
+
+  .add-acceptedCategories, .modify-acceptedCategories {
+    width: 100%;
   }
 }
 

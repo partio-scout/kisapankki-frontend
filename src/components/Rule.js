@@ -84,7 +84,7 @@ const Rule = ({ rules, setRules, categories }) => {
           {modifyVisible && modifiedRuleId === rule.id ?
             <div className="rule-form-item">
               <form onSubmit={handleRuleModify}>
-                <div>
+                <div className="item-modify">
                   <input
                     className="rule"
                     type="text"
@@ -92,8 +92,10 @@ const Rule = ({ rules, setRules, categories }) => {
                     name="Category"
                     onChange={({ target }) => setModifiedRuleName(target.value)}
                   />
-                  <button type="submit" className="rule-save-button">Tallenna</button>
-                  <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  <div className="item-buttons-save">
+                    <button type="submit" className="rule-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
                 </div>
                 <div className="modify-acceptedCategories">
                   <Select
@@ -112,9 +114,11 @@ const Rule = ({ rules, setRules, categories }) => {
             </div>
           :
           <Fragment>
-            <p>{rule.name}</p>
-            <button onClick={() => handleShowModify(rule)} className="modify-button">Muokkaa</button>
-            <button onClick={() => handleRuleDelete(rule)} className="delete-button">Poista</button>
+            <p className="item-name">{rule.name}</p>
+            <div className="item-buttons">
+              <button onClick={() => handleShowModify(rule)} className="modify-button">Muokkaa</button>
+              <button onClick={() => handleRuleDelete(rule)} className="delete-button">Poista</button>
+            </div>
             <div className="break"></div>
             <div className="accepted-categories-list">
               {rule.acceptedCategories && rule.acceptedCategories.map(category => (
@@ -127,7 +131,7 @@ const Rule = ({ rules, setRules, categories }) => {
       }
 
       <form onSubmit={handleRuleAdd} className="add-form">
-        <div>
+        <div className="item-add">
           <input
             className="rule"
             type="text"

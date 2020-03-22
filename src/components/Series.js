@@ -72,7 +72,7 @@ const Series = ({ series, setSeries }) => {
           {modifyVisible && modifiedSerieId === serie.id ?
             <div className="serie-form-item">
               <form onSubmit={handleSerieModify} >
-                <div>
+                <div className="item-modify">
                   <input
                     className="serie"
                     type="text"
@@ -80,8 +80,10 @@ const Series = ({ series, setSeries }) => {
                     name="Serie"
                     onChange={({ target }) => setModifiedSerieName(target.value)}
                   />
-                  <button type="submit" className="serie-save-button">Tallenna</button>
-                  <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  <div className="item-buttons-save">
+                    <button type="submit" className="serie-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
                   <div className="color-picker">
                     <CirclePicker
                       color={modifiedSerieColor}
@@ -95,16 +97,18 @@ const Series = ({ series, setSeries }) => {
             </div>
           :
           <Fragment>
-            <p>{serie.name}<span style={{ backgroundColor: serie.color, display: 'inline-block', borderRadius: '50%', height: '27px', width: '27px' }} /></p>
-            <button onClick={() => handleShowModify(serie)} className="modify-button">Muokkaa</button>
-            <button onClick={() => handleSerieDelete(serie)} className="delete-button">Poista</button>
+            <p className="item-name"><span>{serie.name}</span><span style={{ backgroundColor: serie.color, display: 'inline-block', borderRadius: '50%', height: '27px', width: '27px', marginLeft: '5px' }} /></p>
+            <div className="item-buttons">
+              <button onClick={() => handleShowModify(serie)} className="modify-button">Muokkaa</button>
+              <button onClick={() => handleSerieDelete(serie)} className="delete-button">Poista</button>
+            </div>
           </Fragment>
           }
         </div>))
       }
 
       <form onSubmit={handleSeriesAdd} className="add-form">
-        <div>
+        <div className="item-add">
           <input
             className="name"
             type="text"

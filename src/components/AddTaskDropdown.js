@@ -36,26 +36,6 @@ const AddTaskDropdown = () => {
   return (
     <div className="crls-container">
       <div className="task-types-menu">
-        {showCategories ?
-          <Fragment>
-            <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
-            <Category categories={categories} setCategories={setCategories} />
-          </Fragment>
-          :
-          <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
-        }
-      </div>
-      <div className="task-types-menu">
-        {showLanguages ?
-          <Fragment>
-            <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Sulje kielet</button>
-            <Language languages={languages} setLanguages={setLanguages} />
-          </Fragment>
-          :
-          <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Kielet</button>
-        }
-      </div>
-      <div className="task-types-menu">
         {showSeries ?
           <Fragment>
             <button className="task-types" onClick={() => setShowSeries(!showSeries)}>Sulje sarjat</button>
@@ -73,6 +53,26 @@ const AddTaskDropdown = () => {
           </Fragment>
           :
           <button className="task-types" onClick={() => setShowRules(!showRules)}>Säännöt</button>
+        }
+      </div>
+      <div className="task-types-menu">
+        {showCategories ?
+          <Fragment>
+            <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Sulje kategoriat</button>
+            <Category categories={categories} setCategories={setCategories} />
+          </Fragment>
+          :
+          <button className="task-types" onClick={() => setShowCategories(!showCategories)}>Kategoriat</button>
+        }
+      </div>
+      <div className="task-types-menu">
+        {showLanguages ?
+          <Fragment>
+            <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Sulje kielet</button>
+            <Language languages={languages} setLanguages={setLanguages} />
+          </Fragment>
+          :
+          <button className="task-types" onClick={() => setShowLanguages(!showLanguages)}>Kielet</button>
         }
       </div>
     </div>
