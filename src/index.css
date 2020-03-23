@@ -394,6 +394,29 @@ table, th, td {
 .rating { 
   margin-top: 20px;
 }
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 100px;
+  overflow-x: hidden;
+  padding-top: 30px;
+
+}
+
+.left {
+  left: 0;
+
+}
+.right{
+  right: 0;
+ 
+}
+.rating-sum {
+  margin-left: 5px;
+}
+
 
 .task-header {
  display: flex;

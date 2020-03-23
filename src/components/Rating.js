@@ -7,15 +7,18 @@ const Rating = ({ task }) => {
   const [rating, setRating] = useState()
   const [errorMessage, setErrorMessage] = useState(null)
   const [confirmMessage, setConfirmMessage] = useState(null)
+  const [ratingsAVG, setRatingsAVG] = useState(task.ratingsAVG)
+  const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
 
 
 
 
   const changeRating = (newRating) => {
     try {
-      taskService.addRating(task.id, {
+      const t = taskService.addRating(task.id, {
         rating: newRating
       })
+      console.log(t)
       setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)
@@ -32,8 +35,7 @@ const Rating = ({ task }) => {
 
   return (
     <div>
-      <Notification message={errorMessage} type="error" />
-      <Notification message={confirmMessage} type="success" />
+      <h4>Arvostele:</h4>
       <StarRatings
         rating={rating}
         changeRating={changeRating}
@@ -41,15 +43,22 @@ const Rating = ({ task }) => {
         starSpacing="10px"
 
       />
+      <Notification message={errorMessage} type="error" />
+      <Notification message={confirmMessage} type="success" />
       <div className="rating">
+        <h4>Keskiarvo:</h4>
         <StarRatings
-          rating={task.ratingsAVG}
+          rating={ratingsAVG}
           starRatedColor="yellow"
           starDimension="20px"
           starSpacing="10px"
         />
+
+          ({ratingsAmount})
+
+
       </div>
-      <div >arvoteluja yhteensä: {task.ratingsAmount}</div>
+
     </div>
   )
 }
