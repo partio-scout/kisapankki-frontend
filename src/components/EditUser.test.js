@@ -13,7 +13,7 @@ describe('<EditUser />', () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <EditUser user={{ name: 'name', username: 'username' }} setUser={''} setShowEdit={''} setMessage={''} />
+        <EditUser user={{ name: 'name', username: 'username', email: 'email' }} setUser={''} setShowEdit={''} setMessage={''} />
       </Router>
     )
   })
@@ -24,9 +24,9 @@ describe('<EditUser />', () => {
     )
   })
 
-  test('renders inputs for name and username', () => {
+  test('renders inputs for name, username, email and notification options', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(2)
+    expect(inputs.length).toBe(5)
   })
 
   test('renders submit button', async () => {

@@ -7,6 +7,7 @@ import tokenService from '../services/token'
 const Login = ({ setUser }) => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
 
@@ -14,7 +15,7 @@ const Login = ({ setUser }) => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username, password,
+        username, email, password,
       })
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user),
@@ -22,6 +23,7 @@ const Login = ({ setUser }) => {
       setUser(user)
       tokenService.setToken(user.token)
       setUsername('')
+      setEmail('')
       setPassword('')
       history.push('/')
     } catch (exception) {

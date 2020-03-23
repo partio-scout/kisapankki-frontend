@@ -72,11 +72,12 @@ button {
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover, .task-types:hover {
+button:hover, .search-tasks-button:hover {
   background: #253764;
 }
 
@@ -193,7 +194,7 @@ button:hover, .search-tasks-button:hover, .task-types:hover {
   margin-bottom: 10px;
 }
 
-.filter input {
+.filter input, .add-acceptedCategories input, .modify-acceptedCategories input {
   box-shadow: none;
 }
 
@@ -202,7 +203,7 @@ button:hover, .search-tasks-button:hover, .task-types:hover {
 }
 
 .search-input {
-  width: calc(100% - 100px);
+  width: calc(100% - 105px);
 }
 
 .task-list-title {
@@ -326,6 +327,10 @@ table, th, td {
   padding: 5px;
 }
 
+.buttons {
+  margin-top: 15px;
+}
+
 .files {
   display: flex;
   flex-direction: column;
@@ -356,7 +361,7 @@ table, th, td {
 }
 
 .files b {
-  color: #ff0080;
+  color: #f04150;
   margin-left: 5px;
 }
 
@@ -365,53 +370,142 @@ table, th, td {
 }
 
 .task-types {
-  background: #28aae1;
-  color: #fff;
-  padding: 10px;
+  background-color: white;
+  color: #000;
+  padding: 0;
   text-transform: none;
   font-size: 25px;
   letter-spacing: unset;
+  outline: none;
+}
 
+.task-types:hover {
+  background-color: white;
 }
 
 .task-types-menu {
-  margin-top: 50px;
+  margin-top: 10px;
+  border: 1px solid #c7cad1;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 .category-list-item, .language-list-item, .serie-list-item, .rule-list-item {
   display: flex;
+  align-items: center;
+  flex-flow: wrap;
 }
 
-.category-list-item p, .language-list-item p, .serie-list-item p, .rule-list-item p {
-  width: 150px;
+.item-name {
+  display: flex;
+  justify-content: space-between;
+  min-width: 150px;
+  margin: 5px;
+  overflow-wrap: break-word;
+}
+
+.item-name span {
+  min-width: 27px;
+}
+
+.item-buttons {
+  display: flex;
+}
+
+.item-modify {
+  width: 100%;
+}
+
+.item-modify input {
+  display: inline-block;
+  width: 142px;
+}
+
+.item-buttons-save {
+  display: inline-block;
 }
 
 .category-list-item button, .category-form-item  button {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .rule-list-item button, .rule-form-item  button {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .serie-list-item button, .serie-form-item  button {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .language-list-item button, .language-form-item  button {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
-.category-form, .rule-form, .serie-form, .language-form {
-  margin-top: 20px; 
+.category-form, .rule-form, .serie-form, .language-form, .add-form {
+  margin-top: 10px; 
 }
 
+.crls-container button {
+  z-index: 0;
+}
 
+.crls-container input {
+  box-shadow: none;
+  margin-right: 0;
+}
 
+.item-add input {
+  margin-right: 5px;
+}
+
+.break {
+  width: 100%;
+}
+
+.accepted-categories-list {
+  margin-left: 5px;
+  margin-bottom: 10px;
+  font-style: italic;
+  max-width: 350px;
+}
+
+.rule-list-item {
+  border-bottom: 1px solid #c7cad1;
+  max-width: 380px;
+  padding-top: 5px;
+}
+
+/* .rule-list-item button, .category-list-item button, .language-list-item button, .serie-list-item button {
+  background-color: white;
+  color: #253764;
+}
+
+.rule-list-item .delete-button, .category-list-item .delete-button, .language-list-item .delete-button, .serie-list-item .delete-button {
+  color: #f04150;
+}
+
+.crls-container .delete-button:hover {
+  background-color: white;
+} */
+
+.add-form input {
+  width: 260px;
+}
+
+.add-acceptedCategories {
+  width: 356px;
+  margin-bottom: 7px;
+}
+
+.modify-acceptedCategories {
+  width: 374px;
+  margin-bottom: 7px;
+}
+
+.admin-radio input{
+  width: auto;
+  margin: 10px;
+}
 
 @media screen and (max-width: 570px) {
   .container {
@@ -467,6 +561,36 @@ table, th, td {
 
   .task-view-info-background {
     margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .item-name {
+    width: calc(100% - 165px);
+    min-width: 100px;
+  }
+
+  .item-buttons button, .item-buttons-save button {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .item-add input {
+    width: calc(100% - 103px);
+  }
+
+  .item-modify input {
+    display: inline-block;
+    width: calc(100% - 188px);
+  }
+  
+  .item-buttons-save {
+    display: inline-block;
+    width: 170px;
+  }
+
+  .add-acceptedCategories, .modify-acceptedCategories {
+    width: 100%;
   }
 }
 
