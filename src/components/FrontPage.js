@@ -6,8 +6,8 @@ const FrontPage = ({ tasks }) => {
   const [favoriteTasks, setFavoriteTasks] = useState([])
 
   useEffect(() => {
-    setNewTasks([...tasks].sort(compareCreated).slice(0, 10))
-    setFavoriteTasks([...tasks].sort(compareRatings).slice(0, 10))
+    setNewTasks([...tasks].sort(compareCreated).slice(0, 5))
+    setFavoriteTasks([...tasks].sort(compareRatings).slice(0, 5))
   }, [tasks])
 
   const compareCreated = (a, b) => {
