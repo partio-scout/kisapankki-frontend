@@ -11,14 +11,12 @@ const Rating = ({ task }) => {
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
 
 
-
-
   const changeRating = (newRating) => {
     try {
-      const t = taskService.addRating(task.id, {
+      taskService.addRating(task.id, {
         rating: newRating
       })
-      console.log(t)
+
       setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)
