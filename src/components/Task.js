@@ -3,6 +3,7 @@ import taskService from '../services/task'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
+import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
 const Task = ({ match, user }) => {
@@ -84,7 +85,10 @@ const Task = ({ match, user }) => {
               <p>{task.rules && task.rules.name}</p>
               <h3>Tehtävän viimeisin muokkaaja:</h3>
               <p>{task.creatorName}<br />{task.creatorEmail}</p>
+              <h3>Tehtävä lisätty:</h3>
+              {task.created && <p><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></p>}
               <h3>Liitetiedostot:</h3>
+              {task.files && task.files.length === 0 && <p>-</p>}
               {task.files && task.files.map((file) => (
                 <div key={file}>
                   <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>

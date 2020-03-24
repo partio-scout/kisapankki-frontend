@@ -8,9 +8,9 @@ import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
 
-const TaskList = ({ user }) => {
-  const [allTasks, setAllTasks] = useState([])
-  const [tasks, setTasks] = useState([])
+const TaskList = ({ user, originalTasks }) => {
+  const [tasks, setTasks] = useState(originalTasks)
+  const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
@@ -22,11 +22,6 @@ const TaskList = ({ user }) => {
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
-    taskService.getTasks().then((response) => {
-      setTasks(response)
-      setAllTasks(response)
-    })
-
     categoryService.getCategories().then((response) => {
       setCategories(response)
     })

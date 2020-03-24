@@ -5,12 +5,73 @@ import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
 
-jest.mock('../services/task')
 jest.mock('../services/series')
 jest.mock('../services/category')
 jest.mock('../services/rule')
 
 afterEach(cleanup)
+
+const tasks = [
+  {
+    id: 1,
+    name: 'tehtävä1',
+    assignmentText: 'testitehtävänanto',
+    supervisorInstructions: 'testiohjeet',
+    gradingScale: 'testiarvosteluperusteet',
+    creatorName: 'testiluoja',
+    creatorEmail: 'testiposti',
+    series: [{
+      id: '1',
+      name: 'sarja1',
+    }],
+    category: {
+      id: '1',
+      name: 'kategoria1',
+    },
+    language: {
+      id: '1',
+      name: 'kieli1',
+    },
+    rules: {
+      id: '1',
+      name: 'säännöt1',
+    },
+    pending: false,
+    views: 5,
+    ratingsAVG: '3',
+    created: '2020-03-23T19:54:27.358+00:00'
+  },
+
+  {
+    id: 2,
+    name: 'tehtävä2',
+    assignmentText: 'testitehtävänanto nro 2',
+    supervisorInstructions: 'myös toiset testiohjeet',
+    gradingScale: 'testiarvosteluperusteet2',
+    creatorName: 'nooraTestiluoja',
+    creatorEmail: 'testiposti@noora',
+    series: [{
+      id: '2',
+      name: 'sarja2',
+    }],
+    category: {
+      id: '2',
+      name: 'kategoria2',
+    },
+    language: {
+      id: '2',
+      name: 'kieli2',
+    },
+    rules: {
+      id: '2',
+      name: 'säännöt2',
+    },
+    pending: false,
+    views: 0,
+    ratingsAVG: '4',
+    created: '2020-03-23T19:53:27.358+00:00'
+  },
+]
 
 describe('<TaskList />', () => {
   let component
@@ -19,7 +80,7 @@ describe('<TaskList />', () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <TaskList user={user} />
+        <TaskList user={user} originalTasks={tasks} />
       </Router>,
     )
   })
@@ -65,7 +126,7 @@ describe('<TaskList />', () => {
   beforeEach(() => {
     component = mount(
       <Router>
-        <TaskList user={user} />
+        <TaskList user={user} originalTasks={tasks} />
       </Router>,
     )
   })

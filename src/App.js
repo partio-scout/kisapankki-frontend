@@ -10,12 +10,17 @@ import Admin from './components/Admin'
 import User from './components/User'
 import Task from './components/Task'
 import tokenService from './services/token'
+import taskService from './services/task'
 
 const App = () => {
+  const [tasks, setTasks] = useState([])
   const [user, setUser] = useState(null)
   const history = useHistory()
 
   useEffect(() => {
+    taskService.getTasks().then((response) => {
+      setTasks(response)
+    })
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
       const loggedUser = JSON.parse(loggedUserJSON)
@@ -55,13 +60,14 @@ const App = () => {
 
       </div>
       <div className="admin-task-buttons-mobile">
-        {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
+        <Link to="/tehtavat"><button className="addtask-button-mobile">Tehtävät</button></Link>
         <Link to="/lisaa_tehtava"><button className="addtask-button-mobile">Lisää tehtävä</button></Link>
+        {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
       </div>
       <div className="container">
-        <Route exact path="/" render={() => <FrontPage />} />
+        <Route exact path="/" render={() => <FrontPage tasks={tasks} />} />
         <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
-        <Route path="/tehtavat" render={() => <TaskList user={user} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />

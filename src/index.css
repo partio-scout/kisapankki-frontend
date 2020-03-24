@@ -452,6 +452,7 @@ table, th, td {
 .crls-container input {
   box-shadow: none;
   margin-right: 0;
+  height: 16px;
 }
 
 .item-add input {
@@ -507,7 +508,7 @@ table, th, td {
   margin: 10px;
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 625px) {
   .container {
     padding: 0px 10px 10px 10px;
   }

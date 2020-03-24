@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import taskService from '../services/task'
-import Notification from './Notification'
 
-const FrontPage = () => {
+const FrontPage = ({ tasks }) => {
   const [newTasks, setNewTasks] = useState([])
   const [favoriteTasks, setFavoriteTasks] = useState([])
-  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
-    taskService.getTasks().then((response) => {
-      setNewTasks(response)
-      setFavoriteTasks(response)
-    })
-  }, [])
+    setNewTasks([...tasks].sort(compareCreated).slice(0, 10))
+    setFavoriteTasks([...tasks].sort(compareRatings).slice(0, 10))
+  }, [tasks])
+
+  const compareCreated = (a, b) => {
+    return b.created.localeCompare(a.created)
+  }
+
+  const compareRatings = (a, b) => {
+    return b.ratingsAVG - a.ratingsAVG
+  }
 
   return (
     <div className="task-list frontpage-container">
       <h1>Kisatehtäväpankki</h1>
 
-      <Notification message={errorMessage} />
-
       <div className="new-favorite-lists">
         <div className="new-list">
           <h2>Uusimmat tehtävät</h2>
-          {newTasks && newTasks.length > 0 &&
-            <div className="task-list-title frontpage-item">
-              <span>Tehtävän nimi</span>
-              <span>Sarja</span>
-              <span>Kategoria</span>
-            </div>
-          }
-          {newTasks && newTasks.map((task) => (
-            <div className="task-list-item frontpage-item" key={task.id}>
+          <div className="task-list-title frontpage-item">
+            <span>Tehtävän nimi</span>
+            <span>Sarja</span>
+            <span>Kategoria</span>
+          </div>
+          {newTasks.map((task) => (
+            <div className="task-list-item frontpage-item new-item" key={task.id}>
               <span>
                 <Link to={`/tehtava/${task.id}`}>
                   {task.name}
@@ -46,15 +45,13 @@ const FrontPage = () => {
 
         <div className="favorite-list">
           <h2>Suosituimmat tehtävät</h2>
-          {favoriteTasks && favoriteTasks.length > 0 &&
-            <div className="task-list-title frontpage-item">
-              <span>Tehtävän nimi</span>
-              <span>Sarja</span>
-              <span>Kategoria</span>
-            </div>
-          }
-          {favoriteTasks && favoriteTasks.map((task) => (
-            <div className="task-list-item frontpage-item" key={task.id}>
+          <div className="task-list-title frontpage-item">
+            <span>Tehtävän nimi</span>
+            <span>Sarja</span>
+            <span>Kategoria</span>
+          </div>
+          {favoriteTasks.map((task) => (
+            <div className="task-list-item frontpage-item favorite-item" key={task.id}>
               <span>
                 <Link to={`/tehtava/${task.id}`}>
                   {task.name}
