@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const FrontPage = ({ tasks }) => {
+const FrontPage = ({ tasks, addTaskToBasket }) => {
   const [newTasks, setNewTasks] = useState([])
   const [favoriteTasks, setFavoriteTasks] = useState([])
 
@@ -29,6 +29,7 @@ const FrontPage = ({ tasks }) => {
             <span>Tehtävän nimi</span>
             <span>Sarja</span>
             <span>Kategoria</span>
+            <span></span>
           </div>
           {newTasks.map((task) => (
             <div className="task-list-item frontpage-item new-item" key={task.id}>
@@ -39,6 +40,7 @@ const FrontPage = ({ tasks }) => {
               </span>
               <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
               <span>{task.category && task.category.name}</span>
+              <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
             </div>
           ))}
         </div>
@@ -49,6 +51,7 @@ const FrontPage = ({ tasks }) => {
             <span>Tehtävän nimi</span>
             <span>Sarja</span>
             <span>Kategoria</span>
+            <span></span>
           </div>
           {favoriteTasks.map((task) => (
             <div className="task-list-item frontpage-item favorite-item" key={task.id}>
@@ -59,6 +62,7 @@ const FrontPage = ({ tasks }) => {
               </span>
               <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
               <span>{task.category && task.category.name}</span>
+              <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
             </div>
           ))}
         </div>

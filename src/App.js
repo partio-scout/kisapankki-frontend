@@ -3,6 +3,7 @@ import { Route, Link, Redirect, useHistory } from 'react-router-dom'
 import Login from './components/Login'
 import FrontPage from './components/FrontPage'
 import TaskList from './components/TaskList'
+import Basket from './components/Basket'
 import AddAdmin from './components/AddAdmin'
 import AddTaskDropdown from './components/AddTaskDropdown'
 import AddTask from './components/AddTask'
@@ -13,6 +14,7 @@ import tokenService from './services/token'
 import taskService from './services/task'
 
 const App = () => {
+  const [basket, setBasket] = useState([])
   const [tasks, setTasks] = useState([])
   const [user, setUser] = useState(null)
   const history = useHistory()
@@ -27,7 +29,18 @@ const App = () => {
       setUser(loggedUser)
       tokenService.setToken(loggedUser.token)
     }
+    const basketJSON = window.localStorage.getItem('basket')
+    if (basketJSON) {
+      const foundBasket = JSON.parse(basketJSON)
+      setBasket(foundBasket)
+    }
   }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      'basket', JSON.stringify(basket)
+    )
+  }, [basket])
 
   const logout = () => {
     window.localStorage.removeItem('loggedUser')
@@ -35,6 +48,17 @@ const App = () => {
     tokenService.setToken(null)
     history.push('/')
     window.location.reload()
+  }
+
+  const addTaskToBasket = (task) => {
+    const foundTask = basket.find(t => t.id === task.id)
+    if (!foundTask) {
+      setBasket(basket.concat(task))
+    }
+  }
+
+  const removeTaskFromBasket = (id) => {
+    setBasket(basket.filter(task => task.id !== id))
   }
 
   return (
@@ -57,6 +81,7 @@ const App = () => {
             </div>
           </Fragment>
         }
+        <Link to="/valitut_tehtavat"><div className="white-basket">{basket.length > 0 && <span className="number-of-tasks-in-basket">{basket.length}</span>}</div></Link>
       </div>
       <div className="admin-task-buttons-mobile">
         <Link to="/tehtavat"><button className="addtask-button-mobile">Tehtävät</button></Link>
@@ -64,9 +89,10 @@ const App = () => {
         {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
       </div>
       <div className="container">
-        <Route exact path="/" render={() => <FrontPage tasks={tasks} />} />
-        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} />} />
-        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} />} />
+        <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} />} />
+        <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
