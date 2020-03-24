@@ -212,7 +212,6 @@ button:hover, .search-tasks-button:hover {
   justify-content: space-between;
   vertical-align: top;
   font-weight: bold;
-  word-break: break-all;
 }
 
 .task-list-title span:not(:first-of-type) {
@@ -232,7 +231,6 @@ button:hover, .search-tasks-button:hover {
   padding: 10px 15px;
   border-radius: 5px;
   margin-bottom: 15px;
-  word-break: break-all;
 }
 
 .task-list-title span {
@@ -581,10 +579,29 @@ table, th, td {
     outline: none;
     padding: 0px 10px;
     margin: 0px;
+    z-index: 50;
   }
 
   .dropdowns {
     display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .task-list-item, .task-list-title, .frontpage-item {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-list-item span, .task-list-title span, .frontpage-item span {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
+    margin: 5px;
   }
 }
 
