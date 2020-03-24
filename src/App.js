@@ -57,7 +57,6 @@ const App = () => {
             </div>
           </Fragment>
         }
-
       </div>
       <div className="admin-task-buttons-mobile">
         <Link to="/tehtavat"><button className="addtask-button-mobile">Tehtävät</button></Link>

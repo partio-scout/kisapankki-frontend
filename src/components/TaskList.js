@@ -36,6 +36,11 @@ const TaskList = ({ user, originalTasks }) => {
   }, [])
 
   useEffect(() => {
+    setTasks(originalTasks)
+    setAllTasks(originalTasks)
+  }, [originalTasks])
+
+  useEffect(() => {
     if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
       let array = []
       for (let i = 0; i < allTasks.length; i++) {
