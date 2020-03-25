@@ -660,6 +660,12 @@ table, th, td {
   .black-basket, .white-basket {
     margin: 0;
   }
+
+  .logo {
+    top: 15px;
+    background-size: 120px;
+    margin: 5px;
+  }
 }
 
 @media screen and (max-width: 410px) {
@@ -703,9 +709,19 @@ table, th, td {
 
   .logo {
     background-position: 5px 0px;
+    top: 18px;
+    background-size: 100px;
   }
 
   .login-button-header, .signup-button-header, .logout-button-header, .addtask-button-header {
     padding: 0px 5px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .logo {
+    top: 25px;
+    background-size: 80px;
+    margin: 2px;
   }
 }
