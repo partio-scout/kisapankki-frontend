@@ -11,12 +11,15 @@ const Rating = ({ task }) => {
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
 
 
-  const changeRating = (newRating) => {
+
+  const changeRating = async (newRating) => {
     try {
-      taskService.addRating(task.id, {
+      const updatedTask = await taskService.addRating(task.id, {
         rating: newRating
       })
 
+      setRatingsAVG(updatedTask.ratingsAVG)
+      setRatingsAmount(updatedTask.ratingsAmount)
       setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)
@@ -44,15 +47,18 @@ const Rating = ({ task }) => {
       <Notification message={errorMessage} type="error" />
       <Notification message={confirmMessage} type="success" />
       <div className="rating">
-        <h4>Keskiarvo:</h4>
-        <StarRatings
-          rating={ratingsAVG}
-          starRatedColor="yellow"
-          starDimension="20px"
-          starSpacing="10px"
-        />
-
+        <div>
+          <h4>Keskiarvo:</h4>
+          <StarRatings
+            rating={ratingsAVG}
+            starRatedColor="yellow"
+            starDimension="20px"
+            starSpacing="10px"
+          />
+        </div>
+        <div className="rating-avg">
           ({ratingsAmount})
+        </div>
 
 
       </div>
