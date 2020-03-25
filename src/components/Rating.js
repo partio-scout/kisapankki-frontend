@@ -9,17 +9,19 @@ const Rating = ({ task }) => {
   const [confirmMessage, setConfirmMessage] = useState(null)
   const [ratingsAVG, setRatingsAVG] = useState(task.ratingsAVG)
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
+  const [disabled, setDisabled] =useState(false)
 
 
 
   const changeRating = async (newRating) => {
     try {
-      const updatedTask = await taskService.addRating(task.id, {
+      const updatedValues = await taskService.addRating(task.id, {
         rating: newRating
       })
 
-      setRatingsAVG(updatedTask.ratingsAVG)
-      setRatingsAmount(updatedTask.ratingsAmount)
+      setRatingsAVG(updatedValues.ratingsAVG)
+      setRatingsAmount(updatedValues.ratingsAmount)
+      setDisabled(true)
       setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)

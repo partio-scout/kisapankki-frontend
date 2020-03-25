@@ -389,27 +389,24 @@ table, th, td {
   margin-top: 20px; 
 }
 
-
-
 .rating { 
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
+
 .task-rating {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 30px;  
+  float: right;
+  margin-right: 70px; 
 }
+
 .rating-avg {
   margin-top: 35px;
 }
  
-
 .rating-sum {
   margin-left: 5px;
 }
-
 
 .task-header {
  display: flex;
