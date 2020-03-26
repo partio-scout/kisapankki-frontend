@@ -9,31 +9,50 @@ const Rating = ({ task }) => {
   const [confirmMessage, setConfirmMessage] = useState(null)
   const [ratingsAVG, setRatingsAVG] = useState(task.ratingsAVG)
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
-  const [disabled, setDisabled] =useState(false)
+  const [disabled, setDisabled] = useState(false)
 
 
+  useEffect(() => {
+    const votesJSON = window.localStorage.getItem('votes')
+    const votes = JSON.parse(votesJSON)
+    const foundVote = votes.find(t => t === task.id)
+    if (foundVote) {
+      setDisabled(true)
+    }
+  }, [])
 
   const changeRating = async (newRating) => {
-    try {
-      const updatedValues = await taskService.addRating(task.id, {
-        rating: newRating
-      })
+    if (!disabled) {
+      try {
+        const updatedValues = await taskService.addRating(task.id, {
+          rating: newRating
+        })
+        const votesJSON = window.localStorage.getItem('votes')
+        const votes = JSON.parse(votesJSON)
+        const newVotes = votes.concat(task.id)
+        window.localStorage.setItem('votes', JSON.stringify(newVotes))
+        setRatingsAVG(updatedValues.ratingsAVG)
+        setRatingsAmount(updatedValues.ratingsAmount)
+        setDisabled(true)
+        setConfirmMessage('Arvostelu lähetetty')
+        setTimeout(() => {
+          setConfirmMessage(null)
+        }, 2000)
 
-      setRatingsAVG(updatedValues.ratingsAVG)
-      setRatingsAmount(updatedValues.ratingsAmount)
-      setDisabled(true)
-      setConfirmMessage('Arvostelu lähetetty')
-      setTimeout(() => {
-        setConfirmMessage(null)
-      }, 2000)
-
-    }
-    catch (exception) {
-      setErrorMessage('Jotain meni vikaan')
+      }
+      catch (exception) {
+        setErrorMessage('Jotain meni vikaan')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      }
+    } else {
+      setErrorMessage('Olet jo äänestänyt')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     }
+
   }
 
   return (
