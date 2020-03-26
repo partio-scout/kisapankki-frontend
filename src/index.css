@@ -116,18 +116,20 @@ button:hover, .search-tasks-button:hover {
 
 .white-basket {
   position: relative;
-  height: 50px;
-  width: 50px;
+  height: 55px;
+  width: 45px;
+  background-size: 45px;
   background-image: url('./images/white_bag.svg');
   background-repeat: no-repeat;
   background-color: transparent;
   margin: 10px;
+  margin-top: 5px;
   cursor: pointer;
 }
 
 .number-of-tasks-in-basket {
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -140,12 +142,13 @@ button:hover, .search-tasks-button:hover {
 }
 
 .black-basket {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
+  background-size: 20px;
   background-image: url('./images/black_bag.svg');
   background-repeat: no-repeat;
   background-color: transparent;
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   cursor: pointer;
 }
 
