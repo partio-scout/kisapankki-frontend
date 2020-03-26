@@ -26,7 +26,6 @@ const App = () => {
       const votes = []
       window.localStorage.setItem('votes', JSON.stringify(votes))
     }
-    console.log(window.localStorage.getItem('votes'))
   }, [])
 
   const logout = () => {

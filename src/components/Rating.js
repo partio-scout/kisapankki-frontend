@@ -14,10 +14,12 @@ const Rating = ({ task }) => {
 
   useEffect(() => {
     const votesJSON = window.localStorage.getItem('votes')
-    const votes = JSON.parse(votesJSON)
-    const foundVote = votes.find(t => t === task.id)
-    if (foundVote) {
-      setDisabled(true)
+    if (votesJSON) {
+      const votes = JSON.parse(votesJSON)
+      const foundVote = votes.find(t => t === task.id)
+      if (foundVote) {
+        setDisabled(true)
+      }
     }
   }, [])
 
@@ -28,9 +30,11 @@ const Rating = ({ task }) => {
           rating: newRating
         })
         const votesJSON = window.localStorage.getItem('votes')
-        const votes = JSON.parse(votesJSON)
-        const newVotes = votes.concat(task.id)
-        window.localStorage.setItem('votes', JSON.stringify(newVotes))
+        if (votesJSON) {
+          const votes = JSON.parse(votesJSON)
+          const newVotes = votes.concat(task.id)
+          window.localStorage.setItem('votes', JSON.stringify(newVotes))
+        }
         setRatingsAVG(updatedValues.ratingsAVG)
         setRatingsAmount(updatedValues.ratingsAmount)
         setDisabled(true)
