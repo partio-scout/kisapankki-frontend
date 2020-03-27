@@ -486,6 +486,33 @@ table, th, td {
   margin: 10px;
 }
 
+.arrow-container {
+  position: relative;
+}
+
+i {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.name-arrow-up, .rating-arrow-up {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  transform: rotate(-135deg);
+}
+
+.name-arrow-down, .rating-arrow-down {
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  transform: rotate(45deg);
+}
+
 @media screen and (max-width: 570px) {
   .container {
     padding: 0px 10px 10px 10px;

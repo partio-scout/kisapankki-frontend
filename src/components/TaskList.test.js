@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, waitForElement } from '@testing-library/react'
+import { render, cleanup, waitForElement, act, fireEvent } from '@testing-library/react'
 import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
@@ -54,6 +54,23 @@ describe('<TaskList />', () => {
   test('renders delete-button', () => {
     const button = component.container.querySelector('.delete-button')
     expect(button).toHaveTextContent('Poista')
+  })
+
+  test('clicking arrows sorts tasks in correct order by name', async () => {
+    await waitForElement(
+      () => component.container.querySelector('.task-list-item'),
+    )
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
+    
+    const arrowUp = component.container.querySelector('.name-arrow-up')
+    act(() => { fireEvent.click(arrowUp)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä2')
+
+    const arrowDown = component.container.querySelector('.name-arrow-down')
+    act(() => { fireEvent.click(arrowDown)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
   })
 
 })
