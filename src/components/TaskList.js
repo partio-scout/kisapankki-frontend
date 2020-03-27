@@ -188,18 +188,19 @@ const TaskList = ({ user }) => {
         </div>
       }
       {tasks.map((task) => (
-        <div className="task-list-item" key={task.id}>
-          <span>
-            <Link to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
-              {task.name}
-            </Link>
-            <p>Katselukertoja: {task.views}</p>
-          </span>
-          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-          <span>{task.category && task.category.name}</span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
-          }
-        </div>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
+          <div className="task-list-item" key={task.id}>
+            <span>
+              <h3>{task.name}</h3>
+              <p>Katselukertoja: {task.views}</p>
+            </span>
+            <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+            <span>{task.category && task.category.name}</span>
+            {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
+            }
+          </div>
+        </Link>
+
       ))}
     </div>
 
