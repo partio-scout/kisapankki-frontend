@@ -6,7 +6,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user }) => {
+const Task = ({ match, user, addTaskToBasket }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -69,7 +69,7 @@ const Task = ({ match, user }) => {
           {task &&
             <div className="task-view-info">
               <div>
-                <h2>{task.name}</h2>
+                <h2>{task.name}<span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span></h2>
               </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />

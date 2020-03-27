@@ -8,7 +8,7 @@ import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
 
-const TaskList = ({ user, originalTasks }) => {
+const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -185,6 +185,7 @@ const TaskList = ({ user, originalTasks }) => {
           <span>Sarja</span>
           <span>Kategoria</span>
           {user && <span></span>}
+          <span></span>
         </div>
       }
       {tasks.map((task) => (
@@ -197,8 +198,8 @@ const TaskList = ({ user, originalTasks }) => {
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
-          }
+          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
         </div>
       ))}
     </div>
