@@ -9,9 +9,9 @@ import Select from 'react-select'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
 
-const TaskList = ({ user }) => {
-  const [allTasks, setAllTasks] = useState([])
-  const [tasks, setTasks] = useState([])
+const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
+  const [tasks, setTasks] = useState(originalTasks)
+  const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
@@ -23,11 +23,6 @@ const TaskList = ({ user }) => {
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
-    taskService.getTasks().then((response) => {
-      setTasks(response)
-      setAllTasks(response)
-    })
-
     categoryService.getCategories().then((response) => {
       setCategories(response)
     })
@@ -40,6 +35,11 @@ const TaskList = ({ user }) => {
       setRules(response)
     })
   }, [])
+
+  useEffect(() => {
+    setTasks(originalTasks)
+    setAllTasks(originalTasks)
+  }, [originalTasks])
 
   useEffect(() => {
     if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
@@ -219,6 +219,7 @@ const TaskList = ({ user }) => {
           <span>Kategoria</span>
           <span>Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
           {user && <span></span>}
+          <span></span>
         </div>
       }
       {tasks.map((task) => (
@@ -239,8 +240,8 @@ const TaskList = ({ user }) => {
               starSpacing="10px"
             />
           </span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
-          }
+          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
         </div>
       ))}
     </div>

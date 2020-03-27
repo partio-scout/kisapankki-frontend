@@ -64,6 +64,7 @@ const TaskListPending = () => {
           <span>Sarja</span>
           <span>Kategoria</span>
           <span></span>
+          <span></span>
         </div>
       }
       {tasks.map((task) => (
@@ -79,6 +80,7 @@ const TaskListPending = () => {
             <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
             <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
           </span>
+          <span></span>
         </div>
       ))}
 

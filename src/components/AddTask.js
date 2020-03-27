@@ -233,7 +233,7 @@ const AddTask = () => {
               type="text"
               value={creatorEmail}
               name="CreatorEmail"
-              placeholder="Lisääjän sähköpostiosoite"
+              placeholder="Lisääjän sähköposti"
               onChange={({ target }) => setCreatorEmail(target.value)}
             />
           </div>
