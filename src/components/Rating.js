@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import StarRatings from 'react-star-ratings'
 import taskService from '../services/task'
 import Notification from './Notification'
@@ -9,7 +9,6 @@ const Rating = ({ task }) => {
   const [confirmMessage, setConfirmMessage] = useState(null)
   const [ratingsAVG, setRatingsAVG] = useState(task.ratingsAVG)
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
-  const [disabled, setDisabled] =useState(false)
 
 
 
@@ -21,7 +20,6 @@ const Rating = ({ task }) => {
 
       setRatingsAVG(updatedValues.ratingsAVG)
       setRatingsAmount(updatedValues.ratingsAmount)
-      setDisabled(true)
       setConfirmMessage('Arvostelu lähetetty')
       setTimeout(() => {
         setConfirmMessage(null)
@@ -61,7 +59,6 @@ const Rating = ({ task }) => {
         <div className="rating-avg">
           ({ratingsAmount})
         </div>
-
 
       </div>
 
