@@ -192,7 +192,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
       <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
         <div className="task-list-item" key={task.id}>
           <span>
-              <h3>{task.name}</h3>
+              <p className="bigger-task-name">{task.name}</p>
             <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>

@@ -33,10 +33,18 @@ h3, h4 {
   margin-bottom: 5px;
 }
 
- .no-underline {
+.no-underline {
   text-decoration: none;
   color: #253764;
  }
+
+.bigger-task-name {
+  font-size: 115%;
+}
+
+.smaller-task-name {
+  font-size: 105%;
+}
 
 
 input, select {

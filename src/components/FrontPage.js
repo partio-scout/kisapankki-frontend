@@ -35,7 +35,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
             <Link className="no-underline" to={`/tehtava/${task.id}`}>
               <div className="task-list-item frontpage-item new-item" key={task.id}>
                 <span>
-                  {task.name}
+                <p className="smaller-task-name">{task.name}</p>
                 </span>
                 <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                 <span>{task.category && task.category.name}</span>
@@ -58,7 +58,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
             <Link className="no-underline" to={`/tehtava/${task.id}`}>
               <div className="task-list-item frontpage-item favorite-item" key={task.id}>
                 <span>
-                  {task.name}
+                <p className="smaller-task-name">{task.name}</p>
                 </span>
                 <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                 <span>{task.category && task.category.name}</span>
