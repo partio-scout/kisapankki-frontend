@@ -26,12 +26,14 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
         <FrontPageInfo />
         <div className="new-favorite-lists">
           <div className="new-list">
-            <h2>Uusimmat tehtävät</h2>
-            <div className="task-list-title frontpage-item">
-              <span>Tehtävän nimi</span>
-              <span>Sarja</span>
-              <span>Kategoria</span>
-              <span></span>
+            <div className="image-on-background">
+              <h2>Uusimmat tehtävät</h2>
+              <div className="task-list-title frontpage-item">
+                <span >Tehtävän nimi</span>
+                <span>Sarja</span>
+                <span>Kategoria</span>
+                <span></span>
+              </div>
             </div>
             {newTasks.map((task) => (
               <div className="task-list-item frontpage-item new-item" key={task.id}>
@@ -48,12 +50,14 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
           </div>
 
           <div className="favorite-list">
-            <h2>Suosituimmat tehtävät</h2>
-            <div className="task-list-title frontpage-item">
-              <span>Tehtävän nimi</span>
-              <span>Sarja</span>
-              <span>Kategoria</span>
-              <span></span>
+            <div className="image-on-background">
+              <h2>Suosituimmat tehtävät</h2>
+              <div className="task-list-title frontpage-item">
+                <span>Tehtävän nimi</span>
+                <span>Sarja</span>
+                <span>Kategoria</span>
+                <span></span>
+              </div>
             </div>
             {favoriteTasks.map((task) => (
               <div className="task-list-item frontpage-item favorite-item" key={task.id}>
