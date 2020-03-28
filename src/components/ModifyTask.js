@@ -243,7 +243,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
               type="text"
               defaultValue={creatorEmail}
               name="CreatorEmail"
-              placeholder="Muokkaajan sähköpostiosoite"
+              placeholder="Muokkaajan sähköposti"
               onChange={({ target }) => setCreatorEmail(target.value)}
             />
           </div>

@@ -8,9 +8,9 @@ import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
 
-const TaskList = ({ user }) => {
-  const [allTasks, setAllTasks] = useState([])
-  const [tasks, setTasks] = useState([])
+const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
+  const [tasks, setTasks] = useState(originalTasks)
+  const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
@@ -22,11 +22,6 @@ const TaskList = ({ user }) => {
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
-    taskService.getTasks().then((response) => {
-      setTasks(response)
-      setAllTasks(response)
-    })
-
     categoryService.getCategories().then((response) => {
       setCategories(response)
     })
@@ -39,6 +34,11 @@ const TaskList = ({ user }) => {
       setRules(response)
     })
   }, [])
+
+  useEffect(() => {
+    setTasks(originalTasks)
+    setAllTasks(originalTasks)
+  }, [originalTasks])
 
   useEffect(() => {
     if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
@@ -185,22 +185,22 @@ const TaskList = ({ user }) => {
           <span>Sarja</span>
           <span>Kategoria</span>
           {user && <span></span>}
+          <span></span>
         </div>
       }
       {tasks.map((task) => (
-        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
-          <div className="task-list-item" key={task.id}>
-            <span>
+      <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
+        <div className="task-list-item" key={task.id}>
+          <span>
               <h3>{task.name}</h3>
-              <p>Katselukertoja: {task.views}</p>
-            </span>
-            <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-            <span>{task.category && task.category.name}</span>
-            {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
-            }
-          </div>
+            <p>Katselukertoja: {task.views}</p>
+          </span>
+          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+          <span>{task.category && task.category.name}</span>
+          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+        </div>
         </Link>
-
       ))}
     </div>
 

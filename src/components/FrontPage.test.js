@@ -1,11 +1,8 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, waitForElement, fireEvent, act } from '@testing-library/react'
+import { render, cleanup, waitForElement } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import App from './App'
-import FrontPage from './components/FrontPage'
-
-jest.mock('./services/task')
+import FrontPage from './FrontPage'
 
 afterEach(cleanup)
 
@@ -71,38 +68,49 @@ const tasks = [
   },
 ]
 
-describe('<App />', () => {
+describe('<FrontPage />', () => {
   let component
 
   beforeEach(() => {
     component = render(
       <Router>
-        <App>
-          <FrontPage tasks={tasks} addTaskToBasket={'not null'} />
-        </App>
+        <FrontPage tasks={tasks} />
       </Router>,
     )
   })
 
-  test('renders login button in header', () => {
-    const button = component.container.querySelector('.login-button-header')
-    expect(button).toHaveTextContent(
-      'Kirjaudu',
+  test('renders new tasks in correct order', async () => {
+    await waitForElement(
+      () => component.container.querySelector('.new-item'),
+    )
+
+    const tasks = component.container.querySelectorAll('.new-item')
+    expect(tasks.length).toBe(2)
+
+    expect(tasks[0]).toHaveTextContent(
+      'tehtävä1',
+    )
+
+    expect(tasks[1]).toHaveTextContent(
+      'tehtävä2',
     )
   })
 
-  test('clicking icon adds task to basket', async () => {
-    const whiteBasket = component.container.querySelector('.white-basket')
-    expect(whiteBasket).not.toHaveTextContent('1')
-
+  test('renders favorite tasks in correct order', async () => {
     await waitForElement(
-      () => component.container.querySelector('.black-basket'),
+      () => component.container.querySelector('.new-item'),
     )
 
-    const blackBaskets = component.container.querySelectorAll('.black-basket')
-    act(() => { fireEvent.click(blackBaskets[0])})
+    const tasks = component.container.querySelectorAll('.favorite-item')
+    expect(tasks.length).toBe(2)
 
-    expect(whiteBasket).toHaveTextContent('1')
+    expect(tasks[0]).toHaveTextContent(
+      'tehtävä2',
+    )
+
+    expect(tasks[1]).toHaveTextContent(
+      'tehtävä1',
+    )
   })
 
 })
