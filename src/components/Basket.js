@@ -9,6 +9,8 @@ const Basket = ({ tasks, removeTaskFromBasket }) => {
     <div className="task-list">
       <h2>Kisaan valitut tehtävät</h2>
 
+      {tasks && tasks.length === 0 && <div>Ei valittuja tehtäviä</div>}
+
       {tasks && tasks.length > 0 &&
         <div className="task-list-title">
           <span>Tehtävän nimi</span>
