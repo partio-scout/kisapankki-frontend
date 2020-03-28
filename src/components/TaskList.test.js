@@ -117,11 +117,10 @@ describe('<TaskList />', () => {
     expect(button).toHaveTextContent('Poista')
   })
 
-  test('clicking arrows sorts tasks in correct order by name', async () => {
+  test('clicking arrow sorts tasks in correct order by name', async () => {
     await waitForElement(
       () => component.container.querySelector('.task-list-item'),
     )
-    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
     
     const arrowUp = component.container.querySelector('.name-arrow-up')
     act(() => { fireEvent.click(arrowUp)})
@@ -130,6 +129,22 @@ describe('<TaskList />', () => {
 
     const arrowDown = component.container.querySelector('.name-arrow-down')
     act(() => { fireEvent.click(arrowDown)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
+  })
+
+  test('clicking arrow sorts tasks in correct order by rating', async () => {
+    await waitForElement(
+      () => component.container.querySelector('.task-list-item'),
+    )
+    
+    const arrowDown = component.container.querySelector('.rating-arrow-down')
+    act(() => { fireEvent.click(arrowDown)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä2')
+
+    const arrowUp = component.container.querySelector('.rating-arrow-up')
+    act(() => { fireEvent.click(arrowUp)})
 
     expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
   })

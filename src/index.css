@@ -317,6 +317,19 @@ button:hover, .search-tasks-button:hover {
   margin-top: 5px;
 }
 
+.task-list-delete {
+  text-align: center;
+}
+
+.star-ratings {
+  white-space: nowrap;
+}
+
+.star-container {
+  padding-left: 1px!important;
+  padding-right: 1px!important;
+}
+
 .user-info button, .save-task-button, .modify-view-button, .accept-button {
   margin-right: 10px;
 }
@@ -557,14 +570,14 @@ table, th, td {
 .name-arrow-up, .rating-arrow-up {
   position: absolute;
   top: 4px;
-  left: 6px;
+  left: 4px;
   transform: rotate(-135deg);
 }
 
 .name-arrow-down, .rating-arrow-down {
   position: absolute;
   top: 8px;
-  left: 6px;
+  left: 4px;
   transform: rotate(45deg);
 }
 
@@ -638,6 +651,50 @@ table, th, td {
   }
 }
 
+@media screen and (max-width: 660px) {
+  .task-list-item, .task-list-title, .frontpage-item {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-list-item span, .task-list-title span, .frontpage-item span {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .arrow-inline {
+    display: flex!important;
+  }
+
+  .name-arrow-up, .rating-arrow-up {
+    top: 0px;
+  }
+  
+  .name-arrow-down, .rating-arrow-down {
+    top: 4px;
+  }
+
+  .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
+    margin: 5px;
+  }
+
+  .black-basket, .white-basket {
+    margin: 0;
+  }
+
+  .logo {
+    top: 15px;
+    background-size: 120px;
+    margin: 5px;
+  }
+
+  .task-list-delete {
+    text-align: left;
+  }
+}
+
 @media screen and (max-width: 625px) {
   .add-task-container, .modify-task-container {
     width: 100%;
@@ -654,34 +711,6 @@ table, th, td {
 
   .dropdowns {
     display: block;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .task-list-item, .task-list-title, .frontpage-item {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .task-list-item span, .task-list-title span, .frontpage-item span {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
-    margin: 5px;
-  }
-
-  .black-basket, .white-basket {
-    margin: 0;
-  }
-
-  .logo {
-    top: 15px;
-    background-size: 120px;
-    margin: 5px;
   }
 }
 

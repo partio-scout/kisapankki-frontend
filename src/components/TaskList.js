@@ -214,10 +214,10 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
       <Notification message={errorMessage} />
       {tasks && tasks.length > 0 &&
         <div className="task-list-title">
-          <span>Tehtävän nimi <span className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameAsc} /><i className="name-arrow-down" onClick={handleSortByNameDesc} /></span></span>
+          <span className="arrow-inline">Tehtävän nimi <span className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameAsc} /><i className="name-arrow-down" onClick={handleSortByNameDesc} /></span></span>
           <span>Sarja</span>
           <span>Kategoria</span>
-          <span>Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
+          <span className="arrow-inline">Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
           {user && <span></span>}
           <span></span>
         </div>
@@ -235,12 +235,12 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
           <span>
             <StarRatings
               rating={task.ratingsAVG}
-              starRatedColor="yellow"
+              starRatedColor="#f0e105"
               starDimension="20px"
               starSpacing="10px"
             />
           </span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+          {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
           <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
         </div>
       ))}
