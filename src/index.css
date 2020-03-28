@@ -198,14 +198,32 @@ button:hover, .search-tasks-button:hover {
   flex-wrap: wrap;
 }
 
+.frontpage h1 {
+  text-align: center;
+}
+
+.frontpage-info {
+  width: 100%;
+}
+
 .new-list, .favorite-list {
   width: 49%;
 }
 
-.add-task-container, .modify-task-container, .frontpage-container {
+.add-task-container, .modify-task-container {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.frontpage-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lists-container {
+  display: block;
 }
 
 .rc-md-editor {
