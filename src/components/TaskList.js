@@ -9,7 +9,7 @@ import Select from 'react-select'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
 
-const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
+const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -225,7 +225,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>
-            <Link to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
+            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
               {task.name}
             </Link>
             <p>Katselukertoja: {task.views}</p>

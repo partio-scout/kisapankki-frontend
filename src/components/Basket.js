@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import taskService from '../services/task'
 import Notification from './Notification'
 
-const Basket = ({ tasks, removeTaskFromBasket }) => {
+const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews }) => {
 
   return (
     <div className="task-list">
@@ -20,7 +20,7 @@ const Basket = ({ tasks, removeTaskFromBasket }) => {
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>
-            <Link to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
+            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
               {task.name}
             </Link>
             <p>Katselukertoja: {task.views}</p>
