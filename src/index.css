@@ -142,9 +142,9 @@ button:hover, .search-tasks-button:hover {
 }
 
 .black-basket {
-  height: 25px;
-  width: 25px;
-  background-size: 20px;
+  height: 20px;
+  width: 20px;
+  background-size: 15px;
   background-image: url('./images/black_bag.svg');
   background-repeat: no-repeat;
   background-color: transparent;
