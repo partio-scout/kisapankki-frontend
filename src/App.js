@@ -42,6 +42,12 @@ const App = () => {
     )
   }, [basket])
 
+  /*useEffect(() => {
+    taskService.getTasks().then((response) => {
+      setTasks(response)
+    })
+  }, [tasks])*/
+
   const logout = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
