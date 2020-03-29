@@ -196,16 +196,37 @@ button:hover, .search-tasks-button:hover {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding: 20px;
+  border-radius: 4px;
+  background-image: url('./images/retki_luonto_syksy_EevaHelle_DSCF0184.jpg');
+}
+
+.frontpage h1 {
+  text-align: center;
+}
+
+.frontpage-info {
+  width: 100%;
 }
 
 .new-list, .favorite-list {
   width: 49%;
 }
 
-.add-task-container, .modify-task-container, .frontpage-container {
+.add-task-container, .modify-task-container {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.frontpage-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lists-container {
+  display: block;
 }
 
 .rc-md-editor {
@@ -256,6 +277,11 @@ button:hover, .search-tasks-button:hover {
   justify-content: space-between;
   vertical-align: top;
   font-weight: bold;
+
+}
+
+.image-on-background {
+  color: #f4f5f7;
 }
 
 .task-list-title span:not(:first-of-type) {
