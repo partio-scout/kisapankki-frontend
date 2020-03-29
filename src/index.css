@@ -343,6 +343,19 @@ button:hover, .search-tasks-button:hover {
   margin-top: 5px;
 }
 
+.task-list-delete {
+  text-align: center;
+}
+
+.star-ratings {
+  white-space: nowrap;
+}
+
+.star-container {
+  padding-left: 1px!important;
+  padding-right: 1px!important;
+}
+
 .user-info button, .save-task-button, .modify-view-button, .accept-button {
   margin-right: 10px;
 }
@@ -547,19 +560,6 @@ table, th, td {
   padding-top: 5px;
 }
 
-/* .rule-list-item button, .category-list-item button, .language-list-item button, .serie-list-item button {
-  background-color: white;
-  color: #253764;
-}
-
-.rule-list-item .delete-button, .category-list-item .delete-button, .language-list-item .delete-button, .serie-list-item .delete-button {
-  color: #f04150;
-}
-
-.crls-container .delete-button:hover {
-  background-color: white;
-} */
-
 .add-form input {
   width: 260px;
 }
@@ -578,6 +578,33 @@ table, th, td {
   width: auto;
   margin: 10px;
   box-shadow: none;
+}
+
+.arrow-container {
+  position: relative;
+}
+
+.arrow-container i {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.name-arrow-up, .rating-arrow-up {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transform: rotate(-135deg);
+}
+
+.name-arrow-down, .rating-arrow-down {
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  transform: rotate(45deg);
 }
 
 .delete-task-from-basket {
@@ -650,6 +677,50 @@ table, th, td {
   }
 }
 
+@media screen and (max-width: 660px) {
+  .task-list-item, .task-list-title, .frontpage-item {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-list-item span, .task-list-title span, .frontpage-item span {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .arrow-inline {
+    display: flex!important;
+  }
+
+  .name-arrow-up, .rating-arrow-up {
+    top: 0px;
+  }
+  
+  .name-arrow-down, .rating-arrow-down {
+    top: 4px;
+  }
+
+  .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
+    margin: 5px;
+  }
+
+  .black-basket, .white-basket {
+    margin: 0;
+  }
+
+  .logo {
+    top: 15px;
+    background-size: 120px;
+    margin: 5px;
+  }
+
+  .task-list-delete {
+    text-align: left;
+  }
+}
+
 @media screen and (max-width: 625px) {
   .add-task-container, .modify-task-container {
     width: 100%;
@@ -666,34 +737,6 @@ table, th, td {
 
   .dropdowns {
     display: block;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .task-list-item, .task-list-title, .frontpage-item {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .task-list-item span, .task-list-title span, .frontpage-item span {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
-    margin: 5px;
-  }
-
-  .black-basket, .white-basket {
-    margin: 0;
-  }
-
-  .logo {
-    top: 15px;
-    background-size: 120px;
-    margin: 5px;
   }
 }
 
