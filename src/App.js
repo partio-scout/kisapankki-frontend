@@ -29,7 +29,13 @@ const App = () => {
       setUser(loggedUser)
       tokenService.setToken(loggedUser.token)
     }
+    const votes = window.localStorage.getItem('votes')
+    if (!votes) {
+      const votes = []
+      window.localStorage.setItem('votes', JSON.stringify(votes))
+    }
     const basketJSON = window.localStorage.getItem('basket')
+    
     if (basketJSON) {
       const foundBasket = JSON.parse(basketJSON)
       setBasket(foundBasket)

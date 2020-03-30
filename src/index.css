@@ -529,6 +529,30 @@ table, th, td {
   margin-top: 10px; 
 }
 
+.rating { 
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-rating {
+  float: right;
+  margin-right: 70px; 
+}
+
+.rating-avg {
+  margin-top: 35px;
+}
+ 
+.rating-sum {
+  margin-left: 5px;
+}
+
+.task-header {
+ display: flex;
+ justify-content: space-between; 
+ 
+}
 .crls-container button {
   z-index: 0;
 }

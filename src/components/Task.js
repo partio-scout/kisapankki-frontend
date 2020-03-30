@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
+import Rating from './Rating'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
@@ -68,6 +69,10 @@ const Task = ({ match, user, addTaskToBasket }) => {
           <Notification message={errorMessage} type="error" />
           {task &&
             <div className="task-view-info">
+              <h2>{task.name}</h2>
+              <div className="task-rating">
+                <Rating task={task} />
+              </div>
               <div>
                 <h2>{task.name}<span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span></h2>
               </div>
