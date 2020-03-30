@@ -74,7 +74,7 @@ const Rating = ({ task }) => {
         <div>
           <h4>Keskiarvo:</h4>
           <StarRatings
-            rating={ratingsAVG}
+            rating={Number(ratingsAVG)}
             starRatedColor="yellow"
             starDimension="20px"
             starSpacing="10px"
