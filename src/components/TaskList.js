@@ -7,10 +7,11 @@ import categoryService from '../services/category'
 import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
+import StarRatings from 'react-star-ratings'
 
-const TaskList = ({ user }) => {
-  const [allTasks, setAllTasks] = useState([])
-  const [tasks, setTasks] = useState([])
+const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
+  const [tasks, setTasks] = useState(originalTasks)
+  const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
@@ -22,11 +23,6 @@ const TaskList = ({ user }) => {
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
-    taskService.getTasks().then((response) => {
-      setTasks(response)
-      setAllTasks(response)
-    })
-
     categoryService.getCategories().then((response) => {
       setCategories(response)
     })
@@ -39,6 +35,11 @@ const TaskList = ({ user }) => {
       setRules(response)
     })
   }, [])
+
+  useEffect(() => {
+    setTasks(originalTasks)
+    setAllTasks(originalTasks)
+  }, [originalTasks])
 
   useEffect(() => {
     if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
@@ -133,6 +134,38 @@ const TaskList = ({ user }) => {
     }
   }
 
+  const handleSortByNameAsc = () => {
+    setTasks(tasks.sort(compareNamesAsc).concat([]))
+  }
+
+  const handleSortByNameDesc = () => {
+    setTasks(tasks.sort(compareNamesDesc).concat([]))
+  }
+
+  const handleSortByRatingsAsc = () => {
+    setTasks(tasks.sort(compareRatingsAsc).concat([]))
+  }
+
+  const handleSortByRatingsDesc = () => {
+    setTasks(tasks.sort(compareRatingsDesc).concat([]))
+  }
+
+  const compareNamesAsc = (a, b) => {
+    return b.name.localeCompare(a.name)
+  }
+
+  const compareNamesDesc = (a, b) => {
+    return a.name.localeCompare(b.name)
+  }
+
+  const compareRatingsAsc = (a, b) => {
+    return a.ratingsAVG - b.ratingsAVG
+  }
+
+  const compareRatingsDesc = (a, b) => {
+    return b.ratingsAVG - a.ratingsAVG
+  }
+
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
@@ -181,23 +214,34 @@ const TaskList = ({ user }) => {
       <Notification message={errorMessage} />
       {tasks && tasks.length > 0 &&
         <div className="task-list-title">
-          <span>Tehtävän nimi</span>
+          <span className="arrow-inline">Tehtävän nimi <span className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameAsc} /><i className="name-arrow-down" onClick={handleSortByNameDesc} /></span></span>
           <span>Sarja</span>
           <span>Kategoria</span>
+          <span className="arrow-inline">Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
           {user && <span></span>}
+          <span></span>
         </div>
       }
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <span>
-            <Link to={`/tehtava/${task.id}`}>
+            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
               {task.name}
             </Link>
+            <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>
-          }
+          <span>
+            <StarRatings
+              rating={task.ratingsAVG}
+              starRatedColor="#f0e105"
+              starDimension="20px"
+              starSpacing="10px"
+            />
+          </span>
+          {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
         </div>
       ))}
     </div>

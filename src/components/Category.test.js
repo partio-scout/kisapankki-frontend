@@ -7,18 +7,33 @@ jest.mock('../services/category')
 
 afterEach(cleanup)
 
+const categories = [
+  {
+    id: '1',
+    name: 'kategoria1',
+  },
+  {
+    id: '2',
+    name: 'kategoria2',
+  },
+  {
+    id: '3',
+    name: 'pendingkategory',
+  },
+]
+
 describe('<Category />', () => {
   let component
 
   beforeEach(() => {
     component = render(
-      <Category />,
+      <Category categories={categories} setCategories={'not null'} />,
     )
   })
 
-  test('renders input for addingCategory and editingCategory', () => {
+  test('renders input for addingCategory', () => {
     const inputs = component.container.querySelectorAll('input')
-    expect(inputs.length).toBe(2)
+    expect(inputs.length).toBe(1)
   })
 
   test('renders submit button for categoryAdding', () => {
@@ -27,10 +42,18 @@ describe('<Category />', () => {
       'Lisää',
     )
   })
-  test('renders submit button for saving editedCategory', () => {
-    const button = component.container.querySelector('.category-save-button')
+
+  test('renders modify button', () => {
+    const button = component.container.querySelector('.modify-button')
     expect(button).toHaveTextContent(
-      'Tallenna',
+      'Muokkaa',
+    )
+  })
+  
+  test('renders delete button', () => {
+    const button = component.container.querySelector('.delete-button')
+    expect(button).toHaveTextContent(
+      'Poista',
     )
   })
 

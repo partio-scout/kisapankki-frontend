@@ -79,4 +79,10 @@ const addRating = async (id, rating) => {
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, addRating }
+
+const updateViews = async (id) => {
+  const response = await axios.post(`${baseUrl}/${id}/views`)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews, addRating }

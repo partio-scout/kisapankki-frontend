@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import Notification from './Notification'
 import languageService from '../services/language'
 
-const Language = () => {
-  const [languages, setLanguages] = useState([])
+const Language = ({ languages, setLanguages }) => {
   const [languageName, setLanguageName] = useState('')
   const [modifiedLanguageName, setModifiedLanguageName] = useState('')
   const [modifiedLanguageId, setModifiedLanguageId] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
-
-  useEffect(() => {
-    languageService.getLanguages().then((response) => {
-      setLanguages(response)
-    })
-  }, [])
 
   const handleLanguageAdd = async (event) => {
     event.preventDefault()
@@ -61,11 +54,6 @@ const Language = () => {
     }
   }
 
-
-  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
-  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
-
-
   const handleShowModify = (language) => {
     setModifyVisible(true)
     setModifiedLanguageId(language.id)
@@ -75,8 +63,41 @@ const Language = () => {
   return (
     <div className="language-form">
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenModifyFormIsVisible} onSubmit={handleLanguageAdd}>
-        <div>
+
+      {languages && languages.map((language) => (
+        <div className="language-list-item" key={language.id}>
+          {modifyVisible && modifiedLanguageId === language.id ?
+            <div className="language-form-item">
+              <form onSubmit={handleLanguageModify} >
+                <div className="item-modify">
+                  <input
+                    className="language"
+                    type="text"
+                    value={modifiedLanguageName}
+                    name="Language"
+                    onChange={({ target }) => setModifiedLanguageName(target.value)}
+                  />
+                  <div className="item-buttons-save">
+                    <button type="submit" className="language-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            :
+            <Fragment>
+              <p className="item-name">{language.name}</p>
+              <div className="item-buttons">
+                <button onClick={() => handleShowModify(language)} className="modify-button">Muokkaa</button>
+                <button onClick={() => handleLanguageDelete(language)} className="delete-button">Poista</button>
+              </div>
+            </Fragment>
+            }
+        </div>))
+      }
+
+      <form onSubmit={handleLanguageAdd} className="add-form">
+        <div className="item-add">
           <input
             className="language"
             type="text"
@@ -88,36 +109,6 @@ const Language = () => {
           <button type="submit" className="language-add-button">Lisää</button>
         </div>
       </form>
-
-      {languages.map((language) => (
-        <div style={hideWhenModifyFormIsVisible} className="language-list-item" key={language.id}>
-          <p>{language.name}</p>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleLanguageDelete(language)}>Poista</button>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(language)}>Muokkaa</button>
-
-        </div>))
-      }
-      <div style={hideWhenAddingFormIsVisible} className="language-form-item">
-        < form onSubmit={handleLanguageModify} >
-          <div>
-            <input
-              className="language"
-              type="text"
-              value={modifiedLanguageName}
-              name="Language"
-              onChange={({ target }) => setModifiedLanguageName(target.value)}
-            />
-            <button type="submit" className="language-save-button">Tallenna</button>
-            <button onClick={() => setModifyVisible(false)}>Peruuta</button>
-          </div>
-
-          <div>
-
-          </div>
-        </form>
-
-      </div>
-
 
     </div>
   )

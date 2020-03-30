@@ -18,7 +18,6 @@ const addSeries = async (series) => {
 }
 
 const editSerie = async (serie) => {
-  console.log(serie)
   const config = {
     headers: { Authorization: tokenService.getToken() },
   }

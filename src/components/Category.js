@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import Notification from './Notification'
 import categoryService from '../services/category'
 
-
-
-const Category = () => {
+const Category = ({ categories, setCategories }) => {
   const [newCategoryName, setNewCategoryName] = useState('')
   const [modifiedCategoryName, setModifiedCategoryName] = useState('')
   const [modifiedCategoryId, setModifiedCategoryId] = useState('')
-  const [categories, setCategories] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
-
-  useEffect(() => {
-    categoryService.getCategories().then((response) => {
-      setCategories(response)
-    })
-  }, [])
 
   const handleCategoryAdd = async (event) => {
     event.preventDefault()
@@ -63,24 +54,50 @@ const Category = () => {
     }
   }
 
- 
-  const hideWhenModifyFormIsVisible = { display: modifyVisible ? 'none' : '' }
-  const hideWhenAddingFormIsVisible = { display: modifyVisible ? '' : 'none' }
-
   const handleShowModify = (category) => {
     setModifyVisible(true)
     setModifiedCategoryId(category.id)
     setModifiedCategoryName(category.name)
   }
 
-
-
   return (
     <div className="category-form" >
-
       <Notification message={errorMessage} type="error" />
-      <form style={hideWhenModifyFormIsVisible} onSubmit={handleCategoryAdd}>
-        <div>
+
+      {categories && categories.map((category) => (
+        <div className="category-list-item" key={category.id}>
+          {modifyVisible && modifiedCategoryId === category.id ?
+            <div className="category-form-item">
+              <form onSubmit={handleCategoryModify} >
+                <div className="item-modify">
+                  <input
+                    className="category"
+                    type="text"
+                    value={modifiedCategoryName}
+                    name="Category"
+                    onChange={({ target }) => setModifiedCategoryName(target.value)}
+                  />
+                  <div className="item-buttons-save">
+                    <button type="submit" className="category-save-button">Tallenna</button>
+                    <button onClick={() => setModifyVisible(false)}>Peruuta</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            :
+            <Fragment>
+              <p className="item-name">{category.name}</p>
+              <div className="item-buttons">
+                <button onClick={() => handleShowModify(category)} className="modify-button">Muokkaa</button>
+                <button onClick={() => handleCategoryDelete(category)} className="delete-button">Poista</button>
+              </div>
+            </Fragment>
+          }
+        </div>))
+      }
+
+      <form onSubmit={handleCategoryAdd} className="add-form">
+        <div className="item-add">
           <input
             className="category"
             type="text"
@@ -91,41 +108,8 @@ const Category = () => {
           />
           <button type="submit" className="category-add-button">Lisää</button>
         </div>
-
       </form>
-
-      {categories.map((category) => (
-        <div style={hideWhenModifyFormIsVisible} className="category-list-item" key={category.id}>
-          <p>{category.name}</p>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleCategoryDelete(category)}>Poista</button>
-          <button style={hideWhenModifyFormIsVisible} onClick={() => handleShowModify(category)}>Muokkaa</button>
-
-        </div>))
-      }
-      <div style={hideWhenAddingFormIsVisible} className="category-form-item">
-        < form onSubmit={handleCategoryModify} >
-          <div>
-            <input
-              className="category"
-              type="text"
-              value={modifiedCategoryName}
-              name="Category"
-              onChange={({ target }) => setModifiedCategoryName(target.value)}
-            />
-            <button type="submit" className="category-save-button">Tallenna</button>
-            <button onClick={() => setModifyVisible(false)}>Peruuta</button>
-          </div>
-
-          <div>
-
-          </div>
-        </form>
-
-      </div>
-
     </div>
-
-
 
   )
 }

@@ -13,7 +13,7 @@ describe('<User />', () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <User user={{ name: 'name', username: 'username' }} setUser={''} />
+        <User user={{ name: 'name', username: 'username', email: 'email', allowNotification: true }} setUser={''} />
       </Router>
     )
   })
@@ -33,6 +33,18 @@ describe('<User />', () => {
   test('renders username', () => {
     expect(component.container).toHaveTextContent(
       'Käyttäjätunnus',
+    )
+  })
+
+  test('renders email', () => {
+    expect(component.container).toHaveTextContent(
+      'Sähköpostiosoite',
+    )
+  })
+
+  test('renders notification', () => {
+    expect(component.container).toHaveTextContent(
+      'Ilmoitukset',
     )
   })
 

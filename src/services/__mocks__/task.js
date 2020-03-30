@@ -24,6 +24,9 @@ const tasks = [
       name: 'säännöt1',
     },
     pending: false,
+    views: 5,
+    ratingsAVG: '3',
+    created: '2020-03-23T19:54:27.358+00:00'
   },
 
   {
@@ -51,6 +54,9 @@ const tasks = [
       name: 'säännöt2',
     },
     pending: false,
+    views: 0,
+    ratingsAVG: '4',
+    created: '2020-03-23T19:53:27.358+00:00'
   },
 ]
 

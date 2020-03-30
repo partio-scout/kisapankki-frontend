@@ -4,9 +4,10 @@ import Rating from './Rating'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
+import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user }) => {
+const Task = ({ match, user, addTaskToBasket }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -72,6 +73,9 @@ const Task = ({ match, user }) => {
               <div className="task-rating">
                 <Rating task={task} />
               </div>
+              <div>
+                <h2>{task.name}<span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span></h2>
+              </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
               <h3>Rastimiehen ohjeet:</h3>
@@ -86,7 +90,10 @@ const Task = ({ match, user }) => {
               <p>{task.rules && task.rules.name}</p>
               <h3>Tehtävän viimeisin muokkaaja:</h3>
               <p>{task.creatorName}<br />{task.creatorEmail}</p>
+              <h3>Tehtävä lisätty:</h3>
+              {task.created && <p><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></p>}
               <h3>Liitetiedostot:</h3>
+              {task.files && task.files.length === 0 && <p>-</p>}
               {task.files && task.files.map((file) => (
                 <div key={file}>
                   <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
@@ -95,7 +102,7 @@ const Task = ({ match, user }) => {
                 </div>
               ))}
               {user &&
-                <div>
+                <div className="buttons">
                   <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
                   {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
                   <button className="delete-button" onClick={() => handleDelete()}>Poista</button>
