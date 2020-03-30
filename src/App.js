@@ -103,7 +103,7 @@ const App = () => {
       </div>
       <div className="container">
         <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} />} />
-        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} tasks={tasks} setTasks={setTasks} />} />
         <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
         <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} handleUpdateViews={handleUpdateViews} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />

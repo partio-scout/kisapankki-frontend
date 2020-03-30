@@ -7,7 +7,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user, addTaskToBasket }) => {
+const Task = ({ match, user, addTaskToBasket, tasks, setTasks }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -69,9 +69,8 @@ const Task = ({ match, user, addTaskToBasket }) => {
           <Notification message={errorMessage} type="error" />
           {task &&
             <div className="task-view-info">
-              <h2>{task.name}</h2>
               <div className="task-rating">
-                <Rating task={task} />
+                <Rating task={task} tasks={tasks} setTasks={setTasks} />
               </div>
               <div>
                 <h2>{task.name}<span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span></h2>
