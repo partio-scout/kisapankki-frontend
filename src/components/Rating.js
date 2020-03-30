@@ -3,7 +3,7 @@ import StarRatings from 'react-star-ratings'
 import taskService from '../services/task'
 import Notification from './Notification'
 
-const Rating = ({ task }) => {
+const Rating = ({ task, tasks, setTasks }) => {
   const [rating, setRating] = useState()
   const [errorMessage, setErrorMessage] = useState(null)
   const [confirmMessage, setConfirmMessage] = useState(null)
@@ -35,6 +35,10 @@ const Rating = ({ task }) => {
           const newVotes = votes.concat(task.id)
           window.localStorage.setItem('votes', JSON.stringify(newVotes))
         }
+        task.ratings[newRating - 1] = task.ratings[newRating - 1] + 1
+        task.ratingsAVG = updatedValues.ratingsAVG
+        setTasks(tasks.map((t) =>
+          (t.id == task.id) ? task : t))
         setRatingsAVG(updatedValues.ratingsAVG)
         setRatingsAmount(updatedValues.ratingsAmount)
         setDisabled(true)
