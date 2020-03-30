@@ -21,6 +21,11 @@ const App = () => {
       setUser(loggedUser)
       tokenService.setToken(loggedUser.token)
     }
+    const votes = window.localStorage.getItem('votes')
+    if (!votes) {
+      const votes = []
+      window.localStorage.setItem('votes', JSON.stringify(votes))
+    }
   }, [])
 
   const logout = () => {
