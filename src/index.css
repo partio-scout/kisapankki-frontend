@@ -103,8 +103,8 @@ button:hover, .search-tasks-button:hover {
   position: absolute;
   left: 10%;
   top: 0px;
-  height: 80px;
-  width: 180px;
+  height: 50px;
+  width: 140px;
   background-image: url('./images/partio_logo_w.png');
   background-position: 0px 0px;
   background-repeat: no-repeat;
@@ -757,6 +757,7 @@ table, th, td {
 
   textarea, select, input, .task-title {
     width: 100%;
+    box-sizing: border-box;
   }
 
   .dropdowns {
@@ -800,10 +801,12 @@ table, th, td {
   }
 
   .header {
-    padding-right: 5px;
+    padding-right: 10px;
   }
 
   .logo {
+    height: 40px;
+    width: 120px;
     background-position: 5px 0px;
     top: 18px;
     background-size: 100px;
@@ -815,6 +818,10 @@ table, th, td {
 }
 
 @media screen and (max-width: 340px) {
+  h1 {
+    font-size: 30px;
+  }
+
   .logo {
     top: 25px;
     background-size: 80px;
