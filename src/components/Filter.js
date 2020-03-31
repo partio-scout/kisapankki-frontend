@@ -96,6 +96,7 @@ const Filter = ({ allTasks, categories, rules, series}) => {
       setTasks(allTasks)
     }
   }
+  console.log(rules)
   return (
     <div>
       <div className="filter">
