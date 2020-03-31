@@ -259,6 +259,20 @@ button:hover, .search-tasks-button:hover {
   margin-bottom: 10px;
 }
 
+.filtero {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+
+
+}
+.filtera {
+  width: 200px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .filter input, .add-acceptedCategories input, .modify-acceptedCategories input {
   box-shadow: none;
 }

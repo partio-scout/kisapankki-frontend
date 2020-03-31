@@ -96,10 +96,10 @@ const Filter = ({ allTasks, categories, rules, series}) => {
       setTasks(allTasks)
     }
   }
-  console.log(rules)
+  
   return (
-    <div>
-      <div className="filter">
+    <div className="filtero">
+      <div className="filtera">
         <Select
           name="filter-series"
           getOptionLabel={option => `${option.name}`}
@@ -112,7 +112,7 @@ const Filter = ({ allTasks, categories, rules, series}) => {
         />
       </div>
 
-      <div className="filter">
+      <div className="filtera">
         <Select
           name="filter-category"
           getOptionLabel={option => `${option.name}`}
@@ -125,7 +125,7 @@ const Filter = ({ allTasks, categories, rules, series}) => {
         />
       </div>
 
-      <div className="filter">
+      <div className="filtera">
         <Select
           name="filter-rules"
           getOptionLabel={option => `${option.name}`}
