@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 
 
-const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
-  
+const Filter = ({ allTasks, categories, rules, series, tasks, setTasks }) => {
+
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
   const [selectedRules, setSelectedRules] = useState('')
-  const [isClearable, setIsClearable] = useState(true)
 
- 
+
   useEffect(() => {
     if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
       let array = []
@@ -88,7 +87,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
       setTasks(allTasks)
     }
   }
-  
+
   return (
     <div className="search-filter-container">
       <div className="filter">
@@ -98,7 +97,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
           getOptionValue={option => `${option.id}`}
           onChange={handleSeriesFiltering}
           options={series}
-          isClearable={isClearable}
+          isClearable={true}
           placeholder={"Sarja"}
           isMulti={true}
         />
@@ -111,7 +110,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
           getOptionValue={option => `${option.id}`}
           onChange={handleCategoryFiltering}
           options={categories}
-          isClearable={isClearable}
+          isClearable={true}
           placeholder={"Kategoria"}
           isMulti={true}
         />
@@ -124,7 +123,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
           getOptionValue={option => `${option.id}`}
           onChange={handleRuleFiltering}
           options={rules}
-          isClearable={isClearable}
+          isClearable={true}
           placeholder={"Säännöt"}
         />
       </div>
