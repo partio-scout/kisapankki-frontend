@@ -5,7 +5,6 @@ import seriesService from '../services/series'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
-import Select from 'react-select'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
 import Filter from './Filter'
@@ -14,13 +13,8 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState([])
-  const [selectedSeries, setSelectedSeries] = useState([])
-  const [selectedRules, setSelectedRules] = useState('')
-  const [categories, setCategories] = useState([])
-  const [series, setSeries] = useState([])
+  const [categories, setCategories] = useState([]) 
   const [rules, setRules] = useState([])
-  const [isClearable, setIsClearable] = useState(true)
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
@@ -95,7 +89,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
       <h1>Kisatehtäväpankki</h1>
       <div className="search-filter-container">
         <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
-        <div><Filter tasks={tasks} allTasks={allTasks} categories={categories} rules={rules} series={seriess}/> </div>
+        <div><Filter tasks={tasks} allTasks={allTasks} categories={categories} rules={rules} series={seriess} setTasks={setTasks}/> </div>
       </div>
 
       <Notification message={errorMessage} />

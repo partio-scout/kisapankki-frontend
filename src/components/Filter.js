@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import taskService from '../services/task'
-import seriesService from '../services/series'
-import ruleService from '../services/rule'
-import categoryService from '../services/category'
-import Notification from './Notification'
 import Select from 'react-select'
 
 
-const Filter = ({ allTasks, categories, rules, series}) => {
+const Filter = ({ allTasks, categories, rules, series, tasks, setTasks}) => {
   
-  const [tasks, setTasks] =useState()
   const [selectedCategory, setSelectedCategory] = useState([])
   const [selectedSeries, setSelectedSeries] = useState([])
   const [selectedRules, setSelectedRules] = useState('')
- 
   const [isClearable, setIsClearable] = useState(true)
 
  

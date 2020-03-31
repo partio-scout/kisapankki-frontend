@@ -5,6 +5,7 @@ import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
 
+
 jest.mock('../services/series')
 jest.mock('../services/category')
 jest.mock('../services/rule')
