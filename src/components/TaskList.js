@@ -8,6 +8,7 @@ import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
+import Filter from './Filter'
 
 const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
   const [tasks, setTasks] = useState(originalTasks)
@@ -41,57 +42,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
     setAllTasks(originalTasks)
   }, [originalTasks])
 
-  useEffect(() => {
-    if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedSeries.length > 0 && selectedCategory.length > 0) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedSeries.length > 0 && selectedRules) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedCategory.length > 0 && selectedRules) {
-      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id) && task.rules.id === selectedRules.id))
-    } else if (selectedSeries.length > 0) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedCategory.length > 0) {
-      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id)))
-    } else if (selectedRules) {
-      setTasks(allTasks.filter(task => task.rules.id === selectedRules.id))
-    } else {
-      setTasks(allTasks)
-    }
-  }, [selectedCategory, selectedSeries, selectedRules])
+
 
   const handleDelete = async (task) => {
     try {
@@ -104,33 +55,6 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
-    }
-  }
-
-  const handleSeriesFiltering = (series) => {
-    if (series && series.length > 0) {
-      setSelectedSeries(series.map(s => s.id))
-    } else {
-      setSelectedSeries([])
-      setTasks(allTasks)
-    }
-  }
-
-  const handleCategoryFiltering = (category) => {
-    if (category && category.length > 0) {
-      setSelectedCategory(category.map(c => c.id))
-    } else {
-      setSelectedCategory([])
-      setTasks(allTasks)
-    }
-  }
-
-  const handleRuleFiltering = (rules) => {
-    if (rules) {
-      setSelectedRules(rules)
-    } else {
-      setSelectedRules('')
-      setTasks(allTasks)
     }
   }
 
@@ -171,44 +95,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
       <h1>Kisatehtäväpankki</h1>
       <div className="search-filter-container">
         <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
-
-        <div className="filter">
-          <Select
-            name="filter-series"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleSeriesFiltering}
-            options={seriess}
-            isClearable={isClearable}
-            placeholder={"Sarja"}
-            isMulti={true}
-          />
-        </div>
-
-        <div className="filter">
-          <Select
-            name="filter-category"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleCategoryFiltering}
-            options={categories}
-            isClearable={isClearable}
-            placeholder={"Kategoria"}
-            isMulti={true}
-          />
-        </div>
-
-        <div className="filter">
-          <Select
-            name="filter-rules"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleRuleFiltering}
-            options={rules}
-            isClearable={isClearable}
-            placeholder={"Säännöt"}
-          />
-        </div>
+        <div className="search"> <Filter tasks={tasks} allTasks={allTasks} categories={categories} rules={rules} series={series}/> </div>
       </div>
 
       <Notification message={errorMessage} />
@@ -250,3 +137,6 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
 }
 
 export default TaskList
+
+
+
