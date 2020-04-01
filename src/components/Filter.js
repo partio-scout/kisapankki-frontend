@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import Select from 'react-select'
 
 
@@ -89,7 +89,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks }) => {
   }
 
   return (
-    <div className="search-filter-container">
+    <Fragment>
       <div className="filter">
         <Select
           name="filter-series"
@@ -127,7 +127,7 @@ const Filter = ({ allTasks, categories, rules, series, tasks, setTasks }) => {
           placeholder={"Säännöt"}
         />
       </div>
-    </div>
+    </Fragment>
   )
 }
 

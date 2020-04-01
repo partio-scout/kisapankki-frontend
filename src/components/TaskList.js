@@ -105,8 +105,18 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
       <div className="search-filter-container">
-        <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
-        <div><Filter tasks={tasks} allTasks={allTasks} categories={categories} rules={rules} series={seriess} setTasks={setTasks}/> </div>
+        <Search
+          setTasks={setTasks}
+          setAllTasks={setAllTasks}
+        />
+        <Filter
+          tasks={tasks}
+          allTasks={allTasks}
+          categories={categories}
+          rules={rules}
+          series={seriess}
+          setTasks={setTasks}
+        />
       </div>
 
       <Notification message={errorMessage} />

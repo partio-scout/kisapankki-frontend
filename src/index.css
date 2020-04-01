@@ -253,16 +253,10 @@ button:hover, .search-tasks-button:hover {
   flex-wrap: wrap;
 }
 
-.search {
+.search, .filter {
   width: calc(25% - 10px);
   margin-right: 10px;
   margin-bottom: 10px;
-}
-
-.filter {
-  width: 290px;
-  margin-right: 10px;
-  margin-bottom: 10px;   
 }
 
 .filter input, .add-acceptedCategories input, .modify-acceptedCategories input {
