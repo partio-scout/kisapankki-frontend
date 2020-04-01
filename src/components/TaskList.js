@@ -8,6 +8,7 @@ import Notification from './Notification'
 import Select from 'react-select'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
+import Moment from 'react-moment'
 
 const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
   const [tasks, setTasks] = useState(originalTasks)
@@ -150,6 +151,14 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
     setTasks(tasks.sort(compareRatingsDesc).concat([]))
   }
 
+  const handleSortByCreatedAsc = () => {
+    setTasks(tasks.sort(compareCreatedAsc).concat([]))
+  }
+
+  const handleSortByCreatedDesc = () => {
+    setTasks(tasks.sort(compareCreatedDesc).concat([]))
+  }
+
   const compareNamesAsc = (a, b) => {
     return b.name.localeCompare(a.name)
   }
@@ -164,6 +173,14 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
 
   const compareRatingsDesc = (a, b) => {
     return b.ratingsAVG - a.ratingsAVG
+  }
+
+  const compareCreatedAsc = (a, b) => {
+    return a.created.localeCompare(b.created)
+  }
+
+  const compareCreatedDesc = (a, b) => {
+    return b.created.localeCompare(a.created)
   }
 
   return (
@@ -218,6 +235,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
           <span>Sarja</span>
           <span>Kategoria</span>
           <span className="arrow-inline">Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
+          <span className="arrow-inline">Lisätty <span className="arrow-container"><i className="created-arrow-up" onClick={handleSortByCreatedAsc} /><i className="created-arrow-down" onClick={handleSortByCreatedDesc} /></span></span>
           {user && <span></span>}
           <span></span>
         </div>
@@ -240,6 +258,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
               starSpacing="10px"
             />
           </span>
+          {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
           {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
           <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
         </div>
