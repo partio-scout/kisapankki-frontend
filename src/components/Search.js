@@ -22,7 +22,7 @@ const Search = ({ setTasks, setAllTasks }) => {
   }
 
   return (
-    <div>
+    <div className="search">
       <Notification message={errorMessage} type="error" />
       <form onSubmit={handleSearch} className="search-form">
         <input
