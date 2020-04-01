@@ -64,14 +64,6 @@ const Rating = ({ task, tasks, setTasks }) => {
 
   return (
     <div>
-      <h4>Arvostele:</h4>
-      <StarRatings
-        rating={rating}
-        changeRating={changeRating}
-        starDimension="30px"
-        starSpacing="10px"
-
-      />
       <Notification message={errorMessage} type="error" />
       <Notification message={confirmMessage} type="success" />
       <div className="rating">
@@ -89,7 +81,17 @@ const Rating = ({ task, tasks, setTasks }) => {
         </div>
 
       </div>
-
+      {!disabled &&
+        <div>
+          <h4>Arvostele:</h4>
+          <StarRatings
+            rating={rating}
+            changeRating={changeRating}
+            starDimension="30px"
+            starSpacing="10px"
+          />
+        </div>
+      }
     </div>
   )
 }
