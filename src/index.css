@@ -243,6 +243,11 @@ button:hover, .search-tasks-button:hover {
   font-size: 15px;
 }
 
+.rated {
+  font-size: 13px;
+  margin-top: 20px;
+}
+
 .admin-task-buttons-mobile {
   display: none;
 }
@@ -532,7 +537,6 @@ table, th, td {
 .rating { 
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
 }
 
 .task-rating {
@@ -540,14 +544,11 @@ table, th, td {
   margin-right: 70px; 
 }
 
-.rating-avg {
+.rating-amount {
   margin-top: 35px;
+  margin-left: 15px;
 }
  
-.rating-sum {
-  margin-left: 5px;
-}
-
 .task-header {
  display: flex;
  justify-content: space-between; 
