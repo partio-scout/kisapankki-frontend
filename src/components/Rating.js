@@ -7,6 +7,7 @@ const Rating = ({ task, tasks, setTasks }) => {
   const [rating, setRating] = useState()
   const [errorMessage, setErrorMessage] = useState(null)
   const [confirmMessage, setConfirmMessage] = useState(null)
+  const [ratedMessage, setRatedMessage] = useState(null)
   const [ratingsAVG, setRatingsAVG] = useState(task.ratingsAVG)
   const [ratingsAmount, setRatingsAmount] = useState(task.ratingsAmount)
   const [disabled, setDisabled] = useState(false)
@@ -19,59 +20,41 @@ const Rating = ({ task, tasks, setTasks }) => {
       const foundVote = votes.find(t => t === task.id)
       if (foundVote) {
         setDisabled(true)
+        setRatedMessage('Kiitos! Olet jo arvioinut tämän rastin.')
       }
     }
   }, [])
 
   const changeRating = async (newRating) => {
-    if (!disabled) {
-      try {
-        const updatedValues = await taskService.addRating(task.id, {
-          rating: newRating
-        })
-        const votesJSON = window.localStorage.getItem('votes')
-        if (votesJSON) {
-          const votes = JSON.parse(votesJSON)
-          const newVotes = votes.concat(task.id)
-          window.localStorage.setItem('votes', JSON.stringify(newVotes))
-        }
-        task.ratings[newRating - 1] = task.ratings[newRating - 1] + 1
-        task.ratingsAVG = updatedValues.ratingsAVG
-        setTasks(tasks.map((t) =>
-          (t.id == task.id) ? task : t))
-        setRatingsAVG(updatedValues.ratingsAVG)
-        setRatingsAmount(updatedValues.ratingsAmount)
-        setDisabled(true)
-        setConfirmMessage('Arvostelu lähetetty')
-        setTimeout(() => {
-          setConfirmMessage(null)
-        }, 2000)
+    try {
+      const updatedValues = await taskService.addRating(task.id, {
+        rating: newRating
+      })
+      const votesJSON = window.localStorage.getItem('votes')
+      if (votesJSON) {
+        const votes = JSON.parse(votesJSON)
+        const newVotes = votes.concat(task.id)
+        window.localStorage.setItem('votes', JSON.stringify(newVotes))
       }
-      catch (exception) {
-        setErrorMessage('Jotain meni vikaan')
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
-      }
-    } else {
-      setErrorMessage('Olet jo äänestänyt')
+      task.ratings[newRating - 1] = task.ratings[newRating - 1] + 1
+      task.ratingsAVG = updatedValues.ratingsAVG
+      setTasks(tasks.map((t) =>
+        (t.id == task.id) ? task : t))
+      setRatingsAVG(updatedValues.ratingsAVG)
+      setRatingsAmount(updatedValues.ratingsAmount)
+      setDisabled(true)
+      setConfirmMessage('Arvostelu lähetetty')
+    }
+    catch (exception) {
+      setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     }
-
   }
 
   return (
     <div>
-      <h4>Arvostele:</h4>
-      <StarRatings
-        rating={rating}
-        changeRating={changeRating}
-        starDimension="30px"
-        starSpacing="10px"
-
-      />
       <Notification message={errorMessage} type="error" />
       <Notification message={confirmMessage} type="success" />
       <div className="rating">
@@ -84,16 +67,25 @@ const Rating = ({ task, tasks, setTasks }) => {
             starSpacing="10px"
           />
         </div>
-        <div className="rating-avg">
+        <div className="rating-amount">
           ({ratingsAmount})
         </div>
-
       </div>
+      <Notification message={ratedMessage} type="rated" />
+      {!disabled &&
+        <div>
+          <h4>Arvostele:</h4>
+          <StarRatings
+            rating={rating}
+            changeRating={changeRating}
+            starDimension="30px"
+            starSpacing="10px"
+          />
+        </div>
+      }
 
     </div>
   )
 }
-
-
 
 export default Rating
