@@ -1,9 +1,10 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, waitForElement } from '@testing-library/react'
+import { render, cleanup, waitForElement, act, fireEvent } from '@testing-library/react'
 import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
+
 
 jest.mock('../services/series')
 jest.mock('../services/category')
@@ -38,7 +39,7 @@ const tasks = [
     },
     pending: false,
     views: 5,
-    ratingsAVG: '3',
+    ratingsAVG: 3,
     created: '2020-03-23T19:54:27.358+00:00'
   },
 
@@ -68,7 +69,7 @@ const tasks = [
     },
     pending: false,
     views: 0,
-    ratingsAVG: '4',
+    ratingsAVG: 4,
     created: '2020-03-23T19:53:27.358+00:00'
   },
 ]
@@ -115,6 +116,38 @@ describe('<TaskList />', () => {
   test('renders delete-button', () => {
     const button = component.container.querySelector('.delete-button')
     expect(button).toHaveTextContent('Poista')
+  })
+
+  test('clicking arrow sorts tasks in correct order by name', async () => {
+    await waitForElement(
+      () => component.container.querySelector('.task-list-item'),
+    )
+    
+    const arrowUp = component.container.querySelector('.name-arrow-up')
+    act(() => { fireEvent.click(arrowUp)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä2')
+
+    const arrowDown = component.container.querySelector('.name-arrow-down')
+    act(() => { fireEvent.click(arrowDown)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
+  })
+
+  test('clicking arrow sorts tasks in correct order by rating', async () => {
+    await waitForElement(
+      () => component.container.querySelector('.task-list-item'),
+    )
+    
+    const arrowDown = component.container.querySelector('.rating-arrow-down')
+    act(() => { fireEvent.click(arrowDown)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä2')
+
+    const arrowUp = component.container.querySelector('.rating-arrow-up')
+    act(() => { fireEvent.click(arrowUp)})
+
+    expect(component.container.querySelectorAll('.task-list-item')[0]).toHaveTextContent('tehtävä1')
   })
 
 })

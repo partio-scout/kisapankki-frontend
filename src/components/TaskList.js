@@ -5,20 +5,17 @@ import seriesService from '../services/series'
 import ruleService from '../services/rule'
 import categoryService from '../services/category'
 import Notification from './Notification'
-import Select from 'react-select'
 import Search from './Search'
+import StarRatings from 'react-star-ratings'
+import Filter from './Filter'
+import Moment from 'react-moment'
 
-const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
+const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState([])
-  const [selectedSeries, setSelectedSeries] = useState([])
-  const [selectedRules, setSelectedRules] = useState('')
   const [categories, setCategories] = useState([])
-  const [series, setSeries] = useState([])
   const [rules, setRules] = useState([])
-  const [isClearable, setIsClearable] = useState(true)
   const [seriess, setSeriess] = useState([])
 
   useEffect(() => {
@@ -40,57 +37,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
     setAllTasks(originalTasks)
   }, [originalTasks])
 
-  useEffect(() => {
-    if (selectedSeries.length > 0 && selectedCategory.length > 0 && selectedRules) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedSeries.length > 0 && selectedCategory.length > 0) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && selectedCategory.includes(allTasks[i].category.id) && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedSeries.length > 0 && selectedRules) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && allTasks[i].rules.id === selectedRules.id && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedCategory.length > 0 && selectedRules) {
-      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id) && task.rules.id === selectedRules.id))
-    } else if (selectedSeries.length > 0) {
-      let array = []
-      for (let i = 0; i < allTasks.length; i++) {
-        for (let j = 0; j < allTasks[i].series.length; j++) {
-          if (selectedSeries.includes(allTasks[i].series[j].id) && !array.includes(allTasks[i])) {
-            array.push(allTasks[i])
-          }
-        }
-      }
-      setTasks(array)
-    } else if (selectedCategory.length > 0) {
-      setTasks(allTasks.filter(task => selectedCategory.includes(task.category.id)))
-    } else if (selectedRules) {
-      setTasks(allTasks.filter(task => task.rules.id === selectedRules.id))
-    } else {
-      setTasks(allTasks)
-    }
-  }, [selectedCategory, selectedSeries, selectedRules])
+
 
   const handleDelete = async (task) => {
     try {
@@ -106,105 +53,112 @@ const TaskList = ({ user, originalTasks, addTaskToBasket }) => {
     }
   }
 
-  const handleSeriesFiltering = (series) => {
-    if (series && series.length > 0) {
-      setSelectedSeries(series.map(s => s.id))
-    } else {
-      setSelectedSeries([])
-      setTasks(allTasks)
-    }
+  const handleSortByNameAsc = () => {
+    setTasks(tasks.sort(compareNamesAsc).concat([]))
   }
 
-  const handleCategoryFiltering = (category) => {
-    if (category && category.length > 0) {
-      setSelectedCategory(category.map(c => c.id))
-    } else {
-      setSelectedCategory([])
-      setTasks(allTasks)
-    }
+  const handleSortByNameDesc = () => {
+    setTasks(tasks.sort(compareNamesDesc).concat([]))
   }
 
-  const handleRuleFiltering = (rules) => {
-    if (rules) {
-      setSelectedRules(rules)
-    } else {
-      setSelectedRules('')
-      setTasks(allTasks)
-    }
+  const handleSortByRatingsAsc = () => {
+    setTasks(tasks.sort(compareRatingsAsc).concat([]))
+  }
+
+  const handleSortByRatingsDesc = () => {
+    setTasks(tasks.sort(compareRatingsDesc).concat([]))
+  }
+
+  const handleSortByCreatedAsc = () => {
+    setTasks(tasks.sort(compareCreatedAsc).concat([]))
+  }
+
+  const handleSortByCreatedDesc = () => {
+    setTasks(tasks.sort(compareCreatedDesc).concat([]))
+  }
+
+  const compareNamesAsc = (a, b) => {
+    return b.name.localeCompare(a.name)
+  }
+
+  const compareNamesDesc = (a, b) => {
+    return a.name.localeCompare(b.name)
+  }
+
+  const compareRatingsAsc = (a, b) => {
+    return a.ratingsAVG - b.ratingsAVG
+  }
+
+  const compareRatingsDesc = (a, b) => {
+    return b.ratingsAVG - a.ratingsAVG
+  }
+
+  const compareCreatedAsc = (a, b) => {
+    return a.created.localeCompare(b.created)
+  }
+
+  const compareCreatedDesc = (a, b) => {
+    return b.created.localeCompare(a.created)
   }
 
   return (
     <div className="task-list">
       <h1>Kisatehtäväpankki</h1>
       <div className="search-filter-container">
-        <div className="search"><Search setTasks={setTasks} setAllTasks={setAllTasks} /></div>
-
-        <div className="filter">
-          <Select
-            name="filter-series"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleSeriesFiltering}
-            options={seriess}
-            isClearable={isClearable}
-            placeholder={"Sarja"}
-            isMulti={true}
-          />
-        </div>
-
-        <div className="filter">
-          <Select
-            name="filter-category"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleCategoryFiltering}
-            options={categories}
-            isClearable={isClearable}
-            placeholder={"Kategoria"}
-            isMulti={true}
-          />
-        </div>
-
-        <div className="filter">
-          <Select
-            name="filter-rules"
-            getOptionLabel={option => `${option.name}`}
-            getOptionValue={option => `${option.id}`}
-            onChange={handleRuleFiltering}
-            options={rules}
-            isClearable={isClearable}
-            placeholder={"Säännöt"}
-          />
-        </div>
+        <Search
+          setTasks={setTasks}
+          setAllTasks={setAllTasks}
+        />
+        <Filter
+          tasks={tasks}
+          allTasks={allTasks}
+          categories={categories}
+          rules={rules}
+          series={seriess}
+          setTasks={setTasks}
+        />
       </div>
 
       <Notification message={errorMessage} />
       {tasks && tasks.length > 0 &&
         <div className="task-list-title">
-          <span>Tehtävän nimi</span>
+          <span className="arrow-inline">Tehtävän nimi <span className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameAsc} /><i className="name-arrow-down" onClick={handleSortByNameDesc} /></span></span>
           <span>Sarja</span>
           <span>Kategoria</span>
+          <span className="arrow-inline">Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
+          <span className="arrow-inline">Lisätty <span className="arrow-container"><i className="created-arrow-up" onClick={handleSortByCreatedAsc} /><i className="created-arrow-down" onClick={handleSortByCreatedDesc} /></span></span>
           {user && <span></span>}
           <span></span>
         </div>
       }
       {tasks.map((task) => (
-      <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
-        <div className="task-list-item" key={task.id}>
-          <span>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
+          <div className="task-list-item" key={task.id}>
+            <span className="span-bigger">
               <p className="bigger-task-name">{task.name}</p>
-            <p>Katselukertoja: {task.views}</p>
-          </span>
-          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-          <span>{task.category && task.category.name}</span>
-          {user && <span><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
-          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
-        </div>
+              <p>Katselukertoja: {task.views}</p>
+            </span>
+            <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+            <span>{task.category && task.category.name}</span>
+            <span>
+              <StarRatings
+                rating={task.ratingsAVG}
+                starRatedColor="#f0e105"
+                starDimension="20px"
+                starSpacing="10px"
+              />
+            </span>
+            {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
+            {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+            <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+          </div>
         </Link>
       ))}
+
     </div>
 
   )
 }
 
 export default TaskList
+

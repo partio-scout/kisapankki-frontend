@@ -136,6 +136,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
         assignmentTextMD, gradingScaleMD, supervisorInstructionsMD,
         files: oldFiles.concat(addedFiles)
       })
+      console.log(modifiedTask)
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
       setTimeout(() => {
