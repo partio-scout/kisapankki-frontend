@@ -33,6 +33,30 @@ h3, h4 {
   margin-bottom: 5px;
 }
 
+.no-underline {
+  text-decoration: none;
+  color: #253764;
+ }
+
+.span-bigger {
+  margin-top: -20px;
+}
+
+.bigger-task-name {
+  font-size: 130%;
+  color: #253764;
+}
+
+.bigger-task-name-frontpage {
+  font-size: 110%;
+  color: #253764;
+}
+
+.smaller-task-name {
+  font-size: 105%;
+}
+
+
 input, select {
   border: 1px solid #c7cad1;
   box-shadow: inset 0 2px 4px rgba(199,202,209,.4);
@@ -294,7 +318,7 @@ button:hover, .search-tasks-button:hover {
   flex-direction: row;
   justify-content: space-between;
   vertical-align: top;
-  background-color: #f4f5f7;
+  background-color: #dbebf1;
   padding: 10px 15px;
   border-radius: 5px;
   margin-bottom: 15px;

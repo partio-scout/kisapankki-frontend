@@ -67,21 +67,20 @@ const TaskListPending = () => {
           <span></span>
         </div>
       }
+      
       {tasks.map((task) => (
-        <div className={`task-list-item pending`} key={task.id}>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
+        <div className="task-list-item" key={task.id}>
           <span>
-            <Link to={`/tehtava/${task.id}`}>
-              {task.name}
-            </Link>
+          <p> {task.name}</p>
+            <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          <span>
-            <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
+          <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
             <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
-          </span>
-          <span></span>
         </div>
+      </Link>
       ))}
 
     </div>

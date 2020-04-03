@@ -8,15 +8,27 @@ Browser should open http://localhost:3000/ address for local environment
 # Env files
 You have to setup your own env files.
 
-# Users
-## Super admin, admin, user
+* Frontend: 
+```
+REACT_APP_API_URL=http://localhost:3001/api
+```
 
-### Super admin features
-* Add more admins to system
-* Add/delete/modify tasks
-* Change tasks pending variable
+* Backend: 
+
+```
+MONGODB_URI= "Enter mongoDB uri"
+PORT=3001
+TEST_MONGODB_URI= "Enter mongoDB uri for tests"
+SECRET= "Enter your secret"
+ADMIN_KEY= "Enter admin key"
+APPLICATION_STAGE=DEV
+AZURE_STORAGE_ACCOUNT_NAME= "Enter azure 
+AZURE_STORAGE_ACCOUNT_ACCESS_KEY= "Enter azure key"
+```
+
 
 ### Admin features
+* Add more admins to system
 * Add/delete/modify tasks
 * Change tasks pending variable
 

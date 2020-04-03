@@ -14,7 +14,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [categories, setCategories] = useState([]) 
+  const [categories, setCategories] = useState([])
   const [rules, setRules] = useState([])
   const [seriess, setSeriess] = useState([])
 
@@ -132,34 +132,33 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
         </div>
       }
       {tasks.map((task) => (
-        <div className="task-list-item" key={task.id}>
-          <span>
-            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
-              {task.name}
-            </Link>
-            <p>Katselukertoja: {task.views}</p>
-          </span>
-          <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-          <span>{task.category && task.category.name}</span>
-          <span>
-            <StarRatings
-              rating={task.ratingsAVG}
-              starRatedColor="#f0e105"
-              starDimension="20px"
-              starSpacing="10px"
-            />
-          </span>
-          {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
-          {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
-          <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
-        </div>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
+          <div className="task-list-item" key={task.id}>
+            <span className="span-bigger">
+              <p className="bigger-task-name">{task.name}</p>
+              <p>Katselukertoja: {task.views}</p>
+            </span>
+            <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+            <span>{task.category && task.category.name}</span>
+            <span>
+              <StarRatings
+                rating={task.ratingsAVG}
+                starRatedColor="#f0e105"
+                starDimension="20px"
+                starSpacing="10px"
+              />
+            </span>
+            {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
+            {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
+            <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+          </div>
+        </Link>
       ))}
+
     </div>
 
   )
 }
 
 export default TaskList
-
-
 

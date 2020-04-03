@@ -36,16 +36,18 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
               </div>
             </div>
             {newTasks.map((task) => (
-              <div className="task-list-item frontpage-item new-item" key={task.id}>
-                <span>
-                  <Link to={`/tehtava/${task.id}`}>
-                    {task.name}
-                  </Link>
-                </span>
-                <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-                <span>{task.category && task.category.name}</span>
-                <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
-              </div>
+              <Link className="no-underline" to={`/tehtava/${task.id}`}>
+                <div className="task-list-item frontpage-item new-item" key={task.id}>
+                  <span className="span-bigger">
+                    <p className="bigger-task-name-frontpage">{task.name}</p>
+                    <p>Katselukertoja: {task.views}</p>
+                  </span>
+                  <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+                  <span>{task.category && task.category.name}</span>
+                  <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+                </div>
+              </Link>
+
             ))}
           </div>
 
@@ -60,16 +62,18 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
               </div>
             </div>
             {favoriteTasks.map((task) => (
-              <div className="task-list-item frontpage-item favorite-item" key={task.id}>
-                <span>
-                  <Link to={`/tehtava/${task.id}`}>
-                    {task.name}
-                  </Link>
-                </span>
-                <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
-                <span>{task.category && task.category.name}</span>
-                <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
-              </div>
+              <Link className="no-underline" to={`/tehtava/${task.id}`}>
+
+                <div className="task-list-item frontpage-item favorite-item" key={task.id}>
+                  <span className="span-bigger">
+                    <p className="bigger-task-name-frontpage">{task.name}</p>
+                    <p>Katselukertoja: {task.views}</p>
+                  </span>
+                  <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
+                  <span>{task.category && task.category.name}</span>
+                  <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

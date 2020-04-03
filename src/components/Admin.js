@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import TaskListPending from './TaskListPending'
 
 const Admin = () => (
-  <div>
+  <div >
     <TaskListPending />
-    <Link to="/omasivu">Omat tiedot</Link>
+    <Link className="no-underline" to="/omasivu">Omat tiedot</Link>
     <br />
-    <Link to="/lisaa_admin">Lisää ylläpitäjä</Link>
+    <Link className="no-underline" to="/lisaa_admin">Lisää ylläpitäjä</Link>
     <br />
-    <Link to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä/kieliä/sarjoja/kategorioita</Link>
+    <Link className="no-underline" to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä/kieliä/sarjoja/kategorioita</Link>
   </div>
 )
 
