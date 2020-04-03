@@ -67,11 +67,20 @@ const App = () => {
     setBasket(basket.filter(task => task.id !== id))
   }
 
+  const removeAllFromBasket = () => {
+    setBasket([])
+  }
+
   const handleUpdateViews = (id) => {
     taskService.updateViews(id).then(response => {
       setTasks(tasks.map(task => task.id !== id ? task : { ...task, views: task.views + 1 }))
       setBasket(basket.map(task => task.id !== id ? task : { ...task, views: task.views + 1 }))
     })
+  }
+
+  const handleUpdateTask = (modifiedTask) => {
+    setTasks(tasks.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
+    setBasket(basket.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
   }
 
   return (
@@ -103,9 +112,9 @@ const App = () => {
       </div>
       <div className="container">
         <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} />} />
-        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} tasks={tasks} setTasks={setTasks} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} tasks={tasks} setTasks={setTasks} handleUpdateTask={handleUpdateTask} />} />
         <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
-        <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} handleUpdateViews={handleUpdateViews} />} />
+        <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} handleUpdateViews={handleUpdateViews} removeAllFromBasket={removeAllFromBasket} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />

@@ -54,7 +54,7 @@ const Rating = ({ task, tasks, setTasks }) => {
   }
 
   return (
-    <div>
+    <div className="task-rating">
       <Notification message={errorMessage} type="error" />
       <Notification message={confirmMessage} type="success" />
       <div className="rating">

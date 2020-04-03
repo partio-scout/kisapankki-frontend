@@ -8,7 +8,7 @@ import languageService from '../services/language'
 import MDEditor from './MDEditor'
 import Dropzone from 'react-dropzone'
 
-const ModifyTask = ({ setModifyVisible, task, setTask }) => {
+const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask }) => {
 
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -139,6 +139,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
       console.log(modifiedTask)
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
+      handleUpdateTask(modifiedTask)
       setTimeout(() => {
         setMessage(null)
         window.location.reload()
@@ -259,14 +260,14 @@ const ModifyTask = ({ setModifyVisible, task, setTask }) => {
                 {oldFiles && oldFiles.length > 0 &&
                   <React.Fragment>
                     {oldFiles.map((file) => (
-                      <div key={file}>{file.substring(file.indexOf('-') + 1, file.length)}<b onClick={(e) => handleDeleteOldFile(e, file)}>x</b></div>
+                      <div key={file}>{file.substring(file.indexOf('-') + 1, file.length)}<span onClick={(e) => handleDeleteOldFile(e, file)} className="remove-file" /></div>
                     ))}
                   </React.Fragment>
                 }
                 {newFiles && newFiles.length > 0 &&
                   <React.Fragment>
                     {newFiles.map((file) => (
-                      <div key={file.name}>{file.name}<b onClick={(e) => handleDeleteNewFile(e, file.name)}>x</b></div>
+                      <div key={file.name}>{file.name}<span onClick={(e) => handleDeleteNewFile(e, file.name)} className="remove-file" /></div>
                     ))}
                   </React.Fragment>
                 }
