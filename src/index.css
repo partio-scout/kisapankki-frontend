@@ -142,19 +142,18 @@ button:hover, .search-tasks-button:hover {
 }
 
 .black-basket {
-  height: 20px;
-  width: 20px;
-  background-size: 15px;
+  height: 35px;
+  width: 35px;
+  background-size: 25px;
   background-image: url('./images/black_bag.svg');
   background-repeat: no-repeat;
   background-color: transparent;
-  margin: 0 10px 10px 10px;
+  margin-top: 7px;
   cursor: pointer;
 }
 
 .basket-task-view {
-  display: inline-block;
-  vertical-align: middle;
+  float: right;
   margin-top: 5px;
 }
 
@@ -337,6 +336,7 @@ button:hover, .search-tasks-button:hover {
 }
 
 .task-view-info h2 {
+  display: inline-block;
   margin-top: 0px;
 }
 
@@ -449,9 +449,17 @@ table, th, td {
   margin-bottom: 5px;
 }
 
-.files b {
-  color: #f04150;
-  margin-left: 5px;
+.remove-file {
+  display: inline-block;
+  vertical-align: middle;
+  height: 15px;
+  width: 20px;
+  background-size: 15px;
+  background-image: url('./images/remove.svg');
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .button-type-underline, .button-type-image {
@@ -535,7 +543,6 @@ table, th, td {
 }
 
 .rating { 
-  margin-top: 20px;
   display: flex;
 }
 
@@ -632,10 +639,27 @@ table, th, td {
   transform: rotate(45deg);
 }
 
+.delete-task-from-basket-mobile {
+  display: none;
+}
+
 .delete-task-from-basket {
-  font-weight: bold;
-  color: #f04150;
+  height: 25px;
+  width: 25px;
+  background-size: 20px;
+  background-image: url('./images/remove.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
   cursor: pointer;
+}
+
+.basket-delete-all {
+  float: right;
+  margin-top: 20px;
+}
+
+.basket-title {
+  display: inline-block;
 }
 
 @media screen and (max-width: 1200px) {
@@ -672,7 +696,7 @@ table, th, td {
     width: 100%;
   }
 
-  .black-basket, .white-basket {
+  .white-basket {
     margin: 0;
   }
 }
@@ -709,6 +733,23 @@ table, th, td {
   .task-list-delete {
     text-align: left;
   }
+
+  .delete-task-from-basket-mobile {
+    display: block;
+    float: right;
+    margin-top: 5px;
+    height: 25px;
+    width: 25px;
+    background-size: 20px;
+    background-image: url('./images/remove.svg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .delete-task-from-basket {
+    display: none!important;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -737,6 +778,10 @@ table, th, td {
 
   .admin-button-header, .addtask-button-header {
     display: none;
+  }
+
+  .task-rating {
+    float: none;
   }
 }
 
@@ -817,6 +862,10 @@ table, th, td {
 
   .login-button-header, .signup-button-header, .logout-button-header, .addtask-button-header {
     padding: 0px 5px;
+  }
+
+  .basket-delete-all {
+    margin-top: 5px;
   }
 }
 

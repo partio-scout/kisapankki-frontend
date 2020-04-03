@@ -248,7 +248,7 @@ const AddTask = () => {
                 {files.length > 0 &&
                   <React.Fragment>
                     {files.map((file) => (
-                      <div key={file.name}>{file.name}<b onClick={(e) => handleDeleteFile(e, file.name)}>x</b></div>
+                      <div key={file.name}>{file.name}<span onClick={(e) => handleDeleteFile(e, file.name)}className="remove-file" /></div>
                     ))}
                   </React.Fragment>
                 }

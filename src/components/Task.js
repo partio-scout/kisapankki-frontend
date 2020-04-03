@@ -7,7 +7,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user, addTaskToBasket, tasks, setTasks }) => {
+const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -62,18 +62,17 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks }) => {
   return (
     <div>
       {modifyVisible ?
-        <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} />
+        <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} handleUpdateTask={handleUpdateTask} />
         :
         <div className="task-view-info-background">
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
             <div className="task-view-info">
-              <div className="task-rating">
-                <Rating task={task} tasks={tasks} setTasks={setTasks} />
-              </div>
               <div>
-                <h2>{task.name}<span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span></h2>
+                <h2>{task.name}</h2>
+                <span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span>
+                <Rating task={task} tasks={tasks} setTasks={setTasks} />
               </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />
