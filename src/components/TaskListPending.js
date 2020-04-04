@@ -23,7 +23,8 @@ const TaskListPending = () => {
     })
   }, [])
 
-  const handleAccept = (id) => {
+  const handleAccept = (e, id) => {
+    e.preventDefault()
     try {
       taskService.acceptTask(id)
       setTasks(tasks.filter(t => t.id !== id))
@@ -39,7 +40,8 @@ const TaskListPending = () => {
     }
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
+    e.preventDefault()
     try {
       if (window.confirm(`Haluatko poistaa tehtävän: ${tasks.find(t => t.id === id).name}`)) {
         await taskService.deleteTask(id)
@@ -77,8 +79,8 @@ const TaskListPending = () => {
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          <button className="accept-button" onClick={() => handleAccept(task.id)}>Hyväksy</button>
-            <button className="delete-button" onClick={() => handleDelete(task.id)}>Poista</button>
+          <button className="accept-button" onClick={(e) => handleAccept(e, task.id)}>Hyväksy</button>
+            <button className="delete-button" onClick={(e) => handleDelete(e, task.id)}>Poista</button>
         </div>
       </Link>
       ))}
