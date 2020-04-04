@@ -150,7 +150,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
             </span>
             {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
             {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
-            <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+            <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
           </div>
         </Link>
       ))}

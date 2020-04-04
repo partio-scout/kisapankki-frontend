@@ -56,7 +56,8 @@ const App = () => {
     window.location.reload()
   }
 
-  const addTaskToBasket = (task) => {
+  const addTaskToBasket = (e, task) => {
+    e.preventDefault()
     const foundTask = basket.find(t => t.id === task.id)
     if (!foundTask) {
       setBasket(basket.concat(task))

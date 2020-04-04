@@ -44,7 +44,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
                   </span>
                   <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                   <span>{task.category && task.category.name}</span>
-                  <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+                  <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 </div>
               </Link>
 
@@ -71,7 +71,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
                   </span>
                   <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                   <span>{task.category && task.category.name}</span>
-                  <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+                  <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 </div>
               </Link>
             ))}
