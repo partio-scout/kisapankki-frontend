@@ -56,6 +56,20 @@ const App = () => {
     window.location.reload()
   }
 
+  const handleAddTask = (task) => {
+    setTasks(tasks.concat(task))
+  }
+
+  const handleUpdateTask = (modifiedTask) => {
+    setTasks(tasks.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
+    setBasket(basket.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
+  }
+
+  const handleDeleteTask = (id) => {
+    setTasks(tasks.filter(t => t.id !== id))
+    setBasket(basket.filter(t => t.id !== id))
+  }
+
   const addTaskToBasket = (e, task) => {
     e.preventDefault()
     e.stopPropagation()
@@ -71,18 +85,6 @@ const App = () => {
 
   const removeAllFromBasket = () => {
     setBasket([])
-  }
-
-  const handleUpdateViews = (id) => {
-    taskService.updateViews(id).then(response => {
-      setTasks(tasks.map(task => task.id !== id ? task : { ...task, views: task.views + 1 }))
-      setBasket(basket.map(task => task.id !== id ? task : { ...task, views: task.views + 1 }))
-    })
-  }
-
-  const handleUpdateTask = (modifiedTask) => {
-    setTasks(tasks.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
-    setBasket(basket.map(task => task.id !== modifiedTask.id ? task : modifiedTask))
   }
 
   return (
@@ -113,14 +115,14 @@ const App = () => {
         {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
       </div>
       <div className="container">
-        <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
-        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} tasks={tasks} setTasks={setTasks} handleUpdateTask={handleUpdateTask} />} />
-        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} setOriginalTasks={setTasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
-        <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} handleUpdateViews={handleUpdateViews} removeAllFromBasket={removeAllFromBasket} />} />
+        <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
+        <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} removeAllFromBasket={removeAllFromBasket} handleUpdateTask={handleUpdateTask} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
-        <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin /> : <Redirect to="/" />)} />
+        <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} /> : <Redirect to="/" />)} />
         <Route path="/lisaa_admin" render={() => (localStorage.getItem('loggedUser') ? <AddAdmin /> : <Redirect to="/" />)} />
         <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown /> : <Redirect to="/" />)} />
       </div>
