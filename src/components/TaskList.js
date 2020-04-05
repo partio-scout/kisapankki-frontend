@@ -10,7 +10,7 @@ import StarRatings from 'react-star-ratings'
 import Filter from './Filter'
 import Moment from 'react-moment'
 
-const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) => {
+const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews, setOriginalTasks }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -45,6 +45,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
       if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
         await taskService.deleteTask(task.id)
         setTasks(tasks.filter(t => t.id !== task.id))
+        setOriginalTasks(tasks.filter(t => t.id !== task.id))
       }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
@@ -151,7 +152,7 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
             </span>
             {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
             {user && <span className="task-list-delete"><button className="delete-button" onClick={(e) => handleDelete(e, task)}>Poista</button></span>}
-            <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
+            <span><div className="black-basket" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
           </div>
         </Link>
       ))}

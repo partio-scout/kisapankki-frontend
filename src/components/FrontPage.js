@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import FrontPageInfo from './FrontPageInfo'
 
-const FrontPage = ({ tasks, addTaskToBasket }) => {
+const FrontPage = ({ tasks, addTaskToBasket, handleUpdateViews }) => {
   const [newTasks, setNewTasks] = useState([])
   const [favoriteTasks, setFavoriteTasks] = useState([])
 
@@ -36,7 +36,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
               </div>
             </div>
             {newTasks.map((task) => (
-              <Link className="no-underline" to={`/tehtava/${task.id}`}>
+              <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
                 <div className="task-list-item frontpage-item new-item" key={task.id}>
                   <span className="span-bigger">
                     <p className="bigger-task-name-frontpage">{task.name}</p>
@@ -44,7 +44,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
                   </span>
                   <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                   <span>{task.category && task.category.name}</span>
-                  <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
+                  <span><div className="black-basket" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 </div>
               </Link>
 
@@ -62,7 +62,7 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
               </div>
             </div>
             {favoriteTasks.map((task) => (
-              <Link className="no-underline" to={`/tehtava/${task.id}`}>
+              <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
 
                 <div className="task-list-item frontpage-item favorite-item" key={task.id}>
                   <span className="span-bigger">
@@ -71,13 +71,16 @@ const FrontPage = ({ tasks, addTaskToBasket }) => {
                   </span>
                   <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
                   <span>{task.category && task.category.name}</span>
-                  <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
+                  <span><div className="black-basket" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 </div>
               </Link>
             ))}
           </div>
         </div>
       </div>
+      <footer>
+        <p>Kuva: Suomen Partiolaiset/Eeva Helle</p>
+      </footer>
     </div>
   )
 }

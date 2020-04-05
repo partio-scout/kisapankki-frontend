@@ -807,6 +807,10 @@ table, th, td {
   .task-rating {
     float: none;
   }
+
+  .new-favorite-lists {
+    background-image: url('./images/retki_luonto_syksy_EevaHelle_DSCF0184Smaller.jpg');
+  }
 }
 
 @media screen and (max-width: 660px) {
