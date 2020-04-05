@@ -35,7 +35,7 @@ const App = () => {
       window.localStorage.setItem('votes', JSON.stringify(votes))
     }
     const basketJSON = window.localStorage.getItem('basket')
-    
+
     if (basketJSON) {
       const foundBasket = JSON.parse(basketJSON)
       setBasket(foundBasket)
@@ -58,6 +58,7 @@ const App = () => {
 
   const addTaskToBasket = (e, task) => {
     e.preventDefault()
+    e.stopPropagation()
     const foundTask = basket.find(t => t.id === task.id)
     if (!foundTask) {
       setBasket(basket.concat(task))
@@ -112,9 +113,9 @@ const App = () => {
         {user !== null && <Link to="/admin"><button className="admin-button-mobile">Admin</button></Link>}
       </div>
       <div className="container">
-        <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} />} />
+        <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
         <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} tasks={tasks} setTasks={setTasks} handleUpdateTask={handleUpdateTask} />} />
-        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} setOriginalTasks={setTasks} addTaskToBasket={addTaskToBasket} handleUpdateViews={handleUpdateViews} />} />
         <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} handleUpdateViews={handleUpdateViews} removeAllFromBasket={removeAllFromBasket} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
         <Route path="/lisaa_tehtava" render={() => <AddTask />} />
