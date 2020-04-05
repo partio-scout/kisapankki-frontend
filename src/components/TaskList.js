@@ -39,7 +39,8 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
 
 
 
-  const handleDelete = async (task) => {
+  const handleDelete = async (e, task) => {
+    e.preventDefault()
     try {
       if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
         await taskService.deleteTask(task.id)
@@ -149,8 +150,8 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews }) =
               />
             </span>
             {task.created && <span><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></span>}
-            {user && <span className="task-list-delete"><button className="delete-button" onClick={() => handleDelete(task)}>Poista</button></span>}
-            <span><div className="black-basket" onClick={() => addTaskToBasket(task)} /></span>
+            {user && <span className="task-list-delete"><button className="delete-button" onClick={(e) => handleDelete(e, task)}>Poista</button></span>}
+            <span><div className="black-basket" onClick={(e) => addTaskToBasket(e, task)} /></span>
           </div>
         </Link>
       ))}

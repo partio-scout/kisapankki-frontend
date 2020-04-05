@@ -71,7 +71,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
             <div className="task-view-info">
               <div>
                 <h2>{task.name}</h2>
-                <span><div className="black-basket basket-task-view" onClick={() => addTaskToBasket(task)} /></span>
+                <span><div className="black-basket basket-task-view" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 <Rating task={task} tasks={tasks} setTasks={setTasks} />
               </div>
               <h3>Tehtävänanto:</h3>
