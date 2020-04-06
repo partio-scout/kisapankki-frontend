@@ -79,10 +79,18 @@ const addRating = async (id, rating) => {
   return response.data
 }
 
-
 const updateViews = async (id) => {
   const response = await axios.post(`${baseUrl}/${id}/views`)
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews, addRating }
+const makePDFs = async (object) => {
+  const config = {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }
+
+  const response = await axios.post(`${baseUrl}/pdf`, object, config)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews, addRating, makePDFs }

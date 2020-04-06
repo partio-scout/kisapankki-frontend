@@ -101,11 +101,11 @@ button {
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover {
+button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   background: #253764;
 }
 
-.delete-button:hover {
+.delete-button:hover, .basket-delete-all:hover {
   background: #f04150;
 }
 
@@ -686,6 +686,18 @@ table, th, td {
   display: inline-block;
 }
 
+.make-pdfs {
+  text-align: center;
+}
+
+.competition input {
+  width: calc(25% - 26px);
+}
+
+.competition input:last-child {
+  margin-right: 0;
+}
+
 @media screen and (max-width: 1200px) {
   .header {
     padding-left: 20px;
@@ -773,6 +785,11 @@ table, th, td {
 
   .delete-task-from-basket {
     display: none!important;
+  }
+
+  .competition input {
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
