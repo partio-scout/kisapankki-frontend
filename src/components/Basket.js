@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Dropzone from 'react-dropzone'
 import Notification from './Notification'
+import Competition from './Competition'
 import taskService from '../services/task'
 
 const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromBasket }) => {
@@ -13,32 +13,29 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
   const [logo, setLogo] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
 
-  const onDrop = (logo) => {
-    setLogo(logo)
-  }
-
-  const handleDeleteFile = (e) => {
-    e.stopPropagation()
-    setLogo(null)
-  }
-
   const handleMakePDFs = async (e) => {
     let formData = new FormData()
 
-    const competition = JSON.stringify({ name, date, place, type, tasks })
+    const competition = JSON.stringify({ name, date, place, type, tasks: tasks.map(t => t.id) })
     formData.append('competition', competition )
 
     if (logo) {
-      formData.append('logo', logo[0], logo[0].name)
+      formData.append('logo', logo, logo.name)
     }
     
     try {
-      const PDFs = await taskService.makePDFs({ name, date, place, type, logo, tasks })
+      const PDFs = await taskService.makePDFs(formData)
       setName('')
       setDate('')
       setPlace('')
       setType('')
       setLogo(null)
+      const url = window.URL.createObjectURL(new Blob([PDFs]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'file.pdf')
+      document.body.appendChild(link)
+      link.click()
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -50,57 +47,19 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
   return (
     <div className="task-list">
       <Notification message={errorMessage} type="error" />
-      <h2 className="basket-title">Kisan tiedot</h2>
 
-      <div className="competition">
-        <input
-          className="competition-name"
-          type="text"
-          value={name}
-          name="Name"
-          placeholder="Kisan nimi"
-          onChange={({ target }) => setName(target.value)}
-        />
-
-        <input
-          className="competition-date"
-          type="text"
-          value={date}
-          name="Name"
-          placeholder="Kisan päivämäärä"
-          onChange={({ target }) => setDate(target.value)}
-        />
-
-        <input
-          className="competition-place"
-          type="text"
-          value={place}
-          name="Name"
-          placeholder="Kisapaikka"
-          onChange={({ target }) => setPlace(target.value)}
-        />
-
-        <input
-          className="competition-type"
-          type="text"
-          value={type}
-          name="Name"
-          placeholder="Kisan laji"
-          onChange={({ target }) => setType(target.value)}
-        />
-      </div>
-
-      <Dropzone onDrop={onDrop} maxFiles={1}>
-        {({getRootProps, getInputProps}) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <div className="files">
-              <div className="title">Logo</div>
-              {logo && <div key={logo[0].name}>{logo[0].name}<span onClick={(e) => handleDeleteFile(e)} className="remove-file" /></div>}
-            </div>
-          </div>
-        )}
-      </Dropzone>
+      <Competition
+        name={name}
+        date={date}
+        place={place}
+        type={type}
+        logo={logo}
+        setName={setName}
+        setDate={setDate}
+        setPlace={setPlace}
+        setType={setType}
+        setLogo={setLogo}
+      />
 
       <h2 className="basket-title">Kisaan valitut tehtävät</h2>
 
@@ -117,6 +76,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
           <span></span>
         </div>
       }
+
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <div className="delete-task-from-basket-mobile" onClick={() => removeTaskFromBasket(task.id)} />
@@ -142,7 +102,6 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
       ))}
       <div className="make-pdfs"><button onClick={handleMakePDFs}>Tee PDF-tiedostot</button></div>
     </div>
-
   )
 }
 

@@ -84,13 +84,22 @@ const updateViews = async (id) => {
   return response.data
 }
 
-const makePDFs = async (object) => {
+const makePDF = async (formData, id) => {
   const config = {
     headers: { 'Content-Type': 'multipart/form-data' }
   }
 
-  const response = await axios.post(`${baseUrl}/pdf`, object, config)
+  const response = await axios.post(`${baseUrl}/${id}/pdf`, formData, config)
   return response.data
 }
 
-export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews, addRating, makePDFs }
+const makePDFs = async (formData) => {
+  const config = {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }
+
+  const response = await axios.post(`${baseUrl}/pdf`, formData, config)
+  return response.data
+}
+
+export default { addtask, getTasks, getOneTask, getSearchedTasks, updateTask, deleteTask, getPendingTasks, acceptTask, updateViews, addRating, makePDF, makePDFs }
