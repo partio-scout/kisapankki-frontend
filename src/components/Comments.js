@@ -1,23 +1,62 @@
 import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 
-const Comments = () => {
-  const [comments, setComments] = useState("")
-  const [newComment, setNewComment] = useState("")
+const Comments = ({task}) => {
+  const [comments, setComments] = useState([])
+  const [nickName, setNickName] = useState("")
+  const [content, setContent] = useState("")
 
   useEffect(() => {
     commentService.getComments().then((response) => {
       setComments(response)
-
     })
   }, [])
 
+  const handleAddComment = async (event) => {
+    event.preventDefault()
+    try {
+
+      const addedComment = await commentService.addComment({
+        content: content,
+        nickName: nickName,
+        task: task
+      })
+      setNickName('')
+      setContent('')
+      setComments(comments.concat(addedComment))
+    } catch (exception) {
+    
+   
+    }
+  }
+
   return (
     <div>
-     
+      {comments.map(comment =>
+        <li key={comments.id}>{comment.content}</li>)}
 
-
+      <form onSubmit={handleAddComment}>
+        <input
+          className=""
+          type="text"
+          value={nickName}
+          name="nickName"
+          placeholder="Nimimerkki"
+          onChange={({ target }) => setNickName(target.value)}
+        />
+        <input
+          className=""
+          type="text"
+          value={content}
+          name="content"
+          placeholder="Kommentti"
+          onChange={({ target }) => setContent(target.value)}
+        />
+        <button type="submit" className="add-task-button">Lisää kommentti</button>
+      </form>
     </div>
+
+
 
   )
 }
