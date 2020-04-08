@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import commentService from '../services/comments'
+import commentService from '../services/comment'
 
 const Comments = () => {
   const [comments, setComments] = useState("")
@@ -8,15 +8,13 @@ const Comments = () => {
   useEffect(() => {
     commentService.getComments().then((response) => {
       setComments(response)
+
     })
   }, [])
 
   return (
     <div>
-      {comments.map((comment) => (
-        <p>{comment.content}</p>
-
-      ))}
+     
 
 
     </div>

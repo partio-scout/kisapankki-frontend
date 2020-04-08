@@ -112,7 +112,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
         </div>
 
       }
-      <Comments/>
+     
     </div>
 
   )
