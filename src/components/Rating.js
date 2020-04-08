@@ -3,7 +3,7 @@ import StarRatings from 'react-star-ratings'
 import taskService from '../services/task'
 import Notification from './Notification'
 
-const Rating = ({ task, tasks, setTasks }) => {
+const Rating = ({ task, handleUpdateTask }) => {
   const [rating, setRating] = useState()
   const [errorMessage, setErrorMessage] = useState(null)
   const [confirmMessage, setConfirmMessage] = useState(null)
@@ -36,12 +36,9 @@ const Rating = ({ task, tasks, setTasks }) => {
         const newVotes = votes.concat(task.id)
         window.localStorage.setItem('votes', JSON.stringify(newVotes))
       }
-      task.ratings[newRating - 1] = task.ratings[newRating - 1] + 1
-      task.ratingsAVG = updatedValues.ratingsAVG
-      setTasks(tasks.map((t) =>
-        (t.id == task.id) ? task : t))
       setRatingsAVG(updatedValues.ratingsAVG)
       setRatingsAmount(updatedValues.ratingsAmount)
+      handleUpdateTask({ ...task, ratings: task.ratings[newRating - 1] + 1, ratingsAVG: updatedValues.ratingsAVG, ratingsAmount: updatedValues.ratingsAmount })
       setDisabled(true)
       setConfirmMessage('Arvostelu lähetetty')
     }

@@ -10,7 +10,7 @@ import StarRatings from 'react-star-ratings'
 import Filter from './Filter'
 import Moment from 'react-moment'
 
-const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews, setOriginalTasks }) => {
+const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateTask, handleDeleteTask }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -37,15 +37,20 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews, set
     setAllTasks(originalTasks)
   }, [originalTasks])
 
-
+  const handleUpdateViews = async (task) => {
+    try {
+      await taskService.updateViews(task.id)
+      handleUpdateTask({ ...task, views: task.views + 1 })
+    } catch (exeption) {
+    }
+  }
 
   const handleDelete = async (e, task) => {
     e.preventDefault()
     try {
       if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
         await taskService.deleteTask(task.id)
-        setTasks(tasks.filter(t => t.id !== task.id))
-        setOriginalTasks(tasks.filter(t => t.id !== task.id))
+        handleDeleteTask(task.id)
       }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
@@ -134,8 +139,8 @@ const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateViews, set
         </div>
       }
       {tasks.map((task) => (
-        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
-          <div className="task-list-item" key={task.id}>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
+          <div className="task-list-item">
             <span className="span-bigger">
               <p className="bigger-task-name">{task.name}</p>
               <p>Katselukertoja: {task.views}</p>
