@@ -85,11 +85,11 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
       setType('')
       setLogo(null)
       const url = window.URL.createObjectURL(new Blob([PDF], {
-        type: 'application/pdf'
+        type: 'application/zip'
       }))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', `${task.name}.pdf`)
+      link.setAttribute('download', `Rastit.zip`)
       document.body.appendChild(link)
       link.click()
     } catch (exception) {
