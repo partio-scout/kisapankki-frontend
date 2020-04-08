@@ -84,7 +84,9 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
       setPlace('')
       setType('')
       setLogo(null)
-      const url = window.URL.createObjectURL(new Blob([PDF]))
+      const url = window.URL.createObjectURL(new Blob([PDF], {
+        type: 'application/pdf'
+      }))
       const link = document.createElement('a')
       link.href = url
       link.setAttribute('download', 'file.pdf')

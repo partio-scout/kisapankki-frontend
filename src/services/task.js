@@ -86,7 +86,8 @@ const updateViews = async (id) => {
 
 const makePDF = async (formData, id) => {
   const config = {
-    headers: { 'Content-Type': 'multipart/form-data' }
+    headers: { 'Content-Type': 'multipart/form-data' },
+    responseType: 'blob'
   }
 
   const response = await axios.post(`${baseUrl}/${id}/pdf`, formData, config)
