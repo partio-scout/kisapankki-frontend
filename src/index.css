@@ -707,7 +707,13 @@ table, th, td {
   background: grey;
 }
 
+.competition-task div h2 {
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.17em;
+}
+
 .make-pdf {
+  margin-top: 10px;
   color: #253764;
   text-decoration: underline;
   cursor: pointer;

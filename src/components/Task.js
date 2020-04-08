@@ -6,7 +6,7 @@ import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
 import Competition from './Competition'
 import Moment from 'react-moment'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask }) => {
 
@@ -89,7 +89,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
       }))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', 'file.pdf')
+      link.setAttribute('download', `${task.name}.pdf`)
       document.body.appendChild(link)
       link.click()
     } catch (exception) {
