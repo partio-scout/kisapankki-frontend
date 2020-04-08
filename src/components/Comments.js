@@ -3,7 +3,7 @@ import commentService from '../services/comment'
 
 const Comments = ({task}) => {
   const [comments, setComments] = useState([])
-  const [nickName, setNickName] = useState("")
+  const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
 
   useEffect(() => {
@@ -18,10 +18,10 @@ const Comments = ({task}) => {
 
       const addedComment = await commentService.addComment({
         content: content,
-        nickName: nickName,
-        task: task
+        nickname: nickname,
+        task: task.id
       })
-      setNickName('')
+      setNickname('')
       setContent('')
       setComments(comments.concat(addedComment))
     } catch (exception) {
@@ -39,10 +39,10 @@ const Comments = ({task}) => {
         <input
           className=""
           type="text"
-          value={nickName}
-          name="nickName"
+          value={nickname}
+          name="nickname"
           placeholder="Nimimerkki"
-          onChange={({ target }) => setNickName(target.value)}
+          onChange={({ target }) => setNickname(target.value)}
         />
         <input
           className=""
