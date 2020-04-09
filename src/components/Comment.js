@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 
-const Comments = ({ task }) => {
+const Comment = ({ task }) => {
   const [comments, setComments] = useState([])
   const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
@@ -57,4 +57,4 @@ const Comments = ({ task }) => {
 
   )
 }
-export default Comments
+export default Comment
