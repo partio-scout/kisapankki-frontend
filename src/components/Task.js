@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import taskService from '../services/task'
 import Rating from './Rating'
+import Comment from './Comment'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
@@ -112,6 +113,7 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
         </div>
 
       }
+      <div><Comment task={task}/></div>
     </div>
 
   )
