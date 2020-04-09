@@ -30,8 +30,17 @@ const Comment = ({ task }) => {
 
   return (
     <div>
-      {comments.map(comment =>
-        <li key={comments.id}>{comment.content}</li>)}
+      {console.log(comments)}
+      {comments.map((comment) => (
+        <div className="comment-container">
+          <div>
+            <p className="user-left">{comment.content}</p>
+          </div>
+          <div className="user-right" >
+            <div className="user" /> 
+          </div>
+        </div>
+      ))}
 
       <form onSubmit={handleAddComment}>
         <input

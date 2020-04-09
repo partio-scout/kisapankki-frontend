@@ -102,6 +102,7 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
                   </a>
                 </div>
               ))}
+              <Comment task={task} />
               {user &&
                 <div className="buttons">
                   <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
@@ -110,10 +111,10 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
                 </div>}
             </div>
           }
+
         </div>
 
       }
-      <div><Comment task={task}/></div>
     </div>
 
   )

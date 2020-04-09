@@ -123,6 +123,8 @@ button:hover, .search-tasks-button:hover {
   align-items : center;
 }
 
+
+
 .logo {
   position: absolute;
   left: 10%;
@@ -174,6 +176,28 @@ button:hover, .search-tasks-button:hover {
   background-color: transparent;
   margin-top: 7px;
   cursor: pointer;
+}
+
+.comment-container { 
+  display: flex;
+}
+
+.user-left {
+  flex: 0 0 65%;
+}
+
+.user-right {
+  flex: 1;
+}
+
+.user {
+  height: 35px;
+  width: 35px;
+  background-image: url('./images/user.png');
+  background-size: 25px;
+  background-repeat: no-repeat;
+
+
 }
 
 .basket-task-view {
