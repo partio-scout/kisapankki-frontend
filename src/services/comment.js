@@ -21,4 +21,13 @@ const addComment = async (comment) => {
   return response.data
 }
 
-export default { getComments, addComment }
+const deleteComment = async (id) => {
+  const config = {
+    headers: { Authorization: tokenService.getToken() },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
+export default { getComments, addComment, deleteComment }
