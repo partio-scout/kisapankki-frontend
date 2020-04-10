@@ -30,10 +30,12 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
       setPlace('')
       setType('')
       setLogo(null)
-      const url = window.URL.createObjectURL(new Blob([PDFs]))
+      const url = window.URL.createObjectURL(new Blob([PDFs], {
+        type: 'application/zip'
+      }))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', 'file.pdf')
+      link.setAttribute('download', 'Rastit.zip')
       document.body.appendChild(link)
       link.click()
     } catch (exception) {
