@@ -102,6 +102,8 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
                   </a>
                 </div>
               ))}
+                            <h3>Kommentit:</h3>
+
               <Comment task={task} />
               {user &&
                 <div className="buttons">
