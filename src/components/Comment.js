@@ -7,8 +7,9 @@ const Comment = ({ task }) => {
   const [content, setContent] = useState("")
 
   useEffect(() => {
-    commentService.getComments().then((response) => {
+    commentService.getComments(task.id).then((response) => {
       setComments(response)
+    
     })
   }, [])
 

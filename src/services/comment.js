@@ -3,8 +3,8 @@ import tokenService from './token'
 
 const baseUrl = `${process.env.REACT_APP_API_URL}/comment`
 
-const getComments = async () => {
-  const response = await axios.get(baseUrl)
+const getComments = async (id) => {
+  const response = await axios.get(baseUrl, id)
   return response.data
 }
 const addComment = async (comment) => {
