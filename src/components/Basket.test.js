@@ -84,7 +84,7 @@ describe('<Basket />', () => {
     )
   })
 
-  test('basket shows inputs for competition', async () => {    
+  test('basket shows inputs for competition', async () => {
     const inputs = component.container.querySelectorAll('input')
     expect(inputs.length).toBe(5)
   })
@@ -96,6 +96,12 @@ describe('<Basket />', () => {
 
     const tasks = component.container.querySelectorAll('.task-list-item')
     expect(tasks.length).toBe(2)
+  })
+
+  test('basket has pdf button', async () => {
+    const button = component.container.querySelector('.make-pdfs')
+
+    expect(component.container).toContainElement(button)
   })
 
 })
