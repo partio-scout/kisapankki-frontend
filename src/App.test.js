@@ -6,6 +6,10 @@ import App from './App'
 import FrontPage from './components/FrontPage'
 
 jest.mock('./services/task')
+jest.mock('./services/series')
+jest.mock('./services/rule')
+jest.mock('./services/category')
+jest.mock('./services/language')
 
 afterEach(cleanup)
 
@@ -78,7 +82,7 @@ describe('<App />', () => {
     component = render(
       <Router>
         <App>
-          <FrontPage tasks={tasks} addTaskToBasket={'not null'} />
+          <FrontPage tasks={tasks} />
         </App>
       </Router>,
     )
