@@ -12,11 +12,19 @@ import User from './components/User'
 import Task from './components/Task'
 import tokenService from './services/token'
 import taskService from './services/task'
+import seriesService from './services/series'
+import ruleService from './services/rule'
+import categoryService from './services/category'
+import languageService from './services/language'
 
 const App = () => {
   const [basket, setBasket] = useState([])
   const [tasks, setTasks] = useState([])
   const [user, setUser] = useState(null)
+  const [categories, setCategories] = useState([])
+  const [rules, setRules] = useState([])
+  const [seriess, setSeriess] = useState([])
+  const [languages, setLanguages] = useState([])
   const history = useHistory()
 
   useEffect(() => {
@@ -40,6 +48,22 @@ const App = () => {
       const foundBasket = JSON.parse(basketJSON)
       setBasket(foundBasket)
     }
+
+    categoryService.getCategories().then((response) => {
+      setCategories(response)
+    })
+
+    seriesService.getSeries().then((response) => {
+      setSeriess(response)
+    })
+
+    ruleService.getRules().then((response) => {
+      setRules(response)
+    })
+
+    languageService.getLanguages().then(response => {
+      setLanguages(response)
+    })
   }, [])
 
   useEffect(() => {
@@ -116,15 +140,15 @@ const App = () => {
       </div>
       <div className="container">
         <Route exact path="/" render={() => <FrontPage tasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} />} />
-        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} addTaskToBasket={addTaskToBasket} handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
-        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
+        <Route exact path="/tehtava/:id" render={(match) => <Task {...match} user={user} rules={rules} seriess={seriess} languages={languages} addTaskToBasket={addTaskToBasket} handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
+        <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} categories={categories} rules={rules} seriess={seriess} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
         <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} removeAllFromBasket={removeAllFromBasket} handleUpdateTask={handleUpdateTask} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
-        <Route path="/lisaa_tehtava" render={() => <AddTask />} />
+        <Route path="/lisaa_tehtava" render={() => <AddTask rules={rules} seriess={seriess} languages={languages} />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
         <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} /> : <Redirect to="/" />)} />
         <Route path="/lisaa_admin" render={() => (localStorage.getItem('loggedUser') ? <AddAdmin /> : <Redirect to="/" />)} />
-        <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown /> : <Redirect to="/" />)} />
+        <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown rules={rules} categories={categories} languages={languages} series={seriess} setRules={setRules} setCategories={setCategories} setLanguages={setLanguages} setSeriess={setSeriess} /> : <Redirect to="/" />)} />
       </div>
     </div>
   )

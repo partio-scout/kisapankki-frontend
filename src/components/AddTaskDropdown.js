@@ -1,37 +1,14 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import Rule from './Rule'
 import Language from './Language'
 import Series from './Series'
 import Category from './Category'
-import ruleService from '../services/rule'
-import seriesService from '../services/series'
-import languageService from '../services/language'
-import categoryService from '../services/category'
 
-const AddTaskDropdown = () => {
-  const [rules, setRules] = useState([])
-  const [categories, setCategories] = useState([])
-  const [languages, setLanguages] = useState([])
-  const [series, setSeries] = useState([])
+const AddTaskDropdown = ({ rules, categories, languages, series, setRules, setCategories, setLanguages, setSeries }) => {
   const [showCategories, setShowCategories] = useState(false)
   const [showRules, setShowRules] = useState(false)
   const [showLanguages, setShowLanguages] = useState(false)
   const [showSeries, setShowSeries] = useState(false)
-
-  useEffect(() => {
-    ruleService.getRules().then((response) => {
-      setRules(response)
-    })
-    categoryService.getCategories().then((response) => {
-      setCategories(response)
-    })
-    seriesService.getSeries().then((response) => {
-      setSeries(response)
-    })
-    languageService.getLanguages().then((response) => {
-      setLanguages(response)
-    })
-  }, [])
 
   return (
     <div className="crls-container">

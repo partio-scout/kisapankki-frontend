@@ -4,10 +4,53 @@ import { render, cleanup } from '@testing-library/react'
 import { mount } from 'enzyme'
 import AddTask from './AddTask'
 
-jest.mock('../services/category')
-jest.mock('../services/rule')
-jest.mock('../services/series')
-jest.mock('../services/language')
+const series = [
+  {
+    id: '1',
+    name: 'sarja1',
+  },
+  {
+    id: '2',
+    name: 'sarja2',
+  },
+  {
+    id: '3',
+    name: 'testi-ikäryhmä pending',
+  },
+]
+
+const rules = [
+  {
+    id: '1',
+    name: 'säännöt1',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' }, { id: '2', name: 'kategoria2' }]
+  },
+  {
+    id: '2',
+    name: 'säännöt2',
+    acceptedCategories: [ { id: '2', name: 'kategoria2' }, { id: '3', name: 'pendingkategor' }]
+  },
+  {
+    id: '3',
+    name: 'testisäännöt true',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' }, { id: '3', name: 'pendingkategor' }]
+  },
+]
+
+const languages = [
+  {
+    id: '1',
+    name: 'suomi1',
+  },
+  {
+    id: '2',
+    name: 'suomi2',
+  },
+  {
+    id: '3',
+    name: 'ruotsi3',
+  },
+]
 
 afterEach(cleanup)
 
@@ -16,7 +59,7 @@ describe('<AddTask/>', () => {
 
   beforeEach(() => {
     component = render(
-      <AddTask />,
+      <AddTask seriess={series} rules={rules} languages={languages} />,
     )
   })
 
@@ -52,7 +95,7 @@ describe('<AddTask />', () => {
 
   beforeEach(() => {
     component = mount(
-      <AddTask />,
+      <AddTask seriess={series} rules={rules} languages={languages} />,
     )
   })
 

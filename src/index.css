@@ -213,6 +213,7 @@ button:hover, .search-tasks-button:hover {
 .container {
   width: 80%;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 .new-favorite-lists {

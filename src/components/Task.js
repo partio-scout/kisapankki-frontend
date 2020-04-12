@@ -7,7 +7,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, handleDeleteTask }) => {
+const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleAddTask, handleUpdateTask, handleDeleteTask }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -64,7 +64,7 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
   return (
     <div>
       {modifyVisible ?
-        <ModifyTask setModifyVisible={setModifyVisible} task={task} setTask={setTask} handleUpdateTask={handleUpdateTask} />
+        <ModifyTask setModifyVisible={setModifyVisible} task={task} rules={rules} seriess={seriess} languages={languages} setTask={setTask} handleUpdateTask={handleUpdateTask} />
         :
         <div className="task-view-info-background">
           <Notification message={message} type="success" />
@@ -76,23 +76,23 @@ const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, h
                 <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 <Rating task={task} handleUpdateTask={handleUpdateTask} />
               </div>
-              <h3>Tehtävänanto:</h3>
+              <h3>Tehtävänanto</h3>
               <TaskTextDisplay text={task.assignmentText} />
-              <h3>Rastimiehen ohjeet:</h3>
+              <h3>Rastimiehen ohjeet</h3>
               <TaskTextDisplay text={task.supervisorInstructions} />
-              <h3>Arvosteluasteikko:</h3>
+              <h3>Arvosteluasteikko</h3>
               <TaskTextDisplay text={task.gradingScale} />
-              <h3>Sarja:</h3>
+              <h3>Sarja</h3>
               {task.series.map(s => <span key={task.id + s.id}>{s.name}<br /></span>)}
-              <h3>Kategoria:</h3>
+              <h3>Kategoria</h3>
               <p>{task.category && task.category.name}</p>
-              <h3>Sääntöluokka:</h3>
+              <h3>Sääntöluokka</h3>
               <p>{task.rules && task.rules.name}</p>
-              <h3>Tehtävän viimeisin muokkaaja:</h3>
+              <h3>Tehtävän viimeisin muokkaaja</h3>
               <p>{task.creatorName}<br />{task.creatorEmail}</p>
-              <h3>Tehtävä lisätty:</h3>
+              <h3>Tehtävä lisätty</h3>
               {task.created && <p><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></p>}
-              <h3>Liitetiedostot:</h3>
+              <h3>Liitetiedostot</h3>
               {task.files && task.files.length === 0 && <p>-</p>}
               {task.files && task.files.map((file) => (
                 <div key={file}>
