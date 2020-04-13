@@ -5,7 +5,7 @@ import Notification from './Notification'
 import tokenService from '../services/token'
 
 
-const TaskListPending = () => {
+const TaskListPending = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) => {
   const [tasks, setTasks] = useState([])
   const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -23,11 +23,12 @@ const TaskListPending = () => {
     })
   }, [])
 
-  const handleAccept = (e, id) => {
+  const handleAccept = (e, task) => {
     e.preventDefault()
     try {
-      taskService.acceptTask(id)
-      setTasks(tasks.filter(t => t.id !== id))
+      taskService.acceptTask(task.id)
+      setTasks(tasks.filter(t => t.id !== task.id))
+      handleAddTask(task)
       setMessage('Tehtävä hyväksytty')
       setTimeout(() => {
         setMessage(null)
@@ -40,12 +41,20 @@ const TaskListPending = () => {
     }
   }
 
-  const handleDelete = async (e, id) => {
+  const handleUpdateViews = async (task) => {
+    try {
+      await taskService.updateViews(task.id)
+      handleUpdateTask({ ...task, views: task.views + 1 })
+    } catch (exeption) {
+    }
+  }
+
+  const handleDelete = async (e, task) => {
     e.preventDefault()
     try {
-      if (window.confirm(`Haluatko poistaa tehtävän: ${tasks.find(t => t.id === id).name}`)) {
-        await taskService.deleteTask(id)
-        setTasks(tasks.filter(t => t.id !== id))
+      if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
+        await taskService.deleteTask(task.id)
+        handleDeleteTask(task.id)
       }
     } catch (exeption) {
       setErrorMessage('Jotain meni vikaan')
@@ -71,16 +80,16 @@ const TaskListPending = () => {
       }
       
       {tasks.map((task) => (
-        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => taskService.updateViews(task.id)}>
-        <div className="task-list-item" key={task.id}>
+        <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
+        <div className="task-list-item">
           <span>
           <p> {task.name}</p>
             <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          <button className="accept-button" onClick={(e) => handleAccept(e, task.id)}>Hyväksy</button>
-            <button className="delete-button" onClick={(e) => handleDelete(e, task.id)}>Poista</button>
+          <button className="accept-button" onClick={(e) => handleAccept(e, task)}>Hyväksy</button>
+            <button className="delete-button" onClick={(e) => handleDelete(e, task)}>Poista</button>
         </div>
       </Link>
       ))}

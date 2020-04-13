@@ -8,7 +8,7 @@ import Competition from './Competition'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
-const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask }) => {
+const Task = ({ match, user, addTaskToBasket, handleAddTask, handleUpdateTask, handleDeleteTask }) => {
 
   const [task, setTask] = useState(null)
   const [modifyVisible, setModifyVisible] = useState(false)
@@ -32,7 +32,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
     try {
       if (window.confirm(`Haluatko poistaa tehtävän: ${task.name}`)) {
         taskService.deleteTask(task.id)
-        setTasks(tasks.filter(t => t.id !== task.id))
+        handleDeleteTask(task.id)
         setMessage('Tehtävä poistettu')
         setTimeout(() => {
           setMessage(null)
@@ -55,6 +55,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
     try {
       taskService.acceptTask(task.id)
       setMessage('Tehtävä hyväksytty')
+      handleAddTask(task)
       setTimeout(() => {
         setMessage(null)
         history.push('/admin')
@@ -113,7 +114,7 @@ const Task = ({ match, user, addTaskToBasket, tasks, setTasks, handleUpdateTask 
               <div>
                 <h2>{task.name}</h2>
                 <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
-                <Rating task={task} tasks={tasks} setTasks={setTasks} />
+                <Rating task={task} handleUpdateTask={handleUpdateTask} />
               </div>
               <h3>Tehtävänanto:</h3>
               <TaskTextDisplay text={task.assignmentText} />

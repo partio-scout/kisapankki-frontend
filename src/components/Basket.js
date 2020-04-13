@@ -4,7 +4,15 @@ import Notification from './Notification'
 import Competition from './Competition'
 import taskService from '../services/task'
 
-const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromBasket }) => {
+const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBasket }) => {
+
+  const handleUpdateViews = async (task) => {
+    try {
+      await taskService.updateViews(task.id)
+      handleUpdateTask({ ...task, views: task.views + 1 })
+    } catch (exeption) {
+    }
+  }
 
   const [name, setName] = useState('')
   const [date, setDate] = useState('')
@@ -83,7 +91,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateViews, removeAllFromB
         <div className="task-list-item" key={task.id}>
           <div className="delete-task-from-basket-mobile" onClick={() => removeTaskFromBasket(task.id)} />
           <span>
-            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task.id)}>
+            <Link to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)}>
               {task.name}
             </Link>
             <p>Katselukertoja: {task.views}</p>
