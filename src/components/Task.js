@@ -4,6 +4,7 @@ import Rating from './Rating'
 import ModifyTask from './ModifyTask'
 import Notification from './Notification'
 import TaskTextDisplay from './TaskTextDisplay'
+import Competition from './Competition'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 
@@ -13,6 +14,12 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
   const [modifyVisible, setModifyVisible] = useState(false)
   const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [name, setName] = useState('')
+  const [date, setDate] = useState('')
+  const [place, setPlace] = useState('')
+  const [type, setType] = useState('')
+  const [logo, setLogo] = useState(null)
+  const [showMakePDF, setShowMakePDF] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
@@ -61,6 +68,39 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
     }
   }
 
+  const handleMakePDF = async () => {
+    let formData = new FormData()
+
+    const competition = JSON.stringify({ name, date, place, type, task: task.id })
+    formData.append('competition', competition)
+
+    if (logo) {
+      formData.append('logo', logo, logo.name)
+    }
+    
+    try {
+      const PDF = await taskService.makePDF(formData, task.id)
+      setName('')
+      setDate('')
+      setPlace('')
+      setType('')
+      setLogo(null)
+      const url = window.URL.createObjectURL(new Blob([PDF], {
+        type: 'application/pdf'
+      }))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `${name}.pdf`)
+      document.body.appendChild(link)
+      link.click()
+    } catch (exception) {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   return (
     <div>
       {modifyVisible ?
@@ -101,6 +141,26 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                   </a>
                 </div>
               ))}
+              {showMakePDF ?
+                <div className="competition-task">
+                  <div className="make-pdf right" onClick={() => setShowMakePDF(false)}>Sulje</div>
+                  <Competition
+                    name={name}
+                    date={date}
+                    place={place}
+                    type={type}
+                    logo={logo}
+                    setName={setName}
+                    setDate={setDate}
+                    setPlace={setPlace}
+                    setType={setType}
+                    setLogo={setLogo}
+                  />
+                  <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                </div>
+                :
+                <div className="make-pdf" onClick={() => setShowMakePDF(true)}>Lisää kisan tiedot/Tee PDF</div>
+              }
               {user &&
                 <div className="buttons">
                   <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>

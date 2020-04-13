@@ -101,11 +101,11 @@ button {
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover {
+button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   background: #253764;
 }
 
-.delete-button:hover {
+.delete-button:hover, .basket-delete-all:hover {
   background: #f04150;
 }
 
@@ -462,6 +462,7 @@ table, th, td {
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
+  background: white;
   cursor: pointer;
 }
 
@@ -687,6 +688,44 @@ table, th, td {
   display: inline-block;
 }
 
+.make-pdfs {
+  text-align: center;
+}
+
+.competition input {
+  width: calc(25% - 26px);
+}
+
+.competition input:last-child {
+  margin-right: 0;
+}
+
+.competition-task {
+  margin-top: 20px;
+}
+
+.competition-task button {
+  background: grey;
+}
+
+.competition-task div h2 {
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.17em;
+}
+
+.make-pdf {
+  margin-top: 10px;
+  color: #253764;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.right {
+  float: right;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 1200px) {
   .header {
     padding-left: 20px;
@@ -774,6 +813,11 @@ table, th, td {
 
   .delete-task-from-basket {
     display: none!important;
+  }
+
+  .competition input {
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
