@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Notification from './Notification'
 import taskService from '../services/task'
 import fileService from '../services/file'
-import ruleService from '../services/rule'
-import seriesService from '../services/series'
-import languageService from '../services/language'
 import MDEditor from './MDEditor'
 import Dropzone from 'react-dropzone'
 
-const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask }) => {
+const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, seriess, languages }) => {
 
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -19,13 +16,10 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask }) => {
   const [assignmentTextMD, setAssignmentTextMD] = useState(task.assignmentTextMD)
   const [gradingScaleMD, setGradingScaleMD] = useState(task.gradingScaleMD)
   const [supervisorInstructionsMD, setSupervisorInstructionsMD] = useState(task.supervisorInstructionsMD)
-  const [rules, setRules] = useState([])
-  const [rule, setRule] = useState(task.rules ? task.rules.id : null)
   const [categories, setCategories] = useState([])
+  const [rule, setRule] = useState(task.rules ? task.rules.id : null)
   const [category, setCategory] = useState(task.category ? task.category.id : null)
-  const [seriess, setSeriess] = useState([])
   const [series, setSeries] = useState(task.series.map(s => s.id))
-  const [languages, setLanguages] = useState([])
   const [language, setLanguage] = useState(task.language ? task.language.id : null)
   const [creatorName, setCreatorName] = useState(task.creatorName)
   const [creatorEmail, setCreatorEmail] = useState(task.creatorEmail)
@@ -41,21 +35,12 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask }) => {
   let id = task.id
 
   useEffect(() => {
-    ruleService.getRules().then(response => {
-      setRules(response)
-      if (task.rules && task.rules.id) {
-        const foundRule = response.find(r => r.id === task.rules.id)
-        if (foundRule) {
-          setCategories(foundRule.acceptedCategories)
-        }
+    if (rules && task.rules && task.rules.id) {
+      const foundRule = rules.find(r => r.id === task.rules.id)
+      if (foundRule) {
+        setCategories(foundRule.acceptedCategories)
       }
-    })
-    seriesService.getSeries().then(response => {
-      setSeriess(response)
-    })
-    languageService.getLanguages().then(response => {
-      setLanguages(response)
-    })
+    }
   }, [])
 
   const handleRuleChange = (e) => {

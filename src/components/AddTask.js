@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Notification from './Notification'
 import taskService from '../services/task'
 import fileService from '../services/file'
-import ruleService from '../services/rule'
-import seriesService from '../services/series'
-import languageService from '../services/language'
 import MDEditor from './MDEditor'
 import Dropzone from 'react-dropzone'
 
-const AddTask = () => {
+const AddTask = ({ rules, seriess, languages }) => {
 
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -19,13 +16,10 @@ const AddTask = () => {
   const [assignmentTextMD, setAssignmentTextMD] = useState('')
   const [gradingScaleMD, setGradingScaleMD] = useState('')
   const [supervisorInstructionsMD, setSupervisorInstructionsMD] = useState('')
-  const [rules, setRules] = useState([])
   const [rule, setRule] = useState('')
   const [categories, setCategories] = useState([])
   const [category, setCategory] = useState('')
-  const [seriess, setSeriess] = useState([])
   const [series, setSeries] = useState([])
-  const [languages, setLanguages] = useState([])
   const [language, setLanguage] = useState('')
   const [creatorName, setCreatorName] = useState('')
   const [creatorEmail, setCreatorEmail] = useState('')
@@ -35,18 +29,6 @@ const AddTask = () => {
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
   const [files, setFiles] = useState([])
-
-  useEffect(() => {
-    ruleService.getRules().then(response => {
-      setRules(response)
-    })
-    seriesService.getSeries().then(response => {
-      setSeriess(response)
-    })
-    languageService.getLanguages().then(response => {
-      setLanguages(response)
-    })
-  }, [])
 
   const handleRuleChange = (e) => {
     setRule(e.target.value)

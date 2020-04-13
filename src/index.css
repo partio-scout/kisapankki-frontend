@@ -153,9 +153,9 @@ button:hover, .search-tasks-button:hover {
 
 .number-of-tasks-in-basket {
   position: absolute;
-  top: 15px;
+  top: 16px;
   left: 0;
-  right: 0;
+  right: 1px;
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -213,6 +213,7 @@ button:hover, .search-tasks-button:hover {
 .container {
   width: 80%;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 .new-favorite-lists {
