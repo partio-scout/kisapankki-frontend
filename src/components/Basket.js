@@ -58,18 +58,20 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
     <div className="task-list">
       <Notification message={errorMessage} type="error" />
 
-      <Competition
-        name={name}
-        date={date}
-        place={place}
-        type={type}
-        logo={logo}
-        setName={setName}
-        setDate={setDate}
-        setPlace={setPlace}
-        setType={setType}
-        setLogo={setLogo}
-      />
+      {tasks && tasks.length > 0 && 
+        <Competition
+          name={name}
+          date={date}
+          place={place}
+          type={type}
+          logo={logo}
+          setName={setName}
+          setDate={setDate}
+          setPlace={setPlace}
+          setType={setType}
+          setLogo={setLogo}
+        />
+      }
 
       <h2 className="basket-title">Kisaan valitut tehtävät</h2>
 
@@ -110,7 +112,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
           <span className="delete-task-from-basket" onClick={() => removeTaskFromBasket(task.id)} />
         </div>
       ))}
-      <div className="make-pdfs"><button onClick={handleMakePDFs}>Tee PDF-tiedostot</button></div>
+      {tasks && tasks.length > 0 && <div className="make-pdfs"><button onClick={handleMakePDFs}>Tee PDF-tiedostot</button></div>}
     </div>
   )
 }
