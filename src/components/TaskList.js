@@ -11,6 +11,9 @@ const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBa
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [nameAsc, setNameAsc] = useState(false)
+  const [ratingDesc, setRatingDesc] = useState(false)
+  const [dateDesc, setDateDesc] = useState(false)
 
   useEffect(() => {
     setTasks(originalTasks)
@@ -40,6 +43,33 @@ const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBa
     }
   }
 
+  const handleSortByName = () => {
+    if (nameAsc) {
+      setTasks(tasks.sort(compareNamesDesc).concat([]))
+    } else {
+      setTasks(tasks.sort(compareNamesAsc).concat([]))
+    }
+    setNameAsc(!nameAsc)
+  }
+
+  const handleSortByRating = () => {
+    if (ratingDesc) {
+      setTasks(tasks.sort(compareRatingsAsc).concat([]))
+    } else {
+      setTasks(tasks.sort(compareRatingsDesc).concat([]))
+    }
+    setRatingDesc(!ratingDesc)
+  }
+
+  const handleSortByDate = () => {
+    if (dateDesc) {
+      setTasks(tasks.sort(compareCreatedAsc).concat([]))
+    } else {
+      setTasks(tasks.sort(compareCreatedDesc).concat([]))
+    }
+    setDateDesc(!dateDesc)
+  }
+
   const handleSortByNameAsc = () => {
     setTasks(tasks.sort(compareNamesAsc).concat([]))
   }
@@ -65,11 +95,11 @@ const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBa
   }
 
   const compareNamesAsc = (a, b) => {
-    return b.name.localeCompare(a.name)
+    return a.name.localeCompare(b.name)
   }
 
   const compareNamesDesc = (a, b) => {
-    return a.name.localeCompare(b.name)
+    return b.name.localeCompare(a.name)
   }
 
   const compareRatingsAsc = (a, b) => {
@@ -109,11 +139,11 @@ const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBa
       <Notification message={errorMessage} />
       {tasks && tasks.length > 0 &&
         <div className="task-list-title">
-          <span className="arrow-inline">Tehtävän nimi <span className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameAsc} /><i className="name-arrow-down" onClick={handleSortByNameDesc} /></span></span>
+          <span className="arrow-inline"><div onClick={handleSortByName}>Tehtävän nimi</div><div className="arrow-container"><i className="name-arrow-up" onClick={handleSortByNameDesc} /><i className="name-arrow-down" onClick={handleSortByNameAsc} /></div></span>
           <span>Sarja</span>
           <span>Kategoria</span>
-          <span className="arrow-inline">Arvostelu <span className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></span></span>
-          <span className="arrow-inline">Lisätty <span className="arrow-container"><i className="created-arrow-up" onClick={handleSortByCreatedAsc} /><i className="created-arrow-down" onClick={handleSortByCreatedDesc} /></span></span>
+          <span className="arrow-inline"><div onClick={handleSortByRating}>Arvostelu</div><div className="arrow-container"><i className="rating-arrow-up" onClick={handleSortByRatingsAsc} /><i className="rating-arrow-down" onClick={handleSortByRatingsDesc} /></div></span>
+          <span className="arrow-inline"><div onClick={handleSortByDate}>Lisätty</div><div className="arrow-container"><i className="created-arrow-up" onClick={handleSortByCreatedAsc} /><i className="created-arrow-down" onClick={handleSortByCreatedDesc} /></div></span>
           {user && <span></span>}
           <span></span>
         </div>

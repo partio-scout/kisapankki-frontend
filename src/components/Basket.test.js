@@ -79,7 +79,7 @@ describe('<Basket />', () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <Basket tasks={tasks} removeTaskFromBasket='not null' handleUpdateViews='not null' removeAllFromBasket='not null' />
+        <Basket tasks={tasks} />
       </Router>,
     )
   })
