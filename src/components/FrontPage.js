@@ -48,6 +48,7 @@ const FrontPage = ({ tasks, addTaskToBasket, handleUpdateTask }) => {
             {newTasks.map((task) => (
               <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
                 <div className="task-list-item frontpage-item new-item">
+                  <div className="black-basket-mobile" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} />
                   <span className="span-bigger">
                     <p className="bigger-task-name-frontpage">{task.name}</p>
                     <p>Katselukertoja: {task.views}</p>
@@ -73,6 +74,7 @@ const FrontPage = ({ tasks, addTaskToBasket, handleUpdateTask }) => {
             {favoriteTasks.map((task) => (
               <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
                 <div className="task-list-item frontpage-item favorite-item">
+                  <div className="black-basket-mobile" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} />
                   <span className="span-bigger">
                     <p className="bigger-task-name-frontpage">{task.name}</p>
                     <p>Katselukertoja: {task.views}</p>
