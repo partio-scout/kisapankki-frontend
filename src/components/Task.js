@@ -113,7 +113,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
             <div className="task-view-info">
               <div>
                 <h2>{task.name}</h2>
-                <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
+                <span><div className="black-basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
                 <Rating task={task} handleUpdateTask={handleUpdateTask} />
               </div>
               <h3>Tehtävänanto</h3>

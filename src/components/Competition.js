@@ -17,55 +17,68 @@ const Competition = ({ name, date, place, type, logo, setName, setDate, setPlace
     <div>
       <h2 className="basket-title">Kisan tiedot</h2>
 
-      <div className="competition">
-        <input
-          className="competition-name"
-          type="text"
-          value={name}
-          name="Name"
-          placeholder="Kisan nimi"
-          onChange={({ target }) => setName(target.value)}
-        />
+      <div className="competition-container">
 
-        <input
-          className="competition-date"
-          type="text"
-          value={date}
-          name="Name"
-          placeholder="Kisan päivämäärä"
-          onChange={({ target }) => setDate(target.value)}
-        />
-
-        <input
-          className="competition-place"
-          type="text"
-          value={place}
-          name="Name"
-          placeholder="Kisapaikka"
-          onChange={({ target }) => setPlace(target.value)}
-        />
-
-        <input
-          className="competition-type"
-          type="text"
-          value={type}
-          name="Name"
-          placeholder="Kisan laji"
-          onChange={({ target }) => setType(target.value)}
-        />
-      </div>
-
-      <Dropzone onDrop={onDrop}>
-        {({getRootProps, getInputProps}) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <div className="files">
-              <div className="title">Logo</div>
-              {logo && <div key={logo.name}>{logo.name}<span onClick={(e) => handleDeleteLogo(e)} className="remove-file" /></div>}
-            </div>
+        <div className="competition">
+          <div>
+            <input
+              className="competition-name"
+              type="text"
+              value={name}
+              name="Name"
+              placeholder="Kisan nimi"
+              onChange={({ target }) => setName(target.value)}
+            />
           </div>
-        )}
-      </Dropzone>
+
+          <div>
+            <input
+              className="competition-date"
+              type="text"
+              value={date}
+              name="Name"
+              placeholder="Kisan päivämäärä"
+              onChange={({ target }) => setDate(target.value)}
+            />
+          </div>
+
+          <div>
+            <input
+              className="competition-place"
+              type="text"
+              value={place}
+              name="Name"
+              placeholder="Kisapaikka"
+              onChange={({ target }) => setPlace(target.value)}
+            />
+          </div>
+
+          <div>
+            <input
+              className="competition-type"
+              type="text"
+              value={type}
+              name="Name"
+              placeholder="Kisan laji"
+              onChange={({ target }) => setType(target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="competition-dropzone">
+          <Dropzone onDrop={onDrop}>
+            {({getRootProps, getInputProps}) => (
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div className="files competition-files">
+                  <div className="title">Logo</div>
+                  {logo && <div key={logo.name}>{logo.name}<span onClick={(e) => handleDeleteLogo(e)} className="remove-file" /></div>}
+                </div>
+              </div>
+            )}
+          </Dropzone>
+        </div>
+      </div>
 
     </div>
 
