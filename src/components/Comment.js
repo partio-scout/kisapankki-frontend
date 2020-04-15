@@ -72,7 +72,7 @@ const Comment = ({ task }) => {
           <div className="user-right" >
             <div className="user" />
           </div>
-          <button className="accept-button" onClick={(e) => handleCommentAccept( comment)}>Hyväksy</button>
+         
         </div>
       ))}
 
