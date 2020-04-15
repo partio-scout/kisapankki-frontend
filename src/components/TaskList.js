@@ -121,6 +121,7 @@ const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBa
       {tasks.map((task) => (
         <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
           <div className="task-list-item">
+            <div className="black-basket-mobile" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} />
             <span className="span-bigger">
               <p className="bigger-task-name">{task.name}</p>
               <p>Katselukertoja: {task.views}</p>
