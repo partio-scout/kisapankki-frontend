@@ -83,7 +83,7 @@ const TaskListPending = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) 
         <Link className="no-underline" to={`/tehtava/${task.id}`} onClick={() => handleUpdateViews(task)} key={task.id}>
         <div className="task-list-item">
           <span>
-          <p> {task.name}</p>
+            {task.name}
             <p>Katselukertoja: {task.views}</p>
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>

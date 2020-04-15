@@ -5,12 +5,55 @@ import { mount } from 'enzyme'
 import { BrowserRouter as Router } from 'react-router-dom'
 import TaskList from './TaskList'
 
-
-jest.mock('../services/series')
-jest.mock('../services/category')
-jest.mock('../services/rule')
-
 afterEach(cleanup)
+
+const series = [
+  {
+    id: '1',
+    name: 'sarja1',
+  },
+  {
+    id: '2',
+    name: 'sarja2',
+  },
+  {
+    id: '3',
+    name: 'testi-ikäryhmä pending',
+  },
+]
+
+const rules = [
+  {
+    id: '1',
+    name: 'säännöt1',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' }, { id: '2', name: 'kategoria2' }]
+  },
+  {
+    id: '2',
+    name: 'säännöt2',
+    acceptedCategories: [ { id: '2', name: 'kategoria2' }, { id: '3', name: 'pendingkategor' }]
+  },
+  {
+    id: '3',
+    name: 'testisäännöt true',
+    acceptedCategories: [ { id: '1', name: 'kategoria1' }, { id: '3', name: 'pendingkategor' }]
+  },
+]
+
+const categories = [
+  {
+    id: '1',
+    name: 'kategoria1',
+  },
+  {
+    id: '2',
+    name: 'kategoria2',
+  },
+  {
+    id: '3',
+    name: 'pendingkategory',
+  },
+]
 
 const tasks = [
   {
@@ -81,7 +124,7 @@ describe('<TaskList />', () => {
   beforeEach(() => {
     component = render(
       <Router>
-        <TaskList user={user} originalTasks={tasks} />
+        <TaskList user={user} originalTasks={tasks} rules={rules} seriess={series} categories={categories} />
       </Router>,
     )
   })
@@ -159,7 +202,7 @@ describe('<TaskList />', () => {
   beforeEach(() => {
     component = mount(
       <Router>
-        <TaskList user={user} originalTasks={tasks} />
+        <TaskList user={user} originalTasks={tasks} rules={rules} seriess={series} categories={categories} />
       </Router>,
     )
   })

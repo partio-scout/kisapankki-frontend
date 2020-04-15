@@ -1,15 +1,13 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup, waitForElement, fireEvent, act } from '@testing-library/react'
+import { render, cleanup, waitForElement, act, fireEvent } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import App from './App'
-import FrontPage from './components/FrontPage'
+import Basket from './Basket'
 
-jest.mock('./services/task')
-jest.mock('./services/series')
-jest.mock('./services/rule')
-jest.mock('./services/category')
-jest.mock('./services/language')
+
+jest.mock('../services/series')
+jest.mock('../services/category')
+jest.mock('../services/rule')
 
 afterEach(cleanup)
 
@@ -40,7 +38,7 @@ const tasks = [
     },
     pending: false,
     views: 5,
-    ratingsAVG: '3',
+    ratingsAVG: 3,
     created: '2020-03-23T19:54:27.358+00:00'
   },
 
@@ -70,43 +68,40 @@ const tasks = [
     },
     pending: false,
     views: 0,
-    ratingsAVG: '4',
+    ratingsAVG: 4,
     created: '2020-03-23T19:53:27.358+00:00'
   },
 ]
 
-describe('<App />', () => {
+describe('<Basket />', () => {
   let component
 
   beforeEach(() => {
     component = render(
       <Router>
-        <App>
-          <FrontPage tasks={tasks} />
-        </App>
+        <Basket tasks={tasks} removeTaskFromBasket='not null' handleUpdateViews='not null' removeAllFromBasket='not null' />
       </Router>,
     )
   })
 
-  test('renders login button in header', () => {
-    const button = component.container.querySelector('.login-button-header')
-    expect(button).toHaveTextContent(
-      'Kirjaudu',
-    )
+  test('basket shows inputs for competition', async () => {
+    const inputs = component.container.querySelectorAll('input')
+    expect(inputs.length).toBe(5)
   })
 
-  test('clicking icon adds task to basket', async () => {
-    const whiteBasket = component.container.querySelector('.white-basket')
-    expect(whiteBasket).not.toHaveTextContent('1')
-
+  test('basket shows tasks for competition', async () => {
     await waitForElement(
-      () => component.container.querySelector('.black-basket'),
+      () => component.container.querySelector('.task-list-item'),
     )
 
-    const blackBaskets = component.container.querySelectorAll('.black-basket')
-    act(() => { fireEvent.click(blackBaskets[0])})
+    const tasks = component.container.querySelectorAll('.task-list-item')
+    expect(tasks.length).toBe(2)
+  })
 
-    expect(whiteBasket).toHaveTextContent('1')
+  test('basket has pdf button', async () => {
+    const button = component.container.querySelector('.make-pdfs')
+
+    expect(component.container).toContainElement(button)
   })
 
 })

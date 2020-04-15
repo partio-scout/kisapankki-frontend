@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Notification from './Notification'
+import Competition from './Competition'
 import taskService from '../services/task'
 
 const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBasket }) => {
@@ -12,9 +14,65 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
     }
   }
 
+  const [name, setName] = useState('')
+  const [date, setDate] = useState('')
+  const [place, setPlace] = useState('')
+  const [type, setType] = useState('')
+  const [logo, setLogo] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handleMakePDFs = async (e) => {
+    let formData = new FormData()
+
+    const competition = JSON.stringify({ name, date, place, type, tasks: tasks.map(t => t.id) })
+    formData.append('competition', competition )
+
+    if (logo) {
+      formData.append('logo', logo, logo.name)
+    }
+    
+    try {
+      const PDFs = await taskService.makePDFs(formData)
+      setName('')
+      setDate('')
+      setPlace('')
+      setType('')
+      setLogo(null)
+      const url = window.URL.createObjectURL(new Blob([PDFs], {
+        type: 'application/zip'
+      }))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'Rastit.zip')
+      document.body.appendChild(link)
+      link.click()
+    } catch (exception) {
+      setErrorMessage('Jotain meni vikaan')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   return (
     <div className="task-list">
+      <Notification message={errorMessage} type="error" />
+
+      <Competition
+        name={name}
+        date={date}
+        place={place}
+        type={type}
+        logo={logo}
+        setName={setName}
+        setDate={setDate}
+        setPlace={setPlace}
+        setType={setType}
+        setLogo={setLogo}
+      />
+
       <h2 className="basket-title">Kisaan valitut tehtävät</h2>
+
       {tasks && tasks.length > 0 && <button className="basket-delete-all" onClick={removeAllFromBasket}>Poista kaikki</button>}
 
       {tasks && tasks.length === 0 && <div className="empty-basket">Ei valittuja tehtäviä</div>}
@@ -28,6 +86,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
           <span></span>
         </div>
       }
+
       {tasks.map((task) => (
         <div className="task-list-item" key={task.id}>
           <div className="delete-task-from-basket-mobile" onClick={() => removeTaskFromBasket(task.id)} />
@@ -51,8 +110,8 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
           <span className="delete-task-from-basket" onClick={() => removeTaskFromBasket(task.id)} />
         </div>
       ))}
+      <div className="make-pdfs"><button onClick={handleMakePDFs}>Tee PDF-tiedostot</button></div>
     </div>
-
   )
 }
 

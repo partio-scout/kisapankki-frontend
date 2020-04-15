@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import taskService from '../services/task'
-import seriesService from '../services/series'
-import ruleService from '../services/rule'
-import categoryService from '../services/category'
 import Notification from './Notification'
 import Search from './Search'
 import StarRatings from 'react-star-ratings'
 import Filter from './Filter'
 import Moment from 'react-moment'
 
-const TaskList = ({ user, originalTasks, addTaskToBasket, handleUpdateTask, handleDeleteTask }) => {
+const TaskList = ({ user, originalTasks, categories, rules, seriess, addTaskToBasket, handleUpdateTask, handleDeleteTask }) => {
   const [tasks, setTasks] = useState(originalTasks)
   const [allTasks, setAllTasks] = useState(originalTasks)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [categories, setCategories] = useState([])
-  const [rules, setRules] = useState([])
-  const [seriess, setSeriess] = useState([])
-
-  useEffect(() => {
-    categoryService.getCategories().then((response) => {
-      setCategories(response)
-    })
-
-    seriesService.getSeries().then((response) => {
-      setSeriess(response)
-    })
-
-    ruleService.getRules().then((response) => {
-      setRules(response)
-    })
-  }, [])
 
   useEffect(() => {
     setTasks(originalTasks)
