@@ -36,12 +36,24 @@ const Comment = ({ task }) => {
   }
   const handleCommentDelete = async (comment) => {
     try {
-      if (window.confirm(`Haluatko poistaa kommentin: ${comment.content}`)) {
-        await commentService.deleteComment(comment.id)
-        setComments(comments.filter(c => c.id !== comment.id))
-      }
+      await commentService.deleteComment(comment.id)
+      setComments(comments.filter(c => c.id !== comment.id))
     } catch (exeption) {
       setErrorMessage('Kommentin poistaminen ei onnistunut')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+
+    }
+  }
+
+  const handleCommentAccept = async (comment) => {
+  
+    try {
+      await commentService.acceptComment(comment.id)
+      setComments(comments.filter(c => c.id !== comment.id))
+    } catch (exeption) {
+      setErrorMessage('Kommentin hyväksyminen ei onnistunut')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -52,7 +64,6 @@ const Comment = ({ task }) => {
   return (
     <div>
       <Notification message={errorMessage} type="error" />
-      {console.log(comments)}
       {comments.map((comment) => (
         <div className="comment-container">
           <div>
@@ -61,7 +72,7 @@ const Comment = ({ task }) => {
           <div className="user-right" >
             <div className="user" />
           </div>
-          <button onClick={() => handleCommentDelete(comment)} className="add-task-button">Poista</button>
+          <button className="accept-button" onClick={(e) => handleCommentAccept( comment)}>Hyväksy</button>
         </div>
       ))}
 
