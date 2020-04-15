@@ -646,26 +646,30 @@ table, th, td {
   position: relative;
 }
 
+.arrow-inline div {
+  display: inline-block;
+  cursor: pointer;
+}
+
 .arrow-container i {
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   margin-bottom: 3px;
-  cursor: pointer;
 }
 
 .name-arrow-up, .rating-arrow-up, .created-arrow-up {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: -11px;
+  left: 7px;
   transform: rotate(-135deg);
 }
 
 .name-arrow-down, .rating-arrow-down, .created-arrow-down {
   position: absolute;
-  top: 8px;
-  left: 4px;
+  top: -7px;
+  left: 7px;
   transform: rotate(45deg);
 }
 
@@ -781,18 +785,6 @@ table, th, td {
     display: block;
     width: 100%;
     box-sizing: border-box;
-  }
-
-  .arrow-inline {
-    display: flex!important;
-  }
-
-  .name-arrow-up, .rating-arrow-up, .created-arrow-up {
-    top: 0px;
-  }
-  
-  .name-arrow-down, .rating-arrow-down, .created-arrow-down {
-    top: 4px;
   }
 
   .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
