@@ -63,9 +63,8 @@ const Comment = ({ task }) => {
   const handleCommentAccept = async (e, comment) => {
     e.preventDefault()
     try {
-      const aceptedComment = await commentService.acceptComment(comment.id)
+      await commentService.acceptComment(comment.id)
       setPendingComments(pendingComments.filter(c => c.id !== comment.id))
-      setComments(comments.concat(aceptedComment))
     } catch (exeption) {
       setErrorMessage('Kommentin hyväksyminen ei onnistunut')
       setTimeout(() => {
@@ -111,23 +110,7 @@ const Comment = ({ task }) => {
         <button type="submit" className="add-task-button">Lisää kommentti</button>
       </form>
 
-      {pendingComments.map((comment) => (
-        <div className="comment-container">
-          <div>
-            <p className="user-left">{comment.content}</p>
-          </div>
-          <div className="user-right" >
-            <div className="user" />
-          </div>
-          <button className="accept-button" onClick={(e) => handleCommentAccept(e, comment)}>Hyväksy</button>
-          <button className="delete-button" onClick={(e) => handleCommentDelete(e, comment)}>Poista</button>
-
-        </div>
-      ))}
-
     </div>
-
-
   )
 }
 export default Comment
