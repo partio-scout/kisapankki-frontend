@@ -9,7 +9,15 @@ const getComments = async (id) => {
 }
 
 const getPendingComments = async () => {
-  const response = await axios.get(`${baseUrl}/pending`)
+  let config = null
+  const token = tokenService.getToken()
+
+  if (token) {
+    config = {
+      headers: { Authorization: token }
+    }
+  }
+  const response = await axios.get(`${baseUrl}/pending`, config)
   return response.data
 }
 

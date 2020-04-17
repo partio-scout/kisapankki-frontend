@@ -4,7 +4,7 @@ import Notification from './Notification'
 
 const Comment = ({ task }) => {
   const [comments, setComments] = useState([])
-  const [pendingComments, setPendingComments] =useState([])
+  const [pendingComments, setPendingComments] = useState([])
   const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
@@ -34,7 +34,11 @@ const Comment = ({ task }) => {
       })
       setNickname('')
       setContent('')
-      setComments(comments.concat(addedComment))
+      if (addedComment.pending == false) {
+        setComments(comments.concat(addedComment))
+      } else {
+        setPendingComments(pendingComments.concat(addedComment))
+      }
     } catch (exception) {
       setErrorMessage('Kommentin lisääminen ei onnistunut')
       setTimeout(() => {
@@ -42,10 +46,11 @@ const Comment = ({ task }) => {
       }, 5000)
     }
   }
-  const handleCommentDelete = async (comment) => {
+  const handleCommentDelete = async (e, comment) => {
+    e.preventDefault()
     try {
       await commentService.deleteComment(comment.id)
-      setComments(comments.filter(c => c.id !== comment.id))
+      setPendingComments(pendingComments.filter(c => c.id !== comment.id))
     } catch (exeption) {
       setErrorMessage('Kommentin poistaminen ei onnistunut')
       setTimeout(() => {
@@ -55,11 +60,12 @@ const Comment = ({ task }) => {
     }
   }
 
-  const handleCommentAccept = async (comment) => {
-  
+  const handleCommentAccept = async (e, comment) => {
+    e.preventDefault()
     try {
-      await commentService.acceptComment(comment.id)
-      setComments(comments.filter(c => c.id !== comment.id))
+      const aceptedComment = await commentService.acceptComment(comment.id)
+      setPendingComments(pendingComments.filter(c => c.id !== comment.id))
+      setComments(comments.concat(aceptedComment))
     } catch (exeption) {
       setErrorMessage('Kommentin hyväksyminen ei onnistunut')
       setTimeout(() => {
@@ -81,6 +87,7 @@ const Comment = ({ task }) => {
             <div className="user" />
           </div>
          
+
         </div>
       ))}
 
@@ -103,6 +110,20 @@ const Comment = ({ task }) => {
         />
         <button type="submit" className="add-task-button">Lisää kommentti</button>
       </form>
+
+      {pendingComments.map((comment) => (
+        <div className="comment-container">
+          <div>
+            <p className="user-left">{comment.content}</p>
+          </div>
+          <div className="user-right" >
+            <div className="user" />
+          </div>
+          <button className="accept-button" onClick={(e) => handleCommentAccept(e, comment)}>Hyväksy</button>
+          <button className="delete-button" onClick={(e) => handleCommentDelete(e, comment)}>Poista</button>
+
+        </div>
+      ))}
 
     </div>
 
