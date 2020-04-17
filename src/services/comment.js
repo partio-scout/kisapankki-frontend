@@ -8,6 +8,11 @@ const getComments = async (id) => {
   return response.data
 }
 
+const getPendingComments = async () => {
+  const response = await axios.get(`${baseUrl}/pending`)
+  return response.data
+}
+
 const addComment = async (comment) => {
   let config = null
   const token = tokenService.getToken()
@@ -50,4 +55,4 @@ const deleteComment = async (id) => {
   return response.data
 }
 
-export default { getComments, addComment, deleteComment, acceptComment }
+export default { getComments, getPendingComments, addComment, deleteComment, acceptComment }

@@ -4,6 +4,7 @@ import Notification from './Notification'
 
 const Comment = ({ task }) => {
   const [comments, setComments] = useState([])
+  const [pendingComments, setPendingComments] =useState([])
   const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
@@ -11,6 +12,13 @@ const Comment = ({ task }) => {
   useEffect(() => {
     commentService.getComments(task.id).then((response) => {
       setComments(response)
+
+    })
+  }, [])
+
+  useEffect(() => {
+    commentService.getPendingComments().then((response) => {
+      setPendingComments(response)
 
     })
   }, [])
