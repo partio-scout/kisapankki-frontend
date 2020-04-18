@@ -101,7 +101,7 @@ button {
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
+button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-task button:hover {
   background: #253764;
 }
 
@@ -165,9 +165,9 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   text-decoration: none;
 }
 
-.black-basket {
+.black-basket, .black-basket-task-view {
   height: 35px;
-  width: 25px;
+  width: 30px;
   background-size: 25px;
   background-image: url('./images/black_bag.svg');
   background-repeat: no-repeat;
@@ -180,7 +180,7 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   display: none;
 }
 
-.basket-task-view {
+.black-basket-task-view {
   float: right;
   margin-top: 5px;
 }
@@ -470,6 +470,20 @@ table, th, td {
   cursor: pointer;
 }
 
+.competition-files {
+  margin-top: 5px;
+  width: 200px;
+  height: 200px;
+}
+
+.competition-dropzone {
+  margin-left: 10px;
+}
+
+.competition-container {
+  display: flex;
+}
+
 .title {
   font-weight: bold;
   margin: 5px;
@@ -702,7 +716,7 @@ table, th, td {
 }
 
 .competition input {
-  width: calc(25% - 26px);
+  width: 400px;
 }
 
 .competition input:last-child {
@@ -710,6 +724,7 @@ table, th, td {
 }
 
 .competition-task {
+  position: relative;
   margin-top: 20px;
 }
 
@@ -730,9 +745,9 @@ table, th, td {
 }
 
 .right {
-  float: right;
-  margin-top: 5px;
-  margin-right: 10px;
+  position: absolute;
+  top: -8px;
+  left: 580px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -825,9 +840,30 @@ table, th, td {
     display: none!important;
   }
 
+  .competition-container {
+    display: initial;
+  }
+
   .competition input {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .competition-files {
+    width: 100%;
+    height: initial;
+  }
+
+  .competition-dropzone {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .right {
+    position: initial;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
   }
 }
 
