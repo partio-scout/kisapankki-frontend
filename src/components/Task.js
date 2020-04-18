@@ -92,7 +92,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
       }))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', `${name}.pdf`)
+      link.setAttribute('download', `${task.name}.pdf`)
       document.body.appendChild(link)
       link.click()
       setShowLoader(false)
