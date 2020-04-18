@@ -20,6 +20,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
   const [type, setType] = useState('')
   const [logo, setLogo] = useState(null)
   const [showMakePDF, setShowMakePDF] = useState(false)
+  const [showLoader, setShowLoader] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
   }
 
   const handleMakePDF = async () => {
+    setShowLoader(true)
     let formData = new FormData()
 
     const competition = JSON.stringify({ name, date, place, type, task: task.id })
@@ -77,7 +79,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
     if (logo) {
       formData.append('logo', logo, logo.name)
     }
-    
+
     try {
       const PDF = await taskService.makePDF(formData, task.id)
       setName('')
@@ -93,6 +95,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
       link.setAttribute('download', `${name}.pdf`)
       document.body.appendChild(link)
       link.click()
+      setShowLoader(false)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -156,7 +159,11 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                     setType={setType}
                     setLogo={setLogo}
                   />
-                  <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                  {showLoader ?
+                    <div className="loader in-task"></div>
+                    :
+                    <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                  }
                 </div>
                 :
                 <div className="make-pdf" onClick={() => setShowMakePDF(true)}>Lisää kisan tiedot/Tee PDF</div>
