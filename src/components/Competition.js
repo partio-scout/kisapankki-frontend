@@ -71,8 +71,8 @@ const Competition = ({ name, date, place, type, logo, setName, setDate, setPlace
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 <div className="files competition-files">
-                  <div className="title">Logo</div>
-                  {logo && <div key={logo.name}>{logo.name}<span onClick={(e) => handleDeleteLogo(e)} className="remove-file" /></div>}
+                  {!logo && <div className="title">Logo</div>}
+                  {logo && <div key={logo.name}><img src={URL.createObjectURL(logo)}/><span onClick={(e) => handleDeleteLogo(e)} className="remove-file" /></div>}
                 </div>
               </div>
             )}

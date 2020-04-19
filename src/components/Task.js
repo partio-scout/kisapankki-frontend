@@ -139,7 +139,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
               {task.files && task.files.length === 0 && <p>-</p>}
               {task.files && task.files.map((file) => (
                 <div key={file}>
-                  <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
+                  <a href={`https://kisapankkifiles.blob.core.windows.net/files/${file}`}>
                     {file.substring(file.indexOf('-') + 1, file.length)}
                   </a>
                 </div>

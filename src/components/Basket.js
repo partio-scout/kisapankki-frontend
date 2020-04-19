@@ -106,7 +106,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
           <span>
             {task.files && task.files.map((file) => (
               <div key={file}>
-                <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
+                <a href={`https://kisapankkifiles.blob.core.windows.net/files/${file}`}>
                   {file.substring(file.indexOf('-') + 1, file.length)}
                 </a>
               </div>
