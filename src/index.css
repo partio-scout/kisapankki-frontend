@@ -384,11 +384,28 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   margin-top: 20px;
 }
 
+.space {
+  margin-top: 50px;
+}
+
+.space2 {
+  margin-top: 30px;
+}
+
+.textarea {
+  border-radius: 7px;
+}
+
+.comment-date {
+  margin-left: 250px;
+  font-size: 14px;
+}
+
 .comment-content {
   background-color: #fff;
-  width: 250px; 
+  width: 350px; 
   padding: 10px;
-  font-size: 17px; 
+  font-size: 15px; 
   border-radius: 13px;
   text-align: justify; 
 }

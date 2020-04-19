@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 import Notification from './Notification'
+import Moment from 'react-moment'
+
 
 const Comment = ({ task }) => {
   const [comments, setComments] = useState([])
   const [pendingComments, setPendingComments] = useState([])
   const [nickname, setNickname] = useState("")
+  const [date, setDate] = useState('')
   const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -30,6 +33,7 @@ const Comment = ({ task }) => {
       const addedComment = await commentService.addComment({
         content: content,
         nickname: nickname,
+        date: date,
         task: task.id
       })
       setNickname('')
@@ -73,7 +77,10 @@ const Comment = ({ task }) => {
     <div>
       <Notification message={errorMessage} type="error" />
       {comments.map((comment) => (
-        <div>
+        <div key={comment.id}>
+          <div className="comment-date">
+            <Moment format="DD.MM.YYYY HH:mm">{comment.date}</Moment>
+          </div>
           <div className="comment-content">
             {comment.content}
           </div>
@@ -87,8 +94,10 @@ const Comment = ({ task }) => {
               </div>
             </div>
           </div>
+          <div className="space2"></div>
         </div>
       ))}
+      <div className="space"></div>
 
       <form onSubmit={handleAddComment}>
         <div>
@@ -103,7 +112,7 @@ const Comment = ({ task }) => {
         </div>
         <div>
           <textarea
-            className=""
+            className="textarea"
             type="textarea"
             value={content}
             name="content"
