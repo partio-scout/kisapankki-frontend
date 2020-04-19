@@ -471,9 +471,20 @@ table, th, td {
 }
 
 .competition-files {
+  position: relative;
   margin-top: 5px;
   width: 200px;
   height: 200px;
+}
+
+.competition-files img {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+  width: 150px;
+  height: 150px;
 }
 
 .competition-dropzone {
@@ -491,6 +502,20 @@ table, th, td {
 
 .files div {
   margin-bottom: 5px;
+}
+
+.competition-files .remove-file {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 15px;
+  width: 20px;
+  background-size: 15px;
+  background-image: url('./images/remove.svg');
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .remove-file {
