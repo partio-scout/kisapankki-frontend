@@ -34,11 +34,7 @@ const Comment = ({ task }) => {
       })
       setNickname('')
       setContent('')
-      if (addedComment.pending == false) {
-        setComments(comments.concat(addedComment))
-      } else {
-        setPendingComments(pendingComments.concat(addedComment))
-      }
+      setComments(comments.concat(addedComment))
     } catch (exception) {
       setErrorMessage('Kommentin lisääminen ei onnistunut')
       setTimeout(() => {
@@ -46,11 +42,10 @@ const Comment = ({ task }) => {
       }, 5000)
     }
   }
-  const handleCommentDelete = async (e, comment) => {
-    e.preventDefault()
+  const handleCommentDelete = async (comment) => {
     try {
       await commentService.deleteComment(comment.id)
-      setPendingComments(pendingComments.filter(c => c.id !== comment.id))
+      setComments(comments.filter(c => c.id !== comment.id))
     } catch (exeption) {
       setErrorMessage('Kommentin poistaminen ei onnistunut')
       setTimeout(() => {
@@ -60,11 +55,11 @@ const Comment = ({ task }) => {
     }
   }
 
-  const handleCommentAccept = async (e, comment) => {
-    e.preventDefault()
+  const handleCommentAccept = async (comment) => {
+
     try {
       await commentService.acceptComment(comment.id)
-      setPendingComments(pendingComments.filter(c => c.id !== comment.id))
+      setComments(comments.filter(c => c.id !== comment.id))
     } catch (exeption) {
       setErrorMessage('Kommentin hyväksyminen ei onnistunut')
       setTimeout(() => {
@@ -78,39 +73,52 @@ const Comment = ({ task }) => {
     <div>
       <Notification message={errorMessage} type="error" />
       {comments.map((comment) => (
-        <div className="comment-container">
+        <div>
+          <div className="comment-content">
+            {comment.content}
+          </div>
           <div>
-            <p className="user-left">{comment.content}</p>
+            <div className="comment-container">
+              <div>
+                <div className="user" />
+              </div>
+              <div className="user-right" >
+                <p className="user-left">{comment.nickname}</p>
+              </div>
+            </div>
           </div>
-          <div className="user-right" >
-            <div className="user" />
-          </div>
-         
-
         </div>
       ))}
 
       <form onSubmit={handleAddComment}>
-        <input
-          className=""
-          type="text"
-          value={nickname}
-          name="nickname"
-          placeholder="Nimimerkki"
-          onChange={({ target }) => setNickname(target.value)}
-        />
-        <input
-          className=""
-          type="text"
-          value={content}
-          name="content"
-          placeholder="Kommentti"
-          onChange={({ target }) => setContent(target.value)}
-        />
+        <div>
+          <input
+            className=""
+            type="text"
+            value={nickname}
+            name="nickname"
+            placeholder="Nimimerkki"
+            onChange={({ target }) => setNickname(target.value)}
+          />
+        </div>
+        <div>
+          <textarea
+            className=""
+            type="textarea"
+            value={content}
+            name="content"
+            placeholder="Kommentti"
+            onChange={({ target }) => setContent(target.value)}
+            rows="5"
+            cols="50"
+          />
+        </div>
         <button type="submit" className="add-task-button">Lisää kommentti</button>
       </form>
 
     </div>
+
+
   )
 }
 export default Comment

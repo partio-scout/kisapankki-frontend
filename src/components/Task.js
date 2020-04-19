@@ -78,7 +78,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
     if (logo) {
       formData.append('logo', logo, logo.name)
     }
-    
+
     try {
       const PDF = await taskService.makePDF(formData, task.id)
       setName('')
@@ -107,73 +107,79 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
       {modifyVisible ?
         <ModifyTask setModifyVisible={setModifyVisible} task={task} rules={rules} seriess={seriess} languages={languages} setTask={setTask} handleUpdateTask={handleUpdateTask} />
         :
-        <div className="task-view-info-background">
+        
+        <div>
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
-            <div className="task-view-info">
-              <div>
-                <h2>{task.name}</h2>
-                <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
-                <Rating task={task} handleUpdateTask={handleUpdateTask} />
-              </div>
-              <h3>Tehtävänanto</h3>
-              <TaskTextDisplay text={task.assignmentText} />
-              <h3>Rastimiehen ohjeet</h3>
-              <TaskTextDisplay text={task.supervisorInstructions} />
-              <h3>Arvosteluasteikko</h3>
-              <TaskTextDisplay text={task.gradingScale} />
-              <h3>Sarja</h3>
-              {task.series.map(s => <span key={task.id + s.id}>{s.name}<br /></span>)}
-              <h3>Kategoria</h3>
-              <p>{task.category && task.category.name}</p>
-              <h3>Sääntöluokka</h3>
-              <p>{task.rules && task.rules.name}</p>
-              <h3>Tehtävän viimeisin muokkaaja</h3>
-              <p>{task.creatorName}<br />{task.creatorEmail}</p>
-              <h3>Tehtävä lisätty</h3>
-              {task.created && <p><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></p>}
-              <h3>Liitetiedostot</h3>
-              {task.files && task.files.length === 0 && <p>-</p>}
-              {task.files && task.files.map((file) => (
-                <div key={file}>
-                  <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
-                    {file.substring(file.indexOf('-') + 1, file.length)}
-                  </a>
+            <div>
+              <div className="task-view-info-background">
+                <div className="task-view-info"> 
+                  <h2>{task.name}</h2>
+                  <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
+                  <Rating task={task} handleUpdateTask={handleUpdateTask} />
                 </div>
-              ))}
-                            <h3>Kommentit:</h3>
+                <h3>Tehtävänanto</h3>
+                <TaskTextDisplay text={task.assignmentText} />
+                <h3>Rastimiehen ohjeet</h3>
+                <TaskTextDisplay text={task.supervisorInstructions} />
+                <h3>Arvosteluasteikko</h3>
+                <TaskTextDisplay text={task.gradingScale} />
+                <h3>Sarja</h3>
+                {task.series.map(s => <span key={task.id + s.id}>{s.name}<br /></span>)}
+                <h3>Kategoria</h3>
+                <p>{task.category && task.category.name}</p>
+                <h3>Sääntöluokka</h3>
+                <p>{task.rules && task.rules.name}</p>
+                <h3>Tehtävän viimeisin muokkaaja</h3>
+                <p>{task.creatorName}<br />{task.creatorEmail}</p>
+                <h3>Tehtävä lisätty</h3>
+                {task.created && <p><Moment format="DD.MM.YYYY HH:mm">{task.created}</Moment></p>}
+                <h3>Liitetiedostot</h3>
+                {task.files && task.files.length === 0 && <p>-</p>}
+                {task.files && task.files.map((file) => (
+                  <div key={file}>
+                    <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
+                      {file.substring(file.indexOf('-') + 1, file.length)}
+                    </a>
+                  </div>
+                ))}
 
-              <Comment task={task} />
-              {showMakePDF ?
-                <div className="competition-task">
-                  <div className="make-pdf right" onClick={() => setShowMakePDF(false)}>Sulje</div>
-                  <Competition
-                    name={name}
-                    date={date}
-                    place={place}
-                    type={type}
-                    logo={logo}
-                    setName={setName}
-                    setDate={setDate}
-                    setPlace={setPlace}
-                    setType={setType}
-                    setLogo={setLogo}
-                  />
-                  <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
-                </div>
-                :
-                <div className="make-pdf" onClick={() => setShowMakePDF(true)}>Lisää kisan tiedot/Tee PDF</div>
-              }
-              {user &&
-                <div className="buttons">
-                  <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
-                  {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
-                  <button className="delete-button" onClick={() => handleDelete()}>Poista</button>
-                </div>}
+                {showMakePDF ?
+                  <div className="competition-task">
+                    <div className="make-pdf right" onClick={() => setShowMakePDF(false)}>Sulje</div>
+                    <Competition
+                      name={name}
+                      date={date}
+                      place={place}
+                      type={type}
+                      logo={logo}
+                      setName={setName}
+                      setDate={setDate}
+                      setPlace={setPlace}
+                      setType={setType}
+                      setLogo={setLogo}
+                    />
+                    <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                  </div>
+                  :
+                  <div className="make-pdf" onClick={() => setShowMakePDF(true)}>Lisää kisan tiedot/Tee PDF</div>
+                }
+                {user &&
+                  <div className="buttons">
+                    <button onClick={() => setModifyVisible(true)} className="modify-view-button">Muokkaa</button>
+                    {task.pending && <button className="accept-button" onClick={() => handleAccept()}>Hyväksy</button>}
+                    <button className="delete-button" onClick={() => handleDelete()}>Poista</button>
+                  </div>}
+              </div>
+
+              <div className="task-view-info-background">
+                    <h3>Kommentit:</h3>
+
+                    <Comment task={task} />
+              </div>
             </div>
           }
-
         </div>
 
       }

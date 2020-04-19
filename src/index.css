@@ -196,7 +196,7 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   background-image: url('./images/user.png');
   background-size: 25px;
   background-repeat: no-repeat;
-
+  margin-top: 10px;
 
 }
 
@@ -382,6 +382,15 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
+}
+
+.comment-content {
+  background-color: #fff;
+  width: 250px; 
+  padding: 10px;
+  font-size: 17px; 
+  border-radius: 13px;
+  text-align: justify; 
 }
 
 .task-view-info h2 {
