@@ -79,7 +79,7 @@ const Comment = ({ task }) => {
       {comments.map((comment) => (
         <div key={comment.id}>
           <div className="comment-date">
-            <Moment format="DD.MM.YYYY HH:mm">{comment.date}</Moment>
+            <Moment format="DD.MM.YYYY HH:mm">{comment.created}</Moment>
           </div>
           <div className="comment-content">
             {comment.content}
