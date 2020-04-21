@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import Notification from './Notification'
 import taskService from '../services/task'
 import fileService from '../services/file'
@@ -30,6 +30,11 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
   const [oldFiles, setOldFiles] = useState(task.files || [])
   const [newFiles, setNewFiles] = useState([])
+  const [nameToChange, setNameToChange] = useState('')
+  const [fileNames, setFileNames] = useState({})
+  const [showChangeFileName, setShowChangeFileName] = useState(false)
+  const [changedFileName, setChangedFileName] = useState('')
+  const [changedFileExtension, setChangedFileExtension] = useState('')
   const [filesToDelete, setFilesToDelete] = useState([])
 
   let id = task.id
@@ -106,7 +111,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
 
     if (newFiles.length > 0) {
       for (let i = 0; i < newFiles.length; i++) {
-          formData.append('filesToAdd', newFiles[i], newFiles[i].name)
+          formData.append('filesToAdd', newFiles[i], fileNames[newFiles[i].name])
       }
     }
 
@@ -121,13 +126,12 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
         assignmentTextMD, gradingScaleMD, supervisorInstructionsMD,
         files: oldFiles.concat(addedFiles)
       })
-      console.log(modifiedTask)
       setMessage('Tehtävä tallennettu!')
       setTask(modifiedTask)
       handleUpdateTask(modifiedTask)
+      setModifyVisible(false)
       setTimeout(() => {
         setMessage(null)
-        window.location.reload()
       }, 1000)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
@@ -142,7 +146,22 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
   }
 
   const onDrop = (files) => {
-    setNewFiles(newFiles.concat(files))
+    let newFilesArray = []
+    let newNames = {}
+    for (let i = 0; i < files.length; i++) {
+      let found = false
+      for (let j = 0; j < newFiles.length; j++) {
+        if (newFiles[j].name === files[i].name) {
+          found = true
+        }
+      }
+      if (!found) {
+        newFilesArray.push(files[i])
+        newNames[files[i].name] = files[i].name
+      }
+    }
+    setNewFiles(newFiles.concat(newFilesArray))
+    setFileNames({ ...fileNames, ...newNames })
   }
 
   const handleDeleteOldFile = (e, name) => {
@@ -154,6 +173,33 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
   const handleDeleteNewFile = (e, name) => {
     e.stopPropagation()
     setNewFiles(newFiles.filter(file => file.name !== name))
+  }
+
+  const handleChangeFileName = (e, name) => {
+    e.stopPropagation()
+    setShowChangeFileName(true)
+    setNameToChange(name)
+    setChangedFileName(name.substring(0, name.lastIndexOf('.')))
+    setChangedFileExtension(name.substring(name.lastIndexOf('.')))
+  }
+
+  const handleSaveFileName = (e, name) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setFileNames({ ...fileNames, [name]: changedFileName + changedFileExtension })
+    setShowChangeFileName(false)
+    setNameToChange('')
+    setChangedFileName('')
+    setChangedFileExtension('')
+  }
+
+  const handleCancelChangeFileName = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowChangeFileName(false)
+    setNameToChange('')
+    setChangedFileName('')
+    setChangedFileExtension('')
   }
 
   return (
@@ -189,6 +235,7 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">
           <div>
+            <h4 className="series-mobile">Sarja</h4>
             <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
               <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
               {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
@@ -252,7 +299,29 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
                 {newFiles && newFiles.length > 0 &&
                   <React.Fragment>
                     {newFiles.map((file) => (
-                      <div key={file.name}>{file.name}<span onClick={(e) => handleDeleteNewFile(e, file.name)} className="remove-file" /></div>
+                      <div key={file.name}>
+                        {showChangeFileName && file.name === nameToChange ?
+                          <div>
+                            <input
+                              className=""
+                              type="text"
+                              value={changedFileName}
+                              name="ChangedFileName"
+                              onChange={({ target }) => setChangedFileName(target.value)}
+                              onClick={e => e.stopPropagation()}
+                            />
+                            {changedFileExtension}
+                            <button onClick={(e) => handleSaveFileName(e, file.name)}>Tallenna</button>
+                            <button onClick={(e) => handleCancelChangeFileName(e)}>Peruuta</button>
+                          </div>
+                          :
+                          <Fragment>
+                            {fileNames[file.name]}
+                            <span onClick={(e) => handleChangeFileName(e, file.name)}className="edit-file" />
+                            <span onClick={(e) => handleDeleteNewFile(e, file.name)}className="remove-file" />
+                          </Fragment>
+                        }
+                      </div>
                     ))}
                   </React.Fragment>
                 }
