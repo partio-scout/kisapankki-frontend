@@ -131,6 +131,7 @@ const AddTask = ({ user, addTask, rules, seriess, languages }) => {
       if (user) {
         addTask(task)
       }
+      window.scrollTo({ top: 0, behavior: 'smooth'})
       setMessage('Tehtävä lisätty!')
       setTimeout(() => {
         setMessage(null)
