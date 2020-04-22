@@ -311,8 +311,10 @@ const ModifyTask = ({ setModifyVisible, task, setTask, handleUpdateTask, rules, 
                               onClick={e => e.stopPropagation()}
                             />
                             {changedFileExtension}
-                            <button onClick={(e) => handleSaveFileName(e, file.name)}>Tallenna</button>
-                            <button onClick={(e) => handleCancelChangeFileName(e)}>Peruuta</button>
+                            <div className="button-container">
+                              <button onClick={(e) => handleSaveFileName(e, file.name)}>Tallenna</button>
+                              <button onClick={(e) => handleCancelChangeFileName(e)}>Peruuta</button>
+                            </div>
                           </div>
                           :
                           <Fragment>
