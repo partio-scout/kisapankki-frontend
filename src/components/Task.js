@@ -185,7 +185,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                 <h3>Kommentit:</h3>
 
                 <Comment task={task} />
-                <AddComment task={task} />
+                <AddComment task={task} user={user} />
               </div>
             </div>
           }

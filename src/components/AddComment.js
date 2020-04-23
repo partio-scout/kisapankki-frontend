@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 import Notification from './Notification'
 
-const AddComment = ({ task }) => {
+const AddComment = ({ task, user }) => {
   const [comments, setComments] = useState([])
   const [pendingComments, setPendingComments] = useState([])
+  const [pending, setPending] = useState("")
   const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
@@ -25,8 +26,14 @@ const AddComment = ({ task }) => {
       const addedComment = await commentService.addComment({
         content: content,
         nickname: nickname,
-        task: task.id
+        task: task.id,
+        pending: pending
       })
+      if (user) {
+        
+      } else {
+
+      }
       setNickname('')
       setContent('')
       if (addedComment.pending == false) {
