@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import Notification from './Notification'
 import taskService from '../services/task'
 import fileService from '../services/file'
 import MDEditor from './MDEditor'
 import Dropzone from 'react-dropzone'
 
-const AddTask = ({ rules, seriess, languages }) => {
+const AddTask = ({ user, addTask, rules, seriess, languages }) => {
 
   const [message, setMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -29,6 +29,12 @@ const AddTask = ({ rules, seriess, languages }) => {
   const [creatorEmailErrorMessage, setCreatorEmailErrorMessage] = useState(null)
   const [dropDownErrorMessage, setDropDownErrorMessage] = useState(null)
   const [files, setFiles] = useState([])
+  const [fileNames, setFileNames] = useState({})
+  const [showChangeFileName, setShowChangeFileName] = useState(false)
+  const [nameToChange, setNameToChange] = useState('')
+  const [changedFileName, setChangedFileName] = useState('')
+  const [changedFileExtension, setChangedFileExtension] = useState('')
+  const [editor, setEditor] = useState(0)
 
   const handleRuleChange = (e) => {
     setRule(e.target.value)
@@ -94,7 +100,7 @@ const AddTask = ({ rules, seriess, languages }) => {
 
     if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-          formData.append('filesToAdd', files[i], files[i].name)
+          formData.append('filesToAdd', files[i], fileNames[files[i].name])
       }
     }
 
@@ -102,7 +108,7 @@ const AddTask = ({ rules, seriess, languages }) => {
 
     try {
       addedFiles = await fileService.updateFiles(formData)
-      await taskService.addtask({
+      const task = await taskService.addtask({
         name, rule, category, series,
         language, assignmentText, gradingScale,
         creatorName, creatorEmail, supervisorInstructions,
@@ -119,10 +125,16 @@ const AddTask = ({ rules, seriess, languages }) => {
       setCreatorEmail('')
       setCreatorName('')
       setSupervisorInstructions('')
+      setFiles([])
+      setFileNames({})
+      setEditor(editor + 1)
+      if (user) {
+        addTask(task)
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth'})
       setMessage('Tehtävä lisätty!')
       setTimeout(() => {
         setMessage(null)
-        window.location.reload()
       }, 2000)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
@@ -133,12 +145,54 @@ const AddTask = ({ rules, seriess, languages }) => {
   }
 
   const onDrop = (newFiles) => {
-    setFiles(files.concat(newFiles))
+    let newFilesArray = []
+    let newNames = {}
+    for (let i = 0; i < newFiles.length; i++) {
+      let found = false
+      for (let j = 0; j < files.length; j++) {
+        if (files[j].name === newFiles[i].name) {
+          found = true
+        }
+      }
+      if (!found) {
+        newFilesArray.push(newFiles[i])
+        newNames[newFiles[i].name] = newFiles[i].name
+      }
+    }
+    setFiles(files.concat(newFilesArray))
+    setFileNames({ ...fileNames, ...newNames })
   }
 
   const handleDeleteFile = (e, name) => {
     e.stopPropagation()
     setFiles(files.filter(file => file.name !== name))
+  }
+
+  const handleChangeFileName = (e, name) => {
+    e.stopPropagation()
+    setShowChangeFileName(true)
+    setNameToChange(name)
+    setChangedFileName(name.substring(0, name.lastIndexOf('.')))
+    setChangedFileExtension(name.substring(name.lastIndexOf('.')))
+  }
+
+  const handleSaveFileName = (e, name) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setFileNames({ ...fileNames, [name]: changedFileName + changedFileExtension })
+    setShowChangeFileName(false)
+    setNameToChange('')
+    setChangedFileName('')
+    setChangedFileExtension('')
+  }
+
+  const handleCancelChangeFileName = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowChangeFileName(false)
+    setNameToChange('')
+    setChangedFileName('')
+    setChangedFileExtension('')
   }
 
   return (
@@ -161,19 +215,20 @@ const AddTask = ({ rules, seriess, languages }) => {
         <div>
           <h4>Tehtävänanto</h4>
           <Notification message={assignmentTextErrorMessage} type="error" />
-          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} />
+          <MDEditor setText={setAssignmentText} setMD={setAssignmentTextMD} key={editor + 1} />
         </div>
         <div>
           <h4>Arvostelu</h4>
-          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} />
+          <MDEditor setText={setGradingScale} setMD={setGradingScaleMD} key={editor + 2} />
         </div>
         <div className="instructions">
           <h4>Rastimiehen ohje</h4>
-          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} />
+          <MDEditor setText={setSupervisorInstructions} setMD={setSupervisorInstructionsMD} key={editor + 3} />
         </div>
         <Notification message={dropDownErrorMessage} type="error" />
         <div className="dropdowns">
           <div>
+            <h4 className="series-mobile">Sarja</h4>
             <select multiple value={series} onChange={(e) => handleSeriesChange(e)} className="multiple-series">
               <option value="" className="series-info">Sarja (paina Ctrl, jos useita)</option>
               {seriess.map(series => <option key={series.id} value={series.id}>{series.name}</option>)}
@@ -230,7 +285,31 @@ const AddTask = ({ rules, seriess, languages }) => {
                 {files.length > 0 &&
                   <React.Fragment>
                     {files.map((file) => (
-                      <div key={file.name}>{file.name}<span onClick={(e) => handleDeleteFile(e, file.name)}className="remove-file" /></div>
+                      <div key={file.name}>
+                        {showChangeFileName && file.name === nameToChange ?
+                          <div>
+                            <input
+                              className=""
+                              type="text"
+                              value={changedFileName}
+                              name="ChangedFileName"
+                              onChange={({ target }) => setChangedFileName(target.value)}
+                              onClick={e => e.stopPropagation()}
+                            />
+                            {changedFileExtension}
+                            <div className="button-container">
+                              <button onClick={(e) => handleSaveFileName(e, file.name)}>Tallenna</button>
+                              <button onClick={(e) => handleCancelChangeFileName(e)}>Peruuta</button>
+                            </div>
+                          </div>
+                          :
+                          <Fragment>
+                            {fileNames[file.name]}
+                            <span onClick={(e) => handleChangeFileName(e, file.name)}className="edit-file" />
+                            <span onClick={(e) => handleDeleteFile(e, file.name)}className="remove-file" />
+                          </Fragment>
+                        }
+                      </div>
                     ))}
                   </React.Fragment>
                 }

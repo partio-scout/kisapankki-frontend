@@ -101,7 +101,7 @@ button {
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-task button:hover {
+button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-task button:hover, .files button:hover {
   background: #253764;
 }
 
@@ -413,6 +413,10 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   font-weight: bold;
 }
 
+.series-mobile {
+  display: none;
+}
+
 .instructions {
   margin-bottom: 10px;
 }
@@ -495,6 +499,10 @@ table, th, td {
   display: flex;
 }
 
+.button-container {
+  display: inline-block;
+}
+
 .title {
   font-weight: bold;
   margin: 5px;
@@ -502,6 +510,18 @@ table, th, td {
 
 .files div {
   margin-bottom: 5px;
+}
+
+.files input {
+  width: initial;
+  height: 15px;
+  margin-right: 0;
+}
+
+.files button {
+  margin: 2px;
+  background-color: grey;
+  padding: 5px 10px;
 }
 
 .competition-files .remove-file {
@@ -525,6 +545,19 @@ table, th, td {
   width: 20px;
   background-size: 15px;
   background-image: url('./images/remove.svg');
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.edit-file {
+  display: inline-block;
+  vertical-align: middle;
+  height: 15px;
+  width: 20px;
+  background-size: 15px;
+  background-image: url('./images/edit.svg');
   background-position: 5px 0px;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -960,8 +993,13 @@ table, th, td {
 }
 
 @media screen and (max-width: 625px) {
-  .add-task-container, .modify-task-container {
+  .add-task-container, .add-task-container input, .modify-task-container, .modify-task-container input {
     width: 100%;
+  }
+
+  .files input {
+    width: initial;
+    height: 30px;
   }
 
   h2 {
@@ -976,6 +1014,15 @@ table, th, td {
 
   .dropdowns {
     display: block;
+  }
+
+  .series-info {
+    display: none;
+  }
+
+  .series-mobile {
+    display: block;
+    margin-bottom: 0;
   }
 }
 
