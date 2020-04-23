@@ -101,7 +101,7 @@ button {
   z-index: 100;
 }
 
-button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
+button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-task button:hover, .files button:hover {
   background: #253764;
 }
 
@@ -167,9 +167,9 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   text-decoration: none;
 }
 
-.black-basket {
+.black-basket, .black-basket-task-view {
   height: 35px;
-  width: 35px;
+  width: 30px;
   background-size: 25px;
   background-image: url('./images/black_bag.svg');
   background-repeat: no-repeat;
@@ -200,7 +200,12 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
 
 }
 
-.basket-task-view {
+
+.black-basket-mobile {
+  display: none;
+}
+
+.black-basket-task-view {
   float: right;
   margin-top: 5px;
 }
@@ -460,6 +465,10 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
   font-weight: bold;
 }
 
+.series-mobile {
+  display: none;
+}
+
 .instructions {
   margin-bottom: 10px;
 }
@@ -517,6 +526,35 @@ table, th, td {
   cursor: pointer;
 }
 
+.competition-files {
+  position: relative;
+  margin-top: 5px;
+  width: 200px;
+  height: 200px;
+}
+
+.competition-files img {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+  width: 150px;
+  height: 150px;
+}
+
+.competition-dropzone {
+  margin-left: 10px;
+}
+
+.competition-container {
+  display: flex;
+}
+
+.button-container {
+  display: inline-block;
+}
+
 .title {
   font-weight: bold;
   margin: 5px;
@@ -526,6 +564,32 @@ table, th, td {
   margin-bottom: 5px;
 }
 
+.files input {
+  width: initial;
+  height: 15px;
+  margin-right: 0;
+}
+
+.files button {
+  margin: 2px;
+  background-color: grey;
+  padding: 5px 10px;
+}
+
+.competition-files .remove-file {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 15px;
+  width: 20px;
+  background-size: 15px;
+  background-image: url('./images/remove.svg');
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .remove-file {
   display: inline-block;
   vertical-align: middle;
@@ -533,6 +597,19 @@ table, th, td {
   width: 20px;
   background-size: 15px;
   background-image: url('./images/remove.svg');
+  background-position: 5px 0px;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.edit-file {
+  display: inline-block;
+  vertical-align: middle;
+  height: 15px;
+  width: 20px;
+  background-size: 15px;
+  background-image: url('./images/edit.svg');
   background-position: 5px 0px;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -693,26 +770,30 @@ table, th, td {
   position: relative;
 }
 
+.arrow-inline div {
+  display: inline-block;
+  cursor: pointer;
+}
+
 .arrow-container i {
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 3px;
   margin-bottom: 3px;
-  cursor: pointer;
 }
 
 .name-arrow-up, .rating-arrow-up, .created-arrow-up {
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: -11px;
+  left: 7px;
   transform: rotate(-135deg);
 }
 
 .name-arrow-down, .rating-arrow-down, .created-arrow-down {
   position: absolute;
-  top: 8px;
-  left: 4px;
+  top: -7px;
+  left: 7px;
   transform: rotate(45deg);
 }
 
@@ -723,6 +804,7 @@ table, th, td {
 .delete-task-from-basket {
   height: 25px;
   width: 25px;
+  margin-top: 5px;
   background-size: 20px;
   background-image: url('./images/remove.svg');
   background-repeat: no-repeat;
@@ -744,7 +826,7 @@ table, th, td {
 }
 
 .competition input {
-  width: calc(25% - 26px);
+  width: 400px;
 }
 
 .competition input:last-child {
@@ -752,6 +834,7 @@ table, th, td {
 }
 
 .competition-task {
+  position: relative;
   margin-top: 20px;
 }
 
@@ -772,9 +855,31 @@ table, th, td {
 }
 
 .right {
-  float: right;
-  margin-top: 5px;
-  margin-right: 10px;
+  position: absolute;
+  top: -8px;
+  left: 580px;
+}
+
+.loader {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #253764;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+}
+
+.in-task {
+  margin-left: 65px;
+}
+
+.in-basket {
+  margin-left: 48%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media screen and (max-width: 1200px) {
@@ -829,18 +934,6 @@ table, th, td {
     box-sizing: border-box;
   }
 
-  .arrow-inline {
-    display: flex!important;
-  }
-
-  .name-arrow-up, .rating-arrow-up, .created-arrow-up {
-    top: 0px;
-  }
-  
-  .name-arrow-down, .rating-arrow-down, .created-arrow-down {
-    top: 4px;
-  }
-
   .task-list-title span:first-child, .task-list-title span:not(:first-of-type) {
     margin: 5px;
   }
@@ -862,13 +955,47 @@ table, th, td {
     cursor: pointer;
   }
 
-  .delete-task-from-basket {
+  .black-basket-mobile {
+    display: block;
+    float: right;
+    height: 35px;
+    width: 25px;
+    background-size: 25px;
+    background-image: url('./images/black_bag.svg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin-top: 7px;
+    cursor: pointer;
+  }
+
+  .delete-task-from-basket, .black-basket {
     display: none!important;
+  }
+
+  .competition-container {
+    display: initial;
   }
 
   .competition input {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .competition-files {
+    width: 100%;
+    height: initial;
+  }
+
+  .competition-dropzone {
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .right {
+    position: initial;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
   }
 }
 
@@ -918,8 +1045,13 @@ table, th, td {
 }
 
 @media screen and (max-width: 625px) {
-  .add-task-container, .modify-task-container {
+  .add-task-container, .add-task-container input, .modify-task-container, .modify-task-container input {
     width: 100%;
+  }
+
+  .files input {
+    width: initial;
+    height: 30px;
   }
 
   h2 {
@@ -934,6 +1066,15 @@ table, th, td {
 
   .dropdowns {
     display: block;
+  }
+
+  .series-info {
+    display: none;
+  }
+
+  .series-mobile {
+    display: block;
+    margin-bottom: 0;
   }
 }
 

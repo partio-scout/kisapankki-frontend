@@ -77,7 +77,6 @@ const App = () => {
     setUser(null)
     tokenService.setToken(null)
     history.push('/')
-    window.location.reload()
   }
 
   const handleAddTask = (task) => {
@@ -144,7 +143,7 @@ const App = () => {
         <Route path="/tehtavat" render={() => <TaskList user={user} originalTasks={tasks} categories={categories} rules={rules} seriess={seriess} addTaskToBasket={addTaskToBasket} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />} />
         <Route path="/valitut_tehtavat" render={() => <Basket tasks={basket} removeTaskFromBasket={removeTaskFromBasket} removeAllFromBasket={removeAllFromBasket} handleUpdateTask={handleUpdateTask} />} />
         <Route path="/kirjautuminen" render={() => <Login setUser={setUser} />} />
-        <Route path="/lisaa_tehtava" render={() => <AddTask rules={rules} seriess={seriess} languages={languages} />} />
+        <Route path="/lisaa_tehtava" render={() => <AddTask user={user} addTask={handleAddTask} rules={rules} seriess={seriess} languages={languages} />} />
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
         <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} /> : <Redirect to="/" />)} />
         <Route path="/lisaa_admin" render={() => (localStorage.getItem('loggedUser') ? <AddAdmin /> : <Redirect to="/" />)} />

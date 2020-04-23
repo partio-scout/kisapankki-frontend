@@ -20,17 +20,19 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
   const [type, setType] = useState('')
   const [logo, setLogo] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
+  const [showLoader, setShowLoader] = useState(false)
 
   const handleMakePDFs = async (e) => {
+    setShowLoader(true)
     let formData = new FormData()
 
     const competition = JSON.stringify({ name, date, place, type, tasks: tasks.map(t => t.id) })
-    formData.append('competition', competition )
+    formData.append('competition', competition)
 
     if (logo) {
       formData.append('logo', logo, logo.name)
     }
-    
+
     try {
       const PDFs = await taskService.makePDFs(formData)
       setName('')
@@ -46,6 +48,7 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
       link.setAttribute('download', 'Rastit.zip')
       document.body.appendChild(link)
       link.click()
+      setShowLoader(false)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -58,18 +61,20 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
     <div className="task-list">
       <Notification message={errorMessage} type="error" />
 
-      <Competition
-        name={name}
-        date={date}
-        place={place}
-        type={type}
-        logo={logo}
-        setName={setName}
-        setDate={setDate}
-        setPlace={setPlace}
-        setType={setType}
-        setLogo={setLogo}
-      />
+      {tasks && tasks.length > 0 &&
+        <Competition
+          name={name}
+          date={date}
+          place={place}
+          type={type}
+          logo={logo}
+          setName={setName}
+          setDate={setDate}
+          setPlace={setPlace}
+          setType={setType}
+          setLogo={setLogo}
+        />
+      }
 
       <h2 className="basket-title">Kisaan valitut tehtävät</h2>
 
@@ -100,17 +105,23 @@ const Basket = ({ tasks, removeTaskFromBasket, handleUpdateTask, removeAllFromBa
           <span>{task.category && task.category.name}</span>
           <span>
             {task.files && task.files.map((file) => (
-                <div key={file}>
-                  <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
-                    {file.substring(file.indexOf('-') + 1, file.length)}
-                  </a>
-                </div>
-              ))}
+              <div key={file}>
+                <a href={`https://kisapankkifiles.blob.core.windows.net/files/${file}`}>
+                  {file.substring(file.indexOf('-') + 1, file.length)}
+                </a>
+              </div>
+            ))}
           </span>
           <span className="delete-task-from-basket" onClick={() => removeTaskFromBasket(task.id)} />
         </div>
       ))}
-      <div className="make-pdfs"><button onClick={handleMakePDFs}>Tee PDF-tiedostot</button></div>
+      {tasks && tasks.length > 0 && <div className="make-pdfs">
+        {showLoader ?
+          <div className="loader in-basket"></div>
+          :
+          <button onClick={handleMakePDFs}>Tee PDF-tiedostot</button>
+        }
+      </div>}
     </div>
   )
 }

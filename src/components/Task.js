@@ -22,6 +22,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
   const [type, setType] = useState('')
   const [logo, setLogo] = useState(null)
   const [showMakePDF, setShowMakePDF] = useState(false)
+  const [showLoader, setShowLoader] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
   }
 
   const handleMakePDF = async () => {
+    setShowLoader(true)
     let formData = new FormData()
 
     const competition = JSON.stringify({ name, date, place, type, task: task.id })
@@ -92,9 +94,10 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
       }))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', `${name}.pdf`)
+      link.setAttribute('download', `${task.name}.pdf`)
       document.body.appendChild(link)
       link.click()
+      setShowLoader(false)
     } catch (exception) {
       setErrorMessage('Jotain meni vikaan')
       setTimeout(() => {
@@ -108,14 +111,14 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
       {modifyVisible ?
         <ModifyTask setModifyVisible={setModifyVisible} task={task} rules={rules} seriess={seriess} languages={languages} setTask={setTask} handleUpdateTask={handleUpdateTask} />
         :
-        
+
         <div>
           <Notification message={message} type="success" />
           <Notification message={errorMessage} type="error" />
           {task &&
             <div>
               <div className="task-view-info-background">
-                <div className="task-view-info"> 
+                <div className="task-view-info">
                   <h2>{task.name}</h2>
                   <span><div className="black-basket basket-task-view" title="Lisää koriin" onClick={(e) => addTaskToBasket(e, task)} /></span>
                   <Rating task={task} handleUpdateTask={handleUpdateTask} />
@@ -161,7 +164,11 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                       setType={setType}
                       setLogo={setLogo}
                     />
-                    <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                    {showLoader ?
+                      <div className="loader in-task"></div>
+                      :
+                      <button onClick={() => handleMakePDF()}>Tee PDF-tiedosto</button>
+                    }
                   </div>
                   :
                   <div className="make-pdf" onClick={() => setShowMakePDF(true)}>Lisää kisan tiedot/Tee PDF</div>
@@ -175,10 +182,10 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
               </div>
 
               <div className="task-view-info-background">
-                    <h3>Kommentit:</h3>
+                <h3>Kommentit:</h3>
 
-                    <Comment task={task} />
-                    <AddComment task={task} />
+                <Comment task={task} />
+                <AddComment task={task} />
               </div>
             </div>
           }
