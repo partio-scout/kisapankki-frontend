@@ -8,6 +8,7 @@ import TaskTextDisplay from './TaskTextDisplay'
 import Competition from './Competition'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
+import AddComment from './AddComment'
 
 const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleAddTask, handleUpdateTask, handleDeleteTask }) => {
 
@@ -177,6 +178,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                     <h3>Kommentit:</h3>
 
                     <Comment task={task} />
+                    <AddComment task={task} />
               </div>
             </div>
           }

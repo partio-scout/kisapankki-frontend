@@ -26,26 +26,6 @@ const Comment = ({ task }) => {
     })
   }, [])
 
-  const handleAddComment = async (event) => {
-    event.preventDefault()
-    try {
-
-      const addedComment = await commentService.addComment({
-        content: content,
-        nickname: nickname,
-        date: date,
-        task: task.id
-      })
-      setNickname('')
-      setContent('')
-      setComments(comments.concat(addedComment))
-    } catch (exception) {
-      setErrorMessage('Kommentin lisääminen ei onnistunut')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-    }
-  }
   const handleCommentDelete = async (comment) => {
     try {
       await commentService.deleteComment(comment.id)
@@ -98,32 +78,6 @@ const Comment = ({ task }) => {
         </div>
       ))}
       <div className="space"></div>
-
-      <form onSubmit={handleAddComment}>
-        <div>
-          <input
-            className=""
-            type="text"
-            value={nickname}
-            name="nickname"
-            placeholder="Nimimerkki"
-            onChange={({ target }) => setNickname(target.value)}
-          />
-        </div>
-        <div>
-          <textarea
-            className="textarea"
-            type="textarea"
-            value={content}
-            name="content"
-            placeholder="Kommentti"
-            onChange={({ target }) => setContent(target.value)}
-            rows="5"
-            cols="50"
-          />
-        </div>
-        <button type="submit" className="add-task-button">Lisää kommentti</button>
-      </form>
 
     </div>
 

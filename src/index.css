@@ -397,8 +397,9 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover {
 }
 
 .comment-date {
-  margin-left: 250px;
   font-size: 14px;
+  text-align: right;
+  max-width: 350px;
 }
 
 .comment-content {
