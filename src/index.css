@@ -178,6 +178,11 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   cursor: pointer;
 }
 
+.black-basket-task-view {
+  float: right;
+  margin-top: 5px;
+}
+
 .comment-container { 
   display: flex;
 }

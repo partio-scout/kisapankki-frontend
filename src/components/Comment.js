@@ -6,10 +6,6 @@ import Moment from 'react-moment'
 
 const Comment = ({ task }) => {
   const [comments, setComments] = useState([])
-  const [pendingComments, setPendingComments] = useState([])
-  const [nickname, setNickname] = useState("")
-  const [date, setDate] = useState('')
-  const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
@@ -18,40 +14,6 @@ const Comment = ({ task }) => {
 
     })
   }, [])
-
-  useEffect(() => {
-    commentService.getPendingComments().then((response) => {
-      setPendingComments(response)
-
-    })
-  }, [])
-
-  const handleCommentDelete = async (comment) => {
-    try {
-      await commentService.deleteComment(comment.id)
-      setComments(comments.filter(c => c.id !== comment.id))
-    } catch (exeption) {
-      setErrorMessage('Kommentin poistaminen ei onnistunut')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-
-    }
-  }
-
-  const handleCommentAccept = async (comment) => {
-
-    try {
-      await commentService.acceptComment(comment.id)
-      setComments(comments.filter(c => c.id !== comment.id))
-    } catch (exeption) {
-      setErrorMessage('Kommentin hyväksyminen ei onnistunut')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-
-    }
-  }
 
   return (
     <div>
