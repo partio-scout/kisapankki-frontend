@@ -11,7 +11,7 @@ const Admin = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) => (
     <br />
     <Link className="no-underline" to="/lisaa_admin">Lisää ylläpitäjä</Link>
     <br />
-    <Link className="no-underline" to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä/kieliä/sarjoja/kategorioita</Link>
+    <Link className="no-underline" to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä, kieliä, sarjoja ja kategorioita</Link>
   </div>
 )
 

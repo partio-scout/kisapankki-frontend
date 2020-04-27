@@ -400,6 +400,10 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   margin-top: 20px;
 }
 
+.task-view-info-background p {
+  margin-top: 5px;
+}
+
 .space {
   margin-top: 50px;
 }
@@ -420,7 +424,7 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
 
 .comment-content {
   background-color: #fff;
-  width: 350px; 
+  max-width: 350px; 
   padding: 10px;
   font-size: 15px; 
   border-radius: 13px;

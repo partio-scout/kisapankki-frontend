@@ -25,12 +25,13 @@ const addComment = async (comment) => {
   let config = null
   const token = tokenService.getToken()
 
+  console.log(token)
   if (token) {
     config = {
       headers: { Authorization: token }
     }
   }
- 
+
   const response = await axios.post(baseUrl, comment, config)
   return response.data
 }

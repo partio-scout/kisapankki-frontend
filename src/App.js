@@ -75,7 +75,7 @@ const App = () => {
   const logout = () => {
     window.localStorage.removeItem('loggedUser')
     setUser(null)
-    tokenService.setToken(null)
+    tokenService.setTokenNull()
     history.push('/')
   }
 

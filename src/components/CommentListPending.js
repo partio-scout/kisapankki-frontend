@@ -61,19 +61,19 @@ const CommentListPending = () => {
           <span>Kommentoija</span>
           <span></span>
           <span></span>
+          <span></span>
         </div>
       }
 
       {comments.map((comment) => (
         <div className="no-underline" key={comment.id}>
           <div className="task-list-item">
-            <span>
-              {comment.content}
-            </span>
+            <span>{comment.content}</span>
             <span></span>
             <span>{comment.nickname}</span>
-            <button className="accept-button" onClick={() => handleCommentAccept(comment)}>Hyväksy</button>
-            <button className="delete-button" onClick={() => handleCommentDelete(comment)}>Poista</button>
+            <span><button className="accept-button" onClick={() => handleCommentAccept(comment)}>Hyväksy</button></span>
+            <span><button className="delete-button" onClick={() => handleCommentDelete(comment)}>Poista</button></span>
+            <span></span>
           </div>
         </div>
       ))}
