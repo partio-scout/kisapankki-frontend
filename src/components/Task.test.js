@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import Task from './Task'
+import Comment from './Comment'
 
 jest.mock('../services/task')
 jest.mock('react-router-dom', () => ({

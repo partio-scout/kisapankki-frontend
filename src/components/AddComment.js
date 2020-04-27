@@ -2,22 +2,11 @@ import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 import Notification from './Notification'
 
-const AddComment = ({ task, user }) => {
-  const [comments, setComments] = useState([])
-  const [pendingComments, setPendingComments] = useState([])
-  const [pending, setPending] = useState("")
+const AddComment = ({ task, user, setComments, comments }) => {
   const [nickname, setNickname] = useState("")
   const [content, setContent] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
-
-  useEffect(() => {
-    commentService.getComments(task.id).then((response) => {
-      setComments(response)
-
-    })
-  }, [])
-
-
+  const [message, setMessage] = useState(null)
 
   const handleAddComment = async (event) => {
     event.preventDefault()
@@ -27,18 +16,17 @@ const AddComment = ({ task, user }) => {
         content: content,
         nickname: nickname,
         task: task.id,
-        pending: pending
       })
       if (user) {
-      } else {
-      }
+        setComments(comments.concat(addedComment))
+      } 
+      setMessage('Kommentin lisääminen onnistui')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+
       setNickname('')
       setContent('')
-      if (addedComment.pending == false) {
-        setComments(comments.concat(addedComment))
-      } else {
-        setPendingComments(pendingComments.concat(addedComment))
-      }
     } catch (exception) {
       setErrorMessage('Kommentin lisääminen ei onnistunut')
       setTimeout(() => {
@@ -51,6 +39,8 @@ const AddComment = ({ task, user }) => {
 
   return (
     <div>
+      <Notification message={message} type="success" />
+      <Notification message={errorMessage} type="error" />
       <form onSubmit={handleAddComment}>
         <div>
           <input

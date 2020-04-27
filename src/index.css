@@ -42,6 +42,12 @@ h3, h4 {
   margin-top: -20px;
 }
 
+.button-delete-comment, .button-delete-comment:hover {
+  color: red;
+  background-color: transparent;
+  font-size: 12px;
+}
+
 .bigger-task-name {
   font-size: 130%;
   color: #253764;

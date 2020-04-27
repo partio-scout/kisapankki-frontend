@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import commentService from '../services/comment'
 import Notification from './Notification'
 import Moment from 'react-moment'
+import AddComment from './AddComment'
 
 
 const Comment = ({ task, user }) => {
@@ -15,7 +16,7 @@ const Comment = ({ task, user }) => {
     })
   }, [])
 
-  const handleCommentDelete = async (comment) => {
+  const handleCommentDelete = async ( comment) => {
     try {
       await commentService.deleteComment(comment.id)
       setComments(comments.filter(c => c.id !== comment.id))
@@ -36,7 +37,7 @@ const Comment = ({ task, user }) => {
           <div className="comment-date">
             <Moment format="DD.MM.YYYY HH:mm">{comment.created}</Moment>
             {user &&
-              "  POISTA"
+              <button className="button-delete-comment" onClick={() => handleCommentDelete( comment)}>Poista</button>
             }
           </div>
           <div className="comment-content">
@@ -56,7 +57,7 @@ const Comment = ({ task, user }) => {
         </div>
       ))}
       <div className="space"></div>
-
+      <AddComment task={task} user={user} setComments={setComments} comments={comments} />
     </div>
 
 
