@@ -30,9 +30,7 @@ const AddComment = ({ task, user }) => {
         pending: pending
       })
       if (user) {
-        
       } else {
-
       }
       setNickname('')
       setContent('')
@@ -48,6 +46,8 @@ const AddComment = ({ task, user }) => {
       }, 5000)
     }
   }
+
+
 
   return (
     <div>
@@ -75,7 +75,9 @@ const AddComment = ({ task, user }) => {
           />
         </div>
         <button type="submit" className="add-task-button">Lisää kommentti</button>
+
       </form>
+
     </div>
   )
 

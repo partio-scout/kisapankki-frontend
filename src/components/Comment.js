@@ -4,7 +4,7 @@ import Notification from './Notification'
 import Moment from 'react-moment'
 
 
-const Comment = ({ task }) => {
+const Comment = ({ task, user }) => {
   const [comments, setComments] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -15,6 +15,19 @@ const Comment = ({ task }) => {
     })
   }, [])
 
+  const handleCommentDelete = async (comment) => {
+    try {
+      await commentService.deleteComment(comment.id)
+      setComments(comments.filter(c => c.id !== comment.id))
+    } catch (exeption) {
+      setErrorMessage('Kommentin poistaminen ei onnistunut')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+
+    }
+  }
+
   return (
     <div>
       <Notification message={errorMessage} type="error" />
@@ -22,6 +35,9 @@ const Comment = ({ task }) => {
         <div key={comment.id}>
           <div className="comment-date">
             <Moment format="DD.MM.YYYY HH:mm">{comment.created}</Moment>
+            {user &&
+              "  POISTA"
+            }
           </div>
           <div className="comment-content">
             {comment.content}

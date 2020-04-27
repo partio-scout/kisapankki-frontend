@@ -184,7 +184,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
               <div className="task-view-info-background">
                 <h3>Kommentit:</h3>
 
-                <Comment task={task} />
+                <Comment task={task} user={user}/>
                 <AddComment task={task} user={user} />
               </div>
             </div>
