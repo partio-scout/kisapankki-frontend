@@ -4,6 +4,7 @@ import { render, cleanup, fireEvent } from '@testing-library/react'
 import Task from './Task'
 
 jest.mock('../services/task')
+jest.mock('../services/comment')
 jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: jest.fn(),

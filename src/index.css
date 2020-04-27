@@ -42,6 +42,12 @@ h3, h4 {
   margin-top: -20px;
 }
 
+.button-delete-comment, .button-delete-comment:hover {
+  color: red;
+  background-color: transparent;
+  font-size: 12px;
+}
+
 .bigger-task-name {
   font-size: 130%;
   color: #253764;
@@ -123,6 +129,8 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   align-items : center;
 }
 
+
+
 .logo {
   position: absolute;
   left: 10%;
@@ -175,6 +183,34 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   margin-top: 7px;
   cursor: pointer;
 }
+
+.black-basket-task-view {
+  float: right;
+  margin-top: 5px;
+}
+
+.comment-container { 
+  display: flex;
+}
+
+.user-left {
+  flex: 0 0 65%;
+}
+
+.user-right {
+  flex: 1;
+}
+
+.user {
+  height: 35px;
+  width: 35px;
+  background-image: url('./images/user.png');
+  background-size: 25px;
+  background-repeat: no-repeat;
+  margin-top: 10px;
+
+}
+
 
 .black-basket-mobile {
   display: none;
@@ -362,6 +398,37 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
   border-radius: 4px;
   padding: 10px;
   margin-top: 20px;
+}
+
+.task-view-info-background p {
+  margin-top: 5px;
+}
+
+.space {
+  margin-top: 50px;
+}
+
+.space2 {
+  margin-top: 30px;
+}
+
+.textarea {
+  border-radius: 7px;
+}
+
+.comment-date {
+  font-size: 14px;
+  text-align: right;
+  max-width: 350px;
+}
+
+.comment-content {
+  background-color: #fff;
+  max-width: 350px; 
+  padding: 10px;
+  font-size: 15px; 
+  border-radius: 13px;
+  text-align: justify; 
 }
 
 .task-view-info h2 {
