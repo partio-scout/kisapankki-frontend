@@ -147,7 +147,7 @@ const App = () => {
         <Route path="/omasivu" render={() => (localStorage.getItem('loggedUser') ? <User user={user} setUser={setUser} /> : <Redirect to="/" />)} />
         <Route path="/admin" render={() => (localStorage.getItem('loggedUser') ? <Admin handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} /> : <Redirect to="/" />)} />
         <Route path="/lisaa_admin" render={() => (localStorage.getItem('loggedUser') ? <AddAdmin /> : <Redirect to="/" />)} />
-        <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown rules={rules} categories={categories} languages={languages} series={seriess} setRules={setRules} setCategories={setCategories} setLanguages={setLanguages} setSeriess={setSeriess} /> : <Redirect to="/" />)} />
+        <Route path="/lisaa_pudotusvalikkoon" render={() => (localStorage.getItem('loggedUser') ? <AddTaskDropdown rules={rules} categories={categories} languages={languages} series={seriess} setRules={setRules} setCategories={setCategories} setLanguages={setLanguages} setSeries={setSeriess} /> : <Redirect to="/" />)} />
       </div>
     </div>
   )
