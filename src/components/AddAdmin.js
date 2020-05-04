@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Notification from './Notification'
 import userService from '../services/user'
 
@@ -12,15 +12,8 @@ const AddAdmin = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [users, setUsers] = useState([])
   const [email, setEmail] = useState('')
   const [allowNotifications, setAllowNotifications] = useState(true)
-
-  useEffect(() => {
-    userService.getUsers().then((response) => {
-      setUsers(response)
-    })
-  }, [])
 
   const handleAddAdmin = async (event) => {
     event.preventDefault()
@@ -34,15 +27,13 @@ const AddAdmin = () => {
     if (username.length < 3) {
       setUsernameErrorMessage('Käyttäjätunnuksessa pitää olla vähintään 3 kirjainta')
     }
+    if (email.length < 5) {
+      setEmailErrorMessage('Sähköpostissa pitää olla vähintään 5 kirjainta')
+    }
     if (password.length < 3) {
       setPasswordErrorMessage('Salasanassa pitää olla vähintään 3 kirjainta')
     }
-    if (users.some((user) => (user.username === username))) {
-      setUsernameErrorMessage('Käyttäjätunnus on varattu')
-    }
-
-    if (name.length < 3 || username.length < 3 || password.length < 3
-      || users.some((user) => (user.username === username))) {
+    if (name.length < 3 || username.length < 3 || email.length < 5 || password.length < 3) {
       return
     }
     try {
@@ -58,8 +49,12 @@ const AddAdmin = () => {
       setTimeout(() => {
         setMessage(null)
       }, 5000)
-    } catch (exception) {
-      setErrorMessage('Lisääminen epäonnistui')
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.error && error.response.data.error === "username already exists") {
+        setErrorMessage('Käyttäjätunnus on varattu')
+      } else {
+        setErrorMessage('Lisääminen epäonnistui')
+      }
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
