@@ -4,8 +4,6 @@ import { render, cleanup, fireEvent, act } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AddAdmin from './AddAdmin'
 
-jest.mock('../services/user')
-
 afterEach(cleanup)
 
 describe('<AddAdmin />', () => {
