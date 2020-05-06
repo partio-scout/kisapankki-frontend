@@ -143,7 +143,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
                 {task.files && task.files.length === 0 && <p>-</p>}
                 {task.files && task.files.map((file) => (
                   <div key={file}>
-                    <a href={`https://kisapankki.blob.core.windows.net/files/${file}`}>
+                    <a href={`https://kisapankkifiles.blob.core.windows.net/files/${file}`}>
                       {file.substring(file.indexOf('-') + 1, file.length)}
                     </a>
                   </div>
@@ -151,7 +151,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
 
                 {showMakePDF ?
                   <div className="competition-task">
-                    <div className="make-pdf right" onClick={() => setShowMakePDF(false)}>Sulje</div>
+                    <div className="make-pdf close" onClick={() => setShowMakePDF(false)}>Sulje</div>
                     <Competition
                       name={name}
                       date={date}
@@ -182,7 +182,7 @@ const Task = ({ match, user, rules, seriess, languages, addTaskToBasket, handleA
               </div>
 
               <div className="task-view-info-background">
-                <h3>Kommentit:</h3>
+                <h3>Kommentit</h3>
 
                 <Comment task={task} user={user}/>
                 
