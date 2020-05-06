@@ -2,80 +2,44 @@
 
 # Tasks
 
+# Get all accepted tasks
+
 | Type  | GET  |
 |---|---|
 | Uri | api/task  |
 | DataType | json  |
-| Comments  |   |
+| Comments  |Fetch and return all tasks   |
 | Expected updates  |   |
 ##### Data
 ```
 {
-name: "Nilkan nyrjähdys",
-assignmentText: "Kuinka auttaisit ystävääsi kun hän on nyrjäyttänyt nilkkansa?",
-supervisorInstructions: "Kerro tehtävänanto, näytä apuvälineet. Aikaa 20min.",
-gradingScale: "1-5p - koho - kompressio - kylmä",
-creatorName: "Arttu",
-creatorEmail: "sähköposti@sähköposti.com",
-pending: false,
-series: {
-task: [
-"5e37d8c114f20730f1253fd5",
-"5e37f16c8f51645b31d01137",
-"5e380c889de4a0199cd46c31",
-"5e380cf99de4a0199cd46c32",
-"5e380dc5d3588434b8846b57",
-"5e380f4fd3588434b8846b58",
-"5e380fbad3588434b8846b59",
-"5e380fd3d3588434b8846b5a",
-"5e381095d3588434b8846b5b",
-"5e3810a9d3588434b8846b5c",
-"5e3816d3d3588434b8846b5d",
-"5e381706d3588434b8846b5e",
-"5e3848bfe54e612fd06d3c6d",
-"5e3848d8e54e612fd06d3c6e",
-"5e384a0ce54e612fd06d3c71"
-],
-name: "Sudenpennut",
-maxAge: 12,
-minAge: 6,
-color: "Punainen",
-id: "5e37d88014f20730f1253fd1"
-},
-category: {
-task: [ ],
-category: "Ensiapu",
-id: "5e388954b226c84d544b2b0e"
-},
-language: {
-task: [
-"5e37d8c114f20730f1253fd5",
-"5e37df899566c6334dc1c74d",
-"5e37f16c8f51645b31d01137",
-"5e380c889de4a0199cd46c31",
-"5e380cf99de4a0199cd46c32",
-"5e380dc5d3588434b8846b57",
-"5e380f4fd3588434b8846b58",
-"5e380fbad3588434b8846b59",
-"5e380fd3d3588434b8846b5a",
-"5e381095d3588434b8846b5b",
-"5e3816d3d3588434b8846b5d",
-"5e381706d3588434b8846b5e",
-"5e3848bfe54e612fd06d3c6d",
-"5e3848d8e54e612fd06d3c6e",
-"5e384a0ce54e612fd06d3c71"
-],
-name: "Suomi",
-__v: 15,
-id: "5e37d86d14f20730f1253fcf"
-},
-rules: {
-task: [ ],
-rules: "Vanhat",
-__v: 0,
-id: "5e38888bb226c84d544b2b06"
-},
-id: "5e394ce084150c0004ed201c"
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: false,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+}
+```
+
+# Get all pending tasks
+
+| Type  | GET  |
+|---|---|
+| Uri | api/task  |
+| DataType | json  |
+| Comments  |Fetch and return task that are waiting for admin acceptance   |
+| Expected updates  |   |
+
+##### Data
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: true,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
 }
 ``` 
 
@@ -88,7 +52,6 @@ id: "5e394ce084150c0004ed201c"
 | Comments  |   |
 | Expected updates  |   |
 
-##### Data
 
 # See single task
 
@@ -96,11 +59,21 @@ id: "5e394ce084150c0004ed201c"
 |---|---|
 | Uri | api/task/:id  |
 | DataType | json  |
-| Comments  |   |
+| Comments  | return task with specified id  |
 | Expected updates  |   |
 
 ##### Data
 
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: true,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+}
+```
 
 # Edit task
 
@@ -126,59 +99,148 @@ id: "5e394ce084150c0004ed201c"
 
 ```
 {
-  name: 'Kissan karvojen syönti',
-  assignmentText: 'Syödään kissan karvoja.',
-  supervisorInstructions: 'Kerää kissan karvat sohvan kulmasta.',
-  gradingScale: '1-10',
+  name: 'testi',
+  rule: '5e4ec1f33661d81858295d8e',
+  category: '5e73f8700b30432ec0e500bd',
+  series: [ '5e4ec20f3661d81858295d93' ],
+  language: '5e7604f5bff3a05dcd2ffbf0',
+  assignmentText: '<p>Testi</p>\n',
+  gradingScale: '<p>testi</p>\n',
   creatorName: 'Make',
-  creatorEmail: 'make@kake.com',
-  pending: false,
-  series: 5e37d88014f20730f1253fd1,
-  category: 5e3888a5b226c84d544b2b08,
-  language: 5e37d86d14f20730f1253fcf,
-  rules: 5e388894b226c84d544b2b07,
-  id: '5e3d292787210b37a2b35cd1'
+  creatorEmail: 'timo@timpuri.com',
+  supervisorInstructions: '<p>testi</p>\n',
+  assignmentTextMD: 'Testi',
+  gradingScaleMD: 'testi',
+  supervisorInstructionsMD: 'testi',
+  files: []
 }
 ```
 
+# Accept task
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/task/:id/accept  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |Change tasks pending state   |
+
+# Search and return non pending tasks with specified search term
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/search  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |  |
+
+# Create and send PDF made from single task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/:id/pdf  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |  |
+
+# Create multiple PDFs and return them as zip file
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/pdf  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |  |
+
 # Rules
+
+# Get all rules
 
 | Type  | GET  |
 |---|---|
 | Uri | api/rule  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |   |
+| Comments  | Fetch all rules, populate pointers   |
+| Expected updates  |  |
 
 ##### Data
 
 ```
 {
-task: [ ],
-rules: "Vanhat",
-__v: 0,
-id: "5e38888bb226c84d544b2b06"
-},
+  task: [ ],
+  acceptedCategories: [
+  {
+  task: [ ],
+  name: "Kädentaidot",
+  id: "5ea9eb670b3fef10aceb9e45"
+  }
+  ],
+  name: "Menneet",
+  __v: 0,
+  id: "5ea9eb830b3fef10aceb9e46"
+}
 ``` 
+
 # Add rule
 
 | Type  | POST  |
 |---|---|
 | Uri | api/rule  |
 | DataType | json  |
-| Comments  |   |
+| Comments  |requires valid token   |
 | Expected updates  |   |
 
 ##### Data
 
 ```
 {
-  task: [],
-  rules: 'Edelliset',
+  task: [ ],
+  acceptedCategories: [
+  {
+  task: [ ],
+  name: "Kädentaidot",
+  id: "5ea9eb670b3fef10aceb9e45"
+  }
+  ],
+  name: "Menneet",
   __v: 0,
-  id: '5e3d2aebbd03d6386ee720a7'
+  id: "5ea9eb830b3fef10aceb9e46"
 }
 ``` 
+
+# Delete rule
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/rule/:id  |
+| DataType | json  |
+| Comments  |requires valid token   |
+| Expected updates  |   |
+
+# Update rule
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/rule/:id  |
+| DataType | json  |
+| Comments  |requires valid token   |
+| Expected updates  |   |
+
+```
+{
+  task: [ ],
+  acceptedCategories: [
+  {
+  task: [ ],
+  name: "Kädentaidot",
+  id: "5ea9eb670b3fef10aceb9e45"
+  }
+  ],
+  name: "Menneet",
+  __v: 0,
+  id: "5ea9eb830b3fef10aceb9e46"
+}
+```
 
 # Log in
 
@@ -189,7 +251,6 @@ id: "5e38888bb226c84d544b2b06"
 | Comments  |   |
 | Expected updates  |   |
 
-##### Data
 
 # Languages
 
@@ -204,11 +265,11 @@ id: "5e38888bb226c84d544b2b06"
 
 ```
 {
-task: [ ],
-name: "Suomi",
-__v: 15,
-id: "5e37d86d14f20730f1253fcf"
-},
+  task: [ ],
+  name: "Ruotsi2",
+  __v: 0,
+  id: "5ea9eb300b3fef10aceb9e44"
+}
 ``` 
 # Add language
 
@@ -222,19 +283,28 @@ id: "5e37d86d14f20730f1253fcf"
 ##### Data
 
 ```
-{ 
-task: [], 
-name: 'Saksa',
-__v: 0, 
-id: '5e3d2bdc1cd0b138e2ffc319' 
+{
+  task: [ ],
+  name: "Ruotsi2",
+  __v: 0,
+  id: "5ea9eb300b3fef10aceb9e44"
 }
 ```
 
-# Categories
+# Delete language
 
-| Type  | Get  |
+| Type  | DELETE  |
 |---|---|
-| Uri | api/categories  |
+| Uri | api/language/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+# Update languages name
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/language/:id  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
@@ -243,9 +313,31 @@ id: '5e3d2bdc1cd0b138e2ffc319'
 
 ```
 {
-task: [ ],
-category: "Kätevyys",
-id: "5e3888a5b226c84d544b2b08"
+  task: [ ],
+  name: "Ruotsi2",
+  __v: 0,
+  id: "5ea9eb300b3fef10aceb9e44"
+}
+```
+
+# Categories
+
+# Get all categories
+
+| Type  | Get  |
+|---|---|
+| Uri | api/categories  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |Fetch all categories, populate pointers   |
+
+##### Data
+
+```
+{
+  task: [ ],
+  name: "Kätevyys",
+  id: "5e73f81a0b30432ec0e500bb"
 },
 ``` 
 
@@ -261,53 +353,57 @@ id: "5e3888a5b226c84d544b2b08"
 ##### Data
 
 ```
-{ 
-task: [], 
-category: 'Sukellus', 
-id: '5e3d2c67b040c2392855c7a5' 
-}
-```
-
-# Age groups
-
-| Type  | get  |
-|---|---|
-| Uri | api/series  |
-| DataType | json  |
-| Comments  |   |
-| Expected updates  |   |
-
-##### Data
-
-```
 {
-task: [ ],
-name: "Sudenpennut",
-maxAge: 12,
-minAge: 6,
-color: "Punainen",
-id: "5e37d88014f20730f1253fd1"
+  task: [ ],
+  name: "Kätevyys",
+  id: "5e73f81a0b30432ec0e500bb"
 },
 ```
 
-# Add age group
+# Delete category
 
-| Type  | get  |
+| Type  | DELETE  |
+|---|---|
+| Uri | api/categories/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+
+# Series
+
+| Type  | GET  |
 |---|---|
 | Uri | api/series  |
 | DataType | json  |
 | Comments  |   |
 | Expected updates  |   |
 
-##### Data
 
-```
-{
-  task: [],
-  name: 'Teinit',
-  maxAge: 19,
-  minAge: 10,
-  color: 'Pinkki',
-  id: '5e3d2ce4fb003a397693dc28'
-}
-```
+# Add Series
+
+| Type  | GET  |
+|---|---|
+| Uri | api/series  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |requires valid token   |
+
+# Delete Series
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/series  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |requires valid token   |
+
+# Update Series
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/series/:id  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |Update name and color of series    |
+
