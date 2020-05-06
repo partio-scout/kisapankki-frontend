@@ -49,7 +49,7 @@
 |---|---|
 | Uri | api/task/:id  |
 | DataType | json  |
-| Comments  |   |
+| Comments  | requires valid token   |
 | Expected updates  |   |
 
 
@@ -122,7 +122,7 @@
 |---|---|
 | Uri | api/task/:id/accept  |
 | DataType | json  |
-| Comments  |   |
+| Comments  | requires valid token   |
 | Expected updates  |Change tasks pending state   |
 
 ## Search and return non pending tasks with specified search term
@@ -279,7 +279,7 @@
 |---|---|
 | Uri | api/language  |
 | DataType | json  |
-| Comments  |   |
+| Comments  |requires valid token    |
 | Expected updates  |   |
 
 ##### Data
@@ -299,7 +299,7 @@
 |---|---|
 | Uri | api/language/:id  |
 | DataType | json  |
-| Comments  |   |
+| Comments  |requires valid token    |
 | Expected updates  |   |
 
 ## Update languages name
@@ -350,7 +350,7 @@
 | Uri | api/categories  |
 | DataType | json  |
 | Comments  |   |
-| Expected updates  |   |
+| Expected updates  |requires valid token    |
 
 ##### Data
 
