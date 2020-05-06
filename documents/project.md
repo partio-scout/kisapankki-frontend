@@ -40,3 +40,17 @@ AZURE_STORAGE_ACCOUNT_ACCESS_KEY= "Enter azure key"
 ![Tables](/documents/tietokantataulut.jpg)
 
 https://www.draw.io/ Import from Trello -> Documentation -> Untitled Diagram.xml
+
+### MD-TO-PDF
+
+MD-TO-PDF npm-package is used in this application for parsing tasks to pdf-form. It has been implemented straight to the back-end code as a folder instead of npm module. This has been chosen due to lack of programmatical modification for puppeteer launch options.
+
+For this reason dependencies of md-to-pdf must be declared in back-end root package.json. When updating md-to-pdf it must be cloned from github and transferred to back-end.
+
+To ensure that the whole application goes trough CircleCI pipeline md-to-pdf folder's tests must be deleted. Application has been found to function correctly in Heroku, with the following configurations:
+
+* Heroku buildpack for puppeteer: https://github.com/jontewks/puppeteer-heroku-buildpack
+* Navigate to md-to-pdf/dist/lib/config.js and declare following launch_options: {   'args': ['--no-sandbox',
+'--disable-setuid-sandbox']}
+* Navigate to md-to-pdf/dist/index.js and comment out Object.defineProperty(exports, "__esModule", { value: true }); (presumably on line 6)
+
