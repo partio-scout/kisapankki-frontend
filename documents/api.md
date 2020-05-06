@@ -2,7 +2,7 @@
 
 # Tasks
 
-# Get all accepted tasks
+## Get all accepted tasks
 
 | Type  | GET  |
 |---|---|
@@ -22,11 +22,11 @@
 }
 ```
 
-# Get all pending tasks
+## Get all pending tasks
 
 | Type  | GET  |
 |---|---|
-| Uri | api/task  |
+| Uri | api/task/pending  |
 | DataType | json  |
 | Comments  |Fetch and return task that are waiting for admin acceptance   |
 | Expected updates  |   |
@@ -43,7 +43,7 @@
 }
 ``` 
 
-# Delete task
+## Delete task
 
 | Type  | DELETE  |
 |---|---|
@@ -53,9 +53,9 @@
 | Expected updates  |   |
 
 
-# See single task
+## See single task
 
-| Type  | POST  |
+| Type  | GET  |
 |---|---|
 | Uri | api/task/:id  |
 | DataType | json  |
@@ -75,9 +75,9 @@
 }
 ```
 
-# Edit task
+## Edit task
 
-| Type  | POST  |
+| Type  | PUT  |
 |---|---|
 | Uri | api/task  |
 | DataType | json  |
@@ -86,7 +86,7 @@
 
 ##### Data
 
-# Add task
+## Add task
 
 | Type  | POST  |
 |---|---|
@@ -116,7 +116,7 @@
 }
 ```
 
-# Accept task
+## Accept task
 
 | Type  | PUT  |
 |---|---|
@@ -125,7 +125,7 @@
 | Comments  |   |
 | Expected updates  |Change tasks pending state   |
 
-# Search and return non pending tasks with specified search term
+## Search and return non pending tasks with specified search term
 
 | Type  | POST  |
 |---|---|
@@ -134,7 +134,7 @@
 | Comments  |   |
 | Expected updates  |  |
 
-# Create and send PDF made from single task
+## Create and send PDF made from single task
 
 | Type  | POST  |
 |---|---|
@@ -143,7 +143,7 @@
 | Comments  |   |
 | Expected updates  |  |
 
-# Create multiple PDFs and return them as zip file
+## Create multiple PDFs and return them as zip file
 
 | Type  | POST  |
 |---|---|
@@ -154,7 +154,7 @@
 
 # Rules
 
-# Get all rules
+## Get all rules
 
 | Type  | GET  |
 |---|---|
@@ -181,7 +181,7 @@
 }
 ``` 
 
-# Add rule
+## Add rule
 
 | Type  | POST  |
 |---|---|
@@ -208,7 +208,7 @@
 }
 ``` 
 
-# Delete rule
+## Delete rule
 
 | Type  | DELETE  |
 |---|---|
@@ -217,7 +217,7 @@
 | Comments  |requires valid token   |
 | Expected updates  |   |
 
-# Update rule
+## Update rule
 
 | Type  | PUT  |
 |---|---|
@@ -254,6 +254,8 @@
 
 # Languages
 
+## Get all languages
+
 | Type  | Get  |
 |---|---|
 | Uri | api/language  |
@@ -271,7 +273,7 @@
   id: "5ea9eb300b3fef10aceb9e44"
 }
 ``` 
-# Add language
+## Add language
 
 | Type  | POST  |
 |---|---|
@@ -291,7 +293,7 @@
 }
 ```
 
-# Delete language
+## Delete language
 
 | Type  | DELETE  |
 |---|---|
@@ -300,7 +302,7 @@
 | Comments  |   |
 | Expected updates  |   |
 
-# Update languages name
+## Update languages name
 
 | Type  | PUT  |
 |---|---|
@@ -322,7 +324,7 @@
 
 # Categories
 
-# Get all categories
+## Get all categories
 
 | Type  | Get  |
 |---|---|
@@ -341,7 +343,7 @@
 },
 ``` 
 
-# Add category
+## Add category
 
 | Type  | POST  |
 |---|---|
@@ -360,17 +362,19 @@
 },
 ```
 
-# Delete category
+## Delete category
 
 | Type  | DELETE  |
 |---|---|
 | Uri | api/categories/:id  |
 | DataType | json  |
 | Comments  |   |
-| Expected updates  |   |
+| Expected updates  |requires valid token    |
 
 
 # Series
+
+## Get all series
 
 | Type  | GET  |
 |---|---|
@@ -380,7 +384,7 @@
 | Expected updates  |   |
 
 
-# Add Series
+## Add Series
 
 | Type  | GET  |
 |---|---|
@@ -389,7 +393,7 @@
 | Comments  |   |
 | Expected updates  |requires valid token   |
 
-# Delete Series
+## Delete Series
 
 | Type  | DELETE  |
 |---|---|
@@ -398,7 +402,7 @@
 | Comments  |   |
 | Expected updates  |requires valid token   |
 
-# Update Series
+## Update Series
 
 | Type  | PUT  |
 |---|---|
