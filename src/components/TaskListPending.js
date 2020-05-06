@@ -69,15 +69,16 @@ const TaskListPending = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) 
       <h1>Hyväksyntää odottavat kisatehtävät</h1>
       <Notification message={message} type="success" />
       <Notification message={errorMessage} type="error" />
-      {tasks && tasks.length > 0 &&
+      {tasks && tasks.length > 0 ?
         <div className="task-list-title">
           <span>Tehtävän nimi</span>
           <span>Sarja</span>
           <span>Kategoria</span>
-          <span></span>
-          <span></span>
+          <span className="accept-and-delete-buttons"></span>
           <span></span>
         </div>
+        :
+        <div>Ei tehtäviä</div>
       }
       
       {tasks.map((task) => (
@@ -89,8 +90,10 @@ const TaskListPending = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) 
           </span>
           <span>{task.series.map(s => <div key={task.id + s.id}>{s.name} </div>)}</span>
           <span>{task.category && task.category.name}</span>
-          <span><button className="accept-button" onClick={(e) => handleAccept(e, task)}>Hyväksy</button></span>
-          <span><button className="delete-button" onClick={(e) => handleDelete(e, task)}>Poista</button></span>
+          <span className="accept-and-delete-buttons">
+            <button className="accept-button" onClick={(e) => handleAccept(e, task)}>Hyväksy</button>
+            <button className="delete-button" onClick={(e) => handleDelete(e, task)}>Poista</button>
+          </span>
           <span></span>
         </div>
       </Link>

@@ -43,7 +43,7 @@ h3, h4 {
 }
 
 .button-delete-comment, .button-delete-comment:hover {
-  color: red;
+  color: #f04150;
   background-color: transparent;
   font-size: 12px;
 }
@@ -78,8 +78,9 @@ input, select {
   margin-right: 10px;
 }
 
-textarea {
+input, textarea {
   font-family: "PT Sans", sans-serif;
+  font-size: 15px;
 }
 
 .add-task-container select, .modify-task-container select {
@@ -405,21 +406,22 @@ button:hover, .search-tasks-button:hover, .make-pdfs button:hover, .competition-
 }
 
 .space {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .space2 {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .textarea {
   border-radius: 7px;
+  padding: 7px;
 }
 
 .comment-date {
   font-size: 14px;
   text-align: right;
-  max-width: 350px;
+  max-width: 365px;
 }
 
 .comment-content {
@@ -869,9 +871,9 @@ table, th, td {
   cursor: pointer;
 }
 
-.right {
+.close {
   position: absolute;
-  top: -8px;
+  top: 10px;
   left: 580px;
 }
 
@@ -890,6 +892,18 @@ table, th, td {
 
 .in-basket {
   margin-left: 48%;
+}
+
+.no-comments {
+  margin-bottom: 30px;
+}
+
+.admin-list {
+  margin-bottom: 5px;
+}
+
+.accept-and-delete-buttons {
+  width: 200px!important;
 }
 
 @keyframes spin {
@@ -1006,10 +1020,10 @@ table, th, td {
     margin-left: 0px;
   }
 
-  .right {
+  .close {
     position: initial;
     float: right;
-    margin-top: 5px;
+    margin-top: 15px;
     margin-right: 10px;
   }
 }
@@ -1091,6 +1105,14 @@ table, th, td {
     display: block;
     margin-bottom: 0;
   }
+
+  .add-form input {
+    width: 278px;
+  }
+
+  .crls-container input {
+    height: 33px;
+  }
 }
 
 @media screen and (max-width: 410px) {
@@ -1105,12 +1127,12 @@ table, th, td {
   }
 
   .item-add input {
-    width: calc(100% - 103px);
+    width: calc(100% - 85px);
   }
 
   .item-modify input {
     display: inline-block;
-    width: calc(100% - 188px);
+    width: calc(100% - 172px);
   }
   
   .item-buttons-save {

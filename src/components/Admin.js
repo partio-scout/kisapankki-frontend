@@ -4,14 +4,12 @@ import TaskListPending from './TaskListPending'
 import CommentListPending from './CommentListPending'
 
 const Admin = ({ handleAddTask, handleUpdateTask, handleDeleteTask }) => (
-  <div >
+  <div>
     <TaskListPending handleAddTask={handleAddTask} handleUpdateTask={handleUpdateTask} handleDeleteTask={handleDeleteTask} />
     <CommentListPending/>
-    <Link className="no-underline" to="/omasivu">Omat tiedot</Link>
-    <br />
-    <Link className="no-underline" to="/lisaa_admin">Lisää ylläpitäjä</Link>
-    <br />
-    <Link className="no-underline" to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä, kieliä, sarjoja ja kategorioita</Link>
+    <div className="admin-list"><Link className="no-underline" to="/omasivu">Omat tiedot</Link></div>
+    <div className="admin-list"><Link className="no-underline" to="/lisaa_admin">Lisää ylläpitäjä</Link></div>
+    <div className="admin-list"><Link className="no-underline" to="/lisaa_pudotusvalikkoon">Hallinnoi sääntöjä, kieliä, sarjoja ja kategorioita</Link></div>
   </div>
 )
 
