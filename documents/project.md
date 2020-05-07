@@ -10,7 +10,7 @@ You have to setup your own env files.
 
 * Frontend: 
 ```
-REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_API_URL=http://localhost:3001/api for local use, /api for production (assuming front-end being built as static inside back-end repository)
 ```
 
 * Backend: 
@@ -21,9 +21,9 @@ PORT=3001
 TEST_MONGODB_URI= "Enter mongoDB uri for tests"
 SECRET= "Enter your secret"
 ADMIN_KEY= "Enter admin key"
-APPLICATION_STAGE=DEV
-AZURE_STORAGE_ACCOUNT_NAME= "Enter azure 
-AZURE_STORAGE_ACCOUNT_ACCESS_KEY= "Enter azure key"
+APPLICATION_STAGE=DEV for local use and PROD for production
+AZURE_STORAGE_ACCOUNT_NAME= "Enter azure account name"
+AZURE_STORAGE_ACCOUNT_ACCESS_KEY= "Enter azure access key"
 ```
 
 
@@ -31,9 +31,12 @@ AZURE_STORAGE_ACCOUNT_ACCESS_KEY= "Enter azure key"
 * Add more admins to system
 * Add/delete/modify tasks
 * Change tasks pending variable
+* Control comments and comment on tasks
 
 ### User features
 * Add tasks to pending list
+* Comment tasks
+* Form pdf's from tasks for contests
 
 ### Database tables
 
