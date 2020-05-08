@@ -13,12 +13,48 @@
 ##### Data
 ```
 {
-  content: "testi",
-  nickname: "testi",
-  created: "2020-04-09T14:56:20.974Z",
+  series: [
+  {
+  name: "Sudenpennut",
+  color: "#f5ea2e",
+  id: "5e4ec2033661d81858295d91"
+  }
+  ],
+  files: [ ],
+  ratings: [
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  name: "sfsfs",
+  assignmentText: "<p>sfsfsf</p> ",
+  assignmentTextMD: "sfsfsf",
+  supervisorInstructions: "",
+  supervisorInstructionsMD: "",
+  gradingScale: "",
+  gradingScaleMD: "",
+  creatorName: "fsf",
+  creatorEmail: "sfsf",
   pending: false,
-  task: "5e7ba15e8e2e1249e8f8772d",
-  id: "5e8f379432a1452e383e50d3"
+  category: {
+  name: "Retkeilytaidot",
+  id: "5e73f8830b30432ec0e500be"
+  },
+  language: {
+  name: "Suomi",
+  id: "5e4ec1f73661d81858295d8f"
+  },
+  rules: {
+  name: "Nykyiset",
+  id: "5e4ec1ed3661d81858295d8d"
+  },
+  views: 1,
+  ratingsAVG: 0,
+  ratingsAmount: 0,
+  created: "2020-05-05T23:40:35.161Z",
+  id: "5eb1f97328585747d4a05270"
 }
 ```
 
@@ -34,12 +70,48 @@
 ##### Data
 ```
 {
-  content: "testi",
-  nickname: "testi",
-  created: "2020-04-09T14:56:20.974Z",
-  pending: true,
-  task: "5e7ba15e8e2e1249e8f8772d",
-  id: "5e8f379432a1452e383e50d3"
+  series: [
+  {
+  name: "Sudenpennut",
+  color: "#f5ea2e",
+  id: "5e4ec2033661d81858295d91"
+  }
+  ],
+  files: [ ],
+  ratings: [
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  name: "sfsfs",
+  assignmentText: "<p>sfsfsf</p> ",
+  assignmentTextMD: "sfsfsf",
+  supervisorInstructions: "",
+  supervisorInstructionsMD: "",
+  gradingScale: "",
+  gradingScaleMD: "",
+  creatorName: "fsf",
+  creatorEmail: "sfsf",
+  pending: false,
+  category: {
+  name: "Retkeilytaidot",
+  id: "5e73f8830b30432ec0e500be"
+  },
+  language: {
+  name: "Suomi",
+  id: "5e4ec1f73661d81858295d8f"
+  },
+  rules: {
+  name: "Nykyiset",
+  id: "5e4ec1ed3661d81858295d8d"
+  },
+  views: 1,
+  ratingsAVG: 0,
+  ratingsAmount: 0,
+  created: "2020-05-05T23:40:35.161Z",
+  id: "5eb1f97328585747d4a05270"
 }
 ``` 
 
@@ -66,12 +138,48 @@
 
 ```
 {
-  content: "testi",
-  nickname: "testi",
-  created: "2020-04-09T14:56:20.974Z",
-  pending: true,
-  task: "5e7ba15e8e2e1249e8f8772d",
-  id: "5e8f379432a1452e383e50d3"
+  series: [
+  {
+  name: "Sudenpennut",
+  color: "#f5ea2e",
+  id: "5e4ec2033661d81858295d91"
+  }
+  ],
+  files: [ ],
+  ratings: [
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  name: "sfsfs",
+  assignmentText: "<p>sfsfsf</p> ",
+  assignmentTextMD: "sfsfsf",
+  supervisorInstructions: "",
+  supervisorInstructionsMD: "",
+  gradingScale: "",
+  gradingScaleMD: "",
+  creatorName: "fsf",
+  creatorEmail: "sfsf",
+  pending: false,
+  category: {
+  name: "Retkeilytaidot",
+  id: "5e73f8830b30432ec0e500be"
+  },
+  language: {
+  name: "Suomi",
+  id: "5e4ec1f73661d81858295d8f"
+  },
+  rules: {
+  name: "Nykyiset",
+  id: "5e4ec1ed3661d81858295d8d"
+  },
+  views: 1,
+  ratingsAVG: 0,
+  ratingsAmount: 0,
+  created: "2020-05-05T23:40:35.161Z",
+  id: "5eb1f97328585747d4a05270"
 }
 ```
 
@@ -99,20 +207,48 @@
 
 ```
 {
-  name: 'testi',
-  rule: '5e4ec1f33661d81858295d8e',
-  category: '5e73f8700b30432ec0e500bd',
-  series: [ '5e4ec20f3661d81858295d93' ],
-  language: '5e7604f5bff3a05dcd2ffbf0',
-  assignmentText: '<p>Testi</p>\n',
-  gradingScale: '<p>testi</p>\n',
-  creatorName: 'Make',
-  creatorEmail: 'timo@timpuri.com',
-  supervisorInstructions: '<p>testi</p>\n',
-  assignmentTextMD: 'Testi',
-  gradingScaleMD: 'testi',
-  supervisorInstructionsMD: 'testi',
-  files: []
+  series: [
+  {
+  name: "Sudenpennut",
+  color: "#f5ea2e",
+  id: "5e4ec2033661d81858295d91"
+  }
+  ],
+  files: [ ],
+  ratings: [
+  0,
+  0,
+  0,
+  0,
+  0
+  ],
+  name: "sfsfs",
+  assignmentText: "<p>sfsfsf</p> ",
+  assignmentTextMD: "sfsfsf",
+  supervisorInstructions: "",
+  supervisorInstructionsMD: "",
+  gradingScale: "",
+  gradingScaleMD: "",
+  creatorName: "fsf",
+  creatorEmail: "sfsf",
+  pending: false,
+  category: {
+  name: "Retkeilytaidot",
+  id: "5e73f8830b30432ec0e500be"
+  },
+  language: {
+  name: "Suomi",
+  id: "5e4ec1f73661d81858295d8f"
+  },
+  rules: {
+  name: "Nykyiset",
+  id: "5e4ec1ed3661d81858295d8d"
+  },
+  views: 1,
+  ratingsAVG: 0,
+  ratingsAmount: 0,
+  created: "2020-05-05T23:40:35.161Z",
+  id: "5eb1f97328585747d4a05270"
 }
 ```
 
@@ -150,6 +286,15 @@
 | Uri | api/task/pdf  |
 | DataType | json  |
 | Comments  |   |
+| Expected updates  |  |
+
+## Add rating to specified task
+
+| Type  | POST  |
+|---|---|
+| Uri | api/task/:id/rate  |
+| DataType | json  |
+| Comments  | pdate tasks rating list, amount and average and returns updated rating data  |
 | Expected updates  |  |
 
 # Rules
@@ -330,8 +475,8 @@
 |---|---|
 | Uri | api/categories  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |Fetch all categories, populate pointers   |
+| Comments  | Fetch all categories, populate pointers  |
+| Expected updates  |   |
 
 ##### Data
 
@@ -349,8 +494,8 @@
 |---|---|
 | Uri | api/categories  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |requires valid token    |
+| Comments  |requires valid token    |
+| Expected updates  |   |
 
 ##### Data
 
@@ -368,8 +513,8 @@
 |---|---|
 | Uri | api/categories/:id  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |requires valid token    |
+| Comments  | requires valid token  |
+| Expected updates  |    |
 
 
 # Series
@@ -390,8 +535,8 @@
 |---|---|
 | Uri | api/series  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |requires valid token   |
+| Comments  | requires valid token  |
+| Expected updates  |   |
 
 ## Delete Series
 
@@ -399,8 +544,8 @@
 |---|---|
 | Uri | api/series  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |requires valid token   |
+| Comments  | requires valid token  |
+| Expected updates  |   |
 
 ## Update Series
 
@@ -408,6 +553,194 @@
 |---|---|
 | Uri | api/series/:id  |
 | DataType | json  |
-| Comments  |   |
-| Expected updates  |Update name and color of series    |
+| Comments  | Update name and color of series   |
+| Expected updates  |   |
 
+# Comments 
+
+## Get all comments
+
+| Type  | GET  |
+|---|---|
+| Uri | api/comment  |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |   |
+
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: false,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+},
+```
+
+## Get all comments waiting for acceptance 
+
+| Type  | GET  |
+|---|---|
+| Uri | api/comments/pending  |
+| DataType | json  |
+| Comments  |  requires valid token |
+| Expected updates  |   |
+
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: false,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+},
+```
+
+## Get single non pending comment 
+
+| Type  | GET  |
+|---|---|
+| Uri | api/comment/:id |
+| DataType | json  |
+| Comments  |   |
+| Expected updates  |  |
+
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: true,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+},
+```
+
+## Add comment 
+
+| Type  | POST  |
+|---|---|
+| Uri | api/comment |
+| DataType | json  |
+| Comments  | additions with valid token in request are auto accepted  |
+| Expected updates  |  |
+
+```
+{
+  content: "testi",
+  nickname: "testi",
+  created: "2020-04-09T14:56:20.974Z",
+  pending: false,
+  task: "5e7ba15e8e2e1249e8f8772d",
+  id: "5e8f379432a1452e383e50d3"
+},
+```
+
+## Delete comment 
+
+| Type  | DELETE  |
+|---|---|
+| Uri | api/comment |
+| DataType | json  |
+| Comments  | requires valid token  |
+| Expected updates  |  |
+
+## Accepet comment 
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/comment/:id/accept |
+| DataType | json  |
+| Comments  | requires valid token  |
+| Expected updates  |  |
+
+# File
+
+## Delete blobs if list is given, Add files to blob storage
+
+| Type  | POST  |
+|---|---|
+| Uri | api/file |
+| DataType | json  |
+| Comments  |  |
+| Expected updates  |  |
+
+# User 
+
+## Get all saved users
+
+| Type  | GET  |
+|---|---|
+| Uri | api/user |
+| DataType | json  |
+| Comments  |  |
+| Expected updates  |  |
+
+```
+{
+  username: "kesti",
+  name: "pesti",
+  email: "testi@testi.fi",
+  allowNotifications: false,
+  __v: 0
+},
+```
+
+## Create new user
+
+| Type  | POST  |
+|---|---|
+| Uri | api/user |
+| DataType | json  |
+| Comments  |  |
+| Expected updates  |  |
+
+```
+{
+  username: "kesti",
+  name: "pesti",
+  email: "testi@testi.fi",
+  allowNotifications: false,
+  __v: 0
+},
+```
+
+## Path used to create the first admin user
+
+| Type  | POST  |
+|---|---|
+| Uri | api/user/adminkey |
+| DataType | json  |
+| Comments  |  |
+| Expected updates  |  |
+
+```
+{
+  username: "kesti",
+  name: "pesti",
+  email: "testi@testi.fi",
+  allowNotifications: false,
+  __v: 0
+},
+```
+
+## Update user information
+
+| Type  | PUT  |
+|---|---|
+| Uri | api/user |
+| DataType | json  |
+| Comments  |  |
+| Expected updates  |  |
+
+```
+{
+  username: "kesti",
+  name: "pesti",
+  email: "testi@testi.fi",
+  allowNotifications: false,
+  __v: 0
+},
+```
