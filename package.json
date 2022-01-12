@@ -6,7 +6,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "http-proxy-middleware": "^0.20.0",
-    "markdown-it": "^10.0.0",
+    "markdown-it": "^12.3.2",
     "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-ckeditor-component": "^1.1.0",
